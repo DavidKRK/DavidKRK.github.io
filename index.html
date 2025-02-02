@@ -157,7 +157,8 @@
   <script>
     function updateTime() {
       var maintenant = new Date();
-      var timeString = maintenant.toUTCString();
+     var timeString = maintenant.getUTCHours().toString().padStart(2, '0') + ':' + 
+                 maintenant.getUTCMinutes().toString().padStart(2, '0') + ' UTC';
       document.getElementById('current-time').innerText = 'UTC: ' + timeString;
     }
     setInterval(updateTime, 1000); // Mise à jour toutes les secondes
