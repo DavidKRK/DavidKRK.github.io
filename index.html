@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -45,102 +48,67 @@
             transform: scaleX(1);
             transform-origin: bottom left;
         }
-        .section {
-            padding: 50px 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 100px 0;
-        }
-        .header img {
-            width: 200px;
-            height: auto;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-        .header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-        .header p {
-            font-size: 1.5rem;
-            color: #BBBBBB;
-        }
-        .nav {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-        }
         .nav a {
-            font-size: 1.5rem;
-            color: white;
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 5px;
-        }
-        .nav a:hover::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background-color: #FF0000;
-            bottom: -5px;
-            left: 0;
-        }
-        .content {
-            text-align: center;
-        }
-        .content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        .content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <img src="logo.png" alt="David KRK Logo">
-        <h1 class="title-animation">Bienvenue sur le site de David KRK</h1>
-        <p class="title-animation">DJ et producteur de musique électronique</p>
-        <nav class="nav title-animation">
-            <a href="bio.html" class="hover-underline-animation">Biographie</a>
-            <a href="#music" class="hover-underline-animation">Musique</a>
-            <a href="#events" class="hover-underline-animation">Événements</a>
-            <a href="#contact" class="hover-underline-animation">Contact</a>
+    <header class="min-h-screen flex flex-col justify-center items-center">
+        <!-- Logo centré -->
+        <div class="mb-12">
+            <img src="logo 30-01-25.png" alt="David KRK Logo" class="w-48 h-48 mx-auto rounded-full">
+        </div>
+
+        <!-- Navigation principale -->
+        <nav class="flex flex-col md:flex-row gap-8 text-center">
+            <a href="bio.html" class="hover-underline-animation title-animation text-2xl">Biographie</a>
+            <a href="#music" class="hover-underline-animation title-animation text-2xl">Musique</a>
+            <a href="#events" class="hover-underline-animation title-animation text-2xl">Événements</a>
+            <a href="#contact" class="hover-underline-animation title-animation text-2xl">Contact</a>
         </nav>
+
+        <!-- Bouton Back pour la biographie -->
+        <div class="mt-20">
+            <a href="bio.html" class="inline-block px-8 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition duration-300 title-animation">
+                Découvrir la biographie
+            </a>
+        </div>
     </header>
 
-    <div class="content">
-        <!-- Musique Section -->
-        <section id="music" class="section">
-            <h2>Musique</h2>
-            <p>Découvrez quelques-unes des meilleures productions de David KRK.</p>
-            <!-- Ajoutez des liens ou des lecteurs de musique ici -->
+    <!-- Sections de contenu -->
+    <div class="container mx-auto px-4 py-20 max-w-4xl">
+        <!-- Section Musique -->
+        <section id="music" class="mb-20">
+            <h2 class="text-4xl font-bold mb-8 text-center text-red-500">Musique</h2>
+            <!-- Ajouter ici le contenu musical -->
         </section>
 
-        <!-- Événements Section -->
-        <section id="events" class="section">
-            <h2>Événements</h2>
-            <p>Découvrez les prochains événements où David KRK se produira.</p>
-            <!-- Ajoutez des informations sur les événements ici -->
+        <!-- Section Événements -->
+        <section id="events" class="mb-20">
+            <h2 class="text-4xl font-bold mb-8 text-center text-red-500">Événements</h2>
+            <!-- Ajouter ici les événements -->
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <h2>Contact</h2>
-            <p>Pour toute demande, veuillez contacter David KRK à l'adresse suivante :</p>
-            <p>Email: contact@example.com</p>
+        <!-- Section Contact -->
+        <section id="contact">
+            <h2 class="text-4xl font-bold mb-8 text-center text-red-500">Contact</h2>
+            <p class="text-center text-lg mb-4">Pour toute demande professionnelle :</p>
+            <p class="text-center text-red-500 font-medium">contact@davidkrk.com</p>
         </section>
     </div>
 </body>
 </html>
+
+<!-- Dans bio.html -->
+<div class="container mx-auto px-6">
+    <!-- Bouton Retour en haut à gauche -->
+    <div class="mb-12">
+        <a href="index.html" class="text-red-500 hover:text-red-400 transition duration-300">
+            ← Retour à l'accueil
+        </a>
+    </div>
+
+    <!-- Le reste du contenu bio reste inchangé -->
+</div>
+
