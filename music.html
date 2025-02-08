@@ -3,25 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musique</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>David KRK · Musique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #141414, #32373c);
+            color: #FFFFFF;
+        }
+        .title-animation {
+            animation: fadeInDown 1s ease-in-out;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+            color: white;
+        }
+        .hover-underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #FF0000;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .hover-underline-animation:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Music</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Set David KRK</h2>
-            <p>Join me :</p>
-            <ul>
-                 <li><a href="https://soundcloud.com/davidkrk" target="_blank">SoundCloud</a></li>
-                <li><a href="https://www.mixcloud.com/DavidKRK/" target="_blank">MixCloud</a></li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>David KRK</p>
-    </footer>
+    <div id="music" class="py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-6xl font-bold text-center mb-4 title-animation">David KRK</h1>
+            <h2 class="text-4xl font-bold text-center mb-12 text-red-500 title-animation">Set David KRK</h2>
+            <div class="text-center">
+                <p>Join me :</p>
+                <ul>
+                    <li><a href="https://soundcloud.com/davidkrk" target="_blank" class="text-red-500 hover-underline-animation">SoundCloud</a></li>
+                    <li><a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="text-red-500 hover-underline-animation">MixCloud</a></li>
+                </ul>
+            </div>
+            <nav class="text-center mb-12">
+                <a href="index.html" class="text-xl mx-4 hover-underline-animation">Retour</a>
+            </nav>
+        </div>
+    </div>
 </body>
 </html>
