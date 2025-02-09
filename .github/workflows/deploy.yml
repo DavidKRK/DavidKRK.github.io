@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          submodules: true  # Assurez-vous que cette ligne est présente pour gérer les sous-modules
+          submodules: true  
           fetch-depth: 1
 
       - name: Setup Node.js
