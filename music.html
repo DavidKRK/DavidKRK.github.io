@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK · Page Principale</title>
+    <title>David KRK · Musique</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background: linear-gradient(135deg, #141414, #32373c);
             color: #FFFFFF;
-            font-family: 'Arial', sans-serif;
         }
         .title-animation {
             animation: fadeInDown 1s ease-in-out;
@@ -44,33 +43,38 @@
         .hover-underline-animation:hover:after {
             transform: scaleX(1);
             transform-origin: bottom left;
+        } 
+         .lang-content {
+            display: none;
+     </style>
+    <script>
+        function showContent(lang) {
+            const contents = document.querySelectorAll('.lang-content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById(lang).style.display = 'block';
         }
-        .nav a {
-            font-size: 1.3rem;
-        }
-    </style>
+    </script>
 </head>
-    <header class="min-h-screen flex flex-col justify-center items-center">
-        <!-- Logo centré -->
-        <div class="mb-12">
-            <img src="logo 30-01-25.png" alt="David KRK Logo" class="w-48 h-48 mx-auto rounded-full">
-        </div>
-
-        <!-- Navigation principale -->
-        <nav class="flex flex-col md:flex-row gap-8 text-center">
-            <a href="bio.html" class="hover-underline-animation title-animation text-2xl">Biographie</a>
-            <a href="music.html" class="hover-underline-animation title-animation text-2xl">Musique</a>
-            <a href="#events" class="hover-underline-animation title-animation text-2xl">Événements</a>
-            <a href="#contact" class="hover-underline-animation title-animation text-2xl">Contact</a>
-        </nav>
-<br>
-<iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay"></iframe>
-    </br>
+<body>
+    <div id="music" class="py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-6xl font-bold text-center mb-4 title-animation">David KRK</h1>
+            <h2 class="text-4xl font-bold text-center mb-12 text-red-500 title-animation">Set</h2>
+          
+                 <nav class="text-center mb-12">
+                     <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
+<a href="https://www.mixcloud.com/DavidKRK/"  class="text-xl mx-4 hover-underline-animation">Mixcloud David KRK</a>
+<a href="https://soundcloud.com/davidkrk/"  class="text-xl mx-4 hover-underline-animation">Soundcloud David KRK</a>
+</div>
+  </div>
+    <div>
+   <p align="center">
 </p>
 </div>
-    </header>
+<br>
+<iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay">
+    </iframe>
+</br>
 </div>
 </body>
 </html>
-
-
