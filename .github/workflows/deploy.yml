@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        with:
+          submodules: true
+          fetch-depth: 1
+          
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
