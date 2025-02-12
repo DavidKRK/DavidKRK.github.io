@@ -5,7 +5,5 @@
   "scripts": {
     "build": "jekyll build"
   },
-  "dependencies": {
-    "example-dependency": "^1.0.0"
-  }
+  "dependencies": {}
 }
