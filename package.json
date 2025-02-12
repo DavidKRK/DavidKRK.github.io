@@ -1,0 +1,11 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Add your build script here'"
+  },
+  "dependencies": {
+    "example-dependency": "^1.0.0"
+  }
+}
