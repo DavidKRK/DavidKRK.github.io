@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'Add your build script here'"
+    "build": "jekyll build"
   },
   "dependencies": {
     "example-dependency": "^1.0.0"
