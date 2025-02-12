@@ -24,8 +24,11 @@ jobs:
       - name: Install Ruby and Build Essentials
         run: sudo apt-get install -y ruby-full build-essential zlib1g-dev
 
+      - name: Configure gem installation directory
+        run: echo 'export GEM_HOME=$HOME/.gem' >> $GITHUB_ENV
+
       - name: Install Jekyll and Bundler
-        run: gem install jekyll bundler
+        run: gem install jekyll bundler --user-install
 
       - name: Build project
         run: npm run build
