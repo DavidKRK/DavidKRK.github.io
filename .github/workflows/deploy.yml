@@ -21,9 +21,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install Jekyll
+      - name: Install Ruby and Build Essentials
         run: sudo apt-get install -y ruby-full build-essential zlib1g-dev
-             gem install jekyll bundler
+
+      - name: Install Jekyll and Bundler
+        run: gem install jekyll bundler
 
       - name: Build project
         run: npm run build
