@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David KRK | Dj & Producer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #141414, #32373c);
+            color: #FFFFFF;
+            font-family: 'Arial', sans-serif;
+        }
+        .title-animation {
+            animation: fadeInDown 1s ease-in-out;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+            color: white;
+        }
+        .hover-underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #FF0000;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .hover-underline-animation:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        .nav a {
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+    <header class="min-h-screen flex flex-col justify-center items-center">
+        <!-- Logo centré -->
+        <div class="mb-12">
+            <img src="logo 30-01-25.png" alt="David KRK Logo" class="w-48 h-48 mx-auto rounded-full">
+        </div>
+
+        <!-- Navigation principale -->
+        <nav class="flex flex-col md:flex-row gap-8 text-center">
+            <a href="bio.html" class="hover-underline-animation title-animation text-2xl">Bio</a>
+            <a href="music.html" class="hover-underline-animation title-animation text-2xl">Music</a>
+            <a href="#events" class="hover-underline-animation title-animation text-2xl">Event</a>
+            <a href="#contact" class="hover-underline-animation title-animation text-2xl">Contact</a>
+        </nav>
+<br>
+<iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay">
+    </iframe>
+    </br>
+ <footer class="bg-gray-900 py-6 mt-auto">
+    <div class="container mx-auto text-center px-4">
+      <p class="text-gray-400 mb-2">&copy; 2025 David KRK - All rights reserved</p>
+      <p class="text-orange-500 font-bold text-lg hover:scale-105 transition-transform duration-300 cursor-default">
+        "May The Techno Be With You"
+      </p>
+    </div>
+  </footer>
+    </p>
+</div>
+    </header>
+</div>
+</body>
+  </div>
+</html>
+
+
