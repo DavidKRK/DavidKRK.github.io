@@ -18,7 +18,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
-      .title-animation {
+     .title-animation {
             animation: fadeInDown 1s ease-in-out;
         }
         @keyframes fadeInDown {
@@ -31,7 +31,7 @@
                 transform: translateY(0);
             }
         }
-      .hover-underline-animation {
+     .hover-underline-animation {
             display: inline-block;
             position: relative;
             background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
@@ -40,7 +40,7 @@
             color: transparent;
             animation: gradient 10s ease infinite;
         }
-      .hover-underline-animation:after {
+     .hover-underline-animation:after {
             content: '';
             position: absolute;
             width: 100%;
@@ -52,7 +52,7 @@
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
         }
-      .hover-underline-animation:hover:after {
+     .hover-underline-animation:hover:after {
             transform: scaleX(1);
             transform-origin: bottom left;
         }
@@ -67,7 +67,7 @@
                 background-position: 0% 50%;
             }
         }
-      .neon {
+     .neon {
             animation: neon 2s ease-in-out infinite;
         }
         @keyframes neon {
@@ -81,7 +81,7 @@
                 color: #FFFF00; /* jaune */
             }
         }
-      .rotate {
+     .rotate {
             animation: rotate 10s linear infinite;
         }
         @keyframes rotate {
@@ -105,15 +105,16 @@
     <div id="biography" class="py-20">
         <div class="container mx-auto px-6">
             <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
-            <div class="mt-12"></div>
-            <h2 class="text-6xl font-bold text-green-500 title-animation">Bio</h2>
+            <div class="text-center mb-12">
+                <h2 class="text-6xl font-bold text-blue-500 title-animation">Bio</h2>
+            </div>
             <nav class="text-center mb-12">
                 <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
                 <a href="javascript:void(0);" onclick="showContent('francais')" class="text-xl mx-4 hover-underline-animation">Français</a>
                 <a href="javascript:void(0);" onclick="showContent('castellano')" class="text-xl mx-4 hover-underline-animation">Castellano</a>
                 <a href="javascript:void(0);" onclick="showContent('euskara')" class="text-xl mx-4 hover-underline-animation">Euskara</a>
                 <a href="javascript:void(0);" onclick="showContent('english')" class="text-xl mx-4 hover-underline-animation">English</a>
-            </nav>
+            </nav> 
 
             <div id="francais" class="lang-content" style="display: none;">
                 <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Français</h3>
