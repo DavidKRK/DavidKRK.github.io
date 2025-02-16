@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>David KRK | Site en Construction</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
   <style>
     body {
-      background: linear-gradient(135deg, #141414, #32373c);
+      background: linear-gradient(135deg, #141414, #141414);
       color: #FFFFFF;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Russo One', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -18,7 +22,7 @@
       margin: 0;
       text-align: center;
     }
-    .title-animation {
+   .title-animation {
       animation: fadeInDown 1s ease-in-out;
     }
     @keyframes fadeInDown {
@@ -31,13 +35,16 @@
         transform: translateY(0);
       }
     }
-    .underline-animation {
+   .hover-underline-animation {
       display: inline-block;
       position: relative;
-      color: white;
-      margin-top: 1rem;
+      background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: gradient 10s ease infinite;
     }
-    .underline-animation:after {
+   .hover-underline-animation:after {
       content: '';
       position: absolute;
       width: 100%;
@@ -45,13 +52,38 @@
       height: 2px;
       bottom: 0;
       left: 0;
-      background-color: #FF0000;
+      background-color: #FFFFFF;
       transform-origin: bottom right;
       transition: transform 0.25s ease-out;
     }
-    .underline-animation:hover:after {
+   .hover-underline-animation:hover:after {
       transform: scaleX(1);
       transform-origin: bottom left;
+    }
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+   .neon {
+      animation: neon 2s ease-in-out infinite;
+    }
+    @keyframes neon {
+      0% {
+        color: #FFFF00; /* jaune */
+      }
+      50% {
+        color: #00FFFF; /* cyan */
+      }
+      100% {
+        color: #FFFF00; /* jaune */
+      }
     }
   </style>
 </head>
@@ -61,15 +93,21 @@
     <br>
     <h2 class="text-4xl font-bold text-green-500 title-animation">Site en Construction</h2>
     <div class="text-red-500">
-      <p class="text-xl mt-6 title-animation">Revenez bientôt pour découvrir mon nouveau site !</p>
+      <p class="text-xl mt-6 title-animation">Revenez bientôt pour découvrir mon nouveau site!</p>
       <p class="text-xl mt-6 title-animation">¡Regresa pronto para descubrir mi nuevo sitio!</p>
       <p class="text-xl mt-6 title-animation">Itzuli laster nire webgune berria ezagutzera!</p>
       <p class="text-xl mt-6 title-animation">Come back soon to discover my new website!</p>
     </div>
     <br>
-    <a href="mailto:davidkrkofficial@gmail.com" class="underline-animation text-xl">
-      >>> Contact Mail <<<
-    </a>
+    <a href="mailto:davidkrkofficial@gmail.com" class="text-3xl mx-4 hover-underline-animation">>>> Contact Mail <<<</a>
+    <br>
+    <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+  </div>
+  <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
+    <footer class="py-6 px-4 text-left mr-4">
+      <p class="text-gray-400 mb-2">&copy; 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
+    </footer>
+    <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
   </div>
 </body>
 </html>
