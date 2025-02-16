@@ -18,7 +18,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
-       .title-animation {
+      .title-animation {
             animation: fadeInDown 1s ease-in-out;
         }
         @keyframes fadeInDown {
@@ -31,7 +31,7 @@
                 transform: translateY(0);
             }
         }
-       .hover-underline-animation {
+      .hover-underline-animation {
             display: inline-block;
             position: relative;
             background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
@@ -40,7 +40,7 @@
             color: transparent;
             animation: gradient 10s ease infinite;
         }
-       .hover-underline-animation:after {
+      .hover-underline-animation:after {
             content: '';
             position: absolute;
             width: 100%;
@@ -52,7 +52,7 @@
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
         }
-       .hover-underline-animation:hover:after {
+      .hover-underline-animation:hover:after {
             transform: scaleX(1);
             transform-origin: bottom left;
         }
@@ -67,7 +67,7 @@
                 background-position: 0% 50%;
             }
         }
-       .neon {
+      .neon {
             animation: neon 2s ease-in-out infinite;
         }
         @keyframes neon {
@@ -81,7 +81,7 @@
                 color: #FFFF00; /* jaune */
             }
         }
-       .rotate {
+      .rotate {
             animation: rotate 10s linear infinite;
         }
         @keyframes rotate {
@@ -115,7 +115,7 @@
                 <a href="javascript:void(0);" onclick="showContent('english')" class="text-xl mx-4 hover-underline-animation">English</a>
             </nav>
 
-            <div id="francais" class="lang-content">
+            <div id="francais" class="lang-content" style="display: none;">
                 <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Français</h3>
                 <p class="mb-4 title-animation">
                     <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
@@ -133,7 +133,7 @@
                 </p>
             </div>
 
-            <div id="castellano" class="lang-content">
+            <div id="castellano" class="lang-content" style="display: none;">
                 <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Castellano</h3>
                 <p class="mb-4 title-animation">
                     <p>David KRK, nacido en agosto de 1982, es un DJ que se presenta en España, Francia y la Costa Vasca desde 2000.</p>
@@ -151,7 +151,7 @@
                 </p>
             </div>
 
-            <div id="euskara" class="lang-content">
+            <div id="euskara" class="lang-content" style="display: none;">
                 <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Euskara</h3>
                 <p class="mb-4 title-animation">
                     <p>David KRK-ren biografia: 1982-ko abuztuan jaioa, David KRK 2000-garren urtetik aurrera Espainian, Frantzian eta Euskadin hezitako “deejay” gazte bat da.</p>
@@ -169,7 +169,7 @@
                 </p>
             </div>
 
-            <div id="english" class="lang-content">
+            <div id="english" class="lang-content" style="display: none;">
                 <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">English</h3>
                 <p class="mb-4 title-animation">
                     <p>David KRK, born in August 1982, is a DJ who has been performing in Spain, France, and the Basque Coast since 2000.</p>
