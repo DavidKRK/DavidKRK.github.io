@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David KRK · Music</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #141414, #32373c);
+            background: linear-gradient(135deg, #141414, #141414);
             color: #FFFFFF;
+            font-family: 'Russo One', sans-serif;
         }
-        .title-animation {
+ .title-animation {
             animation: fadeInDown 1s ease-in-out;
         }
         @keyframes fadeInDown {
@@ -23,12 +27,16 @@
                 transform: translateY(0);
             }
         }
-        .hover-underline-animation {
+.hover-underline-animation {
             display: inline-block;
             position: relative;
-            color: white;
+            background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: gradient 10s ease infinite;
         }
-        .hover-underline-animation:after {
+.hover-underline-animation:after {
             content: '';
             position: absolute;
             width: 100%;
@@ -36,15 +44,26 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background-color: #FF0000;
+            background-color: #FFFFFF;
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
         }
-        .hover-underline-animation:hover:after {
+.hover-underline-animation:hover:after {
             transform: scaleX(1);
             transform-origin: bottom left;
         } 
-         .lang-content {
+ @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+.lang-content {
             display: none;
         }
      </style>
@@ -59,13 +78,13 @@
 <body>
     <div id="music" class="py-20">
         <div class="container mx-auto px-6">
-            <h1 class="text-6xl font-bold text-center mb-4 title-animation">David KRK</h1>
-            <h2 class="text-4xl font-bold text-center mb-12 text-red-500 title-animation">Set</h2>
+            <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
+            <h2 class="text-6xl font-bold text-center mb-12 text-red-500 title-animation">Set</h2>
           
-               <nav class="text-center mb-12">
-    <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
-    <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="text-xl mx-4 hover-underline-animation">Mixcloud David KRK</a>
-    <a href="https://soundcloud.com/davidkrk/" target="_blank" class="text-xl mx-4 hover-underline-animation">Soundcloud David KRK</a>
+                 <nav class="text-center mb-12">
+                     <a href="index.html" class="text-3xl mx-4 hover-underline-animation">Back</a>
+<a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="text-3xl mx-4 hover-underline-animation">Mixcloud David KRK</a>
+<a href="https://soundcloud.com/davidkrk/" target="_blank" class="text-3xl mx-4 hover-underline-animation">Soundcloud David KRK</a>
 </nav>
 <div>
   <p align="center"></p>
