@@ -22,7 +22,7 @@
       margin: 0;
       text-align: center;
     }
-.title-animation {
+   .title-animation {
       animation: fadeInDown 1s ease-in-out;
     }
     @keyframes fadeInDown {
@@ -35,7 +35,7 @@
         transform: translateY(0);
       }
     }
-.hover-underline-animation {
+   .hover-underline-animation {
       display: inline-block;
       position: relative;
       background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
@@ -44,7 +44,7 @@
       color: transparent;
       animation: gradient 10s ease infinite;
     }
-.hover-underline-animation:after {
+   .hover-underline-animation:after {
       content: '';
       position: absolute;
       width: 100%;
@@ -56,7 +56,7 @@
       transform-origin: bottom right;
       transition: transform 0.25s ease-out;
     }
-.hover-underline-animation:hover:after {
+   .hover-underline-animation:hover:after {
       transform: scaleX(1);
       transform-origin: bottom left;
     }
@@ -71,7 +71,7 @@
         background-position: 0% 50%;
       }
     }
-.neon {
+   .neon {
       animation: neon 2s ease-in-out infinite;
     }
     @keyframes neon {
@@ -85,7 +85,7 @@
         color: #FFFF00; /* jaune */
       }
     }
-.rotate {
+   .rotate {
       animation: rotate 10s linear infinite;
     }
     @keyframes rotate {
@@ -96,7 +96,7 @@
         transform: rotate(360deg);
       }
     }
-.photo-container {
+   .photo-container {
       position: fixed;
       top: 0;
       left: 100%;
@@ -104,23 +104,15 @@
       height: 100%;
       background-size: cover;
       background-position: center;
-      animation: slideIn 5s ease-in-out infinite;
+      animation: slideIn 7s ease-in-out infinite;
     }
     @keyframes slideIn {
-      0% {
-        width: 0%;
-        left: 100%;
-      }
-      50% {
-        width: 100%;
-        left: 0%;
-      animation-play-state: paused;
-      }
-      100% {
-        width: 0%;
-        left: 100%;
-        animation-play-state: running;
-      }
+      0% { width: 0%; left: 100%; }
+      14% { width: 100%; left: 0%; }
+      14% { width: 100%; left: 0%; animation-play-state: paused; }
+      71% { width: 100%; left: 0%; animation-play-state: running; }
+      85% { width: 0%; left: 100%; }
+      100% { width: 0%; left: 100%; }
     }
   </style>
 </head>
