@@ -22,7 +22,7 @@
       margin: 0;
       text-align: center;
     }
-   .title-animation {
+ .title-animation {
       animation: fadeInDown 1s ease-in-out;
     }
     @keyframes fadeInDown {
@@ -35,7 +35,7 @@
         transform: translateY(0);
       }
     }
-   .hover-underline-animation {
+ .hover-underline-animation {
       display: inline-block;
       position: relative;
       background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
@@ -44,7 +44,7 @@
       color: transparent;
       animation: gradient 10s ease infinite;
     }
-   .hover-underline-animation:after {
+ .hover-underline-animation:after {
       content: '';
       position: absolute;
       width: 100%;
@@ -56,7 +56,7 @@
       transform-origin: bottom right;
       transition: transform 0.25s ease-out;
     }
-   .hover-underline-animation:hover:after {
+ .hover-underline-animation:hover:after {
       transform: scaleX(1);
       transform-origin: bottom left;
     }
@@ -71,7 +71,7 @@
         background-position: 0% 50%;
       }
     }
-   .neon {
+ .neon {
       animation: neon 2s ease-in-out infinite;
     }
     @keyframes neon {
@@ -85,7 +85,7 @@
         color: #FFFF00; /* jaune */
       }
     }
-   .rotate {
+ .rotate {
       animation: rotate 10s linear infinite;
     }
     @keyframes rotate {
@@ -96,7 +96,7 @@
         transform: rotate(360deg);
       }
     }
-   .photo-container {
+ .photo-container {
       position: fixed;
       top: 0;
       left: 0;
@@ -104,23 +104,28 @@
       height: 100%;
       background-size: cover;
       background-position: center;
-      transition: opacity 1s ease-in-out;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
     }
-   .photo {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.5; /* ajustez la transparence ici */
-      transition: opacity 1s ease-in-out;
+ .photo-container:nth-child(1) {
+      animation-delay: 2s;
+    }
+ .photo-container:nth-child(2) {
+      animation-delay: 5s;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="photo-container" style="background-image: url('https://drive.google.com/uc?id=1PgG3MI1JWnhq0EA5QmYCg-C-38klX4he');"></div>
-  <div class="photo-container" style="background-image: url('https://drive.google.com/uc?id=1bnPQyLVITZ1yh5C_yQHuYMSg82lVToeB'); opacity: 0;"></div>
+  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
+  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');"></div>
   <div class="container" style="position: relative; z-index: 1;">
     <h1 class="text-8xl font-bold title-animation">David KRK</h1>
     <div class="mt-12"></div>
@@ -142,18 +147,5 @@
     </footer>
     <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
   </div>
-  <script>
-    const photoContainer = document.querySelectorAll('.photo-container');
-
-    let index = 0;
-    let interval = setInterval(() => {
-      if (index >= photoContainer.length) {
-        clearInterval(interval);
-      } else {
-        photoContainer[index].style.opacity = 1;
-        index++;
-      }
-    }, 1000); // ajustez l'intervalle de chargement des photos ici
-  </script>
 </body>
 </html>
