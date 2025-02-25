@@ -135,71 +135,71 @@
         width: 100%;
       }
       .photo-container {
-        position:
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
-  }
-  @media (max-width: 400px) and (max-height: 800px) {
-    /* ajustements pour les téléphones Xiaomi Red Note 13 */
-    .container {
-      width: 90vw;
-      margin: 2vh;
+    @media (max-width: 400px) and (max-height: 800px) {
+      /* ajustements pour les téléphones Xiaomi Red Note 13 */
+      .container {
+        width: 90vw;
+        margin: 2vh;
+      }
+      .row {
+        flex-direction: column;
+      }
+      .col-md-4 {
+        width: 100%;
+        margin-bottom: 2vh;
+      }
     }
-    .row {
-      flex-direction: column;
+    @media (max-width: 1080px) and (max-height: 1920px) {
+      /* ajustements pour les résolutions d'écran Full HD */
+      .container {
+        width: 80vw;
+        margin: 2vh;
+      }
+      .row {
+        flex-direction: row;
+      }
+      .col-md-4 {
+        width: 33.33%;
+        margin-right: 2vh;
+      }
     }
-    .col-md-4 {
-      width: 100%;
-      margin-bottom: 2vh;
+    .fixed {
+      position: fixed;
+      bottom: 0;
+      right: 0;
     }
-  }
-  @media (max-width: 1080px) and (max-height: 1920px) {
-    /* ajustements pour les résolutions d'écran Full HD */
-    .container {
-      width: 80vw;
-      margin: 2vh;
+    .mb-4 {
+      margin-bottom: 4px;
     }
-    .row {
-      flex-direction: row;
+    .mr-4 {
+      margin-right: 4px;
     }
-    .col-md-4 {
-      width: 33.33%;
-      margin-right: 2vh;
+    .flex {
+      display: flex;
     }
-  }
-  .fixed {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-  }
-  .mb-4 {
-    margin-bottom: 4px;
-  }
-  .mr-4 {
-    margin-right: 4px;
-  }
-  .flex {
-    display: flex;
-  }
-  .w-24 {
-    width: 24px;
-  }
-  .h-24 {
-    height: 24px;
-  }
-  .border-4 {
-    border-width: 4px;
-  }
-  .border-white {
-    border-color: #ffffff;
-  }
-  .rounded-full {
-    border-radius: 50%;
-  }
-</style>
+    .w-24 {
+      width: 24px;
+    }
+    .h-24 {
+      height: 24px;
+    }
+    .border-4 {
+      border-width: 4px;
+    }
+    .border-white {
+      border-color: #ffffff;
+    }
+    .rounded-full {
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
   <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
@@ -223,6 +223,7 @@
     </div>
   </div>
   <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
-<img src="davidkrk.github.io\logo\logo_30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">  </div>
+    <img src="/logo/logo_30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
+  </div>
 </body>
 </html>
