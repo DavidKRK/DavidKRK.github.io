@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David KRK · Music</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <style>
         body {
-            background: linear-gradient(135deg, #141414, #32373c);
+            background: linear-gradient(135deg, #141414, #141414);
             color: #FFFFFF;
+            font-family: 'Russo One', sans-serif;
         }
-        .title-animation {
+   .title-animation {
             animation: fadeInDown 1s ease-in-out;
         }
         @keyframes fadeInDown {
@@ -23,12 +28,16 @@
                 transform: translateY(0);
             }
         }
-        .hover-underline-animation {
+   .hover-underline-animation {
             display: inline-block;
             position: relative;
-            color: white;
+            background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: gradient 10s ease infinite;
         }
-        .hover-underline-animation:after {
+   .hover-underline-animation:after {
             content: '';
             position: absolute;
             width: 100%;
@@ -36,18 +45,66 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background-color: #FF0000;
+            background-color: #FFFFFF;
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
         }
-        .hover-underline-animation:hover:after {
+   .hover-underline-animation:hover:after {
             transform: scaleX(1);
             transform-origin: bottom left;
         } 
-         .lang-content {
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+   .lang-content {
             display: none;
         }
-     </style>
+   .rotate {
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+   .neon {
+            animation: neon 2s ease-in-out infinite;
+        }
+        @keyframes neon {
+            0% {
+                color: #FFFF00; /* jaune */
+            }
+            50% {
+                color: #00FFFF; /* cyan */
+            }
+            100% {
+                color: #FFFF00; /* jaune */
+            }
+        }
+       .fab {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+
+       .fa-mixcloud {
+            color: #45a0e6;
+        }
+
+       .fa-soundcloud {
+            color: #ff8800;
+        }
+    </style>
     <script>
         function showContent(lang) {
             const contents = document.querySelectorAll('.lang-content');
@@ -59,20 +116,31 @@
 <body>
     <div id="music" class="py-20">
         <div class="container mx-auto px-6">
-            <h1 class="text-6xl font-bold text-center mb-4 title-animation">David KRK</h1>
-            <h2 class="text-4xl font-bold text-center mb-12 text-red-500 title-animation">Set</h2>
+            <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
+            <h2 class="text-6xl font-bold text-center mb-12 text-red-500 title-animation">Set</h2>
           
                  <nav class="text-center mb-12">
-                     <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
-<a href="https://www.mixcloud.com/DavidKRK/"  class="text-xl mx-4 hover-underline-animation">Mixcloud David KRK</a>
-<a href="https://soundcloud.com/davidkrk/"  class="text-xl mx-4 hover-underline-animation">Soundcloud David KRK</a>
-</nav>
-<div>
-  <p align="center"></p>
-</div>
-<br>
-<iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay"></iframe>
-</div>
-</div>
+                     <a href="index.html" class="text-3xl mx-4 hover-underline-animation">Back</a>
+                     <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="text-3xl mx-4 hover:underline hover:text-blue-500">
+                         <i class="fab fa-mixcloud"></i> Mixcloud David KRK
+                     </a>
+                     <a href="https://soundcloud.com/davidkrk/" target="_blank" class="text-3xl mx-4 hover:underline hover:text-orange-500">
+                         <i class="fab fa-soundcloud"></i> Soundcloud David KRK
+                     </a>
+                 </nav>
+            <div>
+              <p align="center"></p>
+            </div>
+            <br>
+            <iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay"></iframe>
+        </div>
+        <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
+            <footer class="py-6 px-4 text-left mr-4">
+                <p class="text-gray-400 mb-2">&copy; 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
+                <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+            </footer>
+            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
+        </div>
+    </div>
 </body>
 </html>

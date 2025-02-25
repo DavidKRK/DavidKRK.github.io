@@ -1,85 +1,228 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK | Dj & Producer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #141414, #32373c);
-            color: #FFFFFF;
-            font-family: 'Arial', sans-serif;
-        }
-        .title-animation {
-            animation: fadeInDown 1s ease-in-out;
-        }
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .hover-underline-animation {
-            display: inline-block;
-            position: relative;
-            color: white;
-        }
-        .hover-underline-animation:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #FF0000;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-        .hover-underline-animation:hover:after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-        .nav a {
-            font-size: 1.3rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David KRK | Site en Construction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #141414, #141414);
+      color: #FFFFFF;
+      font-family: 'Russo One', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .title-animation {
+      animation: fadeInDown 1s ease-in-out;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hover-underline-animation {
+      display: inline-block;
+      position: relative;
+      background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: gradient 10s ease infinite;
+    }
+    .hover-underline-animation:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #FFFFFF;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+    .hover-underline-animation:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    .neon {
+      animation: neon 2s ease-in-out infinite;
+    }
+    @keyframes neon {
+      0% {
+        color: #FFFF00; /* jaune */
+      }
+      50% {
+        color: #00FFFF; /* cyan */
+      }
+      100% {
+        color: #FFFF00; /* jaune */
+      }
+    }
+    .rotate {
+      animation: rotate 10s linear infinite;
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .container {
+      width: 80%;
+      margin: 2em;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .col-md-4 {
+      width: 33.33%;
+    }
+    .photo-container {
+      position: fixed;
+      top: 0;
+      left: 100%;
+      width: 0%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      animation: slideIn 7s ease-in-out infinite;
+    }
+    @keyframes slideIn {
+      0% { width: 0%; left: 100%; }
+      14% { width: 100%; left: 0%; }
+      14% { width: 100%; left: 0%; animation-play-state: paused; }
+      71% { width: 100%; left: 0%; animation-play-state: running; }
+      85% { width: 0%; left: 100%; }
+      100% { width: 0%; left: 100%; }
+    }
+    /* médias queries */
+    @media (max-width: 768px) {
+      .container {
+        width: 100%;
+      }
+      .col-md-4 {
+        width: 100%;
+      }
+      .photo-container {
+        position:
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @media (max-width: 400px) and (max-height: 800px) {
+    /* ajustements pour les téléphones Xiaomi Red Note 13 */
+    .container {
+      width: 90vw;
+      margin: 2vh;
+    }
+    .row {
+      flex-direction: column;
+    }
+    .col-md-4 {
+      width: 100%;
+      margin-bottom: 2vh;
+    }
+  }
+  @media (max-width: 1080px) and (max-height: 1920px) {
+    /* ajustements pour les résolutions d'écran Full HD */
+    .container {
+      width: 80vw;
+      margin: 2vh;
+    }
+    .row {
+      flex-direction: row;
+    }
+    .col-md-4 {
+      width: 33.33%;
+      margin-right: 2vh;
+    }
+  }
+  .fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+  .mb-4 {
+    margin-bottom: 4px;
+  }
+  .mr-4 {
+    margin-right: 4px;
+  }
+  .flex {
+    display: flex;
+  }
+  .w-24 {
+    width: 24px;
+  }
+  .h-24 {
+    height: 24px;
+  }
+  .border-4 {
+    border-width: 4px;
+  }
+  .border-white {
+    border-color: #ffffff;
+  }
+  .rounded-full {
+    border-radius: 50%;
+  }
+</style>
 </head>
-    <header class="min-h-screen flex flex-col justify-center items-center">
-        <!-- Logo centré -->
-        <div class="mb-12">
-            <img src="logo 30-01-25.png" alt="David KRK Logo" class="w-48 h-48 mx-auto rounded-full">
-        </div>
-
-        <!-- Navigation principale -->
-        <nav class="flex flex-col md:flex-row gap-8 text-center">
-            <a href="bio.html" class="hover-underline-animation title-animation text-2xl">Bio</a>
-            <a href="music.html" class="hover-underline-animation title-animation text-2xl">Music</a>
-            <a href="#events" class="hover-underline-animation title-animation text-2xl">Event</a>
-            <a href="#contact" class="hover-underline-animation title-animation text-2xl">Contact</a>
-        </nav>
-<br>
-<iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay"></iframe>
-    </br>
-</p>
-</div>
-    </header>
-</div>
-</body>
- <footer class="bg-gray-900 py-6 mt-auto">
-    <div class="container mx-auto text-center px-4">
-      <p class="text-gray-400 mb-2">&copy; 2025 David KRK - All rights reserved</p>
-      <p class="text-orange-500 font-bold text-lg hover:scale-105 transition-transform duration-300 cursor-default">
-        "May The Techno Be With You"
-      </p>
+<body>
+  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
+  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg'); animation-delay: 7s;"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h1 class="text-8xl font-bold title-animation">David KRK</h1>
+        <div class="mt-12"></div>
+        <h2 class="text-6xl font-bold text-green-500 title-animation">Site en Construction</h2>
+        <p class="text-xl mt-6 title-animation">Revenez bientôt pour découvrir mon nouveau site!</p>
+      </div>
+      <div class="col-md-4">
+        <h2 class="text-6xl font-bold text-green-500 title-animation mt-12">Sitio en Construcción</h2>
+        <p class="text-xl mt-6 title-animation">¡Regresa pronto para descubrir mi nuevo sitio!</p>
+      </div>
+      <div class="col-md-4">
+        <h2 class="text-6xl font-bold text-green-500 title-animation mt-12">Site Under Construction</h2>
+        <p class="text-xl mt-6 title-animation">Come back soon to discover my new website!</p>
+      </div>
     </div>
-  </footer>
   </div>
+  <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
+<img src="davidkrk.github.io\logo\logo_30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">  </div>
+</body>
 </html>
-
-

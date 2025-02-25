@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
@@ -6,33 +6,39 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-24.04
+
+    # Ajoutez cette section pour donner des permissions en écriture
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: true  
-          fetch-depth: 1
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: 14
 
-      - name: Install dependencies
+      - name: Install npm dependencies
         run: npm install
 
-      - name: Build the site
-        run: npm run build
-      
-      - name: Clean up processes
+      - name: Install Ruby and build tools
+        run: sudo apt-get install -y ruby-full build-essential zlib1g-dev
+
+      - name: Install Jekyll and Bundler
         run: |
-          pkill -f node || true
+          echo 'export GEM_HOME=$HOME/.gem' >> $GITHUB_ENV
+          echo "$HOME/.local/share/gem/ruby/3.2.0/bin" >> $GITHUB_PATH
+          gem install jekyll bundler --user-install
+
+      - name: Build with Jekyll
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAGES_TOKEN }}
-          publish_dir: ./public
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
