@@ -10,8 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <style>
     :root {
-      --main-bg: #141414;
-      --neon-color: #FF69B4;
+      --main-bg: #0a0a0a;
+      --neon-red: #FF0000;
+      --section-bg: rgba(10, 10, 10, 0.95);
     }
 
     body {
@@ -24,7 +25,7 @@
       position: relative;
     }
 
-    /* Arrière-plan animé */
+    /* Animation photos */
     .photo-container {
       position: fixed;
       top: 0;
@@ -35,59 +36,75 @@
       z-index: 0;
       background-size: cover;
       background-position: center;
-      animation: photoFade 14s infinite;
+      animation: photoFade 16s infinite;
     }
 
     @keyframes photoFade {
       0% { opacity: 0; }
-      15% { opacity: 0.3; }
-      40% { opacity: 0.3; }
-      50% { opacity: 0; }
+      12% { opacity: 0.4; }
+      25% { opacity: 0.4; }
+      37% { opacity: 0; }
       100% { opacity: 0; }
     }
 
-    /* Contenu principal */
-    .main-content {
-      position: relative;
-      z-index: 2;
-      padding-top: 5rem;
-      padding-bottom: 10rem;
+    #photo1 {
+      background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
+      animation-delay: 0s;
     }
 
-    /* Sections linguistiques */
+    #photo2 {
+      background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
+      animation-delay: 8s;
+    }
+
+    /* Neon rouge */
+    .neon {
+      animation: neonPulse 1.2s infinite;
+      color: var(--neon-red);
+    }
+
+    @keyframes neonPulse {
+      0%, 100% { 
+        text-shadow: 0 0 10px var(--neon-red), 
+                     0 0 20px rgba(255, 0, 0, 0.5); 
+      }
+      50% { 
+        text-shadow: 0 0 20px var(--neon-red),
+                     0 0 40px var(--neon-red),
+                     0 0 60px rgba(255, 0, 0, 0.3); 
+      }
+    }
+
+    /* Sections */
     .lang-section {
-      background: rgba(20, 20, 20, 0.9);
-      backdrop-filter: blur(5px);
+      background: var(--section-bg);
       border: 2px solid rgba(255, 255, 255, 0.1);
       margin: 2rem auto;
       padding: 2rem;
       max-width: 800px;
-      border-radius: 15px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
     }
 
-    /* Player Mixcloud */
+    /* Player */
     .music-player {
       width: 90%;
       max-width: 800px;
-      height: 220px;
+      height: 180px;
       margin: 3rem auto;
-      border-radius: 15px;
+      border: 2px solid var(--neon-red);
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
     }
 
-    /* Neon animation */
-    .neon {
-      animation: neonPulse 1.5s infinite;
-      color: var(--neon-color);
+    /* Footer */
+    footer {
+      border-top: 2px solid var(--neon-red);
+      box-shadow: 0 -5px 20px rgba(255, 0, 0, 0.2);
     }
 
-    @keyframes neonPulse {
-      0%, 100% { text-shadow: 0 0 10px var(--neon-color); }
-      50% { text-shadow: 0 0 20px var(--neon-color), 0 0 30px var(--neon-color); }
-    }
-
-    /* Responsive */
     @media (max-width: 768px) {
       .lang-section {
         margin: 1rem;
@@ -95,37 +112,37 @@
       }
       h1 { font-size: 2.5rem !important; }
       h2 { font-size: 1.8rem !important; }
-      .music-player { height: 150px; }
+      .music-player { height: 130px; }
     }
   </style>
 </head>
 <body>
-  <!-- Arrière-plan -->
-  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg')"></div>
-  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg'); animation-delay: 7s;"></div>
+  <!-- Photos en arrière-plan -->
+  <div class="photo-container" id="photo1"></div>
+  <div class="photo-container" id="photo2"></div>
 
-  <!-- Contenu -->
-  <div class="main-content">
-    <h1 class="text-6xl md:text-8xl text-center mb-8">DAVID KRK</h1>
+  <!-- Contenu principal -->
+  <div class="pt-16 pb-32">
+    <h1 class="text-6xl md:text-8xl text-center mb-12">DAVID KRK</h1>
 
-    <!-- Sections -->
+    <!-- Sections linguistiques -->
     <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-green-500 text-center mb-4">SITE EN CONSTRUCTION</h2>
+      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">SITE EN CONSTRUCTION</h2>
       <p class="text-xl md:text-2xl text-center">Revenez bientôt pour découvrir mon nouveau site !</p>
     </div>
 
     <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-green-500 text-center mb-4">GUNEA ERAIKITZEN</h2>
+      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">GUNEA ERAIKITZEN</h2>
       <p class="text-xl md:text-2xl text-center">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
     </div>
 
     <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-green-500 text-center mb-4">SITIO EN CONSTRUCCIÓN</h2>
+      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">SITIO EN CONSTRUCCIÓN</h2>
       <p class="text-xl md:text-2xl text-center">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
     </div>
 
     <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-green-500 text-center mb-4">UNDER CONSTRUCTION</h2>
+      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">UNDER CONSTRUCTION</h2>
       <p class="text-xl md:text-2xl text-center">Come back soon to discover my new website!</p>
     </div>
 
@@ -142,15 +159,16 @@
   </div>
 
   <!-- Footer -->
-  <footer class="fixed bottom-0 w-full bg-black/90 backdrop-blur-sm py-4 px-6 flex flex-col md:flex-row items-center justify-between">
-    <div class="text-center md:text-left order-2 md:order-1">
-      <p class="text-gray-400 mb-1">&copy; 2025 <span class="neon">DAVID KRK</span></p>
-      <p class="neon text-lg md:text-xl font-bold">"MAY THE TECHNO BE WITH YOU"</p>
+  <footer class="fixed bottom-0 w-full bg-black/95 py-4 px-6 text-center">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div class="mb-4 md:mb-0">
+        <p class="text-gray-400">&copy; 2025 <span class="neon">DAVID KRK</span></p>
+        <p class="neon text-lg md:text-xl font-bold mt-1">"MAY THE TECHNO BE WITH YOU"</p>
+      </div>
+      <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png"
+           alt="Logo"
+           class="w-20 h-20 border-2 border-neon-red rounded-full">
     </div>
-    
-    <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png"
-         alt="Logo"
-         class="w-20 h-20 md:w-24 md:h-24 border-4 border-white rounded-full mb-4 md:mb-0 order-1 md:order-2">
   </footer>
 </body>
 </html>
