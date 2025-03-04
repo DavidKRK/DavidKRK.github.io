@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <style>
     body {
       background: linear-gradient(135deg, #141414, #141414);
@@ -22,6 +21,7 @@
       margin: 0;
       text-align: center;
       overflow-x: hidden;
+      position: relative;
     }
     .title-animation {
       animation: fadeInDown 1s ease-in-out;
@@ -30,41 +30,42 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .hover-underline-animation {
-      display: inline-block;
-      position: relative;
-      background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: gradient 10s ease infinite;
-    }
-    .hover-underline-animation:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      transform: scaleX(0);
-      height: 2px;
-      bottom: 0;
+    .photo-carousel {
+      position: fixed;
+      top: 0;
       left: 0;
-      background-color: #FFFFFF;
-      transform-origin: bottom right;
-      transition: transform 0.25s ease-out;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
-    .hover-underline-animation:hover:after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
+    .photo-container {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 0%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      animation: slideIn 14s linear infinite;
+      opacity: 0.3;
     }
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes slideIn {
+      0% { width: 0%; left: 100%; opacity: 0; }
+      10% { width: 100%; left: 0%; opacity: 0.3; }
+      40% { width: 100%; left: 0%; opacity: 0.3; }
+      50% { width: 0%; left: 100%; opacity: 0; }
+      100% { width: 0%; left: 100%; opacity: 0; }
+    }
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      background: rgba(20, 20, 20, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
     }
     .container {
       width: 80%;
       margin: 2em auto;
-      position: relative;
-      z-index: 1;
     }
     .row {
       display: flex;
@@ -77,25 +78,6 @@
       padding: 15px;
       box-sizing: border-box;
     }
-    .photo-container {
-      position: fixed;
-      top: 0;
-      left: 100%;
-      width: 0%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      animation: slideIn 7s ease-in-out infinite;
-      z-index: 0;
-      opacity: 0.7;
-    }
-    @keyframes slideIn {
-      0% { width: 0%; left: 100%; }
-      14% { width: 100%; left: 0%; }
-      71% { width: 100%; left: 0%; }
-      85% { width: 0%; left: 100%; }
-      100% { width: 0%; left: 100%; }
-    }
     @media (max-width: 1024px) {
       .container { width: 90%; }
       .col-md-4 { width: 45%; }
@@ -106,7 +88,8 @@
       .col-md-4 { width: 100%; padding: 10px; }
       h1 { font-size: 3rem !important; }
       h2 { font-size: 2rem !important; }
-      .photo-container { animation: none; width: 100%; left: 0; opacity: 0.4; }
+      .photo-container { animation: none; display: none; }
+      .content-wrapper { background: rgba(20, 20, 20, 0.95); }
     }
     @media (max-width: 480px) {
       .container { width: 95%; margin: 1em auto; }
@@ -120,28 +103,31 @@
       right: 20px;
       z-index: 2;
     }
-    .rounded-full { border-radius: 50%; }
   </style>
 </head>
 <body>
-  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
-  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg'); animation-delay: 7s;"></div>
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h1 class="text-6xl md:text-8xl font-bold title-animation">David KRK</h1>
-        <div class="mt-6 md:mt-12"></div>
-        <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation">Site en Construction</h2>
-        <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">Revenez bientôt pour découvrir mon nouveau site!</p>
-      </div>
-      <div class="col-md-4">
-        <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation mt-6 md:mt-12">Sitio en Construcción</h2>
-        <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">¡Regresa pronto para descubrir mi nuevo sitio!</p>
-      </div>
-      <div class="col-md-4">
-        <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation mt-6 md:mt-12">Site Under Construction</h2>
-        <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">Come back soon to discover my new website!</p>
+  <div class="photo-carousel">
+    <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
+    <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg'); animation-delay: -7s;"></div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h1 class="text-6xl md:text-8xl font-bold title-animation">David KRK</h1>
+          <div class="mt-6 md:mt-12"></div>
+          <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation">Site en Construction</h2>
+          <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">Revenez bientôt pour découvrir mon nouveau site!</p>
+        </div>
+        <div class="col-md-4">
+          <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation mt-6 md:mt-12">Sitio en Construcción</h2>
+          <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">¡Regresa pronto para descubrir mi nuevo sitio!</p>
+        </div>
+        <div class="col-md-4">
+          <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation mt-6 md:mt-12">Site Under Construction</h2>
+          <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">Come back soon to discover my new website!</p>
+        </div>
       </div>
     </div>
   </div>
