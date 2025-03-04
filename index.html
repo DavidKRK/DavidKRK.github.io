@@ -1,174 +1,154 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>David KRK | Site en Construction</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --main-bg: #0a0a0a;
-      --neon-red: #FF0000;
-      --section-bg: rgba(10, 10, 10, 0.95);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David KRK - Site en Construction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-red: #FF0000;
+            --animation-duration: 20s;
+        }
 
-    body {
-      background: var(--main-bg);
-      color: white;
-      font-family: 'Russo One', sans-serif;
-      min-height: 100vh;
-      margin: 0;
-      overflow-x: hidden;
-      position: relative;
-    }
+        body {
+            background: #0a0a0a;
+            font-family: 'Russo One', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            min-height: 100vh;
+        }
 
-    /* Animation photos */
-    .photo-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      z-index: 0;
-      background-size: cover;
-      background-position: center;
-      animation: photoFade 16s infinite;
-    }
+        /* Conteneurs d'animation */
+        .animation-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    @keyframes photoFade {
-      0% { opacity: 0; }
-      12% { opacity: 0.4; }
-      25% { opacity: 0.4; }
-      37% { opacity: 0; }
-      100% { opacity: 0; }
-    }
+        /* Animation du texte */
+        .text-content {
+            position: absolute;
+            text-align: center;
+            opacity: 1;
+            animation: textCycle var(--animation-duration) infinite;
+            z-index: 2;
+        }
 
-    #photo1 {
-      background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
-      animation-delay: 0s;
-    }
+        @keyframes textCycle {
+            0%, 30% { opacity: 1; transform: translateX(0); }
+            35%, 65% { opacity: 0; transform: translateX(-100%); }
+            70%, 100% { opacity: 1; transform: translateX(0); }
+        }
 
-    #photo2 {
-      background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
-      animation-delay: 8s;
-    }
+        /* Animation des photos */
+        .photo-slide {
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            animation: photoSlide var(--animation-duration) infinite;
+            opacity: 0;
+        }
 
-    /* Neon rouge */
-    .neon {
-      animation: neonPulse 1.2s infinite;
-      color: var(--neon-red);
-    }
+        @keyframes photoSlide {
+            0% { opacity: 0; right: -100%; }
+            15% { opacity: 1; right: 0; }
+            30% { opacity: 1; right: 0; }
+            45% { opacity: 0; right: 100%; }
+            100% { opacity: 0; right: 100%; }
+        }
 
-    @keyframes neonPulse {
-      0%, 100% { 
-        text-shadow: 0 0 10px var(--neon-red), 
-                     0 0 20px rgba(255, 0, 0, 0.5); 
-      }
-      50% { 
-        text-shadow: 0 0 20px var(--neon-red),
-                     0 0 40px var(--neon-red),
-                     0 0 60px rgba(255, 0, 0, 0.3); 
-      }
-    }
+        /* Délais d'animation */
+        #photo1 {
+            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
+            animation-delay: 4s;
+        }
 
-    /* Sections */
-    .lang-section {
-      background: var(--section-bg);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      margin: 2rem auto;
-      padding: 2rem;
-      max-width: 800px;
-      border-radius: 8px;
-      position: relative;
-      z-index: 2;
-    }
+        #photo2 {
+            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
+            animation-delay: 12s;
+        }
 
-    /* Player */
-    .music-player {
-      width: 90%;
-      max-width: 800px;
-      height: 180px;
-      margin: 3rem auto;
-      border: 2px solid var(--neon-red);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
-    }
+        /* Style neon rouge */
+        .neon-text {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red),
+                         0 0 20px var(--neon-red),
+                         0 0 30px var(--neon-red);
+            animation: neonPulse 1.5s ease-in-out infinite alternate;
+        }
 
-    /* Footer */
-    footer {
-      border-top: 2px solid var(--neon-red);
-      box-shadow: 0 -5px 20px rgba(255, 0, 0, 0.2);
-    }
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 5px var(--neon-red); }
+            to { text-shadow: 0 0 20px var(--neon-red),
+                              0 0 30px var(--neon-red); }
+        }
 
-    @media (max-width: 768px) {
-      .lang-section {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-      h1 { font-size: 2.5rem !important; }
-      h2 { font-size: 1.8rem !important; }
-      .music-player { height: 130px; }
-    }
-  </style>
+        /* Player et footer */
+        .music-player {
+            position: fixed;
+            bottom: 120px;
+            width: 80%;
+            max-width: 600px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .site-footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            z-index: 3;
+        }
+    </style>
 </head>
 <body>
-  <!-- Photos en arrière-plan -->
-  <div class="photo-container" id="photo1"></div>
-  <div class="photo-container" id="photo2"></div>
+    <div class="animation-container">
+        <!-- Contenu texte -->
+        <div class="text-content">
+            <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
+                    <p class="text-xl md:text-2xl">Revenez bientôt pour découvrir mon nouveau site !</p>
+                </div>
+                <!-- Ajouter les autres langues ici -->
+            </div>
+        </div>
 
-  <!-- Contenu principal -->
-  <div class="pt-16 pb-32">
-    <h1 class="text-6xl md:text-8xl text-center mb-12">DAVID KRK</h1>
-
-    <!-- Sections linguistiques -->
-    <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">SITE EN CONSTRUCTION</h2>
-      <p class="text-xl md:text-2xl text-center">Revenez bientôt pour découvrir mon nouveau site !</p>
+        <!-- Photos -->
+        <div class="photo-slide" id="photo1"></div>
+        <div class="photo-slide" id="photo2"></div>
     </div>
 
-    <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">GUNEA ERAIKITZEN</h2>
-      <p class="text-xl md:text-2xl text-center">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
-    </div>
-
-    <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">SITIO EN CONSTRUCCIÓN</h2>
-      <p class="text-xl md:text-2xl text-center">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
-    </div>
-
-    <div class="lang-section">
-      <h2 class="text-4xl md:text-6xl text-center mb-4 neon">UNDER CONSTRUCTION</h2>
-      <p class="text-xl md:text-2xl text-center">Come back soon to discover my new website!</p>
-    </div>
-
-    <!-- Lecteur -->
+    <!-- Player Mixcloud -->
     <div class="music-player">
-      <iframe
-        width="100%"
-        height="100%"
-        src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F"
-        frameborder="0"
-        allow="autoplay">
-      </iframe>
+        <iframe
+            width="100%"
+            height="120"
+            src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F"
+            frameborder="0"
+            allow="autoplay">
+        </iframe>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="fixed bottom-0 w-full bg-black/95 py-4 px-6 text-center">
-    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between">
-      <div class="mb-4 md:mb-0">
-        <p class="text-gray-400">&copy; 2025 <span class="neon">DAVID KRK</span></p>
-        <p class="neon text-lg md:text-xl font-bold mt-1">"MAY THE TECHNO BE WITH YOU"</p>
-      </div>
-      <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png"
-           alt="Logo"
-           class="w-20 h-20 border-2 border-neon-red rounded-full">
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="site-footer text-center">
+        <div class="flex justify-center items-center space-x-4">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png"
+                 alt="Logo"
+                 class="w-16 h-16 border-2 border-red-500 rounded-full">
+            <p class="neon-text text-lg">"MAY THE TECHNO BE WITH YOU"</p>
+        </div>
+        <p class="text-gray-500 mt-2">&copy; 2025 DAVID KRK</p>
+    </footer>
 </body>
 </html>
