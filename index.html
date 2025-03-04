@@ -11,129 +11,120 @@
   <style>
     body {
       background: linear-gradient(135deg, #141414, #141414);
-      color: #FFFFFF;
+      color: white;
       font-family: 'Russo One', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
       margin: 0;
-      text-align: center;
       overflow-x: hidden;
       position: relative;
     }
-    .title-animation {
-      animation: fadeInDown 1s ease-in-out;
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes neonPulse {
+      0% { text-shadow: 0 0 5px #FF69B4; }
+      50% { text-shadow: 0 0 20px #FF69B4; }
+      100% { text-shadow: 0 0 5px #FF69B4; }
     }
-    .photo-carousel {
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-fadein { animation: fadeIn 1s ease-in; }
+    .neon { animation: neonPulse 1.5s infinite; }
+    .rotate { animation: rotate 10s linear infinite; }
+
+    /* Photo containers */
+    .photo-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      opacity: 0.3;
       z-index: 0;
-    }
-    .photo-container {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      width: 0%;
-      height: 100%;
       background-size: cover;
       background-position: center;
-      animation: slideIn 14s linear infinite;
-      opacity: 0.3;
+      animation: photoFade 14s infinite;
     }
-    @keyframes slideIn {
-      0% { width: 0%; left: 100%; opacity: 0; }
-      10% { width: 100%; left: 0%; opacity: 0.3; }
-      40% { width: 100%; left: 0%; opacity: 0.3; }
-      50% { width: 0%; left: 100%; opacity: 0; }
-      100% { width: 0%; left: 100%; opacity: 0; }
+    @keyframes photoFade {
+      0% { opacity: 0; }
+      15% { opacity: 0.3; }
+      40% { opacity: 0.3; }
+      50% { opacity: 0; }
+      100% { opacity: 0; }
     }
-    .content-wrapper {
-      position: relative;
-      z-index: 1;
-      background: rgba(20, 20, 20, 0.8);
-      padding: 2rem;
-      border-radius: 10px;
+    #photo1 { background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg'); }
+    #photo2 { 
+      background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
+      animation-delay: 7s;
     }
-    .container {
-      width: 80%;
-      margin: 2em auto;
+
+    /* Mixcloud player */
+    .music-player {
+      position: fixed;
+      bottom: 200px;
+      left: 0;
+      right: 0;
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+      z-index: 2;
     }
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .col-md-4 {
-      width: 30%;
-      padding: 15px;
-      box-sizing: border-box;
-    }
-    @media (max-width: 1024px) {
-      .container { width: 90%; }
-      .col-md-4 { width: 45%; }
-      h1 { font-size: 4rem !important; }
-      h2 { font-size: 2.5rem !important; }
-    }
+
+    /* Responsive */
     @media (max-width: 768px) {
-      .col-md-4 { width: 100%; padding: 10px; }
-      h1 { font-size: 3rem !important; }
-      h2 { font-size: 2rem !important; }
-      .photo-container { animation: none; display: none; }
-      .content-wrapper { background: rgba(20, 20, 20, 0.95); }
-    }
-    @media (max-width: 480px) {
-      .container { width: 95%; margin: 1em auto; }
+      .photo-container { opacity: 0.2 !important; }
       h1 { font-size: 2.5rem !important; }
       h2 { font-size: 1.8rem !important; }
-      .fixed img { width: 60px !important; height: 60px !important; }
-    }
-    .fixed {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 2;
+      .music-player { bottom: 160px; height: 100px; }
+      .logo { width: 60px !important; height: 60px !important; }
     }
   </style>
 </head>
 <body>
-  <div class="photo-carousel">
-    <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
-    <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg'); animation-delay: -7s;"></div>
-  </div>
+  <!-- Photos en arrière-plan -->
+  <div class="photo-container" id="photo1"></div>
+  <div class="photo-container" id="photo2"></div>
 
-  <div class="content-wrapper">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h1 class="text-6xl md:text-8xl font-bold title-animation">David KRK</h1>
-          <div class="mt-6 md:mt-12"></div>
-          <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation">Site en Construction</h2>
-          <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">Revenez bientôt pour découvrir mon nouveau site!</p>
-        </div>
-        <div class="col-md-4">
-          <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation mt-6 md:mt-12">Sitio en Construcción</h2>
-          <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">¡Regresa pronto para descubrir mi nuevo sitio!</p>
-        </div>
-        <div class="col-md-4">
-          <h2 class="text-4xl md:text-6xl font-bold text-green-500 title-animation mt-6 md:mt-12">Site Under Construction</h2>
-          <p class="text-lg md:text-xl mt-4 md:mt-6 title-animation">Come back soon to discover my new website!</p>
-        </div>
+  <!-- Contenu principal -->
+  <div class="relative z-10 pt-20 pb-40 px-4">
+    <h1 class="text-6xl md:text-8xl text-center mb-8 animate-fadein">David KRK</h1>
+    
+    <div class="max-w-4xl mx-auto space-y-12">
+      <!-- Sections langues -->
+      <div class="animate-fadein">
+        <h2 class="text-4xl md:text-6xl text-green-500 text-center">Site en Construction</h2>
+        <p class="text-xl md:text-2xl text-center mt-4">Revenez bientôt !</p>
+      </div>
+
+      <!-- Player Mixcloud -->
+      <div class="music-player animate-fadein">
+        <iframe 
+          width="100%" 
+          height="120" 
+          src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" 
+          frameborder="0"
+          allow="autoplay">
+        </iframe>
       </div>
     </div>
   </div>
 
-  <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
-    <img src="/logo/logo_30-01-25.png" alt="Logo David KRK" class="w-16 h-16 md:w-24 md:h-24 border-4 border-white rounded-full">
+  <!-- Footer fixé -->
+  <div class="fixed bottom-0 w-full bg-black/80 backdrop-blur-sm py-4 px-6 flex flex-col md:flex-row items-center justify-between">
+    <footer class="text-center md:text-left order-2 md:order-1">
+      <p class="text-gray-400 mb-1">&copy; 2025 <span class="rotate">David KRK</span></p>
+      <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+    </footer>
+    
+    <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png" 
+         alt="Logo" 
+         class="logo w-24 h-24 border-4 border-white rounded-full mb-4 md:mb-0 order-1 md:order-2">
   </div>
 </body>
 </html>
