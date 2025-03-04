@@ -16,29 +16,24 @@
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
-      position: relative;
     }
 
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .neon {
+      animation: neonPulse 1.5s infinite;
     }
     @keyframes neonPulse {
-      0% { text-shadow: 0 0 5px #FF69B4; }
-      50% { text-shadow: 0 0 20px #FF69B4; }
-      100% { text-shadow: 0 0 5px #FF69B4; }
+      0%, 100% { text-shadow: 0 0 10px #FF69B4; }
+      50% { text-shadow: 0 0 20px #FF69B4, 0 0 30px #FF69B4; }
+    }
+
+    .rotate {
+      animation: rotate 10s linear infinite;
     }
     @keyframes rotate {
-      from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    .animate-fadein { animation: fadeIn 1s ease-in; }
-    .neon { animation: neonPulse 1.5s infinite; }
-    .rotate { animation: rotate 10s linear infinite; }
-
-    /* Photo containers */
     .photo-container {
       position: fixed;
       top: 0;
@@ -58,73 +53,78 @@
       50% { opacity: 0; }
       100% { opacity: 0; }
     }
-    #photo1 { background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg'); }
-    #photo2 { 
-      background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
-      animation-delay: 7s;
-    }
 
-    /* Mixcloud player */
+    /* Player personnalisé */
     .music-player {
-      position: fixed;
-      bottom: 200px;
-      left: 0;
-      right: 0;
       width: 90%;
-      max-width: 600px;
-      margin: 0 auto;
-      z-index: 2;
+      max-width: 800px;
+      height: 200px;
+      margin: 2rem auto;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .photo-container { opacity: 0.2 !important; }
+      .music-player {
+        height: 150px;
+        margin-top: 1rem;
+      }
       h1 { font-size: 2.5rem !important; }
       h2 { font-size: 1.8rem !important; }
-      .music-player { bottom: 160px; height: 100px; }
-      .logo { width: 60px !important; height: 60px !important; }
     }
   </style>
 </head>
 <body>
-  <!-- Photos en arrière-plan -->
-  <div class="photo-container" id="photo1"></div>
-  <div class="photo-container" id="photo2"></div>
+  <!-- Arrière-plan photos -->
+  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');"></div>
+  <div class="photo-container" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg'); animation-delay: 7s;"></div>
 
   <!-- Contenu principal -->
-  <div class="relative z-10 pt-20 pb-40 px-4">
-    <h1 class="text-6xl md:text-8xl text-center mb-8 animate-fadein">David KRK</h1>
-    
-    <div class="max-w-4xl mx-auto space-y-12">
-      <!-- Sections langues -->
+  <div class="relative z-10 pt-12 pb-24 px-4">
+    <h1 class="text-6xl md:text-8xl text-center mb-8">DAVID KRK</h1>
+
+    <!-- Sections multilangues -->
+    <div class="max-w-4xl mx-auto space-y-16">
+      <!-- Français -->
       <div class="animate-fadein">
-        <h2 class="text-4xl md:text-6xl text-green-500 text-center">Site en Construction</h2>
-        <p class="text-xl md:text-2xl text-center mt-4">Revenez bientôt !</p>
+        <h2 class="text-4xl md:text-6xl text-green-500 text-center">SITE EN CONSTRUCTION</h2>
+        <p class="text-xl md:text-2xl text-center mt-4">Revenez bientôt pour découvrir mon nouveau site !</p>
       </div>
 
-      <!-- Player Mixcloud -->
-      <div class="music-player animate-fadein">
-        <iframe 
-          width="100%" 
-          height="120" 
-          src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" 
-          frameborder="0"
-          allow="autoplay">
-        </iframe>
+      <!-- Espagnol -->
+      <div class="animate-fadein">
+        <h2 class="text-4xl md:text-6xl text-green-500 text-center">SITIO EN CONSTRUCCIÓN</h2>
+        <p class="text-xl md:text-2xl text-center mt-4">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
       </div>
+
+      <!-- Anglais -->
+      <div class="animate-fadein">
+        <h2 class="text-4xl md:text-6xl text-green-500 text-center">UNDER CONSTRUCTION</h2>
+        <p class="text-xl md:text-2xl text-center mt-4">Come back soon to discover my new website!</p>
+      </div>
+    </div>
+
+    <!-- Lecteur Mixcloud agrandi -->
+    <div class="music-player">
+      <iframe 
+        width="100%" 
+        height="100%" 
+        src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" 
+        frameborder="0"
+        allow="autoplay"
+        style="border-radius: 15px;">
+      </iframe>
     </div>
   </div>
 
-  <!-- Footer fixé -->
+  <!-- Footer avec slogan -->
   <div class="fixed bottom-0 w-full bg-black/80 backdrop-blur-sm py-4 px-6 flex flex-col md:flex-row items-center justify-between">
     <footer class="text-center md:text-left order-2 md:order-1">
-      <p class="text-gray-400 mb-1">&copy; 2025 <span class="rotate">David KRK</span></p>
-      <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+      <p class="text-gray-400 mb-1">&copy; 2025 <span class="rotate">DAVID KRK</span></p>
+      <p class="neon font-bold text-lg md:text-xl">"MAY THE TECHNO BE WITH YOU"</p>
     </footer>
     
     <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png" 
          alt="Logo" 
-         class="logo w-24 h-24 border-4 border-white rounded-full mb-4 md:mb-0 order-1 md:order-2">
+         class="w-20 h-20 md:w-24 md:h-24 border-4 border-white rounded-full mb-4 md:mb-0 order-1 md:order-2">
   </div>
 </body>
 </html>
