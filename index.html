@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet>
   <style>
     body {
       background: linear-gradient(135deg, #141414, #141414);
@@ -21,17 +21,11 @@
     /* Animations */
     .neon {
       animation: neonPulse 1.5s infinite;
+      color: #FF69B4;
     }
     @keyframes neonPulse {
       0%, 100% { text-shadow: 0 0 10px #FF69B4; }
       50% { text-shadow: 0 0 20px #FF69B4, 0 0 30px #FF69B4; }
-    }
-
-    .rotate {
-      animation: rotate 10s linear infinite;
-    }
-    @keyframes rotate {
-      to { transform: rotate(360deg); }
     }
 
     .photo-container {
@@ -54,21 +48,22 @@
       100% { opacity: 0; }
     }
 
-    /* Player personnalisé */
     .music-player {
       width: 90%;
       max-width: 800px;
-      height: 200px;
+      height: 220px;
       margin: 2rem auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255,105,180,0.3);
     }
 
-    @media (max-width: 768px) {
-      .music-player {
-        height: 150px;
-        margin-top: 1rem;
-      }
-      h1 { font-size: 2.5rem !important; }
-      h2 { font-size: 1.8rem !important; }
+    .lang-section {
+      background: rgba(20, 20, 20, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
@@ -81,44 +76,49 @@
   <div class="relative z-10 pt-12 pb-24 px-4">
     <h1 class="text-6xl md:text-8xl text-center mb-8">DAVID KRK</h1>
 
-    <!-- Sections multilangues -->
-    <div class="max-w-4xl mx-auto space-y-16">
+    <!-- Sections linguistiques -->
+    <div class="max-w-4xl mx-auto">
       <!-- Français -->
-      <div class="animate-fadein">
+      <div class="lang-section">
         <h2 class="text-4xl md:text-6xl text-green-500 text-center">SITE EN CONSTRUCTION</h2>
         <p class="text-xl md:text-2xl text-center mt-4">Revenez bientôt pour découvrir mon nouveau site !</p>
       </div>
 
-      <!-- Espagnol -->
-      <div class="animate-fadein">
+      <!-- Euskara (Basque) -->
+      <div class="lang-section">
+        <h2 class="text-4xl md:text-6xl text-green-500 text-center">GUNEA ERAIKITZEN</h2>
+        <p class="text-xl md:text-2xl text-center mt-4">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
+      </div>
+
+      <!-- Español -->
+      <div class="lang-section">
         <h2 class="text-4xl md:text-6xl text-green-500 text-center">SITIO EN CONSTRUCCIÓN</h2>
         <p class="text-xl md:text-2xl text-center mt-4">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
       </div>
 
-      <!-- Anglais -->
-      <div class="animate-fadein">
+      <!-- English -->
+      <div class="lang-section">
         <h2 class="text-4xl md:text-6xl text-green-500 text-center">UNDER CONSTRUCTION</h2>
         <p class="text-xl md:text-2xl text-center mt-4">Come back soon to discover my new website!</p>
       </div>
     </div>
 
-    <!-- Lecteur Mixcloud agrandi -->
+    <!-- Lecteur Mixcloud amélioré -->
     <div class="music-player">
       <iframe 
         width="100%" 
         height="100%" 
         src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" 
         frameborder="0"
-        allow="autoplay"
-        style="border-radius: 15px;">
+        allow="autoplay">
       </iframe>
     </div>
   </div>
 
-  <!-- Footer avec slogan -->
+  <!-- Footer -->
   <div class="fixed bottom-0 w-full bg-black/80 backdrop-blur-sm py-4 px-6 flex flex-col md:flex-row items-center justify-between">
     <footer class="text-center md:text-left order-2 md:order-1">
-      <p class="text-gray-400 mb-1">&copy; 2025 <span class="rotate">DAVID KRK</span></p>
+      <p class="text-gray-400 mb-1">&copy; 2025 <span class="neon">DAVID KRK</span></p>
       <p class="neon font-bold text-lg md:text-xl">"MAY THE TECHNO BE WITH YOU"</p>
     </footer>
     
