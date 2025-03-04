@@ -9,7 +9,7 @@
     <style>
         :root {
             --neon-red: #FF0000;
-            --animation-duration: 20s;
+            --animation-duration: 24s;
         }
 
         body {
@@ -18,9 +18,9 @@
             overflow-x: hidden;
             margin: 0;
             min-height: 100vh;
+            color: white;
         }
 
-        /* Conteneurs d'animation */
         .animation-container {
             position: relative;
             height: 100vh;
@@ -29,22 +29,21 @@
             justify-content: center;
         }
 
-        /* Animation du texte */
         .text-content {
             position: absolute;
             text-align: center;
             opacity: 1;
             animation: textCycle var(--animation-duration) infinite;
             z-index: 2;
+            padding: 20px;
         }
 
         @keyframes textCycle {
-            0%, 30% { opacity: 1; transform: translateX(0); }
-            35%, 65% { opacity: 0; transform: translateX(-100%); }
-            70%, 100% { opacity: 1; transform: translateX(0); }
+            0%, 25% { opacity: 1; transform: translateX(0); }
+            30%, 70% { opacity: 0; transform: translateX(-100%); }
+            75%, 100% { opacity: 1; transform: translateX(0); }
         }
 
-        /* Animation des photos */
         .photo-slide {
             position: absolute;
             top: 0;
@@ -59,54 +58,70 @@
 
         @keyframes photoSlide {
             0% { opacity: 0; right: -100%; }
-            15% { opacity: 1; right: 0; }
-            30% { opacity: 1; right: 0; }
-            45% { opacity: 0; right: 100%; }
+            12.5% { opacity: 1; right: 0; }
+            25% { opacity: 1; right: 0; }
+            37.5% { opacity: 0; right: 100%; }
             100% { opacity: 0; right: 100%; }
         }
 
-        /* Délais d'animation */
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
-            animation-delay: 4s;
+            animation-delay: 6s;
         }
 
         #photo2 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
-            animation-delay: 12s;
+            animation-delay: 18s;
         }
 
-        /* Style neon rouge */
         .neon-text {
             color: var(--neon-red);
-            text-shadow: 0 0 10px var(--neon-red),
-                         0 0 20px var(--neon-red),
-                         0 0 30px var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
             animation: neonPulse 1.5s ease-in-out infinite alternate;
         }
 
         @keyframes neonPulse {
             from { text-shadow: 0 0 5px var(--neon-red); }
             to { text-shadow: 0 0 20px var(--neon-red),
-                              0 0 30px var(--neon-red); }
+                         0 0 30px var(--neon-red); }
         }
 
-        /* Player et footer */
         .music-player {
             position: fixed;
-            bottom: 120px;
-            width: 80%;
-            max-width: 600px;
+            bottom: 160px;
+            width: 90%;
+            max-width: 800px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
+            height: 180px;
+            border: 2px solid var(--neon-red);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
         }
 
         .site-footer {
             position: fixed;
             bottom: 20px;
             width: 100%;
-            z-index: 3;
+            z-index: 4;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 768px) {
+            .music-player {
+                height: 140px;
+                bottom: 120px;
+            }
+            
+            .neon-slogan {
+                font-size: 1.5rem !important;
+            }
+            
+            .text-content h1 {
+                font-size: 3rem !important;
+            }
         }
     </style>
 </head>
@@ -115,12 +130,31 @@
         <!-- Contenu texte -->
         <div class="text-content">
             <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
-            <div class="space-y-12">
+            
+            <div class="space-y-16">
+                <!-- Français -->
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
                     <p class="text-xl md:text-2xl">Revenez bientôt pour découvrir mon nouveau site !</p>
                 </div>
-                <!-- Ajouter les autres langues ici -->
+
+                <!-- Euskara -->
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
+                    <p class="text-xl md:text-2xl">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
+                </div>
+
+                <!-- Español -->
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
+                    <p class="text-xl md:text-2xl">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
+                </div>
+
+                <!-- English -->
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
+                    <p class="text-xl md:text-2xl">Come back soon to discover my new website!</p>
+                </div>
             </div>
         </div>
 
@@ -129,11 +163,11 @@
         <div class="photo-slide" id="photo2"></div>
     </div>
 
-    <!-- Player Mixcloud -->
+    <!-- Lecteur Mixcloud amélioré -->
     <div class="music-player">
         <iframe
             width="100%"
-            height="120"
+            height="100%"
             src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F"
             frameborder="0"
             allow="autoplay">
@@ -141,14 +175,17 @@
     </div>
 
     <!-- Footer -->
-    <footer class="site-footer text-center">
-        <div class="flex justify-center items-center space-x-4">
+    <footer class="site-footer">
+        <div class="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
+            <div class="mb-4 md:mb-0 text-center">
+                <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
+                <p class="text-gray-400">&copy; 2025 DAVID KRK</p>
+            </div>
+            
             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png"
-                 alt="Logo"
-                 class="w-16 h-16 border-2 border-red-500 rounded-full">
-            <p class="neon-text text-lg">"MAY THE TECHNO BE WITH YOU"</p>
+                alt="Logo"
+                class="w-24 h-24 border-4 border-red-500 rounded-full hover:scale-110 transition-transform">
         </div>
-        <p class="text-gray-500 mt-2">&copy; 2025 DAVID KRK</p>
     </footer>
 </body>
 </html>
