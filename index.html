@@ -27,6 +27,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding-bottom: 160px; /* Espace pour le footer + lecteur */
         }
 
         .text-content {
@@ -36,6 +37,7 @@
             animation: textCycle var(--animation-duration) infinite;
             z-index: 2;
             padding: 20px;
+            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5)); /* Séparation visuelle */
         }
 
         @keyframes textCycle {
@@ -54,6 +56,7 @@
             background-position: center;
             animation: photoSlide var(--animation-duration) infinite;
             opacity: 0;
+            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5)); /* Séparation visuelle */
         }
 
         @keyframes photoSlide {
@@ -86,26 +89,30 @@
                          0 0 30px var(--neon-red); }
         }
 
-        .music-player {
+        /* ███ LECTEUR MIXCLOUD ███ */
+        .player-mixcloud {
             position: fixed;
-            bottom: 160px;
-            width: 90%;
-            max-width: 800px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            height: 180px;
-            border: 2px solid var(--neon-red);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: #000;
+            z-index: 100; /* Z-index cohérent avec le reste */
+            border-top: 2px solid #fff;
         }
 
+        .player-mixcloud iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ███ FOOTER ███ */
         .site-footer {
             position: fixed;
-            bottom: 20px;
+            bottom: 140px; /* Placé AU-DESSUS du lecteur */
             width: 100%;
-            z-index: 4;
+            z-index: 101; /* Z-index > lecteur */
             padding: 0 20px;
         }
 
@@ -163,40 +170,14 @@
         <div class="photo-slide" id="photo2"></div>
     </div>
 
-<style>
-    /* Style du lecteur */
-    .player-mixcloud {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 120px;       /* Hauteur augmentée */
-        background: #000;    /* Fond pour contraster */
-        z-index: 9999;       /* Priorité maximale */
-        border-top: 2px solid #fff; /* Bordure visible */
-    }
+    <!-- Lecteur Mixcloud -->
+    <div class="player-mixcloud">
+        <iframe 
+            src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&mini=1" 
+            allowfullscreen>
+        </iframe>
+    </div>
 
-    /* Ajustement du contenu principal */
-    body {
-        margin-bottom: 140px; /* Espace = hauteur du lecteur + 20px */
-        min-height: 100vh;    /* Évite les bugs de chevauchement */
-    }
-
-    /* Iframe pleine taille */
-    .player-mixcloud iframe {
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-</style>
-
-<!-- Lecteur -->
-<div class="player-mixcloud">
-    <iframe 
-        src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&mini=1" 
-        allowfullscreen>
-    </iframe>
-</div>
     <!-- Footer -->
     <footer class="site-footer">
         <div class="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
@@ -205,7 +186,7 @@
                 <p class="text-gray-600">&copy; 2025 DAVID KRK</p>
             </div>
             
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo_30-01-25.png"
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png"
                 alt="Logo"
                 class="w-24 h-24 border-4 border-red-500 rounded-full hover:scale-110 transition-transform">
         </div>
