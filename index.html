@@ -162,22 +162,23 @@
         <div class="photo-slide" id="photo1"></div>
         <div class="photo-slide" id="photo2"></div>
     </div>
-
- <style>
-    /* Style du lecteur fixe en bas */
+<style>
+    /* Style du lecteur */
     .player-mixcloud {
-        position: fixed; /* Fixe le lecteur à l'écran */
-        bottom: 0;       /* Collé en bas */
+        position: fixed;
+        bottom: 0;
         left: 0;
         width: 100%;
-        height: 100px;   /* Hauteur minimale pour voir les contrôles */
-        background: #000; /* Fond noir */
-        z-index: 9999;   /* Garantit qu'il est au-dessus de tout */
+        height: 120px;       /* Hauteur augmentée */
+        background: #000;    /* Fond pour contraster */
+        z-index: 9999;       /* Priorité maximale */
+        border-top: 2px solid #fff; /* Bordure visible */
     }
 
-    /* Ajuste la marge du contenu principal pour éviter le chevauchement */
+    /* Ajustement du contenu principal */
     body {
-        margin-bottom: 120px; /* Espace en bas = hauteur du lecteur + 20px */
+        margin-bottom: 140px; /* Espace = hauteur du lecteur + 20px */
+        min-height: 100vh;    /* Évite les bugs de chevauchement */
     }
 
     /* Iframe pleine taille */
@@ -188,14 +189,13 @@
     }
 </style>
 
-<!-- Lecteur Mixcloud -->
+<!-- Lecteur -->
 <div class="player-mixcloud">
     <iframe 
-        src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&mini=1&light=1" 
+        src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&mini=1" 
         allowfullscreen>
     </iframe>
 </div>
-
     <!-- Footer -->
     <footer class="site-footer">
         <div class="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
