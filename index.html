@@ -85,8 +85,7 @@
 
         @keyframes neonPulse {
             from { text-shadow: 0 0 5px var(--neon-red); }
-            to { text-shadow: 0 0 20px var(--neon-red),
-                         0 0 30px var(--neon-red); }
+            to { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red); }
         }
 
         /* ███ LECTEUR MIXCLOUD ███ */
@@ -99,6 +98,7 @@
             background: #000;
             z-index: 100; /* Z-index cohérent avec le reste */
             border-top: 2px solid #fff;
+            display: none; /* Caché par défaut */
         }
 
         .player-mixcloud iframe {
@@ -116,18 +116,34 @@
             padding: 0 20px;
         }
 
+        /* Style du bouton */
+        .neon-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon-red);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px var(--neon-red); }
+            to { box-shadow: 0 0 25px var(--neon-red); }
+        }
+
         @media (max-width: 768px) {
-            .music-player {
-                height: 140px;
-                bottom: 120px;
-            }
-            
-            .neon-slogan {
-                font-size: 1.5rem !important;
-            }
-            
-            .text-content h1 {
-                font-size: 3rem !important;
+            .neon-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -170,16 +186,15 @@
         <div class="photo-slide" id="photo2"></div>
     </div>
 
-   <!-- Bouton d'activation amélioré -->
-    <button onclick="activatePlayer()" 
-            class="neon-button fixed top-4 right-4 z-[1000] px-6 py-3 bg-black/80 rounded-xl hover:scale-110 transition-transform border-2 border-red-500 glow">
+    <!-- Bouton d'activation -->
+    <button onclick="activatePlayer()" class="neon-button">
         🎧 ACTIVER LE MIX
     </button>
 
-    <!-- Lecteur Mixcloud optimisé -->
-    <div class="player-mixcloud" id="playerContainer" style="display:none;">
+    <!-- Lecteur Mixcloud -->
+    <div class="player-mixcloud" id="playerContainer">
         <iframe 
-            src="https://player-widget.mixcloud.com/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&autoplay=1"
+            src="https://player-widget.mixcloud.com/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1"
             allow="autoplay"
             title="Live Techno Mix by David KRK"
             style="border: none;"
@@ -189,7 +204,6 @@
         </iframe>
     </div>
 
-
     <!-- Footer -->
     <footer class="site-footer">
         <div class="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
@@ -197,44 +211,27 @@
                 <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
                 <p class="text-gray-600">&copy; 2025 DAVID KRK</p>
             </div>
-            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
+            <img src="logo-30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
         </div>
     </footer>
-<!-- Script amélioré -->
+
+    <!-- Script -->
     <script>
     function activatePlayer() {
-        const container = document.getElementById('playerContainer');
-        const iframe = container.querySelector('iframe');
-        
-        // Réinitialise complètement l'iframe
-        iframe.src = iframe.src.replace('&autoplay=1', '') + '&autoplay=1';
-        
-        // Affiche le lecteur avec animation
-        container.style.display = 'block';
-        container.style.animation = 'slideUp 0.5s ease-out';
-        
-        // Supprime le bouton après 1s
+        const player = document.getElementById('playerContainer');
+        const iframe = player.querySelector('iframe');
+
+        // Active l'autoplay
+        iframe.src += '&autoplay=1';
+
+        // Affiche le lecteur
+        player.style.display = 'block';
+
+        // Supprime le bouton après 1 seconde
         setTimeout(() => {
             document.querySelector('.neon-button').remove();
         }, 1000);
     }
-
-    // Animation d'apparition
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideUp {
-            0% { transform: translateY(100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        .glow {
-            animation: buttonGlow 1.5s infinite alternate;
-        }
-        @keyframes buttonGlow {
-            from { box-shadow: 0 0 10px #ff0000; }
-            to { box-shadow: 0 0 25px #ff0000; }
-        }
-    `;
-    document.head.appendChild(style);
     </script>
 </body>
 </html>
