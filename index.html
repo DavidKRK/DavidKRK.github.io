@@ -183,15 +183,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('mixcloudIframe');
+            let autoplayAttempted = false; // Variable pour éviter les boucles infinies
 
-            // Fonction pour activer l'autoplay
             function startMixcloud() {
-                iframe.src += '&autoplay=1'; // Ajoute le paramètre autoplay
+                // Ajoute le paramètre autoplay à l'URL de l'iframe
+                iframe.src += '&autoplay=1';
             }
 
-            // Tentative de démarrage immédiat
-            startMixcloud();
+            function handleAutoplay() {
+                if (!autoplayAttempted) {
+                    autoplayAttempted = true;
+                    startMixcloud();
+                }
+            }
 
+            // Attendre un court délai pour s'assurer que l'iframe est complètement chargé
+            setTimeout(handleAutoplay, 500); // Délai de 500ms (ajuster si nécessaire)
         });
     </script>
 </body>
