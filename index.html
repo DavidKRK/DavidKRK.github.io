@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="David KRK - DJ et producteur de Techno. Site officiel en construction.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo/logo_30-01-25.png">
     <title>David KRK - Site en Construction</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --neon-red: #FF0000;
@@ -30,8 +27,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 160px;
-            overflow: hidden;
+            padding-bottom: 160px; /* Espace pour le footer + lecteur */
         }
 
         .text-content {
@@ -41,8 +37,7 @@
             animation: textCycle var(--animation-duration) infinite;
             z-index: 2;
             padding: 20px;
-            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5));
-            will-change: transform, opacity;
+            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5)); /* Séparation visuelle */
         }
 
         @keyframes textCycle {
@@ -61,8 +56,7 @@
             background-position: center;
             animation: photoSlide var(--animation-duration) infinite;
             opacity: 0;
-            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5));
-            backface-visibility: hidden;
+            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5)); /* Séparation visuelle */
         }
 
         @keyframes photoSlide {
@@ -73,6 +67,16 @@
             100% { opacity: 0; right: 100%; }
         }
 
+        #photo1 {
+            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
+            animation-delay: 6s;
+        }
+
+        #photo2 {
+            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg');
+            animation-delay: 18s;
+        }
+
         .neon-text {
             color: var(--neon-red);
             text-shadow: 0 0 10px var(--neon-red);
@@ -81,9 +85,11 @@
 
         @keyframes neonPulse {
             from { text-shadow: 0 0 5px var(--neon-red); }
-            to { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red); }
+            to { text-shadow: 0 0 20px var(--neon-red),
+                         0 0 30px var(--neon-red); }
         }
 
+        /* ███ LECTEUR MIXCLOUD ███ */
         .player-mixcloud {
             position: fixed;
             bottom: 0;
@@ -91,35 +97,44 @@
             width: 100%;
             height: 120px;
             background: #000;
-            z-index: 100;
+            z-index: 100; /* Z-index cohérent avec le reste */
             border-top: 2px solid #fff;
         }
 
+        .player-mixcloud iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ███ FOOTER ███ */
         .site-footer {
             position: fixed;
-            bottom: 140px;
+            bottom: 140px; /* Placé AU-DESSUS du lecteur */
             width: 100%;
-            z-index: 101;
+            z-index: 101; /* Z-index > lecteur */
             padding: 0 20px;
         }
 
         @media (max-width: 768px) {
-            .text-content h1 {
-                font-size: 3rem !important;
+            .music-player {
+                height: 140px;
+                bottom: 120px;
             }
+            
             .neon-slogan {
                 font-size: 1.5rem !important;
             }
-            .player-mixcloud {
-                height: 100px;
+            
+            .text-content h1 {
+                font-size: 3rem !important;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- Contenu Principal -->
     <div class="animation-container">
+        <!-- Contenu texte -->
         <div class="text-content">
             <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
             
@@ -150,20 +165,16 @@
             </div>
         </div>
 
-        <!-- Slides Photos -->
-        <div class="photo-slide" id="photo1" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg')"></div>
-        <div class="photo-slide" id="photo2" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi2.jpg')"></div>
+        <!-- Photos -->
+        <div class="photo-slide" id="photo1"></div>
+        <div class="photo-slide" id="photo2"></div>
     </div>
 
-    <!-- Lecteur Mixcloud Optimisé -->
+    <!-- Lecteur Mixcloud -->
     <div class="player-mixcloud">
         <iframe 
-            src="https://player-widget.mixcloud.com/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&mini=1"
-            allow="autoplay"
-            title="Mix Techno par David KRK"
-            aria-label="Lecteur audio"
-            loading="lazy"
-            style="width:100%;height:100%;border:0">
+            src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&mini=1" 
+            allowfullscreen>
         </iframe>
     </div>
 
@@ -174,28 +185,8 @@
                 <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
                 <p class="text-gray-600">&copy; 2025 DAVID KRK</p>
             </div>
-            <img src="logo-30-01-25.png" 
-                 alt="Logo David KRK"
-                 class="w-24 h-24 border-4 border-white rounded-full"
-                 loading="lazy">
+            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
         </div>
     </footer>
-
-    <!-- Script d'Interaction -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const playTrigger = document.createElement('button');
-            playTrigger.textContent = 'ACTIVER LA MUSIQUE';
-            playTrigger.className = 'neon-text fixed top-4 right-4 z-50 px-4 py-2 bg-black/50 rounded-lg hover:scale-110 transition-transform';
-            
-            playTrigger.addEventListener('click', function() {
-                const iframe = document.querySelector('.player-mixcloud iframe');
-                iframe.src += '&autoplay=1';
-                this.remove();
-            });
-
-            document.body.prepend(playTrigger);
-        });
-    </script>
 </body>
 </html>
