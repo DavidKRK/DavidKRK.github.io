@@ -199,6 +199,9 @@
             <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
             <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
             <div class="player-mixcloud" id="playerContainer">
+                <button id="playButton" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Écouter la musique
+                </button>
                 <iframe
                     id="mixcloudIframe"
                     width="100%"
@@ -206,6 +209,7 @@
                     src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F"
                     frameborder="0"
                     allow="autoplay"
+                    style="display: none;"
                 ></iframe>
             </div>
             <p class="text-gray-600">© 2025 DAVID KRK</p>
@@ -217,27 +221,20 @@
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('mixcloudIframe');
             const loadingContainer = document.getElementById('loadingContainer');
-            let autoplayAttempted = false;
+            const playButton = document.getElementById('playButton');
 
-            function startMixcloud() {
-                iframe.src += '&autoplay=1';
-            }
-
-            function handleAutoplay() {
-                if (!autoplayAttempted) {
-                    autoplayAttempted = true;
-                    startMixcloud();
-                }
-            }
-
-            // Fonction pour cacher l'écran de chargement
             function hideLoadingScreen() {
                 loadingContainer.style.display = 'none';
             }
 
-            // Tentative de démarrage et masquage après un délai
-            handleAutoplay(); // Lance la tentative d'autoplay
-            setTimeout(hideLoadingScreen, 2000); // Masque après 2 secondes (ajuster)
+            playButton.addEventListener('click', function() {
+                // Démarrer le lecteur Mixcloud
+                iframe.src += '&autoplay=1';
+                iframe.style.display = 'block'; // Affiche l'iframe
+                playButton.style.display = 'none'; // Cache le bouton
+            });
+
+            setTimeout(hideLoadingScreen, 2000);
         });
     </script>
 </body>
