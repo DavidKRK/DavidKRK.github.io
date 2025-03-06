@@ -21,6 +21,35 @@
             color: white;
         }
 
+        /* Style pour le conteneur de chargement */
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a; /* Même couleur que le body */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000; /* Assure qu'il est au-dessus de tout */
+        }
+
+        .loading-container img {
+            width: 150px; /* Ajuste la taille du logo */
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .loading-container p {
+            font-size: 1.5em;
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
+            margin-bottom: 20px;
+        }
+
         .animation-container {
             position: relative;
             height: 100vh;
@@ -90,14 +119,8 @@
 
         /* ███ LECTEUR MIXCLOUD ███ */
         .player-mixcloud {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            width: 100%; /* Occupe toute la largeur du conteneur */
             height: 120px;
-            background: #000;
-            z-index: 100; /* Z-index cohérent avec le reste */
-            border-top: 2px solid #fff;
         }
 
         .player-mixcloud iframe {
@@ -109,16 +132,32 @@
         /* ███ FOOTER ███ */
         .site-footer {
             position: fixed;
-            bottom: 140px; /* Placé AU-DESSUS du lecteur */
+            bottom: 0; /* Fixé au bas de l'écran */
             width: 100%;
             z-index: 101; /* Z-index > lecteur */
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centre horizontalement le contenu */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
 <body>
+
+    <!-- Conteneur de chargement -->
+    <div class="loading-container" id="loadingContainer">
+        <img src="logo 30-01-25.png" alt="Logo David KRK">
+        <p class="neon-text">"MAY THE TECHNO BE WITH YOU"</p>
+    </div>
+
     <div class="animation-container">
-        <!-- Contenu texte -->
+        <!-- Contenu texte (caché initialement) -->
         <div class="text-content">
             <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
             
@@ -154,28 +193,22 @@
         <div class="photo-slide" id="photo2"></div>
     </div>
 
-    <!-- Lecteur Mixcloud -->
-    <div class="player-mixcloud" id="playerContainer">
-        <iframe
-            id="mixcloudIframe"
-            width="100%"
-            height="120"
-            src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F"
-            frameborder="0"
-            allow="autoplay"
-        ></iframe>
-    </div>
-
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
-            <div class="mb-4 md:mb-0 text-center">
-                <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
-                <p class="text-gray-600">© 2025 DAVID KRK</p>
+        <div class="footer-content">
+            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
+            <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
+            <div class="player-mixcloud" id="playerContainer">
+                <iframe
+                    id="mixcloudIframe"
+                    width="100%"
+                    height="120"
+                    src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F"
+                    frameborder="0"
+                    allow="autoplay"
+                ></iframe>
             </div>
-           <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">   
-       
-
+            <p class="text-gray-600">© 2025 DAVID KRK</p>
         </div>
     </footer>
 
@@ -183,10 +216,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('mixcloudIframe');
-            let autoplayAttempted = false; // Variable pour éviter les boucles infinies
+            const loadingContainer = document.getElementById('loadingContainer');
+            let autoplayAttempted = false;
 
             function startMixcloud() {
-                // Ajoute le paramètre autoplay à l'URL de l'iframe
                 iframe.src += '&autoplay=1';
             }
 
@@ -197,8 +230,14 @@
                 }
             }
 
-            // Attendre un court délai pour s'assurer que l'iframe est complètement chargé
-            setTimeout(handleAutoplay, 500); // Délai de 500ms (ajuster si nécessaire)
+            // Fonction pour cacher l'écran de chargement
+            function hideLoadingScreen() {
+                loadingContainer.style.display = 'none';
+            }
+
+            // Tentative de démarrage et masquage après un délai
+            handleAutoplay(); // Lance la tentative d'autoplay
+            setTimeout(hideLoadingScreen, 2000); // Masque après 2 secondes (ajuster)
         });
     </script>
 </body>
