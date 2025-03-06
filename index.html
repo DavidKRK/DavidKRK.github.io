@@ -170,24 +170,25 @@
         <div class="photo-slide" id="photo2"></div>
     </div>
 
-   <!-- Bouton d'activation -->
-<button onclick="activatePlayer()" class="neon-button fixed top-4 right-4 z-50 px-4 py-2 bg-black/50 rounded-lg hover:scale-110 transition-transform">
-    🎧 Activer le son
-</button>
+   <!-- Bouton d'activation amélioré -->
+    <button onclick="activatePlayer()" 
+            class="neon-button fixed top-4 right-4 z-[1000] px-6 py-3 bg-black/80 rounded-xl hover:scale-110 transition-transform border-2 border-red-500 glow">
+        🎧 ACTIVER LE MIX
+    </button>
 
-<!-- Lecteur Mixcloud (caché par défaut) -->
-<div class="player-mixcloud" id="playerContainer" style="display:none;">
-    <iframe 
-        src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1"
-        width="100%" 
-        height="120"
-        frameborder="0"
-        allow="autoplay"
-        title="Mix Techno David KRK - Life Good Techno EP1"
-        style="border: none;"
-        loading="lazy">
-    </iframe>
-</div>
+    <!-- Lecteur Mixcloud optimisé -->
+    <div class="player-mixcloud" id="playerContainer" style="display:none;">
+        <iframe 
+            src="https://player-widget.mixcloud.com/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&autoplay=1"
+            allow="autoplay"
+            title="Live Techno Mix by David KRK"
+            style="border: none;"
+            loading="eager"
+            width="100%"
+            height="120">
+        </iframe>
+    </div>
+
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -199,13 +200,41 @@
             <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
         </div>
     </footer>
-<script>
-function activatePlayer() {
-    const player = document.getElementById('playerContainer');
-    player.style.display = 'block'; // Affiche le lecteur
-    player.querySelector('iframe').src += '&autoplay=1'; // Active l'autoplay
-    document.querySelector('button').remove(); // Supprime le bouton après clic
-}
-</script>
+<!-- Script amélioré -->
+    <script>
+    function activatePlayer() {
+        const container = document.getElementById('playerContainer');
+        const iframe = container.querySelector('iframe');
+        
+        // Réinitialise complètement l'iframe
+        iframe.src = iframe.src.replace('&autoplay=1', '') + '&autoplay=1';
+        
+        // Affiche le lecteur avec animation
+        container.style.display = 'block';
+        container.style.animation = 'slideUp 0.5s ease-out';
+        
+        // Supprime le bouton après 1s
+        setTimeout(() => {
+            document.querySelector('.neon-button').remove();
+        }, 1000);
+    }
+
+    // Animation d'apparition
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideUp {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .glow {
+            animation: buttonGlow 1.5s infinite alternate;
+        }
+        @keyframes buttonGlow {
+            from { box-shadow: 0 0 10px #ff0000; }
+            to { box-shadow: 0 0 25px #ff0000; }
+        }
+    `;
+    document.head.appendChild(style);
+    </script>
 </body>
 </html>
