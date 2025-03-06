@@ -170,10 +170,15 @@
         <div class="photo-slide" id="photo2"></div>
     </div>
 
-    <!-- Lecteur Mixcloud -->
-<div class="player-mixcloud">
+   <!-- Bouton d'activation -->
+<button onclick="activatePlayer()" class="neon-button fixed top-4 right-4 z-50 px-4 py-2 bg-black/50 rounded-lg hover:scale-110 transition-transform">
+    🎧 Activer le son
+</button>
+
+<!-- Lecteur Mixcloud (caché par défaut) -->
+<div class="player-mixcloud" id="playerContainer" style="display:none;">
     <iframe 
-        src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1&autoplay=1"
+        src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FDavidKRK%2Fdavid-krk-life-good-techno-ep1%2F&hide_cover=1&light=1"
         width="100%" 
         height="120"
         frameborder="0"
@@ -194,5 +199,13 @@
             <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
         </div>
     </footer>
+<script>
+function activatePlayer() {
+    const player = document.getElementById('playerContainer');
+    player.style.display = 'block'; // Affiche le lecteur
+    player.querySelector('iframe').src += '&autoplay=1'; // Active l'autoplay
+    document.querySelector('button').remove(); // Supprime le bouton après clic
+}
+</script>
 </body>
 </html>
