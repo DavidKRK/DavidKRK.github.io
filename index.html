@@ -2,36 +2,21 @@
 <html lang="fr" class="bg-black">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#000000">
-
-    <!-- Titre de la page (balise TITLE) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David KRK - Techno DJ & Producer</title>
-
-    <!-- Description de la page (balise META DESCRIPTION) -->
     <meta name="description" content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
-
-    <!-- Mots-clés (balise META KEYWORDS - moins importante qu'avant) -->
-    <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France">
-
-    <!-- URL canonique (pour éviter le contenu dupliqué) -->
+    <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events">
     <link rel="canonical" href="https://www.davidkrk.com/">
-
-    <!-- Balises hreflang pour l'internationalisation -->
     <link rel="alternate" href="https://www.davidkrk.com/" hreflang="fr">
     <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
 
-    <!-- Préchargement des ressources critiques -->
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg" as="image">
-    
-    <!-- Tailwind CSS -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Police Russe One avec fallback -->
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --neon-red: #FF0000;
@@ -39,26 +24,25 @@
         }
 
         body {
-            font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            overflow-x: hidden;
+            font-family: 'Russo One', sans-serif;
+            overflow: hidden;
             min-height: 100vh;
             color: white;
         }
 
-        /* Conteneur de chargement */
+        /* Écran de chargement */
         .loading-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: #0a0a0a;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            transition: opacity 0.5s ease;
-            background: rgba(10, 10, 10, 0.98);
         }
 
         .loading-container img {
@@ -68,9 +52,7 @@
             margin-bottom: 20px;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
-            animation: 
-                rotate 3s linear infinite,
-                pulse 1.5s ease-in-out infinite;
+            animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;
         }
 
         @keyframes rotate {
@@ -123,7 +105,6 @@
             animation: photoSlide var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Styles spécifiques pour les photos */
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s; /* Ajout délai initial */
@@ -194,6 +175,15 @@
             }
         }
     </style>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "David KRK",
+      "url": "https://www.davidkrk.com",
+      "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png"
+    }
+    </script>
 </head>
 
     <body class="bg-black">
