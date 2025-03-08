@@ -119,10 +119,11 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            animation: photoSlide var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
+            animation: photoSlide var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Styles spécifiques pour les photos */
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s; /* Ajout délai initial */
@@ -130,8 +131,8 @@
 
         #photo2 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
-        animation-delay: 6s;
-            z-index: 1; /* Placer la deuxième image en dessous du texte */
+            animation-delay: 6s; /* Décalage de la deuxième image */
+            opacity: 0 !important; /* Important: Masquer initialement la deuxième image */
         }
 
         @keyframes photoSlide {
@@ -238,7 +239,7 @@
 
             <!-- Photos -->
             <div class="photo-slide" id="photo1" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');" aria-label="David KRK en mix"></div>
-            <div class="photo-slide" id="photo2" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');" aria-label="Portrait de David KRK"></div>
+            <div class="photo-slide" id="photo2" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'); opacity: 0 !important;" aria-label="Portrait de David KRK"></div>
         </div>
 
         <!-- Footer -->
