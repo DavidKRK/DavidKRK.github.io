@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="bg-black">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>David KRK - Site en Construction</title>
+    <meta name="theme-color" content="#000000">
+    <title>DAVID KRK - Techno DJ & Producer</title>
+
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
+    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg" as="image">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Police Russe One avec fallback -->
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --neon-red: #FF0000;
@@ -13,27 +23,26 @@
         }
 
         body {
-            background: #0a0a0a;
-            font-family: 'Russo One', sans-serif;
+            font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             overflow-x: hidden;
-            margin: 0;
             min-height: 100vh;
             color: white;
         }
 
+        /* Conteneur de chargement */
         .loading-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
             transition: opacity 0.5s ease;
+            background: rgba(10, 10, 10, 0.98);
         }
 
         .loading-container img {
@@ -41,27 +50,24 @@
             height: 180px;
             border-radius: 50%;
             margin-bottom: 20px;
-            animation: rotatePulse 3s ease-in-out infinite;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
+            animation: 
+                rotate 3s linear infinite,
+                pulse 1.5s ease-in-out infinite;
         }
 
-        @keyframes rotatePulse {
-            0% { 
-                transform: rotate(0deg) scale(1);
-                opacity: 0.8;
-            }
-            50% { 
-                transform: rotate(180deg) scale(1.2);
-                opacity: 1;
-                box-shadow: 0 0 25px var(--neon-red);
-            }
-            100% { 
-                transform: rotate(360deg) scale(1);
-                opacity: 0.8;
-            }
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        /* Conteneur principal */
         .animation-container {
             position: relative;
             height: 100vh;
@@ -71,6 +77,7 @@
             padding-bottom: 160px;
         }
 
+        /* Animation du texte */
         .text-content {
             position: absolute;
             text-align: center;
@@ -86,6 +93,7 @@
             75%, 100% { opacity: 1; transform: translateX(0); }
         }
 
+        /* Diaporama photos */
         .photo-slide {
             position: absolute;
             top: 0;
@@ -106,16 +114,7 @@
             100% { opacity: 0; right: 100%; }
         }
 
-        #photo1 {
-            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
-            animation-delay: 6s;
-        }
-
-        #photo2 {
-            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
-            animation-delay: 18s;
-        }
-
+        /* Styles néon */
         .neon-text {
             color: var(--neon-red);
             animation: neonPulse 1.5s ease-in-out infinite alternate;
@@ -126,25 +125,25 @@
             to { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red); }
         }
 
+        /* Lecteur SoundCloud */
         .player-soundcloud {
             width: 90%;
+            max-width: 600px;
             height: 166px;
+            margin: 0 auto;
             position: relative;
             z-index: 102;
-            margin: 0 auto;
         }
 
+        /* Footer */
         .site-footer {
             position: fixed;
             bottom: 0;
             width: 100%;
             z-index: 101;
             padding: 20px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
         }
 
         .footer-content {
@@ -152,52 +151,54 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 600px;
         }
 
-        .footer-content img {
-            width: 128px;
-            height: 128px;
-            border: 3px solid white;
-            border-radius: 50%;
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px rgba(255,255,255,0.3);
-        }
-
+        /* Responsive Mobile */
         @media (max-width: 640px) {
-            .text-content h1 { font-size: 3rem; }
-            .neon-text { font-size: 1.5rem; }
-            .player-soundcloud { width: 95%; }
+            .text-content h1 { font-size: 2.5rem !important; }
+            .neon-text { font-size: 1.25rem !important; }
+            .loading-container img { 
+                width: 140px;
+                height: 140px;
+            }
+            .animation-container {
+                padding-bottom: 200px;
+            }
         }
     </style>
 </head>
-<body>
-
-    <div class="loading-container" id="loadingContainer" role="status" aria-live="polite">
+<body class="bg-black">
+    <!-- Écran de chargement -->
+    <div class="loading-container" id="loadingContainer">
         <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
-        <p class="neon-text">"MAY THE TECHNO BE WITH YOU"</p>
+        <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
     </div>
 
+    <!-- Contenu principal -->
     <div class="animation-container">
         <div class="text-content">
             <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
             
             <div class="space-y-16">
+                <!-- Français -->
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
                     <p class="text-xl md:text-2xl">Revenez bientôt pour découvrir mon nouveau site !</p>
                 </div>
 
+                <!-- Euskara -->
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
                     <p class="text-xl md:text-2xl">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
                 </div>
 
+                <!-- Español -->
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
                     <p class="text-xl md:text-2xl">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
                 </div>
 
+                <!-- English -->
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
                     <p class="text-xl md:text-2xl">Come back soon to discover my new website!</p>
@@ -205,46 +206,54 @@
             </div>
         </div>
 
+        <!-- Photos -->
         <div class="photo-slide" id="photo1"></div>
         <div class="photo-slide" id="photo2"></div>
     </div>
 
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-content">
-            <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
+            <img src="logo 30-01-25.png" alt="Logo David KRK" 
+                 class="w-32 h-32 border-2 border-white rounded-full"
+                 loading="lazy">
             <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
             <div class="player-soundcloud">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
-                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/76985263&color=%23a49c84&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" 
+                    allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/76985263&color=%23a49c84&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+                </iframe>
             </div>
-            <p class="text-gray-600 mt-4">© All rights reserved 2025 DAVID KRK</p>
+            <p class="text-gray-500 mt-4 text-sm">© 2024 DAVID KRK - ALL RIGHTS RESERVED</p>
         </div>
     </footer>
 
+    <!-- Script de chargement -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingContainer = document.getElementById('loadingContainer');
+        window.addEventListener('load', function() {
             const assets = [
                 'logo 30-01-25.png',
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'
             ];
 
-            let loaded = 0;
-            
-            assets.forEach(src => {
+            let loadedCount = 0;
+
+            const checkAssetsLoaded = () => {
+                loadedCount++;
+                if(loadedCount === assets.length) {
+                    document.getElementById('loadingContainer').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('loadingContainer').remove();
+                    }, 500);
+                }
+            };
+
+            assets.forEach(asset => {
                 const img = new Image();
-                img.src = src;
-                img.onload = () => {
-                    loaded++;
-                    if(loaded === assets.length) {
-                        loadingContainer.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingContainer.style.display = 'none';
-                        }, 500);
-                    }
-                };
-                img.onerror = () => loaded++; // Gestion d'erreur
+                img.src = asset;
+                img.onload = checkAssetsLoaded;
+                img.onerror = checkAssetsLoaded;
             });
         });
     </script>
