@@ -266,10 +266,13 @@
                 const checkAssetsLoaded = () => {
                     loadedCount++;
                     if(loadedCount === assets.length) {
-                        document.getElementById('loadingContainer').style.opacity = '0';
+                        // Attendre 3 secondes avant de masquer l'écran de chargement
                         setTimeout(() => {
-                            document.getElementById('loadingContainer').remove();
-                        }, 500);
+                            document.getElementById('loadingContainer').style.opacity = '0';
+                            setTimeout(() => {
+                                document.getElementById('loadingContainer').remove();
+                            }, 500); // Durée de la transition de fondu
+                        }, 3000); // Délai de 3 secondes
                     }
                 };
 
