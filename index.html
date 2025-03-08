@@ -2,21 +2,36 @@
 <html lang="fr" class="bg-black">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Titre de la page (balise TITLE) -->
     <title>David KRK - Techno DJ & Producer</title>
+
+    <!-- Description de la page (balise META DESCRIPTION) -->
     <meta name="description" content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
-    <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events">
+
+    <!-- Mots-clés (balise META KEYWORDS - moins importante qu'avant) -->
+    <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France">
+
+    <!-- URL canonique (pour éviter le contenu dupliqué) -->
     <link rel="canonical" href="https://www.davidkrk.com/">
+
+    <!-- Balises hreflang pour l'internationalisation -->
     <link rel="alternate" href="https://www.davidkrk.com/" hreflang="fr">
     <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
 
+    <!-- Préchargement des ressources critiques -->
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg" as="image">
-
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Police Russe One avec fallback -->
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
+    
     <style>
         :root {
             --neon-red: #FF0000;
@@ -24,34 +39,38 @@
         }
 
         body {
-            font-family: 'Russo One', sans-serif;
-            overflow: hidden;
+            font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
             min-height: 100vh;
             color: white;
         }
 
-        /* Écran de chargement */
+        /* Conteneur de chargement */
         .loading-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
+            transition: opacity 0.5s ease;
+            background: rgba(10, 10, 10, 0.98);
         }
 
         .loading-container img {
             width: 180px;
             height: 180px;
             border-radius: 50%;
+            margin-bottom: 20px;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
-            animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;
+            animation: 
+                rotate 3s linear infinite,
+                pulse 1.5s ease-in-out infinite;
         }
 
         @keyframes rotate {
@@ -99,8 +118,8 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            opacity: 0;
             animation: photoSlide var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
         }
 
         #photo1 {
@@ -179,7 +198,7 @@
 
         <!-- Écran de chargement -->
         <div class="loading-container" id="loadingContainer">
-            <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
+            <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy" style="width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--neon-red); box-shadow: 0 0 15px var(--neon-red); animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;">
             <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
         </div>
 
@@ -187,10 +206,30 @@
         <div class="animation-container">
             <div class="text-content">
                 <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
+            
                 <div class="space-y-16">
+                    <!-- Français -->
                     <div>
                         <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
                         <p class="text-xl md:text-2xl">Nouveau site bientôt disponible ! DJ Techno et Producteur.</p>
+                    </div>
+
+                    <!-- Euskara -->
+                    <div>
+                        <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
+                        <p class="text-xl md:text-2xl">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
+                    </div>
+
+                    <!-- Español -->
+                    <div>
+                        <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
+                        <p class="text-xl md:text-2xl">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
+                    </div>
+
+                    <!-- English -->
+                    <div>
+                        <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
+                        <p class="text-xl md:text-2xl">Come back soon to discover my new website!</p>
                     </div>
                 </div>
             </div>
@@ -216,8 +255,30 @@
         <!-- Script de chargement -->
         <script>
             window.addEventListener('load', function() {
-                const loadingContainer = document.getElementById('loadingContainer');
-                loadingContainer.style.display = 'none';  // On cache immédiatement
+                const assets = [
+                    'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo 30-01-25.png',
+                    'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
+                    'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'
+                ];
+
+                let loadedCount = 0;
+
+                const checkAssetsLoaded = () => {
+                    loadedCount++;
+                    if(loadedCount === assets.length) {
+                        document.getElementById('loadingContainer').style.opacity = '0';
+                        setTimeout(() => {
+                            document.getElementById('loadingContainer').remove();
+                        }, 500);
+                    }
+                };
+
+                assets.forEach(asset => {
+                    const img = new Image();
+                    img.src = asset;
+                    img.onload = checkAssetsLoaded;
+                    img.onerror = checkAssetsLoaded;
+                });
             });
         </script>
     </body>
