@@ -37,15 +37,29 @@
         }
 
         .loading-container img {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             margin-bottom: 20px;
-            animation: rotate 2s linear infinite;
+            animation: rotatePulse 3s ease-in-out infinite;
+            border: 3px solid var(--neon-red);
+            box-shadow: 0 0 15px var(--neon-red);
         }
 
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
+        @keyframes rotatePulse {
+            0% { 
+                transform: rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: rotate(180deg) scale(1.2);
+                opacity: 1;
+                box-shadow: 0 0 25px var(--neon-red);
+            }
+            100% { 
+                transform: rotate(360deg) scale(1);
+                opacity: 0.8;
+            }
         }
 
         .animation-container {
@@ -113,10 +127,11 @@
         }
 
         .player-soundcloud {
-            width: 100%;
+            width: 90%;
             height: 166px;
             position: relative;
             z-index: 102;
+            margin: 0 auto;
         }
 
         .site-footer {
@@ -124,18 +139,35 @@
             bottom: 0;
             width: 100%;
             z-index: 101;
-            padding: 0 20px;
+            padding: 20px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(5px);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .footer-content img {
+            width: 128px;
+            height: 128px;
+            border: 3px solid white;
+            border-radius: 50%;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
         }
 
         @media (max-width: 640px) {
             .text-content h1 { font-size: 3rem; }
             .neon-text { font-size: 1.5rem; }
-            .loading-container img { width: 100px; height: 100px; }
+            .player-soundcloud { width: 95%; }
         }
     </style>
 </head>
@@ -179,13 +211,13 @@
 
     <footer class="site-footer">
         <div class="footer-content">
-            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full" loading="lazy">
-            <p class="neon-text text-2xl md:text-3xl font-bold mb-2">"MAY THE TECHNO BE WITH YOU"</p>
+            <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
+            <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
             <div class="player-soundcloud">
                 <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
                     src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/76985263&color=%23a49c84&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
             </div>
-            <p class="text-gray-600 mt-2">© All rights reserved 2025 DAVID KRK</p>
+            <p class="text-gray-600 mt-4">© All rights reserved 2025 DAVID KRK</p>
         </div>
     </footer>
 
@@ -200,18 +232,19 @@
 
             let loaded = 0;
             
-            const loadAsset = (src) => new Promise(resolve => {
+            assets.forEach(src => {
                 const img = new Image();
                 img.src = src;
-                img.onload = resolve;
-                img.onerror = resolve;
-            });
-
-            Promise.all(assets.map(loadAsset)).then(() => {
-                loadingContainer.style.opacity = '0';
-                setTimeout(() => {
-                    loadingContainer.style.display = 'none';
-                }, 500);
+                img.onload = () => {
+                    loaded++;
+                    if(loaded === assets.length) {
+                        loadingContainer.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingContainer.style.display = 'none';
+                        }, 500);
+                    }
+                };
+                img.onerror = () => loaded++; // Gestion d'erreur
             });
         });
     </script>
