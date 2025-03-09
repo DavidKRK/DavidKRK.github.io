@@ -66,23 +66,40 @@
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding-top: 10vh;
-            padding-bottom: 160px;
+            padding: 10vh 20px 160px;
             visibility: hidden;
         }
         .text-content {
-            position: relative;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
             text-align: center;
-            opacity: 0;
+            position: relative;
             z-index: 2;
-            padding: 20px;
-            animation: textCycle var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
-            visibility: hidden;
         }
+        .space-y-16 {
+            position: relative;
+            min-height: 200px;
+        }
+        .space-y-16 > div {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            animation: textCycle 12s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .space-y-16 > div:nth-child(1) { animation-delay: 0s; }
+        .space-y-16 > div:nth-child(2) { animation-delay: 3s; }
+        .space-y-16 > div:nth-child(3) { animation-delay: 6s; }
+        .space-y-16 > div:nth-child(4) { animation-delay: 9s; }
         @keyframes textCycle {
-            0%, 20% { opacity: 0; }
-            20%, 50% { opacity: 1; }
-            50%, 100% { opacity: 0; }
+            0% { opacity: 0; }
+            5% { opacity: 1; }
+            25% { opacity: 1; }
+            30% { opacity: 0; }
+            100% { opacity: 0; }
         }
         .photo-slide {
             position: absolute;
@@ -93,22 +110,22 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            animation: photoSlide var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
+            animation: photoSlide 12s infinite;
         }
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s;
-            visibility: hidden;
         }
         #photo2 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
             animation-delay: 6s;
         }
         @keyframes photoSlide {
-            0%, 20% { opacity: 0; }
-            20%, 50% { opacity: 1; }
-            50%, 70% { opacity: 0; }
-            70%, 100% { opacity: 0; }
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            50% { opacity: 1; }
+            55% { opacity: 0; }
+            100% { opacity: 0; }
         }
         .neon-text {
             color: var(--neon-red);
@@ -133,6 +150,23 @@
             align-items: center;
             width: 100%;
         }
+        .dailymotion-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+        }
+        .dailymotion-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
         @media (max-width: 640px) {
             .text-content h1 { font-size: 2.5rem !important; }
             .neon-text { font-size: 1.25rem !important; }
@@ -142,6 +176,12 @@
             }
             .animation-container {
                 padding-bottom: 200px;
+            }
+            .space-y-16 > div h2 {
+                font-size: 1.5rem !important;
+            }
+            .space-y-16 > div p {
+                font-size: 1rem !important;
             }
         }
     </style>
@@ -157,7 +197,7 @@
 </head>
 <body class="bg-black">
     <div class="loading-container" id="loadingContainer">
-        <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy" style="width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--neon-red); box-shadow: 0 0 15px var(--neon-red); animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;">
+        <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
         <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
     </div>
     <div class="animation-container" id="animationContainer">
@@ -182,8 +222,8 @@
                 </div>
             </div>
         </div>
-        <div class="photo-slide" id="photo1" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');" aria-label="David KRK en mix"></div>
-        <div class="photo-slide" id="photo2" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');" aria-label="Portrait de David KRK"></div>
+        <div class="photo-slide" id="photo1" aria-label="David KRK en mix"></div>
+        <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK"></div>
     </div>
     <footer class="site-footer">
         <div class="footer-content">
@@ -194,17 +234,13 @@
                 <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
-            
-            <!-- Lecteur Dailymotion intégré -->
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden; margin: 20px auto; width: 90%; max-width: 800px;">
+            <div class="dailymotion-container">
                 <iframe src="https://geo.dailymotion.com/player.html?video=x4lbji"
-                    style="width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border:none;"
                     allowfullscreen
                     title="Dailymotion Video Player"
                     allow="web-share">
                 </iframe>
             </div>
-
             <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
         </div>
@@ -223,8 +259,6 @@
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible';
-                        document.getElementById('photo1').style.visibility = 'visible';
-                        document.getElementById('textContent').style.visibility = 'visible';
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
