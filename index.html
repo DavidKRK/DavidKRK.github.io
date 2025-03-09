@@ -71,11 +71,11 @@
             position: relative;
             height: 100vh;
             display: flex;
-            align-items: flex-start; /* Aligner en haut pour éviter le chevauchement */
+            align-items: center; /* Centrer verticalement le contenu */
             justify-content: center;
-            padding: 10vh 20px 160px;
+            padding: 0; /* Retirer le padding pour que l'image remplisse vraiment */
             visibility: hidden;
-            overflow: hidden; /* Important pour que les images ne dépassent pas */
+            overflow: hidden;
         }
 
         .text-content {
@@ -121,24 +121,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover !important; /* Etirer l'image pour couvrir */
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            opacity: 0;
-            animation: photoSlide 16s infinite;
             z-index: 1;
             transition: opacity 1s ease;
-            background-color: #1a1a1a;
         }
 
-        #photo1 {
-            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
-            animation-delay: 0s;
-        }
-
-        #photo2 {
-            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
-            animation-delay: 8s;
+        .photo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* cover, contain, or other values */
         }
 
         @keyframes photoSlide {
@@ -261,8 +251,28 @@
             </div>
         </div>
 
-        <div class="photo-slide" id="photo1" aria-label="David KRK en mix"></div>
-        <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK"></div>
+        <div class="photo-slide" id="photo1" aria-label="David KRK en mix">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="David KRK en mix">
+
+            <!-- Utilisation de la balise <picture> pour les images responsives (commenter la balise <img> ci-dessus)
+            <picture>
+                <source media="(max-width: 768px)" srcset="image-mobile.jpg">
+                <source media="(max-width: 1200px)" srcset="image-tablette.jpg">
+                <img src="image-desktop.jpg" alt="David KRK en mix">
+            </picture>
+            -->
+        </div>
+
+        <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg" alt="Portrait de David KRK">
+            <!-- Utilisation de la balise <picture> pour les images responsives (commenter la balise <img> ci-dessus)
+             <picture>
+                <source media="(max-width: 768px)" srcset="image2-mobile.jpg">
+                <source media="(max-width: 1200px)" srcset="image2-tablette.jpg">
+                <img src="image2-desktop.jpg" alt="Portrait de David KRK">
+            </picture>
+            -->
+        </div>
     </div>
 
     <footer class="site-footer">
@@ -303,8 +313,8 @@
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible';
-                        document.getElementById('photo1').style.opacity = '1';
-                        document.getElementById('photo2').style.opacity = '1';
+                       // document.getElementById('photo1').style.opacity = '1';  //On enleve car maintenant c'est la balise img qui gère l'affichage
+                       // document.getElementById('photo2').style.opacity = '1'; //On enleve car maintenant c'est la balise img qui gère l'affichage
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
