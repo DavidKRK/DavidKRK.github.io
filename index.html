@@ -75,8 +75,7 @@
             justify-content: center;
             padding-top: 10vh;
             padding-bottom: 160px;
-            opacity: 0; /* Hide initially */
-            transition: opacity 0.5s ease;
+            visibility: hidden; /* Hide initially */
         }
 
         .text-content {
@@ -253,7 +252,7 @@
                 if(loadedCount === assets.length) {
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
-                        document.getElementById('animationContainer').style.opacity = '1'; // Show animation container
+                        document.getElementById('animationContainer').style.visibility = 'visible'; // Show animation container
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
