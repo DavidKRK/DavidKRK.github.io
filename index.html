@@ -116,11 +116,11 @@
 
         .photo-slide {
             position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
-            background-size: contain !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
             opacity: 0;
@@ -302,8 +302,8 @@
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible';
-                        document.getElementById('photo1').style.backgroundImage = "url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg')";
-                        document.getElementById('photo2').style.backgroundImage = "url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg')";
+                        document.getElementById('photo1').style.opacity = '1';
+                        document.getElementById('photo2').style.opacity = '1';
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
