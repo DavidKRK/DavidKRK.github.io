@@ -108,6 +108,7 @@
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s;
+            visibility: hidden; /* Hide initially */
         }
 
         #photo2 {
@@ -253,6 +254,7 @@
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible'; // Show animation container
+                        document.getElementById('photo1').style.visibility = 'visible'; // Show first photo
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
