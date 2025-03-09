@@ -88,8 +88,8 @@
 
         @keyframes textCycle {
             0%, 15% { opacity: 0; transform: translateX(0); }
-            20%, 40% { opacity: 1; transform: translateX(0); }
-            45%, 100% { opacity: 0; transform: translateX(0); }
+            20%, 50% { opacity: 1; transform: translateX(0); } /* Adjusted to match photoSlide */
+            55%, 100% { opacity: 0; transform: translateX(0); }
         }
 
         .photo-slide {
@@ -182,90 +182,89 @@
     </script>
 </head>
 
-    <body class="bg-black">
-        <div class="loading-container" id="loadingContainer">
-            <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy" style="width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--neon-red); box-shadow: 0 0 15px var(--neon-red); animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;">
-            <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
-        </div>
+<body class="bg-black">
+    <div class="loading-container" id="loadingContainer">
+        <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy" style="width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--neon-red); box-shadow: 0 0 15px var(--neon-red); animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;">
+        <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
+    </div>
 
-        <div class="animation-container">
-            <div class="text-content">
-                <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
-            
-                <div class="space-y-16">
-                    <div>
-                        <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
-                        <p class="text-xl md:text-2xl">Nouveau site bientôt disponible ! DJ Techno et Producteur.</p>
-                    </div>
+    <div class="animation-container">
+        <div class="text-content">
+            <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
+        
+            <div class="space-y-16">
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
+                    <p class="text-xl md:text-2xl">Nouveau site bientôt disponible ! DJ Techno et Producteur.</p>
+                </div>
 
-                    <div>
-                        <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
-                        <p class="text-xl md:text-2xl">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
-                    </div>
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
+                    <p class="text-xl md:text-2xl">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
+                </div>
 
-                    <div>
-                        <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
-                        <p class="text-xl md:text-2xl">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
-                    </div>
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
+                    <p class="text-xl md:text-2xl">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
+                </div>
 
-                    <div>
-                        <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
-                        <p class="text-xl md:text-2xl">Come back soon to discover my new website!</p>
-                    </div>
+                <div>
+                    <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
+                    <p class="text-xl md:text-2xl">Come back soon to discover my new website!</p>
                 </div>
             </div>
-
-            <div class="photo-slide" id="photo1" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');" aria-label="David KRK en mix"></div>
-            <div class="photo-slide" id="photo2" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');" aria-label="Portrait de David KRK"></div>
         </div>
 
-        <footer class="site-footer">
-            <div class="footer-content">
-                <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
-                <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
-                <div class="mb-4">
-                    <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
-                </div>
-                <div class="player-soundcloud">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/76985263&color=%23a49c84&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-                    </iframe>
-                </div>
-                <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
-                <p class="text-gray-500 mt-4 text-sm">© 2024 DAVID KRK - ALL RIGHTS RESERVED</p>
+        <div class="photo-slide" id="photo1" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');" aria-label="David KRK en mix"></div>
+        <div class="photo-slide" id="photo2" style="background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');" aria-label="Portrait de David KRK"></div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
+            <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
+            <div class="mb-4">
+                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
-        </footer>
+            <div class="player-soundcloud">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/76985263&color=%23a49c84&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            </div>
+            <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
+            <p class="text-gray-500 mt-4 text-sm">© 2024 DAVID KRK - ALL RIGHTS RESERVED</p>
+        </div>
+    </footer>
 
-        <script>
-            window.addEventListener('load', function() {
-                const assets = [
-                    'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo 30-01-25.png',
-                    'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
-                    'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'
-                ];
+    <script>
+        window.addEventListener('load', function() {
+            const assets = [
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo 30-01-25.png',
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'
+            ];
 
-                let loadedCount = 0;
+            let loadedCount = 0;
 
-                const checkAssetsLoaded = () => {
-                    loadedCount++;
-                    if(loadedCount === assets.length) {
+            const checkAssetsLoaded = () => {
+                loadedCount++;
+                if(loadedCount === assets.length) {
+                    setTimeout(() => {
+                        document.getElementById('loadingContainer').style.opacity = '0';
                         setTimeout(() => {
-                            document.getElementById('loadingContainer').style.opacity = '0';
-                            setTimeout(() => {
-                                document.getElementById('loadingContainer').remove();
-                            }, 500);
-                        }, 3000);
-                    }
-                };
+                            document.getElementById('loadingContainer').remove();
+                        }, 500);
+                    }, 3000);
+                }
+            };
 
-                assets.forEach(asset => {
-                    const img = new Image();
-                    img.src = asset;
-                    img.onload = checkAssetsLoaded;
-                    img.onerror = checkAssetsLoaded;
-                });
+            assets.forEach(asset => {
+                const img = new Image();
+                img.src = asset;
+                img.onload = checkAssetsLoaded;
+                img.onerror = checkAssetsLoaded;
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
