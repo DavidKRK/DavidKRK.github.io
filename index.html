@@ -80,17 +80,16 @@
         .text-content {
             position: relative;
             text-align: center;
-            opacity: 1;
+            opacity: 0;
             z-index: 2;
             padding: 20px;
             animation: textCycle var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes textCycle {
-            0%, 25% { opacity: 1; transform: translateX(0); }
-            25%, 50% { opacity: 0; transform: translateX(-100%); }
-            50%, 75% { opacity: 0; transform: translateX(0); }
-            75%, 100% { opacity: 1; transform: translateX(0); }
+            0%, 15% { opacity: 0; transform: translateX(0); }
+            20%, 40% { opacity: 1; transform: translateX(0); }
+            45%, 100% { opacity: 0; transform: translateX(0); }
         }
 
         .photo-slide {
