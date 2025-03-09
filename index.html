@@ -16,17 +16,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --neon-red: #FF0000;
             --animation-duration: 16s;
         }
+
         body {
             font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
             color: white;
         }
+
         .loading-container {
             position: fixed;
             top: 0;
@@ -41,6 +44,7 @@
             transition: opacity 0.5s ease;
             background: rgba(10, 10, 10, 0.98);
         }
+
         .loading-container img {
             width: 180px;
             height: 180px;
@@ -52,14 +56,17 @@
                 rotate 3s linear infinite,
                 pulse 1.5s ease-in-out infinite;
         }
+
         @keyframes rotate {
             100% { transform: rotate(360deg); }
         }
+
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.8; }
             50% { transform: scale(1.15); opacity: 1; }
             100% { transform: scale(1); opacity: 0.8; }
         }
+
         .animation-container {
             position: relative;
             height: 100vh;
@@ -69,6 +76,7 @@
             padding: 10vh 20px 160px;
             visibility: hidden;
         }
+
         .text-content {
             max-width: 1200px;
             width: 90%;
@@ -77,10 +85,12 @@
             position: relative;
             z-index: 3;
         }
+
         .space-y-16 {
             position: relative;
             min-height: 200px;
         }
+
         .space-y-16 > div {
             position: absolute;
             width: 100%;
@@ -90,10 +100,12 @@
             flex-direction: column;
             align-items: center;
         }
+
         .space-y-16 > div:nth-child(1) { animation-delay: 0s; }
         .space-y-16 > div:nth-child(2) { animation-delay: 3s; }
         .space-y-16 > div:nth-child(3) { animation-delay: 6s; }
         .space-y-16 > div:nth-child(4) { animation-delay: 9s; }
+
         @keyframes textCycle {
             0% { opacity: 0; }
             5% { opacity: 1; }
@@ -101,6 +113,7 @@
             30% { opacity: 0; }
             100% { opacity: 0; }
         }
+
         .photo-slide {
             position: absolute;
             top: 0;
@@ -116,14 +129,17 @@
             transition: opacity 1s ease;
             background-color: #1a1a1a;
         }
+
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s;
         }
+
         #photo2 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
             animation-delay: 8s;
         }
+
         @keyframes photoSlide {
             0% { opacity: 0; }
             10% { opacity: 1; }
@@ -131,14 +147,17 @@
             60% { opacity: 0; }
             100% { opacity: 0; }
         }
+
         .neon-text {
             color: var(--neon-red);
             animation: neonPulse 1.5s ease-in-out infinite alternate;
         }
+
         @keyframes neonPulse {
             from { text-shadow: 0 0 5px var(--neon-red); }
             to { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red); }
         }
+
         .site-footer {
             position: fixed;
             bottom: 0;
@@ -148,12 +167,14 @@
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px) contrast(70%);
         }
+
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
+
         .dailymotion-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -163,6 +184,7 @@
             width: 90%;
             max-width: 800px;
         }
+
         .dailymotion-container iframe {
             position: absolute;
             top: 0;
@@ -171,6 +193,7 @@
             height: 100%;
             border: none;
         }
+
         @media (max-width: 640px) {
             .text-content h1 { font-size: 2.5rem !important; }
             .neon-text { font-size: 1.25rem !important; }
@@ -178,17 +201,21 @@
                 width: 140px;
                 height: 140px;
             }
+
             .animation-container {
                 padding-bottom: 200px;
             }
+
             .space-y-16 > div h2 {
                 font-size: 1.5rem !important;
             }
+
             .space-y-16 > div p {
                 font-size: 1rem !important;
             }
         }
     </style>
+        
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -199,36 +226,44 @@
     }
     </script>
 </head>
+
 <body class="bg-black">
     <div class="loading-container" id="loadingContainer">
         <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
         <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
     </div>
+
     <div class="animation-container" id="animationContainer">
         <div class="text-content" id="textContent">
             <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
+        
             <div class="space-y-16">
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
                     <p class="text-xl md:text-2xl">Nouveau site bientôt disponible ! DJ Techno et Producteur.</p>
                 </div>
+
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
                     <p class="text-xl md:text-2xl">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
                 </div>
+
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
                     <p class="text-xl md:text-2xl">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
                 </div>
+
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
                     <p class="text-xl md:text-2xl">Come back soon to discover my new website!</p>
                 </div>
             </div>
         </div>
+
         <div class="photo-slide" id="photo1" aria-label="David KRK en mix"></div>
         <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK"></div>
     </div>
+
     <footer class="site-footer">
         <div class="footer-content">
             <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
@@ -250,6 +285,7 @@
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
         </div>
     </footer>
+
     <script>
         window.addEventListener('load', function() {
             const assets = [
@@ -257,19 +293,24 @@
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'
             ];
+
             let loadedCount = 0;
+
             const checkAssetsLoaded = () => {
                 loadedCount++;
                 if (loadedCount === assets.length) {
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible';
+                        document.getElementById('photo1').style.backgroundImage = "url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg')";
+                        document.getElementById('photo2').style.backgroundImage = "url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg')";
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
                     }, 3000);
                 }
             };
+
             assets.forEach(asset => {
                 const img = new Image();
                 img.src = asset;
