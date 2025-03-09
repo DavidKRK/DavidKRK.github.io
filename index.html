@@ -109,10 +109,12 @@
             height: 100%;
             background-size: cover !important;
             background-position: center !important;
+            background-repeat: no-repeat !important;
             opacity: 0;
             animation: photoSlide 12s infinite;
             z-index: 1;
             transition: opacity 1s ease;
+            background-color: #1a1a1a;
         }
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
@@ -124,9 +126,9 @@
         }
         @keyframes photoSlide {
             0% { opacity: 0; }
-            15% { opacity: 1; }
-            75% { opacity: 1; }
-            90% { opacity: 0; }
+            10% { opacity: 1; }
+            60% { opacity: 1; }
+            70% { opacity: 0; }
             100% { opacity: 0; }
         }
         .neon-text {
