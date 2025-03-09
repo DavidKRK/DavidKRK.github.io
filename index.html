@@ -12,11 +12,11 @@
     <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg" as="image">
+    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --neon-red: #FF0000;
@@ -52,7 +52,7 @@
             margin-bottom: 20px;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
-            animation: 
+            animation:
                 rotate 3s linear infinite,
                 pulse 1.5s ease-in-out infinite;
         }
@@ -206,7 +206,7 @@
             }
         }
     </style>
-        
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -227,7 +227,7 @@
     <div class="animation-container" id="animationContainer">
         <div class="text-content" id="textContent">
             <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
-        
+
             <div class="space-y-16">
                 <div>
                     <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
@@ -253,25 +253,10 @@
 
         <div class="photo-slide" id="photo1" aria-label="David KRK en mix">
             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="David KRK en mix">
-
-            <!-- Utilisation de la balise <picture> pour les images responsives (commenter la balise <img> ci-dessus)
-            <picture>
-                <source media="(max-width: 768px)" srcset="image-mobile.jpg">
-                <source media="(max-width: 1200px)" srcset="image-tablette.jpg">
-                <img src="image-desktop.jpg" alt="David KRK en mix">
-            </picture>
-            -->
         </div>
 
         <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg" alt="Portrait de David KRK">
-            <!-- Utilisation de la balise <picture> pour les images responsives (commenter la balise <img> ci-dessus)
-             <picture>
-                <source media="(max-width: 768px)" srcset="image2-mobile.jpg">
-                <source media="(max-width: 1200px)" srcset="image2-tablette.jpg">
-                <img src="image2-desktop.jpg" alt="Portrait de David KRK">
-            </picture>
-            -->
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" alt="Portrait de David KRK">
         </div>
     </div>
 
@@ -285,9 +270,9 @@
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="dailymotion-container">
-                <iframe 
-                    src="https://geo.dailymotion.com/player.html?video=x4lbji&autoplay=1&mute=1&controls=1" 
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                <iframe
+                    src="https://geo.dailymotion.com/player.html?video=x4lbji&autoplay=1&mute=1&controls=1"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                     title="Dailymotion Video Player"
                 ></iframe>
@@ -300,9 +285,9 @@
     <script>
         window.addEventListener('load', function() {
             const assets = [
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo 30-01-25.png',
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png',
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg'
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg'
             ];
 
             let loadedCount = 0;
@@ -313,8 +298,6 @@
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible';
-                       // document.getElementById('photo1').style.opacity = '1';  //On enleve car maintenant c'est la balise img qui gère l'affichage
-                       // document.getElementById('photo2').style.opacity = '1'; //On enleve car maintenant c'est la balise img qui gère l'affichage
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
