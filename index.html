@@ -73,29 +73,16 @@
         .text-content {
             position: relative;
             text-align: center;
+            opacity: 0;
             z-index: 2;
             padding: 20px;
+            animation: textCycle var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
+            visibility: hidden;
         }
-        .space-y-16 {
-            position: relative;
-            height: 300px;
-        }
-        .space-y-16 > div {
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            animation: textCycle 12s infinite;
-        }
-        .space-y-16 > div:nth-child(1) { animation-delay: 0s; }
-        .space-y-16 > div:nth-child(2) { animation-delay: 3s; }
-        .space-y-16 > div:nth-child(3) { animation-delay: 6s; }
-        .space-y-16 > div:nth-child(4) { animation-delay: 9s; }
         @keyframes textCycle {
-            0% { opacity: 0; }
-            5% { opacity: 1; }
-            25% { opacity: 1; }
-            30% { opacity: 0; }
-            100% { opacity: 0; }
+            0%, 20% { opacity: 0; }
+            20%, 50% { opacity: 1; }
+            50%, 100% { opacity: 0; }
         }
         .photo-slide {
             position: absolute;
@@ -106,20 +93,22 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            animation: photoSlide 12s infinite;
+            animation: photoSlide var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
         #photo1 {
+            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s;
+            visibility: hidden;
         }
         #photo2 {
+            background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
             animation-delay: 6s;
         }
         @keyframes photoSlide {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            50% { opacity: 1; }
-            55% { opacity: 0; }
-            100% { opacity: 0; }
+            0%, 20% { opacity: 0; }
+            20%, 50% { opacity: 1; }
+            50%, 70% { opacity: 0; }
+            70%, 100% { opacity: 0; }
         }
         .neon-text {
             color: var(--neon-red);
@@ -128,14 +117,6 @@
         @keyframes neonPulse {
             from { text-shadow: 0 0 5px var(--neon-red); }
             to { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red); }
-        }
-        .player-soundcloud {
-            width: 90%;
-            max-width: 600px;
-            height: 166px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 102;
         }
         .site-footer {
             position: fixed;
@@ -176,7 +157,7 @@
 </head>
 <body class="bg-black">
     <div class="loading-container" id="loadingContainer">
-        <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
+        <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy" style="width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--neon-red); box-shadow: 0 0 15px var(--neon-red); animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;">
         <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
     </div>
     <div class="animation-container" id="animationContainer">
@@ -213,9 +194,17 @@
                 <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="player-soundcloud">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/76985263&color=%23a49c84&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            
+            <!-- Lecteur Dailymotion intégré -->
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden; margin: 20px auto; width: 90%; max-width: 800px;">
+                <iframe src="https://geo.dailymotion.com/player.html?video=x4lbji"
+                    style="width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border:none;"
+                    allowfullscreen
+                    title="Dailymotion Video Player"
+                    allow="web-share">
+                </iframe>
             </div>
+
             <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
         </div>
@@ -234,6 +223,8 @@
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
                         document.getElementById('animationContainer').style.visibility = 'visible';
+                        document.getElementById('photo1').style.visibility = 'visible';
+                        document.getElementById('textContent').style.visibility = 'visible';
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
