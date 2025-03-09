@@ -111,6 +111,7 @@
             background-position: center;
             opacity: 0;
             animation: photoSlide 12s infinite;
+            z-index: 1; /* Nouvelle couche sous le texte */
         }
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
@@ -235,11 +236,12 @@
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="dailymotion-container">
-                <iframe src="https://geo.dailymotion.com/player.html?video=x4lbji"
-                    allowfullscreen
+                <iframe 
+                    src="https://geo.dailymotion.com/player.html?video=x4lbji&autoplay=1&mute=0" 
+                    allow="autoplay; fullscreen; web-share" 
+                    allowfullscreen 
                     title="Dailymotion Video Player"
-                    allow="web-share">
-                </iframe>
+                ></iframe>
             </div>
             <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
