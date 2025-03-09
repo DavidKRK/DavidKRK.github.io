@@ -75,7 +75,7 @@
             justify-content: center;
             padding-top: 10vh;
             padding-bottom: 160px;
-            visibility: hidden; /* Hide initially */
+            visibility: hidden;
         }
 
         .text-content {
@@ -85,13 +85,13 @@
             z-index: 2;
             padding: 20px;
             animation: textCycle var(--animation-duration) infinite cubic-bezier(0.4, 0, 0.2, 1);
-            visibility: hidden; /* Hide initially */
+            visibility: hidden;
         }
 
         @keyframes textCycle {
-            0%, 15% { opacity: 0; transform: translateX(0); }
-            20%, 50% { opacity: 1; transform: translateX(0); } /* Adjusted to match photoSlide */
-            55%, 100% { opacity: 0; transform: translateX(0); }
+            0%, 20% { opacity: 0; }
+            20%, 50% { opacity: 1; }
+            50%, 100% { opacity: 0; }
         }
 
         .photo-slide {
@@ -109,7 +109,7 @@
         #photo1 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg');
             animation-delay: 0s;
-            visibility: hidden; /* Hide initially */
+            visibility: hidden;
         }
 
         #photo2 {
@@ -120,7 +120,7 @@
         @keyframes photoSlide {
             0%, 20% { opacity: 0; }
             20%, 50% { opacity: 1; }
-            50%, 70% { opacity: 1; }
+            50%, 70% { opacity: 0; }
             70%, 100% { opacity: 0; }
         }
 
@@ -254,9 +254,9 @@
                 if (loadedCount === assets.length) {
                     setTimeout(() => {
                         document.getElementById('loadingContainer').style.opacity = '0';
-                        document.getElementById('animationContainer').style.visibility = 'visible'; // Show animation container
-                        document.getElementById('photo1').style.visibility = 'visible'; // Show first photo
-                        document.getElementById('textContent').style.visibility = 'visible'; // Show text
+                        document.getElementById('animationContainer').style.visibility = 'visible';
+                        document.getElementById('photo1').style.visibility = 'visible';
+                        document.getElementById('textContent').style.visibility = 'visible';
                         setTimeout(() => {
                             document.getElementById('loadingContainer').remove();
                         }, 500);
