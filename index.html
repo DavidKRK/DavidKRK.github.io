@@ -71,10 +71,11 @@
             position: relative;
             height: 100vh;
             display: flex;
-            align-items: flex-start;
+            align-items: flex-start; /* Aligner en haut pour éviter le chevauchement */
             justify-content: center;
             padding: 10vh 20px 160px;
             visibility: hidden;
+            overflow: hidden; /* Important pour que les images ne dépassent pas */
         }
 
         .text-content {
@@ -120,7 +121,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover !important;
+            background-size: cover !important; /* Etirer l'image pour couvrir */
             background-position: center !important;
             background-repeat: no-repeat !important;
             opacity: 0;
