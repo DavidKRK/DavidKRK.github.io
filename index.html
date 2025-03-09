@@ -19,7 +19,7 @@
     <style>
         :root {
             --neon-red: #FF0000;
-            --animation-duration: 12s;
+            --animation-duration: 16s;
         }
         body {
             font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -111,7 +111,7 @@
             background-position: center !important;
             background-repeat: no-repeat !important;
             opacity: 0;
-            animation: photoSlide 12s infinite;
+            animation: photoSlide 16s infinite;
             z-index: 1;
             transition: opacity 1s ease;
             background-color: #1a1a1a;
@@ -122,13 +122,13 @@
         }
         #photo2 {
             background-image: url('https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa.jpg');
-            animation-delay: 6s;
+            animation-delay: 8s;
         }
         @keyframes photoSlide {
             0% { opacity: 0; }
             10% { opacity: 1; }
-            60% { opacity: 1; }
-            70% { opacity: 0; }
+            50% { opacity: 1; }
+            60% { opacity: 0; }
             100% { opacity: 0; }
         }
         .neon-text {
