@@ -13,7 +13,7 @@
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" as="image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
@@ -52,7 +52,7 @@
             margin-bottom: 20px;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
-            animation: 
+            animation:
                 rotate 3s linear infinite,
                 pulse 1.5s ease-in-out infinite;
         }
@@ -71,20 +71,11 @@
             position: relative;
             height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: center; /* Centrer verticalement le contenu */
             justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
-        }
-
-        .animation-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 90%);
-            z-index: 2;
+            padding: 0; /* Retirer le padding pour que l'image remplisse vraiment */
+            visibility: hidden;
+            overflow: hidden;
         }
 
         .text-content {
@@ -131,39 +122,21 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0;
-            animation: photoSlide var(--animation-duration) infinite;
-        }
-
-        #photo1 { animation-delay: 0s; }
-        #photo2 { animation-delay: 8s; }
-
-        @keyframes photoSlide {
-            0% { 
-                opacity: 0;
-                transform: scale(1.1);
-            }
-            15% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            85% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
+            transition: opacity 1s ease;
         }
 
         .photo-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: center 30%;
-            filter: contrast(105%) brightness(110%);
-            transform: scale(1.02);
+            object-fit: cover; /* cover, contain, or other values */
+        }
+
+        @keyframes photoSlide {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            50% { opacity: 1; }
+            60% { opacity: 0; }
+            100% { opacity: 0; }
         }
 
         .neon-text {
@@ -193,9 +166,9 @@
             width: 100%;
         }
 
-        .dailymotion-container {
+        .youtube-container {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (pour que la vidéo soit responsive) */
             height: 0;
             overflow: hidden;
             margin: 20px auto;
@@ -203,7 +176,7 @@
             max-width: 800px;
         }
 
-        .dailymotion-container iframe {
+        .youtube-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -219,12 +192,15 @@
                 width: 140px;
                 height: 140px;
             }
+
             .animation-container {
                 padding-bottom: 200px;
             }
+
             .space-y-16 > div h2 {
                 font-size: 1.5rem !important;
             }
+
             .space-y-16 > div p {
                 font-size: 1rem !important;
             }
@@ -276,11 +252,11 @@
         </div>
 
         <div class="photo-slide" id="photo1" aria-label="David KRK en mix">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="David KRK en performance">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="David KRK en mix">
         </div>
 
         <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" alt="Portrait scénique de David KRK">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" alt="Portrait de David KRK">
         </div>
     </div>
 
@@ -293,13 +269,13 @@
                 <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="dailymotion-container">
+            <div class="youtube-container">
                 <iframe
-                    src="https://geo.dailymotion.com/player.html?video=x4lbji&autoplay=1&mute=1&controls=1"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    title="Dailymotion Video Player"
-                ></iframe>
+                    src="https://www.youtube.com/embed/EKEl86ULmBE"
+                    title="David KRK - Live Set"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
             <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
