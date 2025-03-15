@@ -8,6 +8,7 @@
     <meta name="description" content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
     <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France">
     <link rel="canonical" href="https://www.davidkrk.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" href="https://www.davidkrk.com/" hreflang="fr">
     <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
@@ -72,7 +73,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Alignement en haut */
             align-items: center;
             padding: 0;
             visibility: hidden;
@@ -84,6 +85,7 @@
             position: relative;
             z-index: 3;
             width: 100%;
+            padding-top: 20px; /* Ajout d'un espace en haut */
         }
 
         .space-y-16 {
@@ -175,7 +177,7 @@
             overflow: hidden;
             margin: 20px auto;
             width: 90%;
-            max-width: 800px;
+            max-width: 600px; /* Redimensionnement pour mobile */
         }
 
         .youtube-container iframe {
