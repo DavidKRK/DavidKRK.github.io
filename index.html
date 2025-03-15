@@ -71,25 +71,25 @@
             position: relative;
             height: 100vh;
             display: flex;
-            flex-direction: column; /* Ajout pour organiser le contenu verticalement */
-            justify-content: center; /* Centre verticalement */
-            align-items: center; /* Centre horizontalement */
-            padding: 0;
+            align-items: center; /* Centrer verticalement le contenu */
+            justify-content: center;
+            padding: 0; /* Retirer le padding pour que l'image remplisse vraiment */
             visibility: hidden;
             overflow: hidden;
         }
 
         .text-content {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
             text-align: center;
             position: relative;
             z-index: 3;
-            width: 100%; /* Prend toute la largeur */
         }
 
         .space-y-16 {
             position: relative;
             min-height: 200px;
-            width: 100%; /* Prend toute la largeur */
         }
 
         .space-y-16 > div {
@@ -99,9 +99,7 @@
             animation: textCycle 12s infinite;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centre horizontalement le contenu */
-            justify-content: center; /* Centre verticalement le contenu */
-            height: 100%; /* Prend toute la hauteur du conteneur space-y-16 */
+            align-items: center;
         }
 
         .space-y-16 > div:nth-child(1) { animation-delay: 0s; }
@@ -168,9 +166,9 @@
             width: 100%;
         }
 
-        .youtube-container {
+        .dailymotion-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio (pour que la vidéo soit responsive) */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             margin: 20px auto;
@@ -178,7 +176,7 @@
             max-width: 800px;
         }
 
-        .youtube-container iframe {
+        .dailymotion-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -271,13 +269,13 @@
                 <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="youtube-container">
+            <div class="dailymotion-container">
                 <iframe
-                    src="https://www.youtube.com/embed/EKEl86ULmBE?autoplay=1&mute=1"
-                    title="David KRK - Live Set"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
+                    src="https://geo.dailymotion.com/player.html?video=x4lbji&autoplay=1&mute=1&controls=1"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    title="Dailymotion Video Player"
+                ></iframe>
             </div>
             <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
