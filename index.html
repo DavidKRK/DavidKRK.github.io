@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr" class="bg-black">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David KRK - Techno DJ & Producer</title>
-    <meta name="description" content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
+    <meta name="description"
+        content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
     <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France">
     <link rel="canonical" href="https://www.davidkrk.com/">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" href="https://www.davidkrk.com/" hreflang="fr">
     <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" as="image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg"
+        as="image">
+    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg"
+        as="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
@@ -29,6 +33,7 @@
             overflow-x: hidden;
             min-height: 100vh;
             color: white;
+            background-color: black;
         }
 
         .loading-container {
@@ -53,19 +58,30 @@
             margin-bottom: 20px;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
-            animation:
-                rotate 3s linear infinite,
-                pulse 1.5s ease-in-out infinite;
+            animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;
         }
 
         @keyframes rotate {
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
         }
 
         .animation-container {
@@ -73,7 +89,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Alignement en haut */
+            justify-content: center;
             align-items: center;
             padding: 0;
             visibility: hidden;
@@ -85,38 +101,68 @@
             position: relative;
             z-index: 3;
             width: 100%;
-            padding-top: 20px; /* Ajout d'un espace en haut */
         }
 
         .space-y-16 {
             position: relative;
             min-height: 200px;
             width: 100%;
+            margin-top: 50px;
         }
 
-        .space-y-16 > div {
-            position: absolute;
+        .space-y-16>div {
             width: 100%;
             opacity: 0;
-            animation: textCycle 12s infinite;
+            animation: slideInUp 24s infinite;
+            /* Modification ici */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
         }
 
-        .space-y-16 > div:nth-child(1) { animation-delay: 0s; }
-        .space-y-16 > div:nth-child(2) { animation-delay: 3s; }
-        .space-y-16 > div:nth-child(3) { animation-delay: 6s; }
-        .space-y-16 > div:nth-child(4) { animation-delay: 9s; }
-
         @keyframes textCycle {
-            0% { opacity: 0; }
-            5% { opacity: 1; }
-            25% { opacity: 1; }
-            30% { opacity: 0; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            30% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            5% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            85% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
         }
 
         .photo-slide {
@@ -132,15 +178,30 @@
         .photo-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* cover ou contain */
+            object-fit: cover;
+            /* cover ou contain */
         }
 
         @keyframes photoSlide {
-            0% { opacity: 0; }
-            10% { opacity: 1; }
-            50% { opacity: 1; }
-            60% { opacity: 0; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         .neon-text {
@@ -149,8 +210,13 @@
         }
 
         @keyframes neonPulse {
-            from { text-shadow: 0 0 5px var(--neon-red); }
-            to { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red); }
+            from {
+                text-shadow: 0 0 5px var(--neon-red);
+            }
+
+            to {
+                text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red);
+            }
         }
 
         .site-footer {
@@ -177,7 +243,6 @@
             overflow: hidden;
             margin: 20px auto;
             width: 90%;
-            max-width: 600px; /* Redimensionnement pour mobile */
         }
 
         .youtube-container iframe {
@@ -190,8 +255,14 @@
         }
 
         @media (max-width: 640px) {
-            .text-content h1 { font-size: 2.5rem !important; }
-            .neon-text { font-size: 1.25rem !important; }
+            .text-content h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .neon-text {
+                font-size: 1.25rem !important;
+            }
+
             .loading-container img {
                 width: 140px;
                 height: 140px;
@@ -201,11 +272,11 @@
                 padding-bottom: 200px;
             }
 
-            .space-y-16 > div h2 {
+            .space-y-16>div h2 {
                 font-size: 1.5rem !important;
             }
 
-            .space-y-16 > div p {
+            .space-y-16>div p {
                 font-size: 1rem !important;
             }
         }
@@ -220,11 +291,43 @@
       "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png"
     }
     </script>
+    <script>
+        window.addEventListener('load', function () {
+            const assets = [
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png',
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg'
+            ];
+
+            let loadedCount = 0;
+
+            const checkAssetsLoaded = () => {
+                loadedCount++;
+                if (loadedCount === assets.length) {
+                    setTimeout(() => {
+                        document.getElementById('loadingContainer').style.opacity = '0';
+                        document.getElementById('animationContainer').style.visibility = 'visible';
+                        setTimeout(() => {
+                            document.getElementById('loadingContainer').remove();
+                        }, 500);
+                    }, 3000);
+                }
+            };
+
+            assets.forEach(asset => {
+                const img = new Image();
+                img.src = asset;
+                img.onload = checkAssetsLoaded;
+                img.onerror = checkAssetsLoaded;
+            });
+        });
+    </script>
 </head>
 
 <body class="bg-black">
     <div class="loading-container" id="loadingContainer">
-        <img src="logo 30-01-25.png" alt="Logo David KRK" loading="lazy">
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK"
+            loading="lazy">
         <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
     </div>
 
@@ -256,27 +359,31 @@
         </div>
 
         <div class="photo-slide" id="photo1" aria-label="David KRK en mix">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="David KRK en mix">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg"
+                alt="David KRK en mix">
         </div>
 
         <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" alt="Portrait de David KRK">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg"
+                alt="Portrait de David KRK">
         </div>
     </div>
 
     <footer class="site-footer">
         <div class="footer-content">
-            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK"
+                class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
             <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
             <div class="mb-4">
-                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank"
+                    class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank"
+                    class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/davidkrk/" target="_blank"
+                    class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="youtube-container">
-                <iframe
-                    src="https://www.youtube.com/embed/EKEl86ULmBE?autoplay=1&mute=1"
-                    title="David KRK - Live Set"
+                <iframe src="https://www.youtube.com/embed/EKEl86ULmBE?autoplay=1&mute=1" title="David KRK - Live Set"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
@@ -285,37 +392,6 @@
             <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
         </div>
     </footer>
-
-    <script>
-        window.addEventListener('load', function() {
-            const assets = [
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png',
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg'
-            ];
-
-            let loadedCount = 0;
-
-            const checkAssetsLoaded = () => {
-                loadedCount++;
-                if (loadedCount === assets.length) {
-                    setTimeout(() => {
-                        document.getElementById('loadingContainer').style.opacity = '0';
-                        document.getElementById('animationContainer').style.visibility = 'visible';
-                        setTimeout(() => {
-                            document.getElementById('loadingContainer').remove();
-                        }, 500);
-                    }, 3000);
-                }
-            };
-
-            assets.forEach(asset => {
-                const img = new Image();
-                img.src = asset;
-                img.onload = checkAssetsLoaded;
-                img.onerror = checkAssetsLoaded;
-            });
-        });
-    </script>
 </body>
+
 </html>
