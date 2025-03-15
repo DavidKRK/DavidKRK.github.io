@@ -12,7 +12,7 @@
     <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" as="image">
+    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -71,25 +71,25 @@
             position: relative;
             height: 100vh;
             display: flex;
-            align-items: center; /* Centrer verticalement le contenu */
-            justify-content: center;
-            padding: 0; /* Retirer le padding pour que l'image remplisse vraiment */
+            flex-direction: column; /* Ajout pour organiser le contenu verticalement */
+            justify-content: center; /* Centre verticalement */
+            align-items: center; /* Centre horizontalement */
+            padding: 0;
             visibility: hidden;
             overflow: hidden;
         }
 
         .text-content {
-            max-width: 1200px;
-            width: 90%;
-            margin: 0 auto;
             text-align: center;
             position: relative;
             z-index: 3;
+            width: 100%; /* Prend toute la largeur */
         }
 
         .space-y-16 {
             position: relative;
             min-height: 200px;
+            width: 100%; /* Prend toute la largeur */
         }
 
         .space-y-16 > div {
@@ -99,8 +99,9 @@
             animation: textCycle 12s infinite;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center; /* Centre verticalement le texte */
+            align-items: center; /* Centre horizontalement le contenu */
+            justify-content: center; /* Centre verticalement le contenu */
+            height: 100%; /* Prend toute la hauteur du conteneur space-y-16 */
         }
 
         .space-y-16 > div:nth-child(1) { animation-delay: 0s; }
@@ -257,7 +258,7 @@
         </div>
 
         <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" alt="Portrait de David KRK">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" alt="Portrait de David KRK">
         </div>
     </div>
 
@@ -288,7 +289,7 @@
             const assets = [
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png',
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg'
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg'
             ];
 
             let loadedCount = 0;
