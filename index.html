@@ -13,7 +13,7 @@
     <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
     <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/david_krk_pagoa_good.jpg" as="image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU[...]
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
@@ -28,6 +28,7 @@
             overflow-x: hidden;
             min-height: 100vh;
             color: white;
+            font-size: 1rem; /* Utiliser rem pour une meilleure adaptabilité */
         }
 
         .loading-container {
@@ -46,12 +47,12 @@
         }
 
         .loading-container img {
-            width: 180px;
-            height: 180px;
+            width: 10rem; /* Utiliser rem au lieu de px */
+            height: 10rem;
             border-radius: 50%;
-            margin-bottom: 20px;
-            border: 3px solid var(--neon-red);
-            box-shadow: 0 0 15px var(--neon-red);
+            margin-bottom: 1.25rem;
+            border: 0.188rem solid var(--neon-red);
+            box-shadow: 0 0 0.938rem var(--neon-red);
             animation:
                 rotate 3s linear infinite,
                 pulse 1.5s ease-in-out infinite;
@@ -164,16 +165,14 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .dailymotion-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         .dailymotion-container iframe {
@@ -189,21 +188,26 @@
             .text-content h1 { font-size: 2.5rem !important; }
             .neon-text { font-size: 1.25rem !important; }
             .loading-container img {
-                width: 140px;
-                height: 140px;
+                width: 8.75rem; /* Utiliser rem au lieu de px */
+                height: 8.75rem;
             }
 
             .animation-container {
-                padding-bottom: 200px;
+                padding-bottom: 12.5rem; /* Utiliser rem au lieu de px */
             }
 
             .space-y-16 > div h2 {
-                font-size: 1.5rem !important;
+                font-size: 1.5rem !important; /* Utiliser rem au lieu de px */
             }
 
             .space-y-16 > div p {
-                font-size: 1rem !important;
+                font-size: 1rem !important; /* Utiliser rem au lieu de px */
             }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .text-content h1 { font-size: 4rem !important; }
+            .neon-text { font-size: 2rem !important; }
         }
     </style>
 
