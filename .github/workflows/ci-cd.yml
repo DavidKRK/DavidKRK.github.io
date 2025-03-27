@@ -23,3 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/deploy-pages@v3
+      - name: Notify Slack
+        if: success()
+        uses: slackapi/slack-github-action@v1
+        with:
+          slack-message: '🚀 Site déployé : ${{ github.repository }}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
