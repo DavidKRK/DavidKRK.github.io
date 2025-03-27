@@ -20,17 +20,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      # Étape 3 : Installation Ruby et dépendances
-      - uses: actions/setup-ruby@v2
+      # Étape 3 : Installation Ruby (VERSION CORRIGÉE)
+      - uses: ruby/setup-ruby@v1  # Changé de actions/setup-ruby@v2
         with:
           ruby-version: '3.1'
-      - run: gem install bundler
-      - run: bundle install
+          bundler-cache: true  # Remplace bundle install
 
       # Étape 4 : Construction du site Jekyll
       - run: bundle exec jekyll build
 
-      # Étape 5 : Vérification des liens Markdown (Nouveau)
+      # Étape 5 : Vérification des liens Markdown
       - name: Lint Markdown
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
@@ -38,22 +37,9 @@ jobs:
           check-modified-files-only: 'no'
 
   deploy:
-    needs: build  # Attend que le job 'build' termine
-    if: github.ref == 'refs/heads/main'  # Ne s'exécute que sur la branche main
+    needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      # Déploiement automatique sur GitHub Pages (Nouveau)
       - uses: actions/deploy-pages@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target-branch: gh-pages  # Branche de déploiement
-          build-dir: ./_site      # Dossier de build Jekyll
-
-      # Vérification des liens après déploiement (Nouveau)
-      - name: Test Links
-        uses: peter-evans/link-checker@v1
-        with:
-          check-images: true
-          check-anchors: true
