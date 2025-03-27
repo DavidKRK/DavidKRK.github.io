@@ -12,7 +12,7 @@ jobs:
       # Étape 1 : Récupération du code
       - uses: actions/checkout@v4
 
-      # Étape 2 : Cache pour accélérer l'installation des gems
+      # Étape 2 : Cache pour les gems
       - uses: actions/cache@v3
         with:
           path: vendor/bundle
@@ -20,17 +20,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      # Étape 3 : Installation Ruby (VERSION CORRIGÉE)
-      - uses: ruby/setup-ruby@v1  # Changé de actions/setup-ruby@v2
+      # Étape 3 : Installation Ruby (version corrigée)
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-          bundler-cache: true  # Remplace bundle install
+          bundler-cache: true  # Gère bundle install automatiquement
 
-      # Étape 4 : Construction du site Jekyll
+      # Étape 4 : Construction du site
       - run: bundle exec jekyll build
 
-      # Étape 5 : Vérification des liens Markdown
-      - name: Lint Markdown
+      # Étape 5 : Vérification Markdown
+      - name: Check Markdown links
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: 'yes'
@@ -42,4 +42,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
+      # Déploiement GitHub Pages
       - uses: actions/deploy-pages@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: gh-pages
+          build-dir: ./_site
+
+      # Vérification des liens
+      - name: Test Links
+        uses: peter-evans/link-checker@v1
+        with:
+          check-images: true
+          check-anchors: true
