@@ -102,7 +102,7 @@
             margin-top: 20px;
         }
 
-        .space-y-16>div {
+        .space-y-16 > div {
             width: 100%;
             opacity: 0;
             animation: slideInUp 24s infinite;
@@ -143,6 +143,7 @@
             height: 100%;
             z-index: 1;
             transition: opacity 1s ease;
+            opacity: 0; /* Initially hidden */
         }
 
         .photo-slide img {
@@ -219,11 +220,11 @@
                 padding: 20px 0 180px;
             }
 
-            .space-y-16>div h2 {
+            .space-y-16 > div h2 {
                 font-size: 1.5rem !important;
             }
 
-            .space-y-16>div p {
+            .space-y-16 > div p {
                 font-size: 1rem !important;
             }
         }
@@ -324,6 +325,9 @@
         </div>
 
         <!-- Slides photos -->
+        <div class="photo-slide" id="photo1" aria-label="Portrait de David KRK">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="Portrait de David KRK">
+        </div>
         <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" alt="Portrait de David KRK">
         </div>
@@ -337,18 +341,18 @@
     </div>
 
     <footer class="site-footer">
-    <div class="footer-content">
-        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
-        <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
-        <div class="mb-4">
-            <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
+        <div class="footer-content">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
+            <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
+            <div class="mb-4">
+                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/davidkrk/" target="_blank" class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="mailto:davidkrkofficial@gmail.com" class="text-gray-500 mt-4 text-sm hover:underline">Contact David KRK</a>
+            <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
         </div>
-        <a href="mailto:davidkrkofficial@gmail.com" class="text-gray-500 mt-4 text-sm hover:underline">Contact David KRK</a>
-        <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
-    </div>
     </footer>
 </body>
 
-    </html>
+</html>
