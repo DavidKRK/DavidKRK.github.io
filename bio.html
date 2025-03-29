@@ -18,7 +18,7 @@
             flex-direction: column;
             min-height: 100vh;
             /* Ajout pour éviter que le footer fixe ne masque le contenu */
-            padding-bottom: 120px; /* Ajustez si nécessaire en fonction de la hauteur du footer */
+            padding-bottom: 140px; /* Ajustez si nécessaire en fonction de la hauteur du footer */
         }
 
         .main-content-area {
@@ -33,7 +33,14 @@
             animation: gradient 10s ease infinite;
             background-size: 200% auto;
             transition: font-weight 0.2s ease-in-out; /* Pour la transition du bouton actif */
+            cursor: pointer; /* Indique que c'est cliquable */
         }
+
+        /* Style pour le lien Back qui n'est pas un bouton */
+        nav > a.hover-underline-animation {
+             cursor: default; /* Ou pointer si vous préférez */
+        }
+
 
         @keyframes gradient {
             0% { background-position: 0% 50%; }
@@ -99,7 +106,9 @@
         <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
 
         <nav id="language-navigation" class="language-nav text-center mb-12">
+             <!-- Lien "Back" -->
             <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
+             <!-- Boutons de langue -->
             <button type="button" data-lang="francais" class="text-xl mx-4 hover-underline-animation">Français</button>
             <button type="button" data-lang="castellano" class="text-xl mx-4 hover-underline-animation">Castellano</button>
             <button type="button" data-lang="euskara" class="text-xl mx-4 hover-underline-animation">Euskara</button>
@@ -114,7 +123,7 @@
         <!-- Français -->
         <div id="francais" class="lang-content">
             <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Français</h3>
-            <div class="mb-4"> <!-- title-animation retiré d'ici -->
+            <div class="mb-4">
                 <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
                 <p>Son style de base : Trance - Tech Trance, se diversifie aujourd'hui en complément de sons plus Techno.</p>
                 <p>Il est apprécié autant dans les clubs Espagnols que dans les complexes Français.</p>
@@ -280,72 +289,83 @@
             </div>
         </div>
         <div class="footer-logo">
-            <img src="logo-30-01-25.png" alt="Logo David KRK" class="w-20 h-20 rounded-full border-4 border-white"> <!-- Taille ajustée pour mieux s'intégrer avec le padding -->
+             <!-- VÉRIFIEZ QUE CE CHEMIN EST CORRECT ! -->
+             <!-- L'image doit être dans le même dossier que ce fichier HTML, ou ajustez le chemin -->
+            <img src="logo-30-01-25.png" alt="Logo David KRK" class="w-20 h-20 rounded-full border-4 border-white">
         </div>
     </footer>
 
     <script>
-        // Récupération des éléments importants
-        const langNav = document.getElementById('language-navigation');
-        const langContents = document.querySelectorAll('.lang-content');
-        const langButtons = langNav.querySelectorAll('button[data-lang]');
-
-        // Fonction pour afficher le contenu d'une langue
-        function showContent(lang) {
-            // Cacher tous les contenus
-            langContents.forEach(el => {
-                el.style.display = 'none';
-            });
-
-            // Retirer la classe active de tous les bouton
-        langButtons.forEach(btn => {
-                btn.classList.remove('active-lang-button');
-            });
-
-            // Trouver et afficher le contenu correspondant
-            const contentToShow = document.getElementById(lang);
-            if (contentToShow) {
-                contentToShow.style.display = 'block';
-                // Optionnel: animer l'apparition si désiré
-                // contentToShow.classList.add('animate__animated', 'animate__fadeIn'); // Nécessite Animate.css ou une animation custom
-            }
-
-            // Trouver et marquer le bouton correspondant comme actif
-            const buttonToActivate = langNav.querySelector(`button[data-lang="${lang}"]`);
-            if (buttonToActivate) {
-                buttonToActivate.classList.add('active-lang-button');
-        }
-           // Sauvegarder la langue sélectionnée dans localStorage
-            localStorage.setItem('selectedLang', lang);
-        }
-
-        // Écouteur d'événement sur la navigation (délégation)
-        langNav.addEventListener('click', function(event) {
-            // Vérifier si l'élément cliqué est un bouton avec l'attribut data-lang
-            const targetButton = event.target.closest('button[data-lang]');
-            if (targetButton) {
-                const lang = targetButton.dataset.lang; // 
-                Récupérer la langue depuis data-lang
-                showContent(lang);
-            }
-        });
-
-        // Code exécuté au chargement initial de la page
+        // Attend que le DOM soit entièrement chargé
         document.addEventListener('DOMContentLoaded', () => {
-            // Aucune langue n'est affichée par défaut grâce à la règle CSS.
-            // On pourrait éventuellement lire localStorage pour marquer le dernier bouton
-            // comme actif, mais sans afficher le contenu, si souhaité.
-            const savedLang = localStorage.getItem('selectedLang');
-            if (savedLang) {
-                 const lastActiveButton = langNav.querySelector(`button[data-lang="${savedLang}"]`);
-                 if (lastActiveButton) {
-                     // Optionnel: Décommentez la ligne suivante si vous voulez que le bouton
-                     // de la dernière langue vue soit marqué comme actif au chargement,
-                     // même si le contenu n'est pas affiché.
-                     // lastActiveButton.classList.add('active-lang-button');
-                 }
+            // Récupération des éléments importants une fois le DOM prêt
+            const langNav = document.getElementById('language-navigation');
+            const langContents = document.querySelectorAll('.lang-content');
+            const langButtons = langNav ? langNav.querySelectorAll('button[data-lang]') : []; // Récupère les boutons seulement si langNav existe
+
+            // Fonction pour afficher le contenu d'une langue
+            function showContent(lang) {
+                // Cacher tous les contenus de langue
+                langContents.forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                // Retirer la classe active de tous les boutons de langue
+                langButtons.forEach(btn => {
+                    btn.classList.remove('active-lang-button');
+                });
+
+                // Trouver et afficher le contenu correspondant à la langue choisie
+                const contentToShow = document.getElementById(lang);
+                if (contentToShow) {
+                    contentToShow.style.display = 'block';
+                } else {
+                    console.error("Contenu introuvable pour l'ID :", lang); // Aide au débogage si un ID est incorrect
+                }
+
+                // Trouver et marquer le bouton correspondant comme actif
+                const buttonToActivate = langNav.querySelector(`button[data-lang="${lang}"]`);
+                if (buttonToActivate) {
+                    buttonToActivate.classList.add('active-lang-button');
+                } else {
+                     console.error("Bouton introuvable pour data-lang :", lang); // Aide au débogage si data-lang est incorrect
+                }
+
+                // Sauvegarder la langue sélectionnée dans localStorage pour une potentielle utilisation future
+                localStorage.setItem('selectedLang', lang);
             }
-             console.log("Page chargée, aucune biographie affichée par défaut.");
+
+            // Vérifier si la barre de navigation des langues existe
+            if (langNav) {
+                // Ajouter un seul écouteur d'événement sur la barre de navigation (délégation d'événements)
+                langNav.addEventListener('click', function(event) {
+                    // Vérifier si l'élément cliqué est (ou est contenu dans) un bouton avec l'attribut data-lang
+                    const targetButton = event.target.closest('button[data-lang]');
+                    if (targetButton) {
+                        // Récupérer la valeur de l'attribut data-lang du bouton cliqué
+                        const lang = targetButton.dataset.lang;
+                        // Appeler la fonction pour afficher la langue correspondante
+                        showContent(lang);
+                    }
+                });
+
+                 // Optionnel : Si vous voulez marquer le dernier bouton sélectionné comme actif au chargement
+                 // (mais sans afficher le contenu, conformément à la demande initiale)
+                 const savedLang = localStorage.getItem('selectedLang');
+                 if (savedLang) {
+                      const lastActiveButton = langNav.querySelector(`button[data-lang="${savedLang}"]`);
+                      if (lastActiveButton) {
+                          // Décommentez la ligne suivante pour activer cette fonctionnalité:
+                          // lastActiveButton.classList.add('active-lang-button');
+                      }
+                 }
+
+            } else {
+                 console.error("L'élément <nav> avec id='language-navigation' est introuvable ! Le changement de langue ne fonctionnera pas.");
+            }
+
+            // Message final confirmant que la page est prête et qu'aucune bio n'est affichée par défaut
+            console.log("Page chargée et script initialisé. Aucune biographie affichée par défaut.");
         });
     </script>
 </body>
