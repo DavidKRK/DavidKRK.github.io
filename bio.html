@@ -1,237 +1,219 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    
-    <!-- SEO Essentiel -->
-    <title>David KRK · DJ Techno Professionnel | Basque Country</title>
-    <meta name="description" content="DJ et producteur Techno basé au Pays Basque. Sets énergiques et atmosphériques pour clubs et festivals.">
-    <meta property="og:image" content="https://davidkrk.com/og-image.jpg">
-
-    <!-- Préchargements critiques -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David KRK · Bio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style">
-    
-    <!-- Styles de base -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <style>
-        :root {
-            --color-primary: #03f4fc;
-            --color-secondary: #ff69b4;
-            --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
-        }
-
-        /* Architecture Responsive */
         body {
-            font-family: 'Russo One', system-ui, sans-serif;
-            background: var(--gradient-bg);
-            color: #fff;
+            background: linear-gradient(135deg, #141414, #141414);
+            color: #FFFFFF;
+            font-family: 'Russo One', sans-serif;
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
         }
-
-        .content-wrapper {
-            width: 95%;
-            margin: 0 auto;
-            padding: 1rem;
+     .title-animation {
+            animation: fadeInDown 1s ease-in-out;
         }
-
-        @media (min-width: 768px) {
-            .content-wrapper {
-                width: 90%;
-                padding: 2rem;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-
-        /* Player SoundCloud Optimisé */
-        .soundcloud-container {
+     .hover-underline-animation {
+            display: inline-block;
             position: relative;
-            padding-bottom: 20%;
-            height: 0;
-            overflow: hidden;
-            margin: 2rem 0;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .soundcloud-iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Système de Navigation Adaptatif */
-        .main-nav {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 1.5rem;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-link {
-            position: relative;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-            -webkit-background-clip: text;
+            background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
             background-clip: text;
+            -webkit-background-clip: text;
             color: transparent;
+            animation: gradient 10s ease infinite;
         }
-
-        @media (max-width: 767px) {
-            .main-nav {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
+     .hover-underline-animation:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #FFFFFF;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+     .hover-underline-animation:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
             }
         }
-
-        /* Section Bio Internationalisée */
-        .bio-section {
-            display: grid;
-            gap: 2rem;
-            padding: 2rem 0;
+     .neon {
+            animation: neon 2s ease-in-out infinite;
         }
-
-        .lang-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        @keyframes neon {
+            0% {
+                color: #FFFF00; /* jaune */
+            }
+            50% {
+                color: #00FFFF; /* cyan */
+            }
+            100% {
+                color: #FFFF00; /* jaune */
+            }
         }
-
-        .lang-content {
-            display: none;
-            opacity: 0;
-            animation: fadeIn 0.4s ease forwards;
+     .rotate {
+            animation: rotate 10s linear infinite;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Footer Dynamique */
-        .main-footer {
-            margin-top: auto;
-            padding: 2rem;
-            background: rgba(0,0,0,0.95);
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .social-icon {
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            transition: transform 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px);
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
+    <script>
+        function showContent(lang) {
+            const contents = document.querySelectorAll('.lang-content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById(lang).style.display = 'block';
+        }
+    </script>
 </head>
-
 <body>
-    <nav class="main-nav">
-        <a href="#bio" class="nav-link">Bio</a>
-        <a href="#music" class="nav-link">Musique</a>
-        <a href="#events" class="nav-link">Événements</a>
-        <a href="#contact" class="nav-link">Contact</a>
-    </nav>
+    <div id="biography" class="py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
+            <div class="text-center mb-12">
+                <h2 class="text-6xl font-bold text-blue-500 title-animation">Bio</h2>
+            </div>
+            <nav class="text-center mb-12">
+                <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
+                <a href="javascript:void(0);" onclick="showContent('francais')" class="text-xl mx-4 hover-underline-animation">Français</a>
+                <a href="javascript:void(0);" onclick="showContent('castellano')" class="text-xl mx-4 hover-underline-animation">Castellano</a>
+                <a href="javascript:void(0);" onclick="showContent('euskara')" class="text-xl mx-4 hover-underline-animation">Euskara</a>
+                <a href="javascript:void(0);" onclick="showContent('english')" class="text-xl mx-4 hover-underline-animation">English</a>
+                <a href="javascript:void(0);" onclick="showContent('ukrainian')" class="text-xl mx-4 hover-underline-animation">Ukrainian</a>
+            </nav> 
 
-    <main class="content-wrapper">
-        <section id="bio" class="bio-section">
-            <h1 class="text-4xl md:text-6xl font-bold text-center mb-8">David KRK</h1>
-
-            <!-- Lecteur SoundCloud -->
-            <div class="soundcloud-container">
-                <iframe 
-                    class="soundcloud-iframe"
-                    loading="lazy"
-                    title="Dernier mix Techno de David KRK"
-                    allow="autoplay"
-                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1809262356&color=%2303f4fc">
-                </iframe>
+            <div id="francais" class="lang-content" style="display: none;">
+                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Français</h3>
+                <p class="mb-4 title-animation">
+                    <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
+                    <p>Son style de base : Trance - Tech Trance, se diversifie aujourd'hui en complément de sons plus Techno.</p>
+                    <p>Il est apprécié autant dans les clubs Espagnols que dans les complexes Français.</p>
+                    <p>Il a partagé des scènes avec des artistes tels que PG-2 (Ex résident Txitxarro - Actuellement Nexo),</p>
+                    <p>Diego ATB (Ex résident Txitxarro), The Fluid (Ex résident Inox - Actuellement Zul), Montxo (Ex Résident Nyx - Actuellement Zul)</p>
+                    <p>mais aussi avec le collectif Espagnol connu sous le nom de North Trance Collective (Dj Sergi - Dj Gordon et Unai ATH).</p>
+                    <p>Il a mixé dans quelques radios et Webradios telles que le programme Line Up sur Espiral Fm à Pampelune sur 99.7 et aussi sur Hesat Radio.</p>
+                    <p>Très vite, David ressent le besoin d'exprimer ses sentiments à travers ses propres mixes.</p>
+                    <p>Ses sets lui viennent du fond du cœur et le style qu'il joue touche le public grâce à cette sensibilité, ses émotions, qui se ressentent à travers son mix.</p>
+                    <p>Son toucher particulier fait de ce DJ un musicien hors pair, dix minutes lui suffisent pour vous transporter dans son univers.</p>
+                    <p>Il choisit ses disques méticuleusement pour que cela lui corresponde au moment présent et pour partager cet enthousiasme à son public.</p>
+                    <p>Son prochain projet sera de produire un son Techno, qui sera sa référence, et c'est avec impatience que nous l'attendons!</p>
+                </p>
             </div>
 
-            <!-- Sélecteur de Langue -->
-            <div class="lang-selector">
-                <button onclick="showLang('fr')" class="lang-btn">Français</button>
-                <button onclick="showLang('es')" class="lang-btn">Castellano</button>
-                <button onclick="showLang('eu')" class="lang-btn">Euskara</button>
-                <button onclick="showLang('en')" class="lang-btn">English</button>
-                <button onclick="showLang('ua')" class="lang-btn">Українська</button>
+            <div id="castellano" class="lang-content" style="display: none;">
+                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Castellano</h3>
+                <p class="mb-4 title-animation">
+                    <p>David KRK, nacido en agosto de 1982, es un DJ que se presenta en España, Francia y la Costa Vasca desde 2000.</p>
+                    <p>Su estilo base, Trance - Tech Trance, se ha diversificado hoy en día con la incorporación de sonidos más Techno.</p>
+                    <p>Es apreciado tanto en los clubes españoles como en los complejos franceses.</p>
+                    <p>Ha compartido escenarios con artistas como PG-2 (ex residente de Txitxarro - actualmente en Nexo),</p>
+                    <p>Diego ATB (ex residente de Txitxarro), The Fluid (ex residente de Inox - actualmente en Zul), Montxo (ex residente de Nyx - actualmente en Zul),</p>
+                    <p>así como con el colectivo español conocido como North Trance Collective (DJ Sergi, DJ Gordon y Unai ATH).</p>
+                    <p>Ha mezclado en varias radios y webradios, como el programa Line Up en Espiral FM en Pamplona en el 99.7, y también en Hesat Radio.</p>
+                    <p>Muy pronto, David siente la necesidad de expresar sus sentimientos a través de sus propias mezclas.</p>
+                    <p>Sus sets, que vienen del fondo del corazón, tocan al público gracias a esta sensibilidad y a las emociones que se sienten a través de su mezcla.</p>
+                    <p>Su toque particular hace de este DJ un músico excepcional; diez minutos son suficientes para transportarte a su universo.</p>
+                    <p>Elige sus discos meticulosamente para que correspondan al momento presente y para compartir ese entusiasmo con su público.</p>
+                    <p>Su próximo proyecto será producir un sonido Techno, que será su referencia, ¡y lo esperamos con impaciencia!</p>
+                </p>
             </div>
 
-            <!-- Contenu Multilingue -->
-            <div id="fr" class="lang-content">
-                <!-- Contenu français -->
+            <div id="euskara" class="lang-content" style="display: none;">
+                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Euskara</h3>
+                <p class="mb-4 title-animation">
+                    <p>David KRK-ren biografia: 1982-ko abuztuan jaioa, David KRK 2000-garren urtetik aurrera Espainian, Frantzian eta Euskadin hezitako “deejay” gazte bat da.</p>
+                    <p>Bere estilo nagusia: Trance eta Techno - Trance dira. Gaur egun elektro-trance izeneko doinu elektronikoa ere jorratzen du.</p>
+                    <p>Espainian eta Frantzian egindako hainbat jaialdi garrantzitsutan egon da DJ hauekin kabina konpartituz:</p>
+                    <p>PG-2 (Txitxarro-ko residente ohia, orain Santander-go Line Up-en dagoena), Diego ATB (Txitxarro-ko residente ohia), The Fluid (Inox-eko residente ohia, orain Zul-en dagoena), Montxo (Nyx-eko residente ohia, orain Zul alter-ean dagoena).</p>
+                    <p>North Trance Collective izeneko kolektibo espainiarraren (DJ Sergi, DJ Gordon eta Unai ATH), Shred'R (Itzela Multiplex) eta Mr Hounck (Sonotone Evénement) laguntzarekin ere parte hartu du.</p>
+                    <p>Zenbait irrati eta web irratietan parte hartu du, adibidez Line Up saioan (Iruñeko 99.7 Espiral FM-en) edota Hesat irratian (http://hesat.libcast.com/).</p>
+                    <p>Bapatean, David-ek bere sentimenduak musika sesioen bidez adierazteko beharra sentitzen du.</p>
+                    <p>Eta sesio hauek bere bihotzeko sakonenetik ateratzen dira. Bera musikaren bitartez publiko sentikor bat erakarri nahi du.</p>
+                    <p>Bere egiteko moduak deejay eta musikari paregabea egiten dute; 10 minututan lor dezake publikoa eta clubber-ak unibertsora eramatea.</p>
+                    <p>Diskoak xehetasunaz aukeratzen ditu une zehatz bakoitzean transmititu nahi duena adierazteko eta bere irrika publikoarekin partaide izateko.</p>
+                    <p>David-en hurrengo proiektua Trance soinu propioa sortzea izango da.</p>
+                    <p>Berehala entzu ahal izango ditugu bere produkzio guztiak.</p>
+                </p>
             </div>
 
-            <div id="es" class="lang-content">
-                <!-- Contenu espagnol -->
+            <div id="english" class="lang-content" style="display: none;">
+                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">English</h3>
+                <p class="mb-4 title-animation">
+                    <p>David KRK, born in August 1982, is a DJ who has been performing in Spain, France, and the Basque Coast since 2000.</p>
+                    <p>His primary style: Trance - Tech Trance, is now diversifying to include more Techno sounds.</p>
+                    <p>He is appreciated in both Spanish clubs and French venues.</p>
+                    <p>He has shared stages with artists such as PG-2 (Former resident at Txitxarro - Currently at Nexo),</p>
+                    <p>Diego ATB (Former resident at Txitxarro), The Fluid (Former resident at Inox - Currently at Zul), Montxo (Former resident at Nyx - Currently at Zul)</p>
+                    <p>as well as with the Spanish collective known as North Trance Collective (DJ Sergi - DJ Gordon and Unai ATH).</p>
+                    <p>He has mixed on several radio stations and web radios such as the Line Up program on Espiral FM in Pamplona on 99.7 and also on Hesat Radio.</p>
+                    <p>Very quickly, David felt the need to express his feelings through his own mixes.</p>
+                    <p>His sets come from the bottom of his heart, and the style he plays resonates with the audience due to this sensitivity and emotions that are felt through his mix.</p> 
+                    <p>His unique touch makes this DJ an exceptional musician; ten minutes are enough to transport you into his universe.</p>
+                    <p>He meticulously chooses his records to match his current feelings and to share this enthusiasm with his audience.</p>
+                    <p>His next project will be to produce a Techno sound, which will be his reference, and we eagerly await it!</p>
+                </p>
             </div>
 
-            <!-- ... autres langues ... -->
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p class="text-sm opacity-75">&copy; 2025 David KRK · Tous droits réservés</p>
-            <div class="social-links">
-                <a href="[soundcloud]" class="social-icon"><i class="fab fa-soundcloud"></i></a>
-                <a href="[mixcloud]" class="social-icon"><i class="fab fa-mixcloud"></i></a>
-                <a href="[instagram]" class="social-icon"><i class="fab fa-instagram"></i></a>
+           <div id="ukrainian" class="lang-content" style="display: none;">
+                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Ukrainian</h3>
+                <p class="mb-4 title-animation">
+                    <p>Девід КРК, народився в серпні 1982 року, є DJ, який виступає в Іспанії, Франції та Країні Басків з 2000 року.</p>
+                    <p>Його основний стиль: Trance - Tech Trance, зараз розширюється, доповнюючись більш Techno звучанням.</p>
+                    <p>Він цінується як в іспанських клубах, так і у французьких комплексах.</p>
+                    <p>Він ділив сцену з такими артистами, як PG-2 (колишній резидент Txitxarro - зараз Nexo),</p>
+                    <p>Дієго ATB (колишній резидент Txitxarro), The Fluid (колишній резидент Inox - зараз Zul), Montxo (колишній резидент Nyx - зараз Zul),</p>
+                    <p>а також з іспанським колективом, відомим як North Trance Collective (Dj Sergi - Dj Gordon та Unai ATH).</p>
+                    <p>Він міксував на кількох радіостанціях та Webradio, таких як програма Line Up на Espiral Fm в Памплоні на 99.7, а також на Hesat Radio.</p>
+                    <p>Дуже швидко Девід відчуває потребу виражати свої почуття через власні мікси.</p>
+                    <p>Його сети йдуть від самого серця, і стиль, який він грає, торкається публіки завдяки цій чутливості, його емоціям, які відчуваються через його мікс.</p>
+                    <p>Його особливий підхід робить цього DJ неперевершеним музикантом, десяти хвилин йому достатньо, щоб перенести вас у свій всесвіт.</p>
+                    <p>Він ретельно обирає свої диски, щоб вони відповідали його поточному настрою та щоб поділитися цим ентузіазмом зі своєю публікою.</p>
+                    <p>Його наступним проектом буде продюсування Techno звучання, яке стане його орієнтиром, і ми з нетерпінням чекаємо на це!</p>
+                </p>
             </div>
         </div>
-    </footer>
-
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "MusicGroup",
-        "name": "David KRK",
-        "genre": ["Techno", "Tech Trance"],
-        "image": "https://davidkrk.com/logo.jpg",
-        "sameAs": [
-            "https://soundcloud.com/davidkrk",
-            "https://instagram.com/davidkrk"
-        ]
-    }
-    </script>
-
-    <script>
-        // Gestion des langues
-        function showLang(lang) {
-            document.querySelectorAll('.lang-content').forEach(el => {
-                el.style.display = 'none';
-                el.style.opacity = 0;
-            });
-            
-            const activeContent = document.getElementById(lang);
-            activeContent.style.display = 'block';
-            setTimeout(() => { activeContent.style.opacity = 1 }, 50);
-        }
-
-        // Activation de la première langue
-        window.addEventListener('DOMContentLoaded', () => showLang('fr'));
-    </script>
+    </div>
+    <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
+        <footer class="py-6 px-4 text-left mr-4"> 
+            <p class="text-gray-400 mb-2">© 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
+            <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+        </footer>
+        <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
+    </div>
 </body>
 </html>
