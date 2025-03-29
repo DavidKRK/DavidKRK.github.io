@@ -2,18 +2,11 @@
 <html lang="fr" class="bg-black">
 
 <head>
-    <!-- Meta tags inchangés -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David KRK - Techno DJ & Producer</title>
     <meta name="description" content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
     <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France">
-    <link rel="canonical" href="https://www.davidkrk.com/">
-    <link rel="alternate" href="https://www.davidkrk.com/" hreflang="fr">
-    <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
-    <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" as="image">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -169,7 +162,7 @@
             }
 
             to {
-                text-shadow: 0 0 20px var(--neon-red), 0 0 30px var (--neon-red);
+                text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red);
             }
         }
 
@@ -188,6 +181,24 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+        }
+
+        .language-selector {
+            margin: 20px;
+        }
+
+        .language-selector button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: var(--neon-red);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-family: 'Russo One', sans-serif;
+        }
+
+        .language-selector button:hover {
+            background-color: #ff4d4d;
         }
 
         @media (max-width: 640px) {
@@ -263,6 +274,18 @@
                 img.onerror = checkAssetsLoaded;
             });
         });
+
+        const translations = {
+            'fr': 'SITE EN CONSTRUCTION',
+            'es': 'SITIO EN CONSTRUCCIÓN',
+            'en': 'UNDER CONSTRUCTION',
+            'de': 'WEBSITE IM BAU'
+        };
+
+        function setLanguage(language) {
+            const textContent = document.getElementById('constructionText');
+            textContent.textContent = translations[language];
+        }
     </script>
 </head>
 
@@ -274,7 +297,7 @@
 
     <div class="animation-container" id="animationContainer">
         <div class="text-content" id="textContent">
-            <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
+            <h1 class="text-6xl md:text-8xl mb-8 neon-text" id="constructionText">SITE EN CONSTRUCTION</h1>
 
             <div class="space-y-16">
                 <!-- Contenu des slides inchangé -->
@@ -306,6 +329,13 @@
         </div>
     </div>
 
+    <div class="language-selector">
+        <button onclick="setLanguage('fr')">Français</button>
+        <button onclick="setLanguage('es')">Español</button>
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('de')">Deutsch</button>
+    </div>
+
     <footer class="site-footer">
         <div class="footer-content">
             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
@@ -321,4 +351,4 @@
     </footer>
 </body>
 
-</html>
+    </html>
