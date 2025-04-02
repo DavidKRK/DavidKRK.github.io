@@ -10,7 +10,7 @@
     color: #ccc;
     margin: 0 10px;
     font-size: 1.5rem;
-    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease; /* Added transform transition */
+    transition: all 0.3s ease; /* Apply transition to all properties */
     display: inline-block; /* Required for transform to work correctly */
 }
 
