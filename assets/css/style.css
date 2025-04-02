@@ -16,7 +16,7 @@
 
 .footer-social-links a:hover {
     color: white;
-    text-shadow: 0 0 8px var(--neon-red), 0 0 12px var(--neon-red); /* Enhanced neon glow */
+    text-shadow: 0 0 10px var(--neon-red); /* Simplified neon glow */
     transform: scale(1.1); /* Scale animation on hover */
 }
 
