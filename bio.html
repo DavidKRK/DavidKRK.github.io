@@ -143,21 +143,18 @@
             display: none;
             opacity: 0;
             transform: translateY(20px);
-            transition: all var(--animation-duration) var(--transition-timing);
-            position: absolute;
+            transition: all 0.3s ease;
+            position: relative;
             width: 100%;
             visibility: hidden;
-            z-index: 1;
-            will-change: transform, opacity;
         }
 
         .lang-content.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            position: relative;
-            visibility: visible;
-            z-index: 2;
+            display: block !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            visibility: visible !important;
+            position: relative !important;
         }
 
         .content-container {
@@ -312,10 +309,10 @@
         <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
 
         <nav id="language-navigation" class="language-nav text-center mb-12">
-             <!-- Lien "Back" -->
+            <!-- Lien "Back" -->
             <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
-             <!-- Boutons de langue -->
-            <button type="button" data-lang="francais" class="text-xl mx-4 hover-underline-animation">Français</button>
+            <!-- Boutons de langue -->
+            <button type="button" data-lang="francais" class="text-xl mx-4 hover-underline-animation active">Français</button>
             <button type="button" data-lang="castellano" class="text-xl mx-4 hover-underline-animation">Castellano</button>
             <button type="button" data-lang="euskara" class="text-xl mx-4 hover-underline-animation">Euskara</button>
             <button type="button" data-lang="english" class="text-xl mx-4 hover-underline-animation">English</button>
@@ -521,128 +518,57 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Initialisation de la page');
-            
-            // Initialisation
-            const savedLang = localStorage.getItem('preferredLanguage') || 'francais';
-            console.log('Langue sauvegardée:', savedLang);
-            
-            // Cache d'abord tous les contenus
+            // Cache tous les contenus au démarrage
             document.querySelectorAll('.lang-content').forEach(content => {
-                console.log('Initialisation du contenu:', content.id);
                 content.style.display = 'none';
                 content.classList.remove('active');
-                content.style.visibility = 'hidden';
-                content.style.opacity = '0';
-                content.style.transform = 'translateY(20px)';
             });
 
-            // Affiche le contenu initial
-            showContent(savedLang);
-            
-            // Gestion des boutons de langue
-            const buttons = document.querySelectorAll('[data-lang]');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    console.log('Clic sur le bouton de langue:', lang);
-                    showContent(lang);
-                    localStorage.setItem('preferredLanguage', lang);
-                });
-            });
-
-            // Animation d'entrée initiale
-            document.querySelector('.main-content-area').style.opacity = '1';
-            console.log('Animation d\'entrée initiale terminée');
-        });
-
-        function showContent(lang) {
-            console.log('Changement de langue vers:', lang);
-            
-            // Cache tous les contenus
-            document.querySelectorAll('.lang-content').forEach(content => {
-                console.log('Masquage du contenu:', content.id);
-                content.style.display = 'none';
-                content.classList.remove('active');
-                content.style.visibility = 'hidden';
-                content.style.opacity = '0';
-                content.style.transform = 'translateY(20px)';
-            });
-
-            // Affiche le contenu de la langue sélectionnée
-            const selectedContent = document.getElementById(lang);
-            if (selectedContent) {
-                console.log('Affichage du contenu:', lang);
-                selectedContent.style.display = 'block';
-                selectedContent.classList.add('active');
-                selectedContent.style.visibility = 'visible';
-                
-                // Animation d'apparition
-                setTimeout(() => {
-                    selectedContent.style.opacity = '1';
-                    selectedContent.style.transform = 'translateY(0)';
-                }, 50);
-                
-                console.log('État du contenu:', {
-                    display: selectedContent.style.display,
-                    classList: selectedContent.classList.toString(),
-                    visibility: selectedContent.style.visibility,
-                    opacity: selectedContent.style.opacity,
-                    transform: selectedContent.style.transform
-                });
-            } else {
-                console.error('Contenu non trouvé pour la langue:', lang);
+            // Affiche le contenu français par défaut
+            const frContent = document.getElementById('francais');
+            if (frContent) {
+                frContent.style.display = 'block';
+                frContent.classList.add('active');
             }
 
-            // Met à jour les boutons
+            // Gestion des boutons de langue
             document.querySelectorAll('[data-lang]').forEach(button => {
-                const buttonLang = button.getAttribute('data-lang');
-                button.classList.remove('active');
-                if (buttonLang === lang) {
-                    button.classList.add('active');
-                    console.log('Bouton activé:', buttonLang);
-                }
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Cache tous les contenus
+                    document.querySelectorAll('.lang-content').forEach(content => {
+                        content.style.display = 'none';
+                        content.classList.remove('active');
+                    });
+                    
+                    // Affiche le contenu sélectionné
+                    const selectedContent = document.getElementById(lang);
+                    if (selectedContent) {
+                        selectedContent.style.display = 'block';
+                        selectedContent.classList.add('active');
+                    }
+                    
+                    // Met à jour l'état des boutons
+                    document.querySelectorAll('[data-lang]').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
             });
 
-            // Mise à jour du titre de la page
-            const titles = {
-                'francais': 'David KRK · Biographie - DJ Techno & Producteur',
-                'castellano': 'David KRK · Biografía - DJ Techno & Productor',
-                'euskara': 'David KRK · Biografia - Techno DJ & Ekoizlea',
-                'english': 'David KRK · Biography - Techno DJ & Producer',
-                'romana': 'David KRK · Biografie - DJ Techno & Producător',
-                'zhongwen': 'David KRK · 个人简介 - 电子音乐DJ和制作人',
-                'nihongo': 'David KRK · バイオグラフィー - テクノDJ＆プロデューサー',
-                'ukrainian': 'David KRK · Біографія - Техно DJ та Продюсер'
-            };
-            document.title = titles[lang] || titles['francais'];
-            console.log('Titre de la page mis à jour:', document.title);
-
-            // Animation du scroll vers le haut en douceur
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            // Animation des paragraphes au scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, {
+                threshold: 0.1
             });
-            console.log('Scroll vers le haut effectué');
-        }
 
-        // Gestion des animations au scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    console.log('Élément visible:', entry.target);
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.mb-4 p').forEach(p => {
-            p.style.opacity = '0';
-            p.style.transform = 'translateY(20px)';
-            p.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(p);
+            document.querySelectorAll('.mb-4 p').forEach(p => observer.observe(p));
         });
     </script>
 </body>

@@ -1,9 +1,14 @@
 {
-  "name": "my-project",
+  "name": "davidkrk-website",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Website de David KRK - DJ Techno & Producteur",
   "scripts": {
-    "build": "jekyll build"
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35"
+  }
 }

@@ -261,6 +261,30 @@
                 font-size: 1.5rem !important;
             }
         }
+
+        .load-player-btn {
+            width: 100%;
+            padding: 2rem;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mixcloud-container .load-player-btn {
+            background: linear-gradient(135deg, #45a0e6, #3178b3);
+            border-color: #45a0e6;
+        }
+
+        .soundcloud-container .load-player-btn {
+            background: linear-gradient(135deg, #ff8800, #ff5500);
+            border-color: #ff8800;
+        }
+
+        .load-player-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
     </style>
     <script>
         function showContent(lang) {
@@ -290,12 +314,20 @@
 
             <div class="player-container mb-12">
                 <h3 class="text-2xl font-bold mb-4 text-center neon">Latest Mix</h3>
-                <iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay"></iframe>
+                <div class="mixcloud-container" data-url="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=0&mini=1&hide_artwork=1&autoplay=0&hide_followers=1&hide_followbutton=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F">
+                    <button class="load-player-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="loadPlayer(this, 'mixcloud')">
+                        <i class="fab fa-mixcloud mr-2"></i>Charger le lecteur Mixcloud
+                    </button>
+                </div>
             </div>
 
-            <div class="player-container mb-12">
-                <h3 class="text-2xl font-bold mb-4 text-center neon">Featured Playlist</h3>
-                <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/davidkrk&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <div class="player-container">
+                <h2 class="text-2xl mb-4 title-animation">Latest Tracks</h2>
+                <div class="soundcloud-container" data-url="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/davidkrkofficial&color=%23ff5500&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&single_active=true">
+                    <button class="load-player-btn bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" onclick="loadPlayer(this, 'soundcloud')">
+                        <i class="fab fa-soundcloud mr-2"></i>Charger le lecteur SoundCloud
+                    </button>
+                </div>
             </div>
 
             <div class="text-center mb-12">
@@ -325,13 +357,70 @@
         </div>
     </div>
 
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script src="https://widget.mixcloud.com/media/js/widgetApi.js"></script>
+    
     <script>
+        // Fonction pour charger les scripts des widgets de manière asynchrone
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                if (document.querySelector(`script[src="${src}"]`)) {
+                    resolve();
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.body.appendChild(script);
+            });
+        }
+
+        // Fonction pour charger un lecteur
+        async function loadPlayer(button, type) {
+            const container = button.parentElement;
+            const url = container.dataset.url;
+            
+            // Créer l'iframe
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = type === 'mixcloud' ? '180' : '450';
+            iframe.frameBorder = '0';
+            iframe.allow = 'autoplay';
+            iframe.loading = 'lazy';
+            iframe.src = url;
+
+            // Remplacer le bouton par l'iframe
+            container.innerHTML = '';
+            container.appendChild(iframe);
+
+            try {
+                // Charger le script approprié
+                if (type === 'mixcloud') {
+                    await loadScript('https://widget.mixcloud.com/media/js/widgetApi.js');
+                    const widget = Mixcloud.PlayerWidget(iframe);
+                    await widget.ready;
+                    widget.events.play.on(() => console.log('Mixcloud playing'));
+                } else if (type === 'soundcloud') {
+                    await loadScript('https://w.soundcloud.com/player/api.js');
+                    const widget = SC.Widget(iframe);
+                    widget.bind(SC.Widget.Events.READY, () => console.log('SoundCloud ready'));
+                }
+            } catch (error) {
+                console.log(`Error loading ${type} widget:`, error);
+                container.innerHTML = `<div class="text-red-500 p-4">Erreur de chargement du lecteur. Veuillez réessayer.</div>`;
+            }
+        }
+
+        // Animation des éléments au scroll
         document.addEventListener('DOMContentLoaded', function() {
-            // Animation des éléments au scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
                     }
                 });
             }, {
@@ -340,16 +429,6 @@
 
             document.querySelectorAll('.player-container').forEach(container => {
                 observer.observe(container);
-            });
-
-            // Gestion du chargement des iframes
-            const iframes = document.querySelectorAll('iframe');
-            iframes.forEach(iframe => {
-                iframe.addEventListener('load', function() {
-                    this.style.opacity = '1';
-                });
-                iframe.style.opacity = '0';
-                iframe.style.transition = 'opacity 0.5s ease';
             });
         });
     </script>
