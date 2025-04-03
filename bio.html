@@ -3,26 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK · Bio</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>David KRK · Biographie - DJ Techno & Producteur</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Découvrez l'histoire de David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Trance, Tech Trance et Techno.">
+    <meta name="keywords" content="David KRK, biographie, DJ techno, producteur, France, Espagne, Pays Basque, Trance, Tech Trance">
+    <meta name="author" content="David KRK">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="David KRK · Biographie - DJ Techno & Producteur">
+    <meta property="og:description" content="Découvrez l'histoire de David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+    <meta property="og:url" content="https://davidkrk.com/bio.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="David KRK · Biographie">
+    <meta name="twitter:description" content="DJ Techno international - France, Espagne, Pays Basque">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
 
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     <style>
+        :root {
+            --primary-color: #FF0000;
+            --secondary-color: #141414;
+            --text-color: #FFFFFF;
+            --animation-duration: 1s;
+            --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            background: linear-gradient(135deg, #141414, #141414);
+            background: linear-gradient(135deg, var(--secondary-color), #000000);
             font-family: 'Russo One', sans-serif;
-            color: #FFFFFF;
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            /* Ajout pour éviter que le footer fixe ne masque le contenu */
-            padding-bottom: 140px; /* Ajustez si nécessaire en fonction de la hauteur du footer */
+            padding-bottom: 140px;
+            overflow-x: hidden;
         }
 
         .main-content-area {
-             flex-grow: 1; /* Assure que le contenu principal prend l'espace disponible */
+            flex-grow: 1;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            animation-delay: 0.3s;
         }
 
         .hover-underline-animation {
@@ -32,15 +67,28 @@
             color: transparent;
             animation: gradient 10s ease infinite;
             background-size: 200% auto;
-            transition: font-weight 0.2s ease-in-out; /* Pour la transition du bouton actif */
-            cursor: pointer; /* Indique que c'est cliquable */
+            transition: all 0.3s var(--transition-timing);
+            position: relative;
+            padding-bottom: 2px;
         }
 
-        /* Style pour le lien Back qui n'est pas un bouton */
-        nav > a.hover-underline-animation {
-             cursor: default; /* Ou pointer si vous préférez */
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, #FF69B4, #FFC67D);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s var(--transition-timing);
         }
 
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
 
         @keyframes gradient {
             0% { background-position: 0% 50%; }
@@ -49,12 +97,113 @@
         }
 
         .title-animation {
-            animation: fadeInDown 1s ease-in-out;
+            animation: fadeInDown var(--animation-duration) var(--transition-timing);
+            opacity: 0;
+            animation-fill-mode: forwards;
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lang-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .lang-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .language-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .language-nav button {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .language-nav button:hover {
+            transform: translateY(-2px);
+        }
+
+        .language-nav button.active {
+            position: relative;
+            font-weight: bold;
+        }
+
+        .language-nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #FF69B4, #FFC67D);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 100px;
+            }
+
+            .language-nav {
+                gap: 0.5rem;
+            }
+
+            .language-nav button {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .hover-underline-animation {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+            }
+
+            h1 {
+                font-size: 2rem !important;
+            }
+
+            .hover-underline-animation {
+                font-size: 0.9rem;
+            }
         }
 
         .neon {
@@ -75,20 +224,8 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Cache toutes les sections de langue par défaut */
-        .lang-content {
-            display: none;
-        }
-
-        /* Style pour le bouton de langue actif */
-        .active-lang-button {
-            font-weight: bold;
-            /* Vous pouvez ajouter d'autres styles ici, par ex. une bordure inférieure */
-             /* border-bottom: 2px solid #FFFF00; */
-        }
-
-         /* Style pour le footer fixe */
-         .site-footer-original {
+        /* Style pour le footer fixe */
+        .site-footer-original {
             position: fixed;
             bottom: 1rem; /* 4 de tailwind */
             right: 1rem; /* 4 de tailwind */
@@ -98,7 +235,7 @@
             background-color: rgba(20, 20, 20, 0.8); /* Optionnel: fond semi-transparent */
             padding: 0.5rem;
             border-radius: 8px;
-         }
+        }
     </style>
 </head>
 <body>
@@ -296,76 +433,92 @@
     </footer>
 
     <script>
-        // Attend que le DOM soit entièrement chargé
-        document.addEventListener('DOMContentLoaded', () => {
-            // Récupération des éléments importants une fois le DOM prêt
-            const langNav = document.getElementById('language-navigation');
-            const langContents = document.querySelectorAll('.lang-content');
-            const langButtons = langNav ? langNav.querySelectorAll('button[data-lang]') : []; // Récupère les boutons seulement si langNav existe
-
-            // Fonction pour afficher le contenu d'une langue
-            function showContent(lang) {
-                // Cacher tous les contenus de langue
-                langContents.forEach(el => {
-                    el.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialisation
+            const savedLang = localStorage.getItem('preferredLanguage') || 'francais';
+            showContent(savedLang);
+            
+            // Gestion des boutons de langue
+            const buttons = document.querySelectorAll('[data-lang]');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    showContent(lang);
+                    localStorage.setItem('preferredLanguage', lang);
                 });
+            });
 
-                // Retirer la classe active de tous les boutons de langue
-                langButtons.forEach(btn => {
-                    btn.classList.remove('active-lang-button');
-                });
+            // Animation d'entrée initiale
+            document.querySelector('.main-content-area').style.opacity = '1';
+        });
 
-                // Trouver et afficher le contenu correspondant à la langue choisie
-                const contentToShow = document.getElementById(lang);
-                if (contentToShow) {
-                    contentToShow.style.display = 'block';
-                } else {
-                    console.error("Contenu introuvable pour l'ID :", lang); // Aide au débogage si un ID est incorrect
+        function showContent(lang) {
+            // Mise à jour des boutons
+            document.querySelectorAll('[data-lang]').forEach(button => {
+                button.classList.remove('active');
+                if (button.getAttribute('data-lang') === lang) {
+                    button.classList.add('active');
                 }
+            });
 
-                // Trouver et marquer le bouton correspondant comme actif
-                const buttonToActivate = langNav.querySelector(`button[data-lang="${lang}"]`);
-                if (buttonToActivate) {
-                    buttonToActivate.classList.add('active-lang-button');
-                } else {
-                     console.error("Bouton introuvable pour data-lang :", lang); // Aide au débogage si data-lang est incorrect
-                }
+            // Masquer tous les contenus avec animation
+            const contents = document.querySelectorAll('.lang-content');
+            contents.forEach(content => {
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    content.style.display = 'none';
+                }, 300);
+            });
 
-                // Sauvegarder la langue sélectionnée dans localStorage pour une potentielle utilisation future
-                localStorage.setItem('selectedLang', lang);
+            // Afficher le contenu sélectionné avec animation
+            const selectedContent = document.getElementById(lang);
+            if (selectedContent) {
+                setTimeout(() => {
+                    selectedContent.style.display = 'block';
+                    // Force reflow
+                    selectedContent.offsetHeight;
+                    selectedContent.style.opacity = '1';
+                    selectedContent.style.transform = 'translateY(0)';
+                }, 300);
             }
 
-            // Vérifier si la barre de navigation des langues existe
-            if (langNav) {
-                // Ajouter un seul écouteur d'événement sur la barre de navigation (délégation d'événements)
-                langNav.addEventListener('click', function(event) {
-                    // Vérifier si l'élément cliqué est (ou est contenu dans) un bouton avec l'attribut data-lang
-                    const targetButton = event.target.closest('button[data-lang]');
-                    if (targetButton) {
-                        // Récupérer la valeur de l'attribut data-lang du bouton cliqué
-                        const lang = targetButton.dataset.lang;
-                        // Appeler la fonction pour afficher la langue correspondante
-                        showContent(lang);
-                    }
-                });
+            // Mise à jour du titre de la page
+            const titles = {
+                'francais': 'David KRK · Biographie - DJ Techno & Producteur',
+                'castellano': 'David KRK · Biografía - DJ Techno & Productor',
+                'euskara': 'David KRK · Biografia - Techno DJ & Ekoizlea',
+                'english': 'David KRK · Biography - Techno DJ & Producer',
+                'romana': 'David KRK · Biografie - DJ Techno & Producător',
+                'zhongwen': 'David KRK · 个人简介 - 电子音乐DJ和制作人',
+                'nihongo': 'David KRK · バイオグラフィー - テクノDJ＆プロデューサー',
+                'ukrainian': 'David KRK · Біографія - Техно DJ та Продюсер'
+            };
+            document.title = titles[lang] || titles['francais'];
 
-                 // Optionnel : Si vous voulez marquer le dernier bouton sélectionné comme actif au chargement
-                 // (mais sans afficher le contenu, conformément à la demande initiale)
-                 const savedLang = localStorage.getItem('selectedLang');
-                 if (savedLang) {
-                      const lastActiveButton = langNav.querySelector(`button[data-lang="${savedLang}"]`);
-                      if (lastActiveButton) {
-                          // Décommentez la ligne suivante pour activer cette fonctionnalité:
-                          // lastActiveButton.classList.add('active-lang-button');
-                      }
-                 }
+            // Animation du scroll vers le haut en douceur
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
-            } else {
-                 console.error("L'élément <nav> avec id='language-navigation' est introuvable ! Le changement de langue ne fonctionnera pas.");
-            }
+        // Gestion des animations au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
 
-            // Message final confirmant que la page est prête et qu'aucune bio n'est affichée par défaut
-            console.log("Page chargée et script initialisé. Aucune biographie affichée par défaut.");
+        document.querySelectorAll('.mb-4 p').forEach(p => {
+            p.style.opacity = '0';
+            p.style.transform = 'translateY(20px)';
+            p.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(p);
         });
     </script>
 </body>
