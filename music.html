@@ -3,106 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK · Music</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo%2030-01-25.png">
+    
+    <title>David KRK · Music - DJ Sets & Productions</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Écoutez les derniers sets et productions de David KRK. Techno, Trance et Tech Trance. Disponible sur Mixcloud et Soundcloud.">
+    <meta name="keywords" content="David KRK, DJ sets, techno music, trance, tech trance, mixcloud, soundcloud, electronic music">
+    <meta name="author" content="David KRK">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="David KRK · Music - DJ Sets & Productions">
+    <meta property="og:description" content="Écoutez les derniers sets et productions de David KRK. Techno, Trance et Tech Trance.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+    <meta property="og:url" content="https://davidkrk.com/music.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="David KRK · Music">
+    <meta name="twitter:description" content="DJ Sets & Productions - Techno, Trance, Tech Trance">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+
+    <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
+    <link rel="preload" href="dist/output.css" as="style">
+    
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="dist/output.css">
+
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "David KRK",
+      "url": "https://davidkrk.com/music.html",
+      "image": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png",
+      "description": "DJ Techno et Producteur de musique électronique",
+      "genre": ["Techno", "Trance", "Tech Trance"],
+      "sameAs": [
+        "https://www.mixcloud.com/DavidKRK/",
+        "https://soundcloud.com/davidkrk/"
+      ]
+    }
+    </script>
     <style>
+        :root {
+            --primary-color: #FF0000;
+            --secondary-color: #141414;
+            --accent-color-1: #FF69B4;
+            --accent-color-2: #FFC67D;
+            --text-color: #FFFFFF;
+            --mixcloud-color: #45a0e6;
+            --soundcloud-color: #ff8800;
+            --animation-duration: 1s;
+            --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            background: linear-gradient(135deg, #141414, #141414);
-            color: #FFFFFF;
+            background: linear-gradient(135deg, var(--secondary-color), #000000);
+            color: var(--text-color);
             font-family: 'Russo One', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
-   .title-animation {
-            animation: fadeInDown 1s ease-in-out;
+
+        .title-animation {
+            opacity: 0;
+            animation: fadeInDown var(--animation-duration) var(--transition-timing) forwards;
         }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-   .hover-underline-animation {
+
+        .hover-underline-animation {
             display: inline-block;
             position: relative;
-            background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
+            background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             animation: gradient 10s ease infinite;
+            transition: transform 0.3s var(--transition-timing);
         }
-   .hover-underline-animation:after {
+
+        .hover-underline-animation:after {
             content: '';
             position: absolute;
             width: 100%;
-            transform: scaleX(0);
             height: 2px;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
-            background-color: #FFFFFF;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
+            background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s var(--transition-timing);
         }
-   .hover-underline-animation:hover:after {
+
+        .hover-underline-animation:hover {
+            transform: translateY(-2px);
+        }
+
+        .hover-underline-animation:hover:after {
             transform: scaleX(1);
-            transform-origin: bottom left;
-        } 
+            transform-origin: left;
+        }
+
         @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-   .lang-content {
-            display: none;
-        }
-   .rotate {
+
+        .rotate {
             animation: rotate 10s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
         }
+
         @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-   .neon {
+
+        .neon {
             animation: neon 2s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
         }
+
         @keyframes neon {
-            0% {
-                color: #FFFF00; /* jaune */
-            }
-            50% {
-                color: #00FFFF; /* cyan */
-            }
-            100% {
-                color: #FFFF00; /* jaune */
-            }
-        }
-       .fab {
-            font-size: 24px;
-            margin-right: 8px;
+            0%, 100% { color: #FFFF00; text-shadow: 0 0 10px rgba(255, 255, 0, 0.5); }
+            50% { color: #00FFFF; text-shadow: 0 0 20px rgba(0, 255, 255, 0.7); }
         }
 
-       .fa-mixcloud {
-            color: #45a0e6;
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
 
-       .fa-soundcloud {
-            color: #ff8800;
+        nav a {
+            position: relative;
+            transition: all 0.3s var(--transition-timing);
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        .fab {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .fa-mixcloud {
+            color: var(--mixcloud-color);
+            filter: drop-shadow(0 0 5px rgba(69, 160, 230, 0.5));
+        }
+
+        .fa-soundcloud {
+            color: var(--soundcloud-color);
+            filter: drop-shadow(0 0 5px rgba(255, 136, 0, 0.5));
+        }
+
+        .player-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s var(--transition-timing) forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px 0 0 0;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .fab {
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 3rem !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+
+            .fixed-footer {
+                padding: 0.5rem;
+            }
+
+            .fixed-footer img {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 1.2rem !important;
+            }
+
+            h1 {
+                font-size: 2rem !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        .load-player-btn {
+            width: 100%;
+            padding: 2rem;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mixcloud-container .load-player-btn {
+            background: linear-gradient(135deg, #45a0e6, #3178b3);
+            border-color: #45a0e6;
+        }
+
+        .soundcloud-container .load-player-btn {
+            background: linear-gradient(135deg, #ff8800, #ff5500);
+            border-color: #ff8800;
+        }
+
+        .load-player-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
     </style>
     <script>
@@ -117,30 +301,139 @@
     <div id="music" class="py-20">
         <div class="container mx-auto px-6">
             <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
-            <h2 class="text-6xl font-bold text-center mb-12 text-red-500 title-animation">Set</h2>
+            <h2 class="text-6xl font-bold text-center mb-12 text-red-500 title-animation">Sets & Productions</h2>
           
-                 <nav class="text-center mb-12">
-                     <a href="index.html" class="text-3xl mx-4 hover-underline-animation">Back</a>
-                     <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="text-3xl mx-4 hover:underline hover:text-blue-500">
-                         <i class="fab fa-mixcloud"></i> Mixcloud David KRK
-                     </a>
-                     <a href="https://soundcloud.com/davidkrk/" target="_blank" class="text-3xl mx-4 hover:underline hover:text-orange-500">
-                         <i class="fab fa-soundcloud"></i> Soundcloud David KRK
-                     </a>
-                 </nav>
-            <div>
-              <p align="center"></p>
+            <nav class="text-center mb-12">
+                <a href="index.html" class="text-3xl hover-underline-animation flex items-center justify-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Back
+                </a>
+                <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer" class="text-3xl hover-underline-animation flex items-center justify-center">
+                    <i class="fab fa-mixcloud"></i> Mixcloud
+                </a>
+                <a href="https://soundcloud.com/davidkrk/" target="_blank" rel="noopener noreferrer" class="text-3xl hover-underline-animation flex items-center justify-center">
+                    <i class="fab fa-soundcloud"></i> Soundcloud
+                </a>
+            </nav>
+
+            <div class="player-container mb-12">
+                <h3 class="text-2xl font-bold mb-4 text-center neon">Latest Mix</h3>
+                <div class="mixcloud-container" data-url="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=0&mini=1&hide_artwork=1&autoplay=0&hide_followers=1&hide_followbutton=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F">
+                    <button class="load-player-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="loadPlayer(this, 'mixcloud')">
+                        <i class="fab fa-mixcloud mr-2"></i>Charger le lecteur Mixcloud
+                    </button>
+                </div>
             </div>
-            <br>
-            <iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay"></iframe>
+
+            <div class="player-container">
+                <h2 class="text-2xl mb-4 title-animation">Latest Tracks</h2>
+                <div class="soundcloud-container" data-url="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/davidkrkofficial&color=%23ff5500&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&single_active=true">
+                    <button class="load-player-btn bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" onclick="loadPlayer(this, 'soundcloud')">
+                        <i class="fab fa-soundcloud mr-2"></i>Charger le lecteur SoundCloud
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mb-12">
+                <p class="text-xl mb-4">Follow David KRK on social media for the latest updates:</p>
+                <div class="flex justify-center gap-6">
+                    <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                        <i class="fab fa-facebook text-4xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/davidkrk/" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                        <i class="fab fa-instagram text-4xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+                        <i class="fab fa-youtube text-4xl"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
-            <footer class="py-6 px-4 text-left mr-4">
-                <p class="text-gray-400 mb-2">&copy; 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
-                <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+
+        <div class="fixed-footer">
+            <footer class="flex items-center gap-4">
+                <div>
+                    <p class="text-gray-400 mb-2">&copy; 2025 <span class="rotate inline-block">David KRK</span></p>
+                    <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+                </div>
+                <img src="images/logo 30-01-25.png" alt="Logo David KRK" class="w-16 h-16 border-2 border-white rounded-full">
             </footer>
-            <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
         </div>
     </div>
+
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script src="https://widget.mixcloud.com/media/js/widgetApi.js"></script>
+    
+    <script>
+        // Fonction pour charger les scripts des widgets de manière asynchrone
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                if (document.querySelector(`script[src="${src}"]`)) {
+                    resolve();
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.body.appendChild(script);
+            });
+        }
+
+        // Fonction pour charger un lecteur
+        async function loadPlayer(button, type) {
+            const container = button.parentElement;
+            const url = container.dataset.url;
+            
+            // Créer l'iframe
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = type === 'mixcloud' ? '180' : '450';
+            iframe.frameBorder = '0';
+            iframe.allow = 'autoplay';
+            iframe.loading = 'lazy';
+            iframe.src = url;
+
+            // Remplacer le bouton par l'iframe
+            container.innerHTML = '';
+            container.appendChild(iframe);
+
+            try {
+                // Charger le script approprié
+                if (type === 'mixcloud') {
+                    await loadScript('https://widget.mixcloud.com/media/js/widgetApi.js');
+                    const widget = Mixcloud.PlayerWidget(iframe);
+                    await widget.ready;
+                    widget.events.play.on(() => console.log('Mixcloud playing'));
+                } else if (type === 'soundcloud') {
+                    await loadScript('https://w.soundcloud.com/player/api.js');
+                    const widget = SC.Widget(iframe);
+                    widget.bind(SC.Widget.Events.READY, () => console.log('SoundCloud ready'));
+                }
+            } catch (error) {
+                console.log(`Error loading ${type} widget:`, error);
+                container.innerHTML = `<div class="text-red-500 p-4">Erreur de chargement du lecteur. Veuillez réessayer.</div>`;
+            }
+        }
+
+        // Animation des éléments au scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.player-container').forEach(container => {
+                observer.observe(container);
+            });
+        });
+    </script>
 </body>
 </html>

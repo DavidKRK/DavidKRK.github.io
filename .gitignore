@@ -1,1 +1,23 @@
+<<<<<<< HEAD
 .aider*
+=======
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local 
+>>>>>>> 0493f4993fce6719914b5aacb418e45a7baaddf2
