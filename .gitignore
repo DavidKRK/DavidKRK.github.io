@@ -1,5 +1,19 @@
+# Dependencies
 node_modules/
-dist/*
-!dist/output.css
+package-lock.json
+
+# Build output
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
 .DS_Store
-.env 
+Thumbs.db
+
+# Environment
+.env
+.env.local 

@@ -1,14 +1,32 @@
 {
   "name": "davidkrk-website",
   "version": "1.0.0",
-  "description": "Website de David KRK - DJ Techno & Producteur",
+  "description": "Website for David KRK - Techno DJ & Producer",
+  "main": "index.html",
   "scripts": {
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
-    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "optimize-images": "node optimize-images.js",
+    "clean": "if exist dist rmdir /s /q dist",
+    "prebuild": "npm run clean && npm run optimize-images && mkdir dist",
+    "postbuild": "xcopy /E /I /Y images dist\\images && copy *.html dist\\ && copy CNAME dist\\ && copy robots.txt dist\\ && copy sitemap.xml dist\\",
+    "start": "npm run build && npx serve dist",
+    "dev": "npm run build && npm run watch & npx serve dist",
+    "validate": "npm run validate:html && npm run validate:css",
+    "validate:html": "html-validate index.html bio.html music.html",
+    "validate:css": "stylelint \"**/*.css\""
+  },
+  "dependencies": {
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1",
     "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.35"
+    "postcss": "^8.4.35",
+    "cssnano": "^6.0.3",
+    "html-validate": "^8.18.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
+    "serve": "^14.2.1"
   }
 }

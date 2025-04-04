@@ -1,32 +1,83 @@
 name: Build and Deploy
 
-   on:
-     push:
-       branches: [main]
-     pull_request:
-       branches: [main]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - uses: ruby/setup-ruby@v1
-           with:
-             ruby-version: '3.1'
-             bundler-cache: true
-         - run: bundle exec jekyll build
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Check HTML files
+        run: npm run validate:html
+        
+      - name: Check CSS files
+        run: npm run validate:css
 
-     deploy:
-       needs: build
-       if: github.ref == 'refs/heads/main'
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - uses: actions/deploy-pages@v3
-         - name: Notify Discord
-           uses: libinkdir/action-discord@master
-           with: 
-             message: 'Site déployé : ${{ github.repository }}'
-           env:
-             DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  build:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build project
+        run: npm run build
+        
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            dist/
+            !dist/node_modules/
+            !dist/package*.json
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          commit_message: "Deploy: ${{ github.event.head_commit.message }}"
+          
+      - name: Notify Discord
+        uses: libinkdir/action-discord@master
+        with: 
+          message: '🚀 Site déployé avec succès : ${{ github.repository }}'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
