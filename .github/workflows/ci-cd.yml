@@ -75,8 +75,8 @@ jobs:
           publish_branch: gh-pages
           commit_message: "Deploy: ${{ github.event.head_commit.message }}"
           
-      - name: Notify Discord
-        uses: libinkdir/action-discord@master
+            - name: Notifier Discord
+        uses: Ilshidur/action-discord@v1.0.1  # Mettez à jour avec une version qui existe
         with: 
           message: '🚀 Site déployé avec succès : ${{ github.repository }}'
         env:
