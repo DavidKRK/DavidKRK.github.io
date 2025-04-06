@@ -19,10 +19,7 @@ jobs:
           cache: 'npm'
           
       - run: npm install
-      
-      - run: npm run validate:html
-      
-      - run: npm run validate:css
+      - run: npm run validate
 
   build:
     needs: quality-checks
@@ -36,7 +33,6 @@ jobs:
           cache: 'npm'
           
       - run: npm install
-      
       - run: npm run build
       
       - uses: actions/upload-artifact@v3
@@ -65,11 +61,11 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           commit_message: "Deploy: ${{ github.event.head_commit.message }}"
-
-      - name: Notification Discord
-        uses: Ilshidur/action-discord@v1
+          
+      - name: Discord Notification
         if: success()
+        uses: Ilshidur/action-discord@master
         with:
-          message: '🚀 Déploiement réussi : ${{ github.repository }}'
+          args: "🚀 Déploiement réussi: ${{ github.repository }}"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
