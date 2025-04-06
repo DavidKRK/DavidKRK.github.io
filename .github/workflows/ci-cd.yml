@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: CI/CD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  quality:
+  quality-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,40 +18,33 @@ jobs:
           node-version: '20'
           cache: 'npm'
           
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Check HTML files
-        run: npm run validate:html
-        
-      - name: Check CSS files
-        run: npm run validate:css
+      - run: npm install
+      
+      - run: npm run validate:html
+      
+      - run: npm run validate:css
 
   build:
-    needs: quality
+    needs: quality-checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Build project
-        run: npm run build
-        
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+      - run: npm install
+      
+      - run: npm run build
+      
+      - uses: actions/upload-artifact@v3
         with:
           name: dist
           path: |
             dist/
-            !dist/node_modules/
+            !dist/node_modules
             !dist/package*.json
 
   deploy:
@@ -61,23 +54,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
         with:
           name: dist
           path: dist
           
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
           commit_message: "Deploy: ${{ github.event.head_commit.message }}"
-          
-            - name: Notifier Discord
-        uses: Ilshidur/action-discord@v1.0.1  # Mettez à jour avec une version qui existe
-        with: 
-          message: '🚀 Site déployé avec succès : ${{ github.repository }}'
+
+      - uses: Ilshidur/action-discord@v1
+        if: success()
+        with:
+          message: '🚀 Deployment successful: ${{ github.repository }}'
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
