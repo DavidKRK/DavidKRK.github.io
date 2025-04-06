@@ -1,74 +1,25 @@
-name: CI/CD
+# Étape 1 : Ouvrir le fichier en conflit
+nano .github/workflows/ci-cd.yml
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+# Recherchez les marqueurs de conflit :
+<<<<<<< HEAD
+      - uses: Ilshidur/action-discord@v1.0.1
+=======
+      - name: Notification Discord
+        uses: Ilshidur/action-discord@master
+>>>>>>> 5fa8f8c... Fix Discord notification indentation
 
-jobs:
-  quality-checks:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          
-      - run: npm install
-      
-      - run: npm run validate:html
-      
-      - run: npm run validate:css
+# Remplacez le bloc conflictuel par :
+      - name: Notification Discord
+        uses: Ilshidur/action-discord@v1
 
-  build:
-    needs: quality-checks
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          
-      - run: npm install
-      
-      - run: npm run build
-      
-      - uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: |
-            dist/
-            !dist/node_modules
-            !dist/package*.json
+# Enregistrez et quittez (Ctrl+X puis Y)
 
-  deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: dist
-          
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          commit_message: "Deploy: ${{ github.event.head_commit.message }}"
+# Étape 2 : Marquer le conflit comme résolu
+git add .github/workflows/ci-cd.yml
 
-      - uses: Ilshidur/action-discord@v1
-        if: success()
-        with:
-          message: '🚀 Deployment successful: ${{ github.repository }}'
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+# Étape 3 : Reprendre le rebase
+git rebase --continue
+
+# Étape 4 : Pousser les changements
+git push origin main
