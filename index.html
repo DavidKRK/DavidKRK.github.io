@@ -8,10 +8,15 @@
     <meta name="description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK.">
     <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France, Basque, Romanian, Chinese, Japanese">
 
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png" type="image/png">
+
     <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aU9Qkz3hU4zG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts (Russo One) -->
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
@@ -32,34 +37,57 @@
 
         /* Loading Screen */
         .loading-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
             z-index: 10000;
             transition: opacity 0.5s ease;
             background: rgba(10, 10, 10, 0.98);
         }
         .loading-container img {
-            width: 180px; height: 180px; border-radius: 50%; margin-bottom: 20px;
+            width: 180px; 
+            height: 180px; 
+            border-radius: 50%; 
+            margin-bottom: 20px;
             border: 3px solid var(--neon-red);
             box-shadow: 0 0 15px var(--neon-red);
             animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;
         }
         @keyframes rotate { 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.15); opacity: 1; } }
+        @keyframes pulse { 
+            0%, 100% { transform: scale(1); opacity: 0.8; } 
+            50% { transform: scale(1.15); opacity: 1; } 
+        }
 
         /* Background Photo Slideshow */
         .photo-slide-container {
-             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-             z-index: -1;
-             overflow: hidden;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
         }
         .photo-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             transition: opacity 1.5s ease-in-out;
             opacity: 0;
         }
         .photo-slide img {
-            width: 100%; height: 100%; object-fit: cover;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
             filter: brightness(0.4);
         }
         .photo-slide.active { opacity: 1; }
@@ -70,7 +98,10 @@
             z-index: 2;
             min-height: 100vh;
             height: auto;
-            display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-start; 
+            align-items: center;
             padding: 40px 20px 250px;
             visibility: hidden;
             width: 100%;
@@ -78,8 +109,11 @@
         }
 
         .text-content {
-            text-align: center; position: relative; width: 100%;
-            margin-top: 40px; margin-bottom: 40px;
+            text-align: center; 
+            position: relative; 
+            width: 100%;
+            margin-top: 40px; 
+            margin-bottom: 40px;
             background-color: transparent;
         }
 
@@ -87,17 +121,26 @@
         .slides-container {
             position: relative;
             min-height: 150px;
-            width: 100%; max-width: 800px;
+            width: 100%; 
+            max-width: 800px;
             margin: 20px auto 0;
             overflow: hidden;
             background-color: transparent;
         }
         .slides-container > div {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             opacity: 0;
             animation: slideText 24s infinite linear;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 0 20px; text-align: center;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            padding: 0 20px; 
+            text-align: center;
         }
         .slides-container > div:nth-child(1) { animation-delay: 0s; }
         .slides-container > div:nth-child(2) { animation-delay: 6s; }
@@ -118,13 +161,20 @@
             animation: neonPulse 1.5s ease-in-out infinite alternate;
         }
         @keyframes neonPulse {
-            from { text-shadow: 0 0 5px var(--neon-red), 0 0 10px var(--neon-red); }
-            to   { text-shadow: 0 0 15px var(--neon-red), 0 0 25px var(--neon-red), 0 0 35px #ff4d4d; }
+            from { 
+                text-shadow: 0 0 5px var(--neon-red), 0 0 10px var(--neon-red); 
+            }
+            to { 
+                text-shadow: 0 0 15px var(--neon-red), 0 0 25px var(--neon-red), 0 0 35px #ff4d4d; 
+            }
         }
 
         /* Fixed Footer */
         .site-footer {
-            position: fixed; bottom: 0; left: 0; width: 100%;
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%;
             z-index: 101;
             padding: 15px 0;
             background: rgba(0, 0, 0, 0.9);
@@ -133,11 +183,27 @@
             box-shadow: 0 -5px 15px rgba(255, 0, 0, 0.3);
         }
         .footer-content {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 15px;
         }
-        .footer-content img { width: 60px; height: 60px; border: 1px solid var(--neon-red); margin-bottom: 10px; border-radius: 50%; }
-        .footer-content .neon-text { font-size: 1.2rem; margin-bottom: 10px; font-weight: bold; }
+        .footer-content img { 
+            width: 60px; 
+            height: 60px; 
+            border: 1px solid var(--neon-red); 
+            margin-bottom: 10px; 
+            border-radius: 50%; 
+        }
+        .footer-content .neon-text { 
+            font-size: 1.2rem; 
+            margin-bottom: 10px; 
+            font-weight: bold; 
+        }
 
         .footer-social-links {
             display: flex;
@@ -155,53 +221,80 @@
         }
 
         /* Language Selector */
-        .footer-content .language-selector { margin-top: 10px; margin-bottom: 10px; }
+        .footer-content .language-selector { 
+            margin-top: 10px; 
+            margin-bottom: 10px; 
+        }
         .language-selector button {
-            margin: 2px 4px; padding: 6px 10px; background-color: transparent;
-            border: 1px solid var(--neon-red); color: white; cursor: pointer;
-            font-family: 'Russo One', sans-serif; font-size: 0.75rem; border-radius: 3px;
-            transition: background-color 0.3s ease, color 0.3s ease; white-space: nowrap;
+            margin: 2px 4px; 
+            padding: 6px 10px; 
+            background-color: transparent;
+            border: 1px solid var(--neon-red); 
+            color: white; 
+            cursor: pointer;
+            font-family: 'Russo One', sans-serif; 
+            font-size: 0.75rem; 
+            border-radius: 3px;
+            transition: all 0.3s ease; 
+            white-space: nowrap;
         }
         .language-selector button:hover,
         .language-selector button.active {
             background-color: var(--neon-red);
             color: black;
+            box-shadow: 0 0 10px var(--neon-red);
         }
 
         /* Contact & Rights */
-        .footer-contact-rights { margin-top: 10px; font-size: 0.8rem; color: #aaa; text-align: center;}
-        .footer-contact-rights a { color: #ccc; text-decoration: none; display: block; margin-bottom: 5px;}
-        .footer-contact-rights a:hover { color: white; text-decoration: underline; }
-        .footer-contact-rights p { margin-top: 5px; }
+        .footer-contact-rights { 
+            margin-top: 10px; 
+            font-size: 0.8rem; 
+            color: #aaa; 
+            text-align: center;
+        }
+        .footer-contact-rights a { 
+            color: #ccc; 
+            text-decoration: none; 
+            display: block; 
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+        .footer-contact-rights a:hover { 
+            color: white; 
+            text-decoration: underline; 
+        }
+        .footer-contact-rights p { 
+            margin-top: 5px; 
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
-             .loading-container img { width: 140px; height: 140px; }
-             .text-content h1 { font-size: 3rem !important; }
-             .slides-container { min-height: 120px; }
-             .slides-container > div h2 { font-size: 1.8rem !important; }
-             .slides-container > div p { font-size: 0.9rem !important; }
-             .footer-content img { width: 50px; height: 50px; }
-             .footer-content .neon-text { font-size: 1rem; }
-             .footer-social-links a { font-size: 1.3rem; }
-             .language-selector button { padding: 5px 8px; font-size: 0.7rem; margin: 2px 3px;}
-             .footer-contact-rights { font-size: 0.75rem; }
-             .animation-container { padding-bottom: 230px; }
-             .site-footer { padding: 10px 0; }
+            .loading-container img { width: 140px; height: 140px; }
+            .text-content h1 { font-size: 3rem !important; }
+            .slides-container { min-height: 120px; }
+            .slides-container > div h2 { font-size: 1.8rem !important; }
+            .slides-container > div p { font-size: 0.9rem !important; }
+            .footer-content img { width: 50px; height: 50px; }
+            .footer-content .neon-text { font-size: 1rem; }
+            .footer-social-links a { font-size: 1.3rem; }
+            .language-selector button { padding: 5px 8px; font-size: 0.7rem; margin: 2px 3px;}
+            .footer-contact-rights { font-size: 0.75rem; }
+            .animation-container { padding-bottom: 230px; }
+            .site-footer { padding: 10px 0; }
         }
 
         @media (max-width: 480px) {
             .loading-container img { width: 100px; height: 100px; }
-             .text-content h1 { font-size: 2.2rem !important; }
-             .slides-container > div h2 { font-size: 1.5rem !important; }
-             .slides-container > div p { font-size: 0.8rem !important; }
-             .footer-content img { width: 40px; height: 40px; margin-bottom: 8px; }
-             .footer-content .neon-text { font-size: 0.9rem; margin-bottom: 8px; }
-             .footer-social-links { margin-bottom: 8px; gap: 12px; }
-             .footer-social-links a { font-size: 1.2rem; }
-             .language-selector { display: flex; flex-wrap: wrap; justify-content: center; }
-             .language-selector button { padding: 4px 7px; font-size: 0.65rem; margin: 2px;}
-             .animation-container { padding-bottom: 240px; }
+            .text-content h1 { font-size: 2.2rem !important; }
+            .slides-container > div h2 { font-size: 1.5rem !important; }
+            .slides-container > div p { font-size: 0.8rem !important; }
+            .footer-content img { width: 40px; height: 40px; margin-bottom: 8px; }
+            .footer-content .neon-text { font-size: 0.9rem; margin-bottom: 8px; }
+            .footer-social-links { margin-bottom: 8px; gap: 12px; }
+            .footer-social-links a { font-size: 1.2rem; }
+            .language-selector { display: flex; flex-wrap: wrap; justify-content: center; }
+            .language-selector button { padding: 4px 7px; font-size: 0.65rem; margin: 2px;}
+            .animation-container { padding-bottom: 240px; }
         }
     </style>
 
@@ -211,15 +304,15 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "David KRK",
-      "url": "https://davidkrk.github.io/",
+      "url": "https://davidkrk.com/",
       "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png",
-       "description": "International Techno DJ and Electronic Music Producer based in France.",
-       "disambiguatingDescription": "Techno DJ & Producer",
-       "sameAs": [
-         "https://www.facebook.com/DavidKRKofficial",
-         "https://www.youtube.com/user/DavidKRKofficial",
-         "https://www.instagram.com/davidkrk/"
-       ]
+      "description": "International Techno DJ and Electronic Music Producer based in France.",
+      "disambiguatingDescription": "Techno DJ & Producer",
+      "sameAs": [
+        "https://www.facebook.com/DavidKRKofficial",
+        "https://www.youtube.com/user/DavidKRKofficial",
+        "https://www.instagram.com/davidkrk/"
+      ]
     }
     </script>
 </head>
@@ -234,12 +327,12 @@
 
     <!-- Background Photo Slideshow Container -->
     <div class="photo-slide-container">
-         <div class="photo-slide" id="photo1">
-             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="Portrait de David KRK">
-         </div>
-         <div class="photo-slide" id="photo2">
-             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" alt="David KRK DJing session">
-         </div>
+        <div class="photo-slide" id="photo1">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="Portrait de David KRK">
+        </div>
+        <div class="photo-slide" id="photo2">
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" alt="David KRK DJing session">
+        </div>
     </div>
 
     <!-- Main Animated Content -->
@@ -280,6 +373,7 @@
                 <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://soundcloud.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
             </div>
             <div class="language-selector">
                 <button onclick="setLanguage('fr')" data-lang="fr">Français</button>
@@ -313,7 +407,9 @@
                 setTimeout(() => {
                     if (loadingContainer) {
                         loadingContainer.style.opacity = '0';
-                        setTimeout(() => { if (loadingContainer) loadingContainer.remove(); }, 500);
+                        setTimeout(() => { 
+                            if (loadingContainer) loadingContainer.remove(); 
+                        }, 500);
                     }
                     if (animationContainer) {
                         animationContainer.style.visibility = 'visible';
@@ -345,99 +441,190 @@
             }
         });
 
-         // Background Photo Slideshow
-         let currentPhotoIndex = 0;
-         let photoInterval;
+        // Background Photo Slideshow
+        let currentPhotoIndex = 0;
+        let photoInterval;
 
-         function startPhotoSlideshow() {
-             const photoSlides = document.querySelectorAll('.photo-slide');
-             if (photoSlides.length === 0) return;
+        function startPhotoSlideshow() {
+            const photoSlides = document.querySelectorAll('.photo-slide');
+            if (photoSlides.length === 0) return;
 
-             if(photoSlides[0]) photoSlides[0].classList.add('active');
-             currentPhotoIndex = 0;
+            if(photoSlides[0]) photoSlides[0].classList.add('active');
+            currentPhotoIndex = 0;
 
-             const slideDuration = 6000;
+            const slideDuration = 6000;
 
-             clearInterval(photoInterval);
+            clearInterval(photoInterval);
 
-             if (photoSlides.length > 1) {
-                 photoInterval = setInterval(() => {
-                     const nextPhotoIndex = (currentPhotoIndex + 1) % photoSlides.length;
+            if (photoSlides.length > 1) {
+                photoInterval = setInterval(() => {
+                    const nextPhotoIndex = (currentPhotoIndex + 1) % photoSlides.length;
 
-                     if(photoSlides[currentPhotoIndex]) photoSlides[currentPhotoIndex].classList.remove('active');
-                     if(photoSlides[nextPhotoIndex]) photoSlides[nextPhotoIndex].classList.add('active');
+                    if(photoSlides[currentPhotoIndex]) photoSlides[currentPhotoIndex].classList.remove('active');
+                    if(photoSlides[nextPhotoIndex]) photoSlides[nextPhotoIndex].classList.add('active');
 
-                     currentPhotoIndex = nextPhotoIndex;
-                 }, slideDuration);
-             }
-         }
+                    currentPhotoIndex = nextPhotoIndex;
+                }, slideDuration);
+            }
+        }
 
         // Multi-Language Content Management
         const translations = {
-            'fr': { 'pageTitle': "David KRK - DJ Techno & Producteur", 'mainTitle': "SITE EN CONSTRUCTION", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactez David KRK", 'rights': "© 2025 DAVID KRK - TOUS DROITS RÉSERVÉS" },
-            'es': { 'pageTitle': "David KRK - DJ Techno & Productor", 'mainTitle': "SITIO EN CONSTRUCCIÓN", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactar a David KRK", 'rights': "© 2025 DAVID KRK - TODOS LOS DERECHOS RESERVADOS" },
-            'en': { 'pageTitle': "David KRK - Techno DJ & Producer", 'mainTitle': "UNDER CONSTRUCTION", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contact David KRK", 'rights': "© 2025 DAVID KRK - ALL RIGHTS RESERVED" },
-            'eu': { 'pageTitle': "David KRK - Techno DJ & Ekoizlea", 'mainTitle': "GUNEA ERAIKITZEN", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Harremanetan jarri David KRK", 'rights': "© 2025 DAVID KRK - ESKUBIDE GUZTIAK ERRESERBATUTA" },
-            'ro': { 'pageTitle': "David KRK - DJ Techno & Producător", 'mainTitle': "SITE ÎN CONSTRUCȚIE", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nouveau sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactați David KRK", 'rights': "© 2025 DAVID KRK - TOATE DREPTURILE REZERVATE" },
-            'zh': { 'pageTitle': "David KRK - Techno DJ & 制作人", 'mainTitle': "网站建设中", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "联系 David KRK", 'rights': "© 2025 DAVID KRK - 版权所有" },
-            'ja': { 'pageTitle': "David KRK - テクノDJ & プロデューサー", 'mainTitle': "ウェブサイト建設中", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "David KRKへのお問い合わせ", 'rights': "© 2025 DAVID KRK - 無断複写・転載を禁じます" }
+            'fr': { 
+                'pageTitle': "David KRK - DJ Techno & Producteur", 
+                'mainTitle': "SITE EN CONSTRUCTION", 
+                'slide1_h2': "NOUVEAU SITE EN PRÉPARATION", 
+                'slide1_p': "Un tout nouveau site web arrive bientôt avec du contenu exclusif !", 
+                'slide2_h2': "DJ SETS & PRODUCTIONS", 
+                'slide2_p': "Découvrez mes dernières productions et performances live.", 
+                'slide3_h2': "ÉVÉNEMENTS À VENIR", 
+                'slide3_p': "Restez à l'écoute pour connaître mes prochaines dates de tournée.", 
+                'slide4_h2': "CONTACT PROFESSIONNEL", 
+                'slide4_p': "Pour les réservations et collaborations professionnelles.", 
+                'contact': "Contactez David KRK", 
+                'rights': "© 2025 DAVID KRK - TOUS DROITS RÉSERVÉS" 
+            },
+            'es': { 
+                'pageTitle': "David KRK - DJ Techno & Productor", 
+                'mainTitle': "SITIO EN CONSTRUCCIÓN", 
+                'slide1_h2': "NUEVO SITIO WEB EN CAMINO", 
+                'slide1_p': "¡Un sitio web completamente nuevo con contenido exclusivo llegará pronto!", 
+                'slide2_h2': "DJ SETS & PRODUCCIONES", 
+                'slide2_p': "Descubre mis últimas producciones y actuaciones en vivo.", 
+                'slide3_h2': "PRÓXIMOS EVENTOS", 
+                'slide3_p': "Mantente atento para conocer mis próximas fechas de gira.", 
+                'slide4_h2': "CONTACTO PROFESIONAL", 
+                'slide4_p': "Para reservas y colaboraciones profesionales.", 
+                'contact': "Contactar a David KRK", 
+                'rights': "© 2025 DAVID KRK - TODOS LOS DERECHOS RESERVADOS" 
+            },
+            'en': { 
+                'pageTitle': "David KRK - Techno DJ & Producer", 
+                'mainTitle': "UNDER CONSTRUCTION", 
+                'slide1_h2': "NEW WEBSITE COMING SOON", 
+                'slide1_p': "A brand new website with exclusive content is arriving soon!", 
+                'slide2_h2': "DJ SETS & PRODUCTIONS", 
+                'slide2_p': "Discover my latest productions and live performances.", 
+                'slide3_h2': "UPCOMING EVENTS", 
+                'slide3_p': "Stay tuned for my upcoming tour dates.", 
+                'slide4_h2': "PROFESSIONAL CONTACT", 
+                'slide4_p': "For bookings and professional collaborations.", 
+                'contact': "Contact David KRK", 
+                'rights': "© 2025 DAVID KRK - ALL RIGHTS RESERVED" 
+            },
+            'eu': { 
+                'pageTitle': "David KRK - Techno DJ & Ekoizlea", 
+                'mainTitle': "GUNEA ERAIKITZEN", 
+                'slide1_h2': "WEBGUNE BERRIA ETORRIRAKO PREST", 
+                'slide1_p': "Eduki esklusiboa duen webgune berri bat laster iritsiko da!", 
+                'slide2_h2': "DJ SETAK & EKOIZPENAK", 
+                'slide2_p': "Aurkitu nire azken ekoizpenak eta zuzeneko emanaldiak.", 
+                'slide3_h2': "ETORRIRAKO EKITALDIAK", 
+                'slide3_p': "Jarri adi nire etorriko bira datengatik.", 
+                'slide4_h2': "KONTAKTU PROFESIONALA", 
+                'slide4_p': "Erreserbak eta lankidetza profesionaletarako.", 
+                'contact': "Harremanetan jarri David KRK", 
+                'rights': "© 2025 DAVID KRK - ESKUBIDE GUZTIAK ERRESERBATUTA" 
+            },
+            'ro': { 
+                'pageTitle': "David KRK - DJ Techno & Producător", 
+                'mainTitle': "SITE ÎN CONSTRUCȚIE", 
+                'slide1_h2': "NOU SITE ÎN CURÂND", 
+                'slide1_p': "Un site complet nou cu conținut exclusiv va sosi în curând!", 
+                'slide2_h2': "SETURI DJ & PRODUCȚII", 
+                'slide2_p': "Descoperă ultimele mele producții și performanțe live.", 
+                'slide3_h2': "EVENIMENTE VIITOARE", 
+                'slide3_p': "Rămâi la curent cu viitoarele mele date de turneu.", 
+                'slide4_h2': "CONTACT PROFESIONAL", 
+                'slide4_p': "Pentru rezervări și colaborări profesionale.", 
+                'contact': "Contactați David KRK", 
+                'rights': "© 2025 DAVID KRK - TOATE DREPTURILE REZERVATE" 
+            },
+            'zh': { 
+                'pageTitle': "David KRK - Techno DJ & 制作人", 
+                'mainTitle': "网站建设中", 
+                'slide1_h2': "新网站即将上线", 
+                'slide1_p': "一个包含独家内容的全新网站即将推出！", 
+                'slide2_h2': "DJ 表演 & 作品", 
+                'slide2_p': "探索我的最新作品和现场表演。", 
+                'slide3_h2': "即将举行的活动", 
+                'slide3_p': "请继续关注我即将到来的巡演日期。", 
+                'slide4_h2': "专业联系", 
+                'slide4_p': "用于预订和专业合作。", 
+                'contact': "联系 David KRK", 
+                'rights': "© 2025 DAVID KRK - 版权所有" 
+            },
+            'ja': { 
+                'pageTitle': "David KRK - テクノDJ & プロデューサー", 
+                'mainTitle': "ウェブサイト建設中", 
+                'slide1_h2': "新しいウェブサイト近日公開", 
+                'slide1_p': "独占コンテンツを備えた真新しいウェブサイトが間もなく登場します！", 
+                'slide2_h2': "DJセット & プロダクション", 
+                'slide2_p': "私の最新のプロダクションとライブパフォーマンスをご覧ください。", 
+                'slide3_h2': "今後のイベント", 
+                'slide3_p': "今後のツアー日程にご期待ください。", 
+                'slide4_h2': "プロフェッショナルコンタクト", 
+                'slide4_p': "ブッキングやプロフェッショナルなコラボレーションのため。", 
+                'contact': "David KRKへのお問い合わせ", 
+                'rights': "© 2025 DAVID KRK - 無断複写・転載を禁じます" 
+            }
         };
 
-         function setTextContent(selector, text) {
-             const element = document.querySelector(selector);
-             if (element) {
-                 element.textContent = text;
-             }
-         }
+        function setTextContent(selector, text) {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.textContent = text;
+            }
+        }
 
-         function setLanguage(language) {
-             const langData = translations[language];
-             if (!langData) return;
+        function setLanguage(language) {
+            const langData = translations[language];
+            if (!langData) return;
 
-             document.documentElement.lang = language;
-             document.title = langData['pageTitle'];
+            document.documentElement.lang = language;
+            document.title = langData['pageTitle'];
 
-             setTextContent('#constructionText', langData['mainTitle']);
-             setTextContent('.slides-container > div:nth-child(1) h2', langData['slide1_h2']);
-             setTextContent('.slides-container > div:nth-child(1) p', langData['slide1_p']);
-             setTextContent('.slides-container > div:nth-child(2) h2', langData['slide2_h2']);
-             setTextContent('.slides-container > div:nth-child(2) p', langData['slide2_p']);
-             setTextContent('.slides-container > div:nth-child(3) h2', langData['slide3_h2']);
-             setTextContent('.slides-container > div:nth-child(3) p', langData['slide3_p']);
-             setTextContent('.slides-container > div:nth-child(4) h2', langData['slide4_h2']);
-             setTextContent('.slides-container > div:nth-child(4) p', langData['slide4_p']);
-             setTextContent('#contactLink', langData['contact']);
-             setTextContent('#rightsText', langData['rights']);
+            setTextContent('#constructionText', langData['mainTitle']);
+            setTextContent('.slides-container > div:nth-child(1) h2', langData['slide1_h2']);
+            setTextContent('.slides-container > div:nth-child(1) p', langData['slide1_p']);
+            setTextContent('.slides-container > div:nth-child(2) h2', langData['slide2_h2']);
+            setTextContent('.slides-container > div:nth-child(2) p', langData['slide2_p']);
+            setTextContent('.slides-container > div:nth-child(3) h2', langData['slide3_h2']);
+            setTextContent('.slides-container > div:nth-child(3) p', langData['slide3_p']);
+            setTextContent('.slides-container > div:nth-child(4) h2', langData['slide4_h2']);
+            setTextContent('.slides-container > div:nth-child(4) p', langData['slide4_p']);
+            setTextContent('#contactLink', langData['contact']);
+            setTextContent('#rightsText', langData['rights']);
 
-             document.querySelectorAll('.language-selector button').forEach(button => {
-                 button.classList.remove('active');
-                 if (button.dataset.lang === language) {
-                     button.classList.add('active');
-                 }
-             });
+            document.querySelectorAll('.language-selector button').forEach(button => {
+                button.classList.remove('active');
+                if (button.dataset.lang === language) {
+                    button.classList.add('active');
+                }
+            });
 
-             localStorage.setItem('preferredLanguage', language);
-         }
+            localStorage.setItem('preferredLanguage', language);
+        }
 
-         document.addEventListener('DOMContentLoaded', () => {
-             const savedLang = localStorage.getItem('preferredLanguage');
-             const browserLang = navigator.language.split('-')[0];
-             let initialLang = 'fr';
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const browserLang = navigator.language.split('-')[0];
+            let initialLang = 'fr';
 
-             if (savedLang && translations[savedLang]) {
-                 initialLang = savedLang;
-             } else if (translations[browserLang]) {
-                 initialLang = browserLang;
-             }
+            if (savedLang && translations[savedLang]) {
+                initialLang = savedLang;
+            } else if (translations[browserLang]) {
+                initialLang = browserLang;
+            }
 
-             setLanguage(initialLang);
+            setLanguage(initialLang);
 
-             document.querySelectorAll('.language-selector button').forEach(button => {
-                 button.addEventListener('click', () => {
+            document.querySelectorAll('.language-selector button').forEach(button => {
+                button.addEventListener('click', () => {
                     setLanguage(button.dataset.lang);
-                 });
-             });
-         });
+                });
+            });
+        });
     </script>
 </body>
 </html>
