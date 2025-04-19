@@ -1,48 +1,43 @@
 <!DOCTYPE html>
-<html lang="fr" class="bg-black"> <!-- Default language set to French -->
+<html lang="fr" class="bg-black">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK - Techno DJ & Producer</title> <!-- Title will be updated by JS based on language -->
+    <title>David KRK - Techno DJ & Producer</title>
     <meta name="description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK.">
     <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France, Basque, Romanian, Chinese, Japanese">
 
     <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aU9Qkz3hU4zG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <!-- Tailwind CSS (Utility-first CSS framework) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (Russo One) -->
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <!-- Your Custom CSS (Place specific styles or overrides here) -->
-    <link rel="stylesheet" href="assets/css/style.css"> <!-- Assumes you have this file -->
 
-    <!-- Embedded Styles (Specific overrides and animations) -->
     <style>
         :root {
             --neon-red: #FF0000;
-            --animation-duration: 16s; /* Not currently used, but defined */
+            --animation-duration: 16s;
         }
 
-        /* Apply base font and background to body for better consistency */
         body {
             font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            overflow-y: auto; /* Allow vertical scroll if needed */
+            overflow-x: hidden;
+            overflow-y: auto;
             min-height: 100vh;
             color: white;
-            background-color: black; /* Set on body as well */
+            background-color: black;
         }
 
-        /* --- Loading Screen --- */
+        /* Loading Screen */
         .loading-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 10000; /* Highest z-index */
+            z-index: 10000;
             transition: opacity 0.5s ease;
-            background: rgba(10, 10, 10, 0.98); /* Slightly transparent black */
+            background: rgba(10, 10, 10, 0.98);
         }
-        /* CORRECTION: Removed loading="lazy" - loader image should load immediately */
         .loading-container img {
             width: 180px; height: 180px; border-radius: 50%; margin-bottom: 20px;
             border: 3px solid var(--neon-red);
@@ -52,34 +47,34 @@
         @keyframes rotate { 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.15); opacity: 1; } }
 
-        /* --- Background Photo Slideshow --- */
+        /* Background Photo Slideshow */
         .photo-slide-container {
-             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; /* Use vh for full viewport height */
-             z-index: -1; /* Behind all other content */
+             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+             z-index: -1;
              overflow: hidden;
         }
         .photo-slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
-            opacity: 0; /* Hidden by default */
+            transition: opacity 1.5s ease-in-out;
+            opacity: 0;
         }
         .photo-slide img {
-            width: 100%; height: 100%; object-fit: cover; /* Cover the area, may crop */
-            filter: brightness(0.4); /* Darken the image */
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.4);
         }
-        .photo-slide.active { opacity: 1; } /* Visible state */
+        .photo-slide.active { opacity: 1; }
 
-        /* --- Main Content Area --- */
+        /* Main Content Area */
         .animation-container {
-            position: relative; /* Needed for z-index */
-            z-index: 2; /* Above photo slideshow */
-            min-height: 100vh; /* Ensure it takes at least full height */
-            height: auto; /* Allow content to expand height */
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            height: auto;
             display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
-            padding: 40px 20px 250px; /* Top/Horizontal/Bottom padding - Bottom padding makes space for fixed footer */
-            visibility: hidden; /* Initially hidden, shown by JS after load */
+            padding: 40px 20px 250px;
+            visibility: hidden;
             width: 100%;
-            background-color: transparent; /* Allows background photos to show */
+            background-color: transparent;
         }
 
         .text-content {
@@ -88,75 +83,70 @@
             background-color: transparent;
         }
 
-        /* --- Text Slides --- */
+        /* Text Slides */
         .slides-container {
-            position: relative; /* For absolute positioning of children */
-            min-height: 150px; /* Minimum height */
-            width: 100%; max-width: 800px; /* Max width for readability */
-            margin: 20px auto 0; /* Spacing */
-            overflow: hidden; /* Hide overflowing text during animation */
+            position: relative;
+            min-height: 150px;
+            width: 100%; max-width: 800px;
+            margin: 20px auto 0;
+            overflow: hidden;
             background-color: transparent;
         }
-        /* Styling individual slides */
         .slides-container > div {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; /* Hidden by default */
-            animation: slideText 24s infinite linear; /* Total animation cycle */
+            opacity: 0;
+            animation: slideText 24s infinite linear;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             padding: 0 20px; text-align: center;
         }
-        /* Animation delays for sequencing */
         .slides-container > div:nth-child(1) { animation-delay: 0s; }
         .slides-container > div:nth-child(2) { animation-delay: 6s; }
         .slides-container > div:nth-child(3) { animation-delay: 12s; }
         .slides-container > div:nth-child(4) { animation-delay: 18s; }
 
-        /* Text slide animation: Fade in, stay, fade out */
         @keyframes slideText {
-            0%      { transform: translateY(50px); opacity: 0; } /* Start below, transparent */
-            4.17%   { transform: translateY(0); opacity: 1; }    /* Move up, fade in (lasts 1s / 24s total) */
-            20.83%  { transform: translateY(0); opacity: 1; }    /* Stay visible (lasts 4s / 24s total) */
-            25%     { transform: translateY(-50px); opacity: 0; } /* Move up, fade out (lasts 1s / 24s total) */
-            100%    { transform: translateY(-50px); opacity: 0; } /* Stay hidden */
+            0%      { transform: translateY(50px); opacity: 0; }
+            4.17%   { transform: translateY(0); opacity: 1; }
+            20.83%  { transform: translateY(0); opacity: 1; }
+            25%     { transform: translateY(-50px); opacity: 0; }
+            100%    { transform: translateY(-50px); opacity: 0; }
         }
 
-        /* --- Neon Text Effect --- */
+        /* Neon Text Effect */
         .neon-text {
             color: var(--neon-red);
             animation: neonPulse 1.5s ease-in-out infinite alternate;
         }
         @keyframes neonPulse {
             from { text-shadow: 0 0 5px var(--neon-red), 0 0 10px var(--neon-red); }
-            to   { text-shadow: 0 0 15px var(--neon-red), 0 0 25px var(--neon-red), 0 0 35px #ff4d4d; } /* Add a lighter shade */
+            to   { text-shadow: 0 0 15px var(--neon-red), 0 0 25px var(--neon-red), 0 0 35px #ff4d4d; }
         }
 
-        /* --- Fixed Footer --- */
+        /* Fixed Footer */
         .site-footer {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            z-index: 101; /* Above main content, below loader */
+            z-index: 101;
             padding: 15px 0;
-            background: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
-            backdrop-filter: blur(8px); /* Frosted glass effect */
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
             border-top: 1px solid var(--neon-red);
-            box-shadow: 0 -5px 15px rgba(255, 0, 0, 0.3); /* Neon glow upwards */
+            box-shadow: 0 -5px 15px rgba(255, 0, 0, 0.3);
         }
         .footer-content {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px;
         }
-        /* Footer Logo */
         .footer-content img { width: 60px; height: 60px; border: 1px solid var(--neon-red); margin-bottom: 10px; border-radius: 50%; }
         .footer-content .neon-text { font-size: 1.2rem; margin-bottom: 10px; font-weight: bold; }
 
-        /* Footer Social Links (assuming styles are in style.css or defined below/Tailwind) */
-        .footer-social-links { /* Added this class to the div in HTML */
+        .footer-social-links {
             display: flex;
-            gap: 15px; /* Space between icons */
+            gap: 15px;
             margin-bottom: 15px;
         }
         .footer-social-links a {
             color: white;
-            font-size: 1.5rem; /* Icon size */
+            font-size: 1.5rem;
             transition: color 0.3s ease, transform 0.3s ease;
         }
         .footer-social-links a:hover {
@@ -173,7 +163,7 @@
             transition: background-color 0.3s ease, color 0.3s ease; white-space: nowrap;
         }
         .language-selector button:hover,
-        .language-selector button.active { /* Style for the active language */
+        .language-selector button.active {
             background-color: var(--neon-red);
             color: black;
         }
@@ -184,10 +174,9 @@
         .footer-contact-rights a:hover { color: white; text-decoration: underline; }
         .footer-contact-rights p { margin-top: 5px; }
 
-        /* --- Media Queries for Responsiveness --- */
+        /* Responsive */
         @media (max-width: 768px) {
              .loading-container img { width: 140px; height: 140px; }
-             /* Using !important carefully with Tailwind, consider configuring Tailwind instead if possible */
              .text-content h1 { font-size: 3rem !important; }
              .slides-container { min-height: 120px; }
              .slides-container > div h2 { font-size: 1.8rem !important; }
@@ -197,7 +186,7 @@
              .footer-social-links a { font-size: 1.3rem; }
              .language-selector button { padding: 5px 8px; font-size: 0.7rem; margin: 2px 3px;}
              .footer-contact-rights { font-size: 0.75rem; }
-             .animation-container { padding-bottom: 230px; } /* Adjust if footer height changes significantly */
+             .animation-container { padding-bottom: 230px; }
              .site-footer { padding: 10px 0; }
         }
 
@@ -210,10 +199,9 @@
              .footer-content .neon-text { font-size: 0.9rem; margin-bottom: 8px; }
              .footer-social-links { margin-bottom: 8px; gap: 12px; }
              .footer-social-links a { font-size: 1.2rem; }
-             /* Allow language buttons to wrap */
              .language-selector { display: flex; flex-wrap: wrap; justify-content: center; }
              .language-selector button { padding: 4px 7px; font-size: 0.65rem; margin: 2px;}
-             .animation-container { padding-bottom: 240px; } /* Adjust if wrapped buttons increase footer height */
+             .animation-container { padding-bottom: 240px; }
         }
     </style>
 
@@ -221,29 +209,26 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person", /* Use MusicGroup or PerformingGroup if more appropriate */
+      "@type": "Person",
       "name": "David KRK",
-      "url": "https://davidkrk.github.io/", /* Make sure this is the correct final URL */
-      "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png",
+      "url": "https://davidkrk.github.io/",
+      "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png",
        "description": "International Techno DJ and Electronic Music Producer based in France.",
        "disambiguatingDescription": "Techno DJ & Producer",
-       "sameAs": [ /* Links to official profiles */
+       "sameAs": [
          "https://www.facebook.com/DavidKRKofficial",
          "https://www.youtube.com/user/DavidKRKofficial",
          "https://www.instagram.com/davidkrk/"
-         /* Add more profiles like SoundCloud, Mixcloud, etc. */
        ]
     }
     </script>
-
 </head>
 
-<body class="bg-black"> <!-- Redundant bg-black if html has it, but harmless -->
+<body class="bg-black">
 
     <!-- Loading Screen -->
     <div class="loading-container" id="loadingContainer">
-        <!-- CORRECTION: Removed loading="lazy" -->
-        "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png",
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png" alt="David KRK Logo">
         <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
     </div>
 
@@ -253,65 +238,50 @@
              <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg" alt="Portrait de David KRK">
          </div>
          <div class="photo-slide" id="photo2">
-             <!-- CORRECTION: Completed image src URL and added alt text -->
              <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg" alt="David KRK DJing session">
          </div>
-         <!-- Add more .photo-slide divs here for more background images -->
     </div>
 
     <!-- Main Animated Content -->
     <div class="animation-container" id="animationContainer">
 
-        <!-- Main Text Content (e.g., "Site under construction") -->
+        <!-- Main Text Content -->
         <div class="text-content">
-            <!-- text-5xl md:text-7xl lg:text-8xl are Tailwind classes for responsive font size -->
-            <h1 id="constructionText" class="neon-text font-bold text-5xl md:text-7xl lg:text-8xl uppercase">
-                <!-- Text set by JS -->
-            </h1>
+            <h1 id="constructionText" class="neon-text font-bold text-5xl md:text-7xl lg:text-8xl uppercase"></h1>
         </div>
 
         <!-- Animated Text Slides Container -->
         <div class="slides-container">
-            <!-- NOTE: Slide content below is the same for all languages in the JS. -->
-            <!-- You should update the 'translations' object in JS with actual translations -->
-            <div> <!-- Slide 1 (FR) -->
-                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2> <p class="text-lg md:text-xl"></p>
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2>
+                <p class="text-lg md:text-xl"></p>
             </div>
-            <div> <!-- Slide 2 (EU) -->
-                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2> <p class="text-lg md:text-xl"></p>
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2>
+                <p class="text-lg md:text-xl"></p>
             </div>
-            <div> <!-- Slide 3 (ES) -->
-                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2> <p class="text-lg md:text-xl"></p>
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2>
+                <p class="text-lg md:text-xl"></p>
             </div>
-            <div> <!-- Slide 4 (EN) -->
-                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2> <p class="text-lg md:text-xl"></p>
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-2"></h2>
+                <p class="text-lg md:text-xl"></p>
             </div>
-            <!-- Add more divs if you add more languages/slides needing this animation -->
         </div>
-
-    </div> <!-- End animation-container -->
+    </div>
 
     <!-- Fixed Footer -->
     <footer class="site-footer">
         <div class="footer-content">
-            <!-- Footer Logo -->
             <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png" alt="David KRK Logo Small">
-            <!-- Footer Text -->
             <p class="neon-text">David KRK</p>
-            <!-- Social Media Links -->
-            <!-- CORRECTION: Added 'footer-social-links' class -->
-            <div class="social-links footer-social-links" id="socialLinks">
-                <!-- Add actual links here -->
+            <div class="footer-social-links">
                 <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/davidkrk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <!-- Add SoundCloud, Mixcloud, etc. -->
-                <!-- <a href="#" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a> -->
-                <!-- <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Mixcloud"><i class="fab fa-mixcloud"></i></a> -->
             </div>
-            <!-- Language Selector -->
             <div class="language-selector">
-                 <!-- IMPROVEMENT: Using data-lang attribute for easier JS access -->
                 <button onclick="setLanguage('fr')" data-lang="fr">Français</button>
                 <button onclick="setLanguage('eu')" data-lang="eu">Euskara</button>
                 <button onclick="setLanguage('es')" data-lang="es">Español</button>
@@ -320,49 +290,38 @@
                 <button onclick="setLanguage('zh')" data-lang="zh">中文</button>
                 <button onclick="setLanguage('ja')" data-lang="ja">日本語</button>
             </div>
-            <!-- Contact Link & Copyright -->
             <div class="footer-contact-rights">
-                <a href="mailto:contact@davidkrk.com" id="contactLink"></a> <!-- Text set by JS -->
-                <p id="rightsText"></p> <!-- Text set by JS -->
+                <a href="mailto:contact@davidkrk.com" id="contactLink"></a>
+                <p id="rightsText"></p>
             </div>
         </div>
     </footer>
 
-    <!-- Main JavaScript -->
     <script>
-        // --- Asset Preloading & Loading Screen Management ---
+        // Asset Preloading & Loading Screen Management
         window.addEventListener('load', function () {
-            // Define assets crucial for the initial view (logo, background images)
             const assets = [
-                <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png" alt="Logo David KRK Loading">
+                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/david_krk_logo.png',
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
-                // CORRECTION: Ensured this URL matches the one in the HTML
                 'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg'
-                // Add other critical assets if needed
             ];
             let loadedCount = 0;
             const loadingContainer = document.getElementById('loadingContainer');
             const animationContainer = document.getElementById('animationContainer');
 
-            // Function to run once all critical assets are loaded (or failed)
             const onAssetsLoaded = () => {
-                // Optional small delay before hiding loader for smoother feel
                 setTimeout(() => {
                     if (loadingContainer) {
                         loadingContainer.style.opacity = '0';
-                        // Remove loader from DOM after fade out transition
-                        setTimeout(() => { if (loadingContainer) loadingContainer.remove(); }, 500); // Match CSS transition duration
+                        setTimeout(() => { if (loadingContainer) loadingContainer.remove(); }, 500);
                     }
-                    // Make the main content visible
                     if (animationContainer) {
                         animationContainer.style.visibility = 'visible';
-                        // Start background slideshow *after* content is potentially visible
                         startPhotoSlideshow();
                     }
-                }, 1000); // 1 second delay (adjust as needed)
+                }, 1000);
             };
 
-            // Callback for each loaded (or errored) asset
             const checkAssetsLoaded = () => {
                 loadedCount++;
                 if (loadedCount === assets.length) {
@@ -370,95 +329,75 @@
                 }
             };
 
-            // Start preloading if assets are defined
             if (assets.length > 0) {
                 assets.forEach(assetUrl => {
-                    // Preload only images this way
                     if (assetUrl.match(/\.(jpeg|jpg|gif|png|svg)$/) != null) {
                         const img = new Image();
                         img.src = assetUrl;
                         img.onload = checkAssetsLoaded;
-                        img.onerror = checkAssetsLoaded; // Count errors too, so loading doesn't hang forever
+                        img.onerror = checkAssetsLoaded;
                     } else {
-                        // If you had non-image assets (like fonts loaded via JS, etc.) handle them here
-                        checkAssetsLoaded(); // Immediately count non-image assets
+                        checkAssetsLoaded();
                     }
                 });
             } else {
-                // No assets to preload, just proceed
                 onAssetsLoaded();
             }
         });
 
-         // --- Background Photo Slideshow ---
+         // Background Photo Slideshow
          let currentPhotoIndex = 0;
-         let photoInterval; // Variable to hold the interval ID
+         let photoInterval;
 
          function startPhotoSlideshow() {
              const photoSlides = document.querySelectorAll('.photo-slide');
-             if (photoSlides.length === 0) return; // No slides found
+             if (photoSlides.length === 0) return;
 
-             // Ensure the first slide is initially active
              if(photoSlides[0]) photoSlides[0].classList.add('active');
              currentPhotoIndex = 0;
 
-             const slideDuration = 6000; // Time each photo is visible (in milliseconds)
+             const slideDuration = 6000;
 
-             // Clear any existing interval to prevent duplicates if function is called again
              clearInterval(photoInterval);
 
-             // Only start interval if there's more than one slide
              if (photoSlides.length > 1) {
                  photoInterval = setInterval(() => {
-                     const nextPhotoIndex = (currentPhotoIndex + 1) % photoSlides.length; // Loop back to 0
+                     const nextPhotoIndex = (currentPhotoIndex + 1) % photoSlides.length;
 
-                     // Remove 'active' class from current slide
                      if(photoSlides[currentPhotoIndex]) photoSlides[currentPhotoIndex].classList.remove('active');
-                     // Add 'active' class to the next slide
                      if(photoSlides[nextPhotoIndex]) photoSlides[nextPhotoIndex].classList.add('active');
 
-                     currentPhotoIndex = nextPhotoIndex; // Update the current index
+                     currentPhotoIndex = nextPhotoIndex;
                  }, slideDuration);
              }
          }
 
-        // --- Multi-Language Content Management ---
+        // Multi-Language Content Management
         const translations = {
-            // NOTE: Slides content (h2, p) is identical here. Replace with actual translations.
             'fr': { 'pageTitle': "David KRK - DJ Techno & Producteur", 'mainTitle': "SITE EN CONSTRUCTION", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactez David KRK", 'rights': "© 2025 DAVID KRK - TOUS DROITS RÉSERVÉS" },
             'es': { 'pageTitle': "David KRK - DJ Techno & Productor", 'mainTitle': "SITIO EN CONSTRUCCIÓN", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactar a David KRK", 'rights': "© 2025 DAVID KRK - TODOS LOS DERECHOS RESERVADOS" },
             'en': { 'pageTitle': "David KRK - Techno DJ & Producer", 'mainTitle': "UNDER CONSTRUCTION", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contact David KRK", 'rights': "© 2025 DAVID KRK - ALL RIGHTS RESERVED" },
             'eu': { 'pageTitle': "David KRK - Techno DJ & Ekoizlea", 'mainTitle': "GUNEA ERAIKITZEN", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Harremanetan jarri David KRK", 'rights': "© 2025 DAVID KRK - ESKUBIDE GUZTIAK ERRESERBATUTA" },
-            'ro': { 'pageTitle': "David KRK - DJ Techno & Producător", 'mainTitle': "SITE ÎN CONSTRUCȚIE", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactați David KRK", 'rights': "© 2025 DAVID KRK - TOATE DREPTURILE REZERVATE" },
+            'ro': { 'pageTitle': "David KRK - DJ Techno & Producător", 'mainTitle': "SITE ÎN CONSTRUCȚIE", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nouveau sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "Contactați David KRK", 'rights': "© 2025 DAVID KRK - TOATE DREPTURILE REZERVATE" },
             'zh': { 'pageTitle': "David KRK - Techno DJ & 制作人", 'mainTitle': "网站建设中", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "联系 David KRK", 'rights': "© 2025 DAVID KRK - 版权所有" },
             'ja': { 'pageTitle': "David KRK - テクノDJ & プロデューサー", 'mainTitle': "ウェブサイト建設中", 'slide1_h2': "SITE EN CONSTRUCTION", 'slide1_p': "Nouveau site bientôt disponible ! DJ Techno et Producteur.", 'slide2_h2': "GUNEA ERAIKITZEN", 'slide2_p': "Itzuli berandu gabe nire webgune berria deskubritzeko !", 'slide3_h2': "SITIO EN CONSTRUCCIÓN", 'slide3_p': "¡Vuelve pronto para descubrir mi nuevo sitio web !", 'slide4_h2': "UNDER CONSTRUCTION", 'slide4_p': "Come back soon to discover my new website!", 'contact': "David KRKへのお問い合わせ", 'rights': "© 2025 DAVID KRK - 無断複写・転載を禁じます" }
         };
 
-         // Helper function to set text content safely
          function setTextContent(selector, text) {
              const element = document.querySelector(selector);
              if (element) {
                  element.textContent = text;
-             } else {
-                 console.warn(`Element not found for selector: ${selector}`);
              }
          }
 
-         // Function to apply translations based on language code
          function setLanguage(language) {
              const langData = translations[language];
-             if (!langData) {
-                 console.warn(`Translations not found for language: ${language}`);
-                 return; // Exit if the language isn't supported
-             }
+             if (!langData) return;
 
-             // Update page language attribute and title
              document.documentElement.lang = language;
              document.title = langData['pageTitle'];
 
-             // Update text content using the helper function
              setTextContent('#constructionText', langData['mainTitle']);
-             // Update text slides
              setTextContent('.slides-container > div:nth-child(1) h2', langData['slide1_h2']);
              setTextContent('.slides-container > div:nth-child(1) p', langData['slide1_p']);
              setTextContent('.slides-container > div:nth-child(2) h2', langData['slide2_h2']);
@@ -467,48 +406,38 @@
              setTextContent('.slides-container > div:nth-child(3) p', langData['slide3_p']);
              setTextContent('.slides-container > div:nth-child(4) h2', langData['slide4_h2']);
              setTextContent('.slides-container > div:nth-child(4) p', langData['slide4_p']);
-             // Update footer text
-             setTextContent('#contactLink', langData['contact']); // Target the link directly
-             setTextContent('#rightsText', langData['rights']);   // Target the paragraph directly
+             setTextContent('#contactLink', langData['contact']);
+             setTextContent('#rightsText', langData['rights']);
 
-             // Update active state on language buttons
              document.querySelectorAll('.language-selector button').forEach(button => {
                  button.classList.remove('active');
-                 // IMPROVEMENT: Check using data-lang attribute
                  if (button.dataset.lang === language) {
                      button.classList.add('active');
                  }
              });
 
-             // Store selected language for persistence
              localStorage.setItem('preferredLanguage', language);
          }
 
-         // --- Initial Language Setup on Page Load ---
          document.addEventListener('DOMContentLoaded', () => {
              const savedLang = localStorage.getItem('preferredLanguage');
-             const browserLang = navigator.language.split('-')[0]; // Get primary language code (e.g., 'en' from 'en-US')
-             let initialLang = 'fr'; // Default language
+             const browserLang = navigator.language.split('-')[0];
+             let initialLang = 'fr';
 
-             // Determine the best initial language
              if (savedLang && translations[savedLang]) {
-                 initialLang = savedLang; // Use saved language if valid
+                 initialLang = savedLang;
              } else if (translations[browserLang]) {
-                 initialLang = browserLang; // Use browser language if supported
-             } // Otherwise, default 'fr' remains
+                 initialLang = browserLang;
+             }
 
-             setLanguage(initialLang); // Apply the initial language
+             setLanguage(initialLang);
 
-             // Add event listeners to language buttons AFTER setting initial language
-             // (No need to add listeners inside setLanguage)
              document.querySelectorAll('.language-selector button').forEach(button => {
                  button.addEventListener('click', () => {
-                    // The setLanguage function called by onclick will handle saving to localStorage
-                    // No additional logic needed here if using onclick attributes in HTML
+                    setLanguage(button.dataset.lang);
                  });
              });
          });
     </script>
-
 </body>
 </html>
