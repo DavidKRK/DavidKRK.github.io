@@ -1,303 +1,147 @@
 <!DOCTYPE html>
-<html lang="fr" class="bg-black">
+
+<html lang="fr">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>David KRK - Techno DJ & Producer</title>
 
-  <!-- Meta Tags -->
-  <meta name="description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK.">
-  <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France, Basque, Romanian, Chinese, Japanese">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/logo%2030-01-25.png">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome (Icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- SEO / Open Graph -->
-  <meta property="og:title" content="David KRK - Techno DJ & Producer">
-  <meta property="og:description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK.">
-  <meta property="og:image" content="https://github.com/DavidKRK/DavidKRK.github.io/blob/main/images/optimized/logo 30-01-25.webp">
-  <meta property="og:url" content="https://davidkrk.com/">
-  <meta name="twitter:card" content="summary_large_image">
+  <title>Site en construction</title>
 
   <style>
+
     body {
-      font-family: 'Russo One', sans-serif;
-      background: linear-gradient(135deg, #141414, #000000);
+
+      background: #000;
+
       color: white;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
+
+      text-align: center;
+
+      padding: 50px;
+
     }
 
-    .neon-text {
-      color: #FF0000;
-      text-shadow: 0 0 5px #FF0000, 0 0 10px #FF0000;
+    button {
+
+      margin: 5px;
+
+      padding: 10px;
+
+      background: #333;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 5px;
+
     }
 
-    .hover-underline-animation {
-      position: relative;
-      display: inline-block;
-      background: linear-gradient(to right, #FF69B4, #FFC67D);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: gradient 10s ease infinite;
-    }
-
-    .hover-underline-animation::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -2px;
-      left: 0;
-      background: linear-gradient(to right, #FF69B4, #FFC67D);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
-
-    .hover-underline-animation:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .photo-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-
-    .photo-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.4);
-    }
-
-    .photo-slide.active {
-      opacity: 1;
-    }
-
-    .animation-container {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-    }
-
-    .site-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 101;
-      padding: 15px 0;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(8px);
-      border-top: 1px solid #FF0000;
-      box-shadow: 0 -5px 15px rgba(255, 0, 0, 0.3);
-    }
-
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 15px;
-    }
-
-    .footer-content img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 1px solid #FF0000;
-    }
-
-    .footer-content .neon-text {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    .language-selector button.active::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(to right, #FF69B4, #FFC67D);
-      transform: scaleX(1);
-      transition: transform 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem !important;
-      }
-
-      .footer-content img {
-        width: 40px;
-        height: 40px;
-      }
-    }
   </style>
+
 </head>
-<body class="bg-black text-white font-russo">
 
-<!-- Navigation -->
-<nav class="fixed top-0 left-0 w-full bg-black bg-opacity-80 z-50 backdrop-filter backdrop-blur-md border-b border-red-600">
-  <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-    <a href="index.html" class="text-2xl neon-text font-bold">David KRK</a>
-    <ul class="flex space-x-6 text-lg">
-      <li><a href="index.html" class="hover:text-red-500 transition-colors">Accueil</a></li>
-      <li><a href="bio.html" class="hover:text-red-500 transition-colors">Bio</a></li>
-      <li><a href="music.html" class="hover:text-red-500 transition-colors">Musique</a></li>
-      <li><a href="#contact" class="hover:text-red-500 transition-colors">Contact</a></li>
-    </ul>
-    <div class="language-selector flex gap-2">
-      <button type="button" onclick="setLanguage('fr')" class="lang-btn active" data-lang="fr" aria-label="Français">FR</button>
-      <button type="button" onclick="setLanguage('es')" class="lang-btn" data-lang="es" aria-label="Español">ES</button>
-      <button type="button" onclick="setLanguage('eu')" class="lang-btn" data-lang="eu" aria-label="Euskara">EU</button>
-      <button type="button" onclick="setLanguage('en')" class="lang-btn" data-lang="en" aria-label="English">EN</button>
-      <button type="button" onclick="setLanguage('zh')" class="lang-btn" data-lang="zh" aria-label="简体中文">中文</button>
-      <button type="button" onclick="setLanguage('ja')" class="lang-btn" data-lang="ja" aria-label="日本語">日本語</button>
-      <button type="button" onclick="setLanguage('uk')" class="lang-btn" data-lang="uk" aria-label="Українська">Українська</button>
-    </div>
+<body>
+
+  <h1 id="mainTitle">SITE EN CONSTRUCTION</h1>
+
+  <h2 id="slide1_h2">NOUVEAU SITE WEB BIENTÔT DISPONIBLE</h2>
+
+  <p id="slide1_p">Un site web entièrement nouveau arrive bientôt !</p>
+
+  <div>
+
+    <button data-lang="fr">Français</button>
+
+    <button data-lang="en">English</button>
+
+    <button data-lang="es">Español</button>
+
+    <button data-lang="zh">中文</button>
+
   </div>
-</nav>
 
-<!-- Loading Screen -->
-<div id="loading" class="loading-container hidden">
-  <img src="images/logo 30-01-25.png" alt="Logo David KRK">
-  <p class="text-white text-xl mt-4">Chargement...</p>
-</div>
+  <script>
 
-<!-- Background Slideshow -->
-<div id="photo-slides" class="relative w-full h-screen overflow-hidden">
-  <div class="photo-slide active"><img src="images/photo1.jpg" alt="Photo 1"></div>
-  <div class="photo-slide"><img src="images/photo2.jpg" alt="Photo 2"></div>
-  <div class="photo-slide"><img src="images/photo3.jpg" alt="Photo 3"></div>
-</div>
+    const translations = {
 
-<!-- Main Content -->
-<div class="animation-container text-center">
-  <h1 class="text-8xl font-bold neon-text title-animation mb-12">David KRK</h1>
-  <h2 class="text-5xl font-bold text-red-500 mb-8">Techno Sets &amp; Productions</h2>
-  <p class="text-xl md:text-2xl mb-12">Un nouveau site web arrive bientôt.</p>
-</div>
+      fr: {
 
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="footer-content">
-    <img src="images/logo 30-01-25.png" alt="Logo David KRK">
-    <p class="neon-text">© 2025 DAVID KRK - Tous droits réservés</p>
-  </div>
-</footer>
+        mainTitle: "SITE EN CONSTRUCTION",
 
-<!-- JavaScript for Language Switching -->
-<script>
-  const translations = {
-    fr: {
-      mainTitle: "SITE EN CONSTRUCTION",
-      slide1_h2: "NOUVEAU SITE WEB EN PRÉPARATION",
-      slide1_p: "Un tout nouveau site web arrive bientôt avec du contenu exclusif !"
-    },
-    es: {
-      mainTitle: "SITIO EN CONSTRUCCIÓN",
-      slide1_h2: "NUEVO SITIO WEB EN CAMINO",
-      slide1_p: "¡Un sitio web completamente nuevo con contenido exclusivo llegará pronto!"
-    },
-    en: {
-      mainTitle: "UNDER CONSTRUCTION",
-      slide1_h2: "NEW WEBSITE COMING SOON",
-      slide1_p: "A brand new website with exclusive content is on its way soon!"
-    },
-    eu: {
-      mainTitle: "WEBGUNE BERRIA ETAIK BAT ARI DA IRITSIKO!",
-      slide1_h2: "Eduki esklusiboa duen webgune berri bat laster iritsiko da!"
-    },
-    zh: {
-      mainTitle: "网站正在建设中",
-      slide1_h2: "新网站即将上线",
-      slide1_p: "一个包含独家内容的全新网站即将推出！"
-    },
-    ja: {
-      mainTitle: "ウェブサイト建設中",
-      slide1_h2: "新しいウェブサイト近日公開",
-      slide1_p: "独占コンテンツを備えた真新しいウェブサイトが間もなく登場します！"
-    },
-    uk: {
-      mainTitle: "САЙТ У РОЗРОБЦІ",
-      slide1_h2: "Новий сайт вже на шляху",
-      slide1_p: "Скоро з'явиться новий сайт із ексклюзивним контентом!"
+        slide1_h2: "NOUVEAU SITE WEB BIENTÔT DISPONIBLE",
+
+        slide1_p: "Un site web entièrement nouveau arrive bientôt !"
+
+      },
+
+      en: {
+
+        mainTitle: "UNDER CONSTRUCTION",
+
+        slide1_h2: "NEW WEBSITE COMING SOON",
+
+        slide1_p: "A brand new website is coming soon!"
+
+      },
+
+      es: {
+
+        mainTitle: "SITIO EN CONSTRUCCIÓN",
+
+        slide1_h2: "NUEVO SITIO WEB PRÓXIMAMENTE",
+
+        slide1_p: "¡Un nuevo sitio web está por llegar!"
+
+      },
+
+      zh: {
+
+        mainTitle: "网站正在建设中",
+
+        slide1_h2: "新网站即将上线",
+
+        slide1_p: "一个全新的网站即将到来！"
+
+      }
+
+    };
+
+    function setLanguage(lang) {
+
+      document.documentElement.setAttribute("lang", lang);
+
+      const langData = translations[lang] || translations.fr;
+
+      document.getElementById("mainTitle").textContent = langData.mainTitle;
+
+      document.getElementById("slide1_h2").textContent = langData.slide1_h2;
+
+      document.getElementById("slide1_p").textContent = langData.slide1_p;
+
     }
-  };
 
-  function setLanguage(lang) {
-    document.documentElement.setAttribute("lang", lang);
-    const langData = translations[lang] || translations.fr;
+    document.addEventListener("DOMContentLoaded", () => {
 
-    document.querySelector("h1").textContent = langData.mainTitle;
-    document.querySelector("h2").textContent = langData.slide1_h2;
-    document.querySelectorAll(".slide-text").forEach(el => el.textContent = langData.slide1_p);
+      const savedLang = localStorage.getItem("preferredLanguage") || navigator.language.split("-")[0];
 
-    document.querySelectorAll(".lang-btn").forEach(btn => {
-      btn.classList.remove("active");
-      if (btn.dataset.lang === lang) btn.classList.add("active");
+      setLanguage(savedLang in translations ? savedLang : "fr");
+
+      document.querySelectorAll("button[data-lang]").forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+          setLanguage(btn.dataset.lang);
+
+        });
+
+      });
+
     });
 
-    localStorage.setItem("preferredLanguage", lang);
-  }
+  </script>
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedLang = localStorage.getItem("preferredLanguage") || navigator.language.split("-")[0];
-    setLanguage(translations[savedLang] ? savedLang : "fr");
-
-    let currentPhotoIndex = 0;
-    const photoSlides = document.querySelectorAll(".photo-slide");
-    const slideDuration = 6000;
-
-    function startSlideshow() {
-      setInterval(() => {
-        photoSlides[currentPhotoIndex].classList.remove("active");
-        currentPhotoIndex = (currentPhotoIndex + 1) % photoSlides.length;
-        photoSlides[currentPhotoIndex].classList.add("active");
-      }, slideDuration);
-    }
-
-    if (photoSlides.length > 1) {
-      startSlideshow();
-    } else {
-      photoSlides[0].classList.add("active");
-    }
-  });
-</script>
 </body>
+
 </html>
