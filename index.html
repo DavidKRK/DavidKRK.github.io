@@ -318,7 +318,27 @@
 </head>
 
 <body class="bg-black">
-
+<nav class="fixed top-0 left-0 w-full bg-black bg-opacity-80 z-50 backdrop-filter backdrop-blur-md border-b border-red-600">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="index.html" class="text-2xl neon-text font-bold">David KRK</a>
+        <ul class="flex space-x-6 text-lg">
+            <li><a href="index.html" class="hover:text-red-500 transition-colors">Accueil</a></li>
+            <li><a href="bio.html" class="hover:text-red-500 transition-colors">Bio</a></li>
+            <li><a href="music.html" class="hover:text-red-500 transition-colors">Musique</a></li>
+            <li><a href="#contact" class="hover:text-red-500 transition-colors">Contact</a></li>
+        </ul>
+        <div class="language-selector flex gap-2">
+            <button onclick="setLanguage('fr')" class="lang-btn active" data-lang="fr">FR</button>
+            <button onclick="setLanguage('es')" class="lang-btn" data-lang="es">ES</button>
+            <button onclick="setLanguage('eu')" class="lang-btn" data-lang="eu">EU</button>
+            <button onclick="setLanguage('en')" class="lang-btn" data-lang="en">EN</button>
+            <button onclick="setLanguage('zh')" class="lang-btn" data-lang="zh">中文</button>
+            <button onclick="setLanguage('ja')" class="lang-btn" data-lang="ja">日本語</button>
+            <button onclick="setLanguage('uk')" class="lang-btn" data-lang="uk">Українська</button>
+        </div>
+    </div>
+</nav>
+<!-- Le reste du contenu suit ici -->
     <!-- Loading Screen -->
     <div class="loading-container" id="loadingContainer">
         <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/refs/heads/main/images/optimized/logo%2030-01-25.webp" alt="David KRK Logo">
