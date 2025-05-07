@@ -263,20 +263,17 @@
   };
 
   function setLanguage(lang) {
-    document.documentElement.setAttribute("lang", lang);
-    const langData = translations[lang] || translations.fr;
-
     document.querySelector("h1").textContent = langData.mainTitle;
     document.querySelector("h2").textContent = langData.slide1_h2;
     document.querySelectorAll(".slide-text").forEach(el => el.textContent = langData.slide1_p);
 
     document.querySelectorAll(".lang-btn").forEach(btn => {
-      btn.classList.remove("active");
-      if (btn.dataset.lang === lang) btn.classList.add("active");
+        btn.classList.remove("active");
+        if (btn.dataset.lang === lang) btn.classList.add("active");
     });
 
     localStorage.setItem("preferredLanguage", lang);
-  }
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     const savedLang = localStorage.getItem("preferredLanguage") || navigator.language.split("-")[0];
