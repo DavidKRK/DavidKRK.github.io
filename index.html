@@ -1,147 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
+    <title>Site en construction</title>
 
-  <meta charset="UTF-8">
+    <style>
+      body {
+        background: #000;
 
-  <title>Site en construction</title>
+        color: white;
 
-  <style>
+        text-align: center;
 
-    body {
-
-      background: #000;
-
-      color: white;
-
-      text-align: center;
-
-      padding: 50px;
-
-    }
-
-    button {
-
-      margin: 5px;
-
-      padding: 10px;
-
-      background: #333;
-
-      color: white;
-
-      border: none;
-
-      border-radius: 5px;
-
-    }
-
-  </style>
-
-</head>
-
-<body>
-
-  <h1 id="mainTitle">SITE EN CONSTRUCTION</h1>
-
-  <h2 id="slide1_h2">NOUVEAU SITE WEB BIENTÔT DISPONIBLE</h2>
-
-  <p id="slide1_p">Un site web entièrement nouveau arrive bientôt !</p>
-
-  <div>
-
-    <button data-lang="fr">Français</button>
-
-    <button data-lang="en">English</button>
-
-    <button data-lang="es">Español</button>
-
-    <button data-lang="zh">中文</button>
-
-  </div>
-
-  <script>
-
-    const translations = {
-
-      fr: {
-
-        mainTitle: "SITE EN CONSTRUCTION",
-
-        slide1_h2: "NOUVEAU SITE WEB BIENTÔT DISPONIBLE",
-
-        slide1_p: "Un site web entièrement nouveau arrive bientôt !"
-
-      },
-
-      en: {
-
-        mainTitle: "UNDER CONSTRUCTION",
-
-        slide1_h2: "NEW WEBSITE COMING SOON",
-
-        slide1_p: "A brand new website is coming soon!"
-
-      },
-
-      es: {
-
-        mainTitle: "SITIO EN CONSTRUCCIÓN",
-
-        slide1_h2: "NUEVO SITIO WEB PRÓXIMAMENTE",
-
-        slide1_p: "¡Un nuevo sitio web está por llegar!"
-
-      },
-
-      zh: {
-
-        mainTitle: "网站正在建设中",
-
-        slide1_h2: "新网站即将上线",
-
-        slide1_p: "一个全新的网站即将到来！"
-
+        padding: 50px;
       }
 
-    };
+      button {
+        margin: 5px;
 
-    function setLanguage(lang) {
+        padding: 10px;
 
-      document.documentElement.setAttribute("lang", lang);
+        background: #333;
 
-      const langData = translations[lang] || translations.fr;
+        color: white;
 
-      document.getElementById("mainTitle").textContent = langData.mainTitle;
+        border: none;
 
-      document.getElementById("slide1_h2").textContent = langData.slide1_h2;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
 
-      document.getElementById("slide1_p").textContent = langData.slide1_p;
+  <body>
+    <h1 id="mainTitle">SITE EN CONSTRUCTION</h1>
 
-    }
+    <h2 id="slide1_h2">NOUVEAU SITE WEB BIENTÔT DISPONIBLE</h2>
 
-    document.addEventListener("DOMContentLoaded", () => {
+    <p id="slide1_p">Un site web entièrement nouveau arrive bientôt !</p>
 
-      const savedLang = localStorage.getItem("preferredLanguage") || navigator.language.split("-")[0];
+    <div>
+      <button data-lang="fr">Français</button>
 
-      setLanguage(savedLang in translations ? savedLang : "fr");
+      <button data-lang="en">English</button>
 
-      document.querySelectorAll("button[data-lang]").forEach(btn => {
+      <button data-lang="es">Español</button>
 
-        btn.addEventListener("click", () => {
+      <button data-lang="zh">中文</button>
+    </div>
 
-          setLanguage(btn.dataset.lang);
+    <script>
+      const translations = {
+        fr: {
+          mainTitle: "SITE EN CONSTRUCTION",
 
-        });
+          slide1_h2: "NOUVEAU SITE WEB BIENTÔT DISPONIBLE",
 
-      });
+          slide1_p: "Un site web entièrement nouveau arrive bientôt !",
+        },
 
-    });
+        en: {
+          mainTitle: "UNDER CONSTRUCTION",
 
-  </script>
+          slide1_h2: "NEW WEBSITE COMING SOON",
 
-</body>
+          slide1_p: "A brand new website is coming soon!",
+        },
 
+        es: {
+          mainTitle: "SITIO EN CONSTRUCCIÓN",
+
+          slide1_h2: "NUEVO SITIO WEB PRÓXIMAMENTE",
+
+          slide1_p: "¡Un nuevo sitio web está por llegar!",
+        },
+
+        zh: {
+          mainTitle: "网站正在建设中",
+
+          slide1_h2: "新网站即将上线",
+
+          slide1_p: "一个全新的网站即将到来！",
+        },
+      }
+
+      function setLanguage(lang) {
+        document.documentElement.setAttribute("lang", lang)
+
+        const langData = translations[lang] || translations.fr
+
+        document.getElementById("mainTitle").textContent = langData.mainTitle
+
+        document.getElementById("slide1_h2").textContent = langData.slide1_h2
+
+        document.getElementById("slide1_p").textContent = langData.slide1_p
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("preferredLanguage") ||
+          navigator.language.split("-")[0]
+
+        setLanguage(savedLang in translations ? savedLang : "fr")
+
+        document.querySelectorAll("button[data-lang]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            setLanguage(btn.dataset.lang)
+          })
+        })
+      })
+    </script>
+  </body>
 </html>
+
