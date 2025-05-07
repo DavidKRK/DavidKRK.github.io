@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr" class="bg-black">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>David KRK - Techno DJ & Producer</title>
 
   <!-- Meta Tags -->
-  <meta name="description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK." />
-  <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France, Basque, Romanian, Chinese, Japanese" />
+  <meta name="description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK.">
+  <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France, Basque, Romanian, Chinese, Japanese">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/logo%2030-01-25.png" />
+  <link rel="icon" type="image/png" href="images/logo%2030-01-25.png">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
   <!-- Font Awesome (Icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- SEO / Open Graph -->
-  <meta property="og:title" content="David KRK - Techno DJ & Producer" />
-  <meta property="og:description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/logo%2030-01-25.png" />
-  <meta property="og:url" content="https://davidkrk.com/" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content="David KRK - Techno DJ & Producer">
+  <meta property="og:description" content="International Techno DJ and Electronic Music Producer based in France. Discover the latest mixes, events, and news from David KRK.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/logo%2030-01-25.png">
+  <meta property="og:url" content="https://davidkrk.com/">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Custom Styles -->
   <style>
     body {
       font-family: 'Russo One', sans-serif;
@@ -108,7 +107,6 @@
       justify-content: center;
       align-items: center;
       padding: 40px 20px;
-      visibility: visible;
     }
 
     .site-footer {
@@ -184,13 +182,13 @@
       <li><a href="#contact" class="hover:text-red-500 transition-colors">Contact</a></li>
     </ul>
     <div class="language-selector flex gap-2">
-      <button onclick="setLanguage('fr')" class="lang-btn active" data-lang="fr">FR</button>
-      <button onclick="setLanguage('es')" class="lang-btn" data-lang="es">ES</button>
-      <button onclick="setLanguage('eu')" class="lang-btn" data-lang="eu">EU</button>
-      <button onclick="setLanguage('en')" class="lang-btn" data-lang="en">EN</button>
-      <button onclick="setLanguage('zh')" class="lang-btn" data-lang="zh">中文</button>
-      <button onclick="setLanguage('ja')" class="lang-btn" data-lang="ja">日本語</button>
-      <button onclick="setLanguage('uk')" class="lang-btn" data-lang="uk">Українська</button>
+      <button onclick="setLanguage('fr')" class="lang-btn active" data-lang="fr" aria-label="Français">FR</button>
+      <button onclick="setLanguage('es')" class="lang-btn" data-lang="es" aria-label="Español">ES</button>
+      <button onclick="setLanguage('eu')" class="lang-btn" data-lang="eu" aria-label="Euskara">EU</button>
+      <button onclick="setLanguage('en')" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      <button onclick="setLanguage('zh')" class="lang-btn" data-lang="zh" aria-label="简体中文">中文</button>
+      <button onclick="setLanguage('ja')" class="lang-btn" data-lang="ja" aria-label="日本語">日本語</button>
+      <button onclick="setLanguage('uk')" class="lang-btn" data-lang="uk" aria-label="Українська">Українська</button>
     </div>
   </div>
 </nav>
@@ -203,9 +201,9 @@
 
 <!-- Background Slideshow -->
 <div id="photo-slides" class="relative w-full h-screen overflow-hidden">
-  <div class="photo-slide active"><img src="images/photo1.jpg" alt="Photo 1" /></div>
-  <div class="photo-slide"><img src="images/photo2.jpg" alt="Photo 2" /></div>
-  <div class="photo-slide"><img src="images/photo3.jpg" alt="Photo 3" /></div>
+  <div class="photo-slide active"><img src="images/photo1.jpg" alt="Photo 1"></div>
+  <div class="photo-slide"><img src="images/photo2.jpg" alt="Photo 2"></div>
+  <div class="photo-slide"><img src="images/photo3.jpg" alt="Photo 3"></div>
 </div>
 
 <!-- Main Content -->
@@ -263,23 +261,25 @@
   };
 
   function setLanguage(lang) {
+    document.documentElement.setAttribute("lang", lang);
+    const langData = translations[lang] || translations.fr;
+
     document.querySelector("h1").textContent = langData.mainTitle;
     document.querySelector("h2").textContent = langData.slide1_h2;
     document.querySelectorAll(".slide-text").forEach(el => el.textContent = langData.slide1_p);
 
     document.querySelectorAll(".lang-btn").forEach(btn => {
-        btn.classList.remove("active");
-        if (btn.dataset.lang === lang) btn.classList.add("active");
+      btn.classList.remove("active");
+      if (btn.dataset.lang === lang) btn.classList.add("active");
     });
 
     localStorage.setItem("preferredLanguage", lang);
-}
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const savedLang = localStorage.getItem("preferredLanguage") || navigator.language.split("-")[0];
     setLanguage(translations[savedLang] ? savedLang : "fr");
 
-    // Gestion du slideshow
     let currentPhotoIndex = 0;
     const photoSlides = document.querySelectorAll(".photo-slide");
     const slideDuration = 6000;
