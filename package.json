@@ -4,10 +4,9 @@
   "description": "Website for David KRK - Techno DJ & Producer",
   "main": "index.html",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
-    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "npm run optimize-images && tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
     "optimize-images": "node optimize-images.js",
-    "clean": "if exist dist rmdir /s /q dist",
+    "clean": "if exist rm -rf dist",
     "prebuild": "npm run clean && npm run optimize-images && mkdir dist",
     "postbuild": "xcopy /E /I /Y images dist\\images && copy *.html dist\\ && copy CNAME dist\\ && copy robots.txt dist\\ && copy sitemap.xml dist\\",
     "start": "npm run build && npx serve dist",
