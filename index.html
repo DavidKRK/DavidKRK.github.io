@@ -1,116 +1,481 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
 
-    <title>Site en construction</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+   
+
+    <link rel="icon" type="image/png" href="images/logo%2030-01-25.png">
+
+   
+
+    <title>David KRK · DJ Techno & Producteur</title>
+
+   
+
+    <meta name="description" content="David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Trance, Tech Trance et Techno.">
+
+    <meta name="keywords" content="David KRK, DJ techno, producteur, France, Espagne, Pays Basque, Trance, Tech Trance">
+
+    <meta name="author" content="David KRK">
+
+   
+
+    <meta property="og:title" content="David KRK · DJ Techno & Producteur">
+
+    <meta property="og:description" content="DJ Techno international - France, Espagne, Pays Basque">
+
+    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+
+    <meta property="og:url" content="https://davidkrk.com">
+
+   
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="David KRK · DJ Techno & Producteur">
+
+    <meta name="twitter:description" content="DJ Techno international - France, Espagne, Pays Basque">
+
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style">
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
+
+    <link rel="preload" href="dist/output.css" as="style">
+
+   
+
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <link rel="stylesheet" href="dist/output.css">
 
     <style>
-      body {
-        background: #000;
 
-        color: white;
+        /* Styles de base */
 
-        text-align: center;
+        body {
 
-        padding: 50px;
-      }
+            background: linear-gradient(135deg, #141414, #000000);
 
-      button {
-        margin: 5px;
+            font-family: 'Russo One', sans-serif;
 
-        padding: 10px;
+            color: #FFFFFF;
 
-        background: #333;
+            margin: 0;
 
-        color: white;
+            padding: 0;
 
-        border: none;
+            min-height: 100vh;
 
-        border-radius: 5px;
-      }
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 0 1rem;
+
+        }
+
+
+        .text-center {
+
+            text-align: center;
+
+        }
+
+
+        .mb-4 {
+
+            margin-bottom: 1rem;
+
+        }
+
+
+        .mt-4 {
+
+            margin-top: 1rem;
+
+        }
+
+
+        .text-8xl {
+
+            font-size: 6rem;
+
+        }
+
+
+        .text-2xl {
+
+            font-size: 1.5rem;
+
+        }
+
+
+        .font-bold {
+
+            font-weight: bold;
+
+        }
+
+
+        .main-content-area {
+
+            flex-grow: 1;
+
+            opacity: 0;
+
+            animation: fadeIn 0.5s ease-in-out forwards;
+
+            animation-delay: 0.3s;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        .hover-underline-animation {
+
+            background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
+
+            background-clip: text;
+
+            -webkit-background-clip: text;
+
+            color: transparent;
+
+            animation: gradient 10s ease infinite;
+
+            background-size: 200% auto;
+
+            transition: all 0.3s var(--transition-timing);
+
+            position: relative;
+
+            padding-bottom: 2px;
+
+        }
+
+
+        .hover-underline-animation::after {
+
+            content: '';
+
+            position: absolute;
+
+            width: 100%;
+
+            height: 2px;
+
+            bottom: 0;
+
+            left: 0;
+
+            background: linear-gradient(to right, #FF69B4, #FFC67D);
+
+            transform: scaleX(0);
+
+            transform-origin: right;
+
+            transition: transform 0.3s var(--transition-timing);
+
+        }
+
+
+        .hover-underline-animation:hover::after {
+
+            transform: scaleX(1);
+
+            transform-origin: left;
+
+        }
+
+
+        @keyframes gradient {
+
+            0% { background-position: 0% 50%; }
+
+            50% { background-position: 100% 50%; }
+
+            100% { background-position: 0% 50%; }
+
+        }
+
+
+        .title-animation {
+
+            animation: fadeInDown var(--animation-duration) var(--transition-timing);
+
+            opacity: 0;
+
+            animation-fill-mode: forwards;
+
+        }
+
+
+        @keyframes fadeInDown {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(-30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; }
+
+            to { opacity: 1; }
+
+        }
+
+
+        .neon {
+
+            animation: neon 2s ease-in-out infinite;
+
+        }
+
+
+        @keyframes neon {
+
+            0%, 100% { color: #FFFF00; }
+
+            50% { color: #00FFFF; }
+
+        }
+
+
+        .rotate {
+
+            animation: rotate 10s linear infinite;
+
+        }
+
+
+        @keyframes rotate {
+
+            from { transform: rotate(0deg); }
+
+            to { transform: rotate(360deg); }
+
+        }
+
+
+        /* Style pour le footer fixe */
+
+        .site-footer-original {
+
+            position: fixed;
+
+            bottom: 1rem; /* 4 de tailwind */
+
+            right: 1rem; /* 4 de tailwind */
+
+            display: flex;
+
+            align-items: center;
+
+            z-index: 50;
+
+            background-color: rgba(20, 20, 20, 0.8); /* Optionnel: fond semi-transparent */
+
+            padding: 0.5rem;
+
+            border-radius: 8px;
+
+        }
+
+
+        /* Styles pour les liens de navigation */
+
+        .main-nav {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 2rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+
+        .main-nav a {
+
+            color: #FFFFFF;
+
+            text-decoration: none;
+
+            font-size: 1.5rem;
+
+            transition: color 0.3s ease;
+
+        }
+
+
+        .main-nav a:hover {
+
+            color: #FF69B4;
+
+        }
+
+
+        /* Styles pour le texte principal */
+
+        .main-text {
+
+            font-size: 2rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+
+        /* Styles pour les icônes de réseaux sociaux */
+
+        .social-icons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 1rem;
+
+            font-size: 2rem;
+
+        }
+
+
+        .social-icons a {
+
+            color: #FFFFFF;
+
+            text-decoration: none;
+
+            transition: color 0.3s ease;
+
+        }
+
+
+        .social-icons a:hover {
+
+            color: #03A9F4;
+
+        }
+
+
+        /* Media query pour les petits écrans */
+
+        @media (max-width: 768px) {
+
+            .text-8xl {
+
+                font-size: 4rem;
+
+            }
+
+
+            .main-nav, .social-icons {
+
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 1rem;
+
+            }
+
+
+            .main-text {
+
+                font-size: 1.5rem;
+
+            }
+
+        }
+
     </style>
-  </head>
 
-  <body>
-    <h1 id="mainTitle">SITE EN CONSTRUCTION</h1>
+</head>
 
-    <h2 id="slide1_h2">NOUVEAU SITE WEB BIENTÔT DISPONIBLE</h2>
+<body>
 
-    <p id="slide1_p">Un site web entièrement nouveau arrive bientôt !</p>
+    <div class="main-content-area container mx-auto px-6">
 
-    <div>
-      <button data-lang="fr">Français</button>
+        <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
 
-      <button data-lang="en">English</button>
 
-      <button data-lang="es">Español</button>
+        <nav class="main-nav">
 
-      <button data-lang="zh">中文</button>
+            <a href="bio.html" class="hover-underline-animation">Bio</a>
+
+            <a href="music.html" class="hover-underline-animation">Music</a>
+
+        </nav>
+
+
+        <p class="main-text text-center">
+
+            Bienvenue sur le site officiel de David KRK, DJ Techno international.
+
+        </p>
+
+
+        <div class="social-icons">
+
+            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+
+            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+
+            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+
+            <a href="#" target="_blank" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+
+        </div>
+
     </div>
 
-    <script>
-      const translations = {
-        fr: {
-          mainTitle: "SITE EN CONSTRUCTION",
+</body>
 
-          slide1_h2: "NOUVEAU SITE WEB BIENTÔT DISPONIBLE",
-
-          slide1_p: "Un site web entièrement nouveau arrive bientôt !",
-        },
-
-        en: {
-          mainTitle: "UNDER CONSTRUCTION",
-
-          slide1_h2: "NEW WEBSITE COMING SOON",
-
-          slide1_p: "A brand new website is coming soon!",
-        },
-
-        es: {
-          mainTitle: "SITIO EN CONSTRUCCIÓN",
-
-          slide1_h2: "NUEVO SITIO WEB PRÓXIMAMENTE",
-
-          slide1_p: "¡Un nuevo sitio web está por llegar!",
-        },
-
-        zh: {
-          mainTitle: "网站正在建设中",
-
-          slide1_h2: "新网站即将上线",
-
-          slide1_p: "一个全新的网站即将到来！",
-        },
-      }
-
-      function setLanguage(lang) {
-        document.documentElement.setAttribute("lang", lang)
-
-        const langData = translations[lang] || translations.fr
-
-        document.getElementById("mainTitle").textContent = langData.mainTitle
-
-        document.getElementById("slide1_h2").textContent = langData.slide1_h2
-
-        document.getElementById("slide1_p").textContent = langData.slide1_p
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const savedLang =
-          localStorage.getItem("preferredLanguage") ||
-          navigator.language.split("-")[0]
-
-        setLanguage(savedLang in translations ? savedLang : "fr")
-
-        document.querySelectorAll("button[data-lang]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            setLanguage(btn.dataset.lang)
-          })
-        })
-      })
-    </script>
-  </body>
 </html>
-
