@@ -34,14 +34,15 @@ jobs:
           
       - run: npm install
       - run: npm run build
+
+      - name: List contents of dist/images/optimized
+        run: |
+          ls -l dist/images/optimized || echo "No optimized images found"
       
       - uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: |
-            dist/
-            !dist/node_modules
-            !dist/package*.json
+          path: dist
 
   deploy:
     needs: build
@@ -54,7 +55,11 @@ jobs:
         with:
           name: dist
           path: dist
-          
+
+      - name: List contents of dist/images/optimized before deploy
+        run: |
+          ls -l dist/images/optimized || echo "No optimized images found"
+      
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -69,3 +74,18 @@ jobs:
           args: "🚀 Déploiement réussi: ${{ github.repository }}"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync files
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: 'DavidKRK/DavidKRK.github.io'
+          source_branch: 'main'
+          destination_branch: 'gh-pages'
+          file_patterns: 'images/optimized/*'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
