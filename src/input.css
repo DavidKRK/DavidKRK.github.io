@@ -9,6 +9,11 @@
 }
 
 @layer components {
+    .main-logo {
+        max-width: 200px;
+        display: block;
+        margin: 2rem auto 1rem auto;
+    }
     .main-content-area {
         @apply flex-grow opacity-0 animate-fade-in;
     }
