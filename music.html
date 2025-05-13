@@ -107,25 +107,27 @@
             color: var(--primary-color); 
         }
 
-        /* Styles pour les liens spécifiques de la page musique (Mixcloud, Soundcloud) */
-        .music-platform-link {
-            display: inline-flex; /* Pour aligner icône et texte */
-            align-items: center; /* Alignement vertical */
+        /* Styles pour les icônes sociales */
+        .social-icon {
+            transition: var(--transition);
+            width: 4rem; /* w-16 */
+            height: 4rem; /* h-16 */
+            border-radius: 9999px; /* rounded-full */
+            background-color: rgba(0, 0, 0, 0.3); /* bg-black bg-opacity-30 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem; /* text-2xl */
-            margin-left: 1rem; /* mx-4 */
-            margin-right: 1rem; /* mx-4 */
-            transition: color 0.3s ease;
-            color: white; /* Couleur de base */
         }
-        .music-platform-link i {
-            margin-right: 0.5rem; /* Espace entre icône et texte */
-            font-size: 1.8rem; /* Taille de l'icône légèrement plus grande */
+        .social-icon:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.5); /* hover:bg-opacity-50 */
         }
-        .music-platform-link:hover {
-            /* Les couleurs spécifiques au survol sont gérées par les classes Tailwind (ex: hover:text-blue-400) */
-        }
-        .fa-mixcloud { color: #45a0e6; }
-        .fa-soundcloud { color: #ff8800; }
+        /* Styles spécifiques pour les icônes Font Awesome dans la section sociale si besoin */
+        .social-icon .fa-mixcloud { color: #45a0e6; }
+        .social-icon .fa-soundcloud { color: #ff8800; }
+        /* Vous pouvez ajouter d'autres couleurs spécifiques ici si nécessaire */
+
 
         /* Animations */
         @keyframes float { 
@@ -181,13 +183,13 @@
             }
             .nav-link { font-size: 1.25rem; } 
 
-            .music-platform-link {
-                font-size: 1.1rem; 
-                margin-left: 0.5rem;
-                margin-right: 0.5rem;
+            .social-icon {
+                width: 3.5rem; /* w-14 */
+                height: 3.5rem; /* h-14 */
+                font-size: 1.25rem; /* text-xl */
             }
-            .music-platform-link i {
-                font-size: 1.5rem;
+            .social-connect-title { /* Titre "Connect With Me" */
+                font-size: 1.5rem; /* text-2xl */
             }
 
             footer .text-sm { 
@@ -207,8 +209,7 @@
     </div>
     
     <nav class="nav-container flex justify-center gap-4 sm:gap-8 mb-8 sm:mb-12">
-        <a href="index.html" class="nav-link text-xl sm:text-2xl">Back</a> 
-        <a href="index.html" class="nav-link text-xl sm:text-2xl">Accueil</a>
+        <a href="index.html" class="nav-link text-xl sm:text-2xl">BACK</a> 
         <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a> 
         <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a> 
         <a href="events.html" class="nav-link text-xl sm:text-2xl">Events</a>
@@ -219,18 +220,32 @@
             <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">David KRK</h1>
             <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 mb-6 sm:mb-10">Sets</h2> 
             
-            <nav class="text-center mb-8 md:mb-12 flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-                <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="music-platform-link hover:text-blue-400">
-                    <i class="fab fa-mixcloud"></i> Mixcloud
-                </a>
-                <a href="https://soundcloud.com/davidkrk/" target="_blank" class="music-platform-link hover:text-orange-400">
-                    <i class="fab fa-soundcloud"></i> Soundcloud
-                </a>
-            </nav>
-            
-            <div class="w-full max-w-3xl mx-auto"> 
+            <div class="w-full max-w-3xl mx-auto mb-12 sm:mb-16"> 
                 <iframe width="100%" height="180" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=0&feed=%2FDavidKRK%2Fplaylists%2Fdavid-krk-life-good-techno%2F" frameborder="0" allow="autoplay" class="rounded-lg shadow-xl"></iframe>
             </div>
+
+            <div class="mb-12 sm:mb-16">
+                <h2 class="social-connect-title text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Connect With Me</h2>
+                <div class="flex justify-center gap-4 sm:gap-6 flex-wrap">
+                    <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/davidkrk/" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="social-icon">
+                        <i class="fab fa-mixcloud"></i> </a>
+                    <a href="https://www.youtube.com/channel/UCEMu_y5_m_9d51A22XnORLA" target="_blank" class="social-icon"> 
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://soundcloud.com/david-krkofficial" target="_blank" class="social-icon">
+                        <i class="fab fa-soundcloud"></i> </a>
+                    <a href="https://www.tiktok.com/@davidkrk" target="_blank" class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </main>
     
@@ -249,12 +264,9 @@
             </a>
         </div>
         <p class="text-xs sm:text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-        </footer>
+    </footer>
 
     <script>
-        // Le script showContent n'est plus nécessaire ici car il n'y a pas de contenu à basculer comme sur la page Bio.
-        // Si vous aviez une autre utilité pour showContent sur cette page, il faudrait la réévaluer.
-
         document.addEventListener('DOMContentLoaded', function() {
             // L'animation fadeInDown pour les .main-title est gérée par CSS.
         });
