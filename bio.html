@@ -30,17 +30,25 @@
             font-family: 'Russo One', sans-serif;
             color: white;
             margin: 0;
-            /* padding: 0; supprimé pour que le padding du body flex fonctionne */
             min-height: 100vh;
             overflow-x: hidden;
-            /* Ajout des classes pour la structure flex comme sur la page de référence */
+            /* Classes Flexbox pour la mise en page globale */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem; /* p-4 */
+            padding-top: 2rem; /* pt-8 */
+        }
+        @media (min-width: 640px) { /* sm: */
+            body {
+                padding-top: 3rem; /* sm:pt-12 */
+            }
         }
        
         .logo-container {
             position: relative;
             margin-bottom: 2rem; /* Espace sous le logo */
             animation: float 6s ease-in-out infinite;
-            /* Assurer que le logo est centré s'il est directement dans le body flex col */
             margin-left: auto;
             margin-right: auto;
         }
@@ -56,14 +64,12 @@
             filter: blur(8px); /* Effet de flou pour la lueur */
             opacity: 0.7;
         }
-        /* Style pour l'image du logo dans le container */
         .logo-container img {
             border: 4px solid white; /* Bordure blanche autour du logo */
             border-radius: 50%; /* Rendre l'image ronde */
-            /* Centrage si ce n'est pas déjà fait par un parent text-center */
-             display: block;
-             margin-left: auto;
-             margin-right: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
        
@@ -131,7 +137,7 @@
         /* Animations */
         @keyframes float { /* Animation de flottement pour le logo */
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); } /* Réduit légèrement le flottement */
+            50% { transform: translateY(-10px); } 
         }
        
         @keyframes gradient { /* Animation de dégradé pour les bordures et textes */
@@ -158,32 +164,31 @@
        
         /* Styles responsives */
         @media (max-width: 768px) {
-            .main-title { /* Taille des titres principaux sur petits écrans */
-                font-size: 2.5rem; /* Ajusté pour bio.html */
+            .main-title { 
+                font-size: 2.5rem; /* Taille par défaut pour .main-title sur mobile */
             }
-            h1.main-title { font-size: 2.8rem; } /* Spécifique pour le H1 principal */
-            h2.main-title { font-size: 2.2rem; } /* Spécifique pour le H2 "Bio" */
+            h1.main-title { font-size: 2.8rem; } /* Spécifique pour le H1 principal sur mobile */
+            h2.main-title { font-size: 2.2rem; } /* Spécifique pour le H2 "Bio" sur mobile */
 
-            .nav-container { /* Conteneur de la navigation principale */
+            .nav-container { /* Conteneur de la navigation principale sur mobile */
                 flex-wrap: wrap;
-                gap: 0.5rem; /* Espace réduit entre les liens de nav */
+                gap: 0.5rem; 
             }
-            .nav-link { font-size: 1.25rem; } /* Taille des liens de nav principale */
+            .nav-link { font-size: 1.25rem; } /* Taille des liens de nav principale sur mobile */
 
-            /* Navigation des langues */
+            /* Navigation des langues sur mobile */
             #biography-content nav a {
-                 font-size: 1rem; /* Taille des liens de langue */
-                 margin: 0 0.25rem; /* Marge réduite */
+                 font-size: 1rem; 
+                 margin: 0 0.25rem; 
             }
 
-            .lang-content h3 { /* Titre de la langue (Français, Castellano...) */
+            .lang-content h3 { /* Titre de la langue (Français, Castellano...) sur mobile */
                 font-size: 1.25rem; 
             }
-            .lang-content p, .lang-content .text-sm { /* Texte des biographies */
+            .lang-content p, .lang-content .text-sm { /* Texte des biographies sur mobile */
                 font-size: 0.85rem !important; 
             }
-            /* Footer links */
-            footer .text-sm {
+            footer .text-sm { /* Texte du footer sur mobile */
                 font-size: 0.75rem;
             }
         }
@@ -209,10 +214,10 @@
         /* Styles pour les liens de navigation de langue */
         #biography-content nav a {
             color: var(--primary-color); 
-            padding: 6px 10px; /* Padding ajusté */
+            padding: 6px 10px; 
             border-radius: 6px;
             transition: background-color 0.3s ease, color 0.3s ease;
-            font-size: 1.1rem; /* Taille de police pour les liens de langue */
+            font-size: 1.1rem; 
         }
         #biography-content nav a:hover, 
         #biography-content nav a.active-lang-link { /* Style pour lien de langue actif/survolé */
@@ -244,34 +249,35 @@
         }
         /* Style pour le conteneur de texte de chaque bio */
         .bio-text-container {
-            background-color: rgba(0, 0, 0, 0.25); /* Fond légèrement transparent */
-            border-left: 3px solid var(--primary-color); /* Bordure latérale colorée */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Ombre portée plus prononcée */
+            background-color: rgba(0, 0, 0, 0.25); 
+            border-left: 3px solid var(--primary-color); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-bottom: 1rem; /* mb-4 */
         }
 
     </style>
 </head>
-<body class="flex flex-col items-center min-h-screen p-4 pt-8 sm:pt-12"> {/* Ajout de padding en haut */}
+<body class="flex flex-col items-center min-h-screen">
 
-    <div class="logo-container mb-8"> {/* Marge ajustée */}
+    <div class="logo-container mt-8 mb-8"> 
         <div class="logo-border"></div>
-        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24"> {/* Taille ajustée */}
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24"> 
     </div>
     
     <nav class="nav-container flex justify-center gap-4 sm:gap-8 mb-8 sm:mb-12">
         <a href="index.html" class="nav-link text-xl sm:text-2xl">Accueil</a>
-        <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a> {/* Lien vers la page actuelle */}
+        <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a> 
         <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a>
         <a href="events.html" class="nav-link text-xl sm:text-2xl">Events</a>
     </nav>
 
-    <main class="text-center max-w-4xl mx-auto px-4 py-8 w-full"> 
-        <div id="biography-content"> {/* ID pour cibler la navigation de langue en JS */}
+    <main class="text-center max-w-4xl mx-auto px-4 w-full"> 
+        <div id="biography-content"> 
             <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">David KRK</h1>
-            <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-blue-400 mb-6 sm:mb-10">Bio</h2> {/* Couleur ajustée pour se démarquer */}
+            <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-blue-400 mb-6 sm:mb-10">Bio</h2> 
             
             <nav class="text-center mb-8 md:mb-12 flex flex-wrap justify-center gap-2 sm:gap-3">
-                {/* Le lien "Back" est remplacé par la navigation principale */}
                 <a href="javascript:void(0);" onclick="showContent('francais', this)" class="hover-underline-animation">Français</a>
                 <a href="javascript:void(0);" onclick="showContent('castellano', this)" class="hover-underline-animation">Castellano</a>
                 <a href="javascript:void(0);" onclick="showContent('euskara', this)" class="hover-underline-animation">Euskara</a>
@@ -281,7 +287,7 @@
 
             <div id="francais" class="lang-content"> 
                 <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-3 text-center" style="color: var(--secondary-color);">Français</h3>
-                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6 rounded-lg shadow-lg mb-4">
+                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6">
                     <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
                     <p>Son style de base : Trance - Tech Trance, se diversifie aujourd'hui en complément de sons plus Techno.</p>
                     <p>Il est apprécié autant dans les clubs Espagnols que dans les complexes Français.</p>
@@ -299,7 +305,7 @@
 
             <div id="castellano" class="lang-content">
                 <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-3 text-center" style="color: var(--secondary-color);">Castellano</h3>
-                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6 rounded-lg shadow-lg mb-4">
+                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6">
                     <p>David KRK, nacido en agosto de 1982, es un DJ que se presenta en España, Francia y la Costa Vasca desde 2000.</p>
                     <p>Su estilo base, Trance - Tech Trance, se ha diversificado hoy en día con la incorporación de sonidos más Techno.</p>
                     <p>Es apreciado tanto en los clubes españoles como en los complejos franceses.</p>
@@ -317,7 +323,7 @@
 
             <div id="euskara" class="lang-content">
                 <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-3 text-center" style="color: var(--secondary-color);">Euskara</h3>
-                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6 rounded-lg shadow-lg mb-4">
+                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6">
                     <p>David KRK-ren biografia: 1982-ko abuztuan jaioa, David KRK 2000-garren urtetik aurrera Espainian, Frantzian eta Euskadin hezitako “deejay” gazte bat da.</p>
                     <p>Bere estilo nagusia: Trance eta Techno - Trance dira. Gaur egun elektro-trance izeneko doinu elektronikoa ere jorratzen du.</p>
                     <p>Espainian eta Frantzian egindako hainbat jaialdi garrantzitsutan egon da DJ hauekin kabina konpartituz:</p>
@@ -335,7 +341,7 @@
 
             <div id="english" class="lang-content">
                 <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-3 text-center" style="color: var(--secondary-color);">English</h3>
-                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6 rounded-lg shadow-lg mb-4">
+                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6">
                     <p>David KRK, born in August 1982, is a DJ who has been performing in Spain, France, and the Basque Coast since 2000.</p>
                     <p>His primary style: Trance - Tech Trance, is now diversifying to include more Techno sounds.</p>
                     <p>He is appreciated in both Spanish clubs and French venues.</p>
@@ -353,7 +359,7 @@
 
            <div id="ukrainian" class="lang-content">
                 <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-3 text-center" style="color: var(--secondary-color);">Ukrainian</h3>
-                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6 rounded-lg shadow-lg mb-4">
+                <div class="bio-text-container text-sm sm:text-base text-justify p-4 sm:p-6">
                     <p>Девід КРК, народився в серпні 1982 року, є DJ, який виступає в Іспанії, Франції та Країні Басків з 2000 року.</p>
                     <p>Його основний стиль: Trance - Tech Trance, зараз розширюється, доповнюючись більш Techno звучанням.</p>
                     <p>Він цінується як в іспанських клубах, так і у французьких комплексах.</p>
@@ -402,7 +408,7 @@
             }
 
             // Styliser le lien de navigation de langue actif
-            var navLinks = document.querySelectorAll('#biography-content nav a'); // Cible la nav de langue
+            var navLinks = document.querySelectorAll('#biography-content nav a'); 
             navLinks.forEach(function(link) {
                 link.classList.remove('active-lang-link'); 
             });
@@ -423,12 +429,7 @@
                 link.classList.remove('active-lang-link');
             });
 
-            // Animation pour les titres principaux (si .main-title a opacity:0 initialement)
-            const mainTitles = document.querySelectorAll('.main-title');
-            mainTitles.forEach(title => {
-                // L'animation fadeInDown s'occupe déjà de l'opacité
-                // title.style.opacity = '1'; // Peut être redondant si l'animation le fait
-            });
+            // L'animation fadeInDown pour les .main-title est gérée par CSS.
         });
     </script>
 </body>
