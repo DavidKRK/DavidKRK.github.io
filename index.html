@@ -127,6 +127,17 @@
         .social-icon .fa-soundcloud { color: #ff8800; }
         .social-icon .fa-whatsapp { color: #25D366; } 
 
+        .facebook-feed-container {
+            background-color: rgba(20, 20, 20, 0.7); /* Fond légèrement transparent pour le conteneur du flux */
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            max-width: 500px; /* Largeur maximale du plugin Facebook */
+            width: 100%; /* S'adapte à la largeur du parent */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
 
         /* Animations */
         @keyframes float {
@@ -170,10 +181,10 @@
 
         /* Styles responsifs */
         @media (max-width: 768px) {
-            .main-title { /* Titre principal "David KRK" */
+            .main-title { 
                 font-size: 2.8rem; 
             }
-            .connect-title { /* Titre "Connect With Me" */
+            .connect-title, .facebook-title { 
                 font-size: 1.8rem; 
             }
             
@@ -190,15 +201,18 @@
                 height: 3.5rem; 
                 font-size: 1.25rem; 
             }
-            .social-connect-title { /* Titre "Connect With Me" pour mobile (identique à .connect-title) */
+            .social-connect-title { 
                 font-size: 1.5rem; 
             }
 
             footer .text-sm { 
                 font-size: 0.75rem;
             }
+            .facebook-feed-container {
+                padding: 0.5rem;
+            }
         }
-         @media (max-width: 480px) { /* Ajustements supplémentaires pour très petits écrans */
+         @media (max-width: 480px) { 
             .nav-link {
                 font-size: 1rem;
                 padding: 0.5rem 0.1rem;
@@ -210,7 +224,8 @@
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen">
-
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v19.0" nonce="VOTRE_NONCE_ICI"></script> 
     <div class="logo-container mt-8 mb-8"> 
         <div class="logo-border"></div>
         <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24"> 
@@ -251,6 +266,23 @@
                 </a>
             </div>
         </div>
+
+        <div class="mb-12 sm:mb-16">
+            <h2 class="facebook-title text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Actualités Facebook</h2>
+            <div class="facebook-feed-container">
+                <div class="fb-page" 
+                     data-href="https://www.facebook.com/DavidKRKofficial" 
+                     data-tabs="timeline" 
+                     data-width="" data-height="500" data-small-header="false" 
+                     data-adapt-container-width="true" 
+                     data-hide-cover="false" 
+                     data-show-facepile="true">
+                    <blockquote cite="https://www.facebook.com/DavidKRKofficial" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/DavidKRKofficial">David KRK</a>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
     </main>
     
     <footer class="mt-auto py-6 text-center w-full"> 
@@ -274,6 +306,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // L'animation fadeInDown pour le .main-title est gérée par CSS.
+            // Le SDK Facebook s'occupe du rendu du plugin.
         });
     </script>
 </body>
