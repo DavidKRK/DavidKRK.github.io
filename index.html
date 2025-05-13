@@ -1,443 +1,306 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
-    <title>DJ Techno &amp; Producteur</title>
+    <title>David KRK · DJ Techno & Producteur</title>
     <meta name="description" content="David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Trance, Tech Trance et Techno.">
     <meta name="keywords" content="David KRK, DJ techno, producteur, France, Espagne, Pays Basque, Trance, Tech Trance">
     <meta name="author" content="David KRK">
-    <meta property="og:title" content="David KRK · DJ Techno &amp; Producteur">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://davidkrk.com/">
+    <meta property="og:title" content="David KRK · DJ Techno & Producteur">
     <meta property="og:description" content="DJ Techno international - France, Espagne, Pays Basque">
     <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
-    <meta property="og:url" content="https://davidkrk.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="David KRK · DJ Techno &amp; Producteur">
-    <meta name="twitter:description" content="DJ Techno international - France, Espagne, Pays Basque">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
-    <link rel="preload" href="dist/output.css" as="style">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://davidkrk.com/">
+    <meta property="twitter:title" content="David KRK · DJ Techno & Producteur">
+    <meta property="twitter:description" content="DJ Techno international - France, Espagne, Pays Basque">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" href="dist/output.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
-
-        /* Styles de base */
-
+        :root {
+            --primary-color: #FF69B4;
+            --secondary-color: #03A9F4;
+            --accent-color: #8BC34A;
+            --dark-bg: #0F0F0F;
+            --darker-bg: #080808;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
         body {
-
-            background: linear-gradient(135deg, #141414, #000000);
-
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             font-family: 'Russo One', sans-serif;
-
-            color: #FFFFFF;
-
+            color: white;
             margin: 0;
-
             padding: 0;
-
             min-height: 100vh;
-
-            display: flex;
-
-            flex-direction: column;
-
+            overflow-x: hidden;
         }
-
-
-        .container {
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-            padding: 0 1rem;
-
-        }
-
-
-        .text-center {
-
-            text-align: center;
-
-        }
-
-
-        .mb-4 {
-
-            margin-bottom: 1rem;
-
-        }
-
-
-        .mt-4 {
-
-            margin-top: 1rem;
-
-        }
-
-
-        .text-8xl {
-
-            font-size: 6rem;
-
-        }
-
-
-        .text-2xl {
-
-            font-size: 1.5rem;
-
-        }
-
-
-        .font-bold {
-
-            font-weight: bold;
-
-        }
-
-
-        .main-content-area {
-
-            flex-grow: 1;
-
-            opacity: 0;
-
-            animation: fadeIn 0.5s ease-in-out forwards;
-
-            animation-delay: 0.3s;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-
-            align-items: center;
-
-        }
-
-
-        .hover-underline-animation {
-
-            background: linear-gradient(to right, #FF69B4, #FFC67D, #8BC34A, #03A9F4, #FF69B4);
-
-            background-clip: text;
-
-            -webkit-background-clip: text;
-
-            color: transparent;
-
-            animation: gradient 10s ease infinite;
-
-            background-size: 200% auto;
-
-            transition: all 0.3s var(--transition-timing);
-
+        
+        .logo-container {
             position: relative;
-
-            padding-bottom: 2px;
-
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
         }
-
-
-        .hover-underline-animation::after {
-
-            content: '';
-
+        
+        .logo-border {
             position: absolute;
-
-            width: 100%;
-
-            height: 2px;
-
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.7;
+        }
+        
+        .main-title {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
             bottom: 0;
-
             left: 0;
-
-            background: linear-gradient(to right, #FF69B4, #FFC67D);
-
-            transform: scaleX(0);
-
-            transform-origin: right;
-
-            transition: transform 0.3s var(--transition-timing);
-
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transform: translateX(-100%);
+            transition: var(--transition);
         }
-
-
-        .hover-underline-animation:hover::after {
-
-            transform: scaleX(1);
-
-            transform-origin: left;
-
+        
+        .nav-link:hover::after {
+            transform: translateX(0);
         }
-
-
+        
+        .social-icon {
+            transition: var(--transition);
+            transform: scale(1);
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: var(--primary-color);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .welcome-text {
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(15, 15, 15, 0.7);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: perspective(500px) rotateX(0deg);
+            transition: all 0.5s ease;
+        }
+        
+        .welcome-text:hover {
+            transform: perspective(500px) rotateX(5deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .welcome-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
         @keyframes gradient {
-
             0% { background-position: 0% 50%; }
-
             50% { background-position: 100% 50%; }
-
             100% { background-position: 0% 50%; }
-
         }
-
-
-        .title-animation {
-
-            animation: fadeInDown var(--animation-duration) var(--transition-timing);
-
-            opacity: 0;
-
-            animation-fill-mode: forwards;
-
-        }
-
-
+        
         @keyframes fadeInDown {
-
             from {
-
                 opacity: 0;
-
                 transform: translateY(-30px);
-
             }
-
             to {
-
                 opacity: 1;
-
                 transform: translateY(0);
-
             }
-
         }
-
-
-        @keyframes fadeIn {
-
-            from { opacity: 0; }
-
-            to { opacity: 1; }
-
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
-
-
-        .neon {
-
-            animation: neon 2s ease-in-out infinite;
-
-        }
-
-
-        @keyframes neon {
-
-            0%, 100% { color: #FFFF00; }
-
-            50% { color: #00FFFF; }
-
-        }
-
-
-        .rotate {
-
-            animation: rotate 10s linear infinite;
-
-        }
-
-
-        @keyframes rotate {
-
-            from { transform: rotate(0deg); }
-
-            to { transform: rotate(360deg); }
-
-        }
-
-
-        /* Style pour le footer fixe */
-
-        .site-footer-original {
-
-            position: fixed;
-
-            bottom: 1rem; /* 4 de tailwind */
-
-            right: 1rem; /* 4 de tailwind */
-
-            display: flex;
-
-            align-items: center;
-
-            z-index: 50;
-
-            background-color: rgba(20, 20, 20, 0.8); /* Optionnel: fond semi-transparent */
-
-            padding: 0.5rem;
-
-            border-radius: 8px;
-
-        }
-
-
-        /* Styles pour les liens de navigation */
-
-        .main-nav {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 2rem;
-
-            margin-bottom: 2rem;
-
-        }
-
-
-        .main-nav a {
-
-            color: #FFFFFF;
-
-            text-decoration: none;
-
-            font-size: 1.5rem;
-
-            transition: color 0.3s ease;
-
-        }
-
-
-        .main-nav a:hover {
-
-            color: #FF69B4;
-
-        }
-
-
-        /* Styles pour le texte principal */
-
-        .main-text {
-
-            font-size: 2rem;
-
-            margin-bottom: 2rem;
-
-        }
-
-
-        /* Styles pour les icônes de réseaux sociaux */
-
-        .social-icons {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 1rem;
-
-            font-size: 2rem;
-
-        }
-
-
-        .social-icons a {
-
-            color: #FFFFFF;
-
-            text-decoration: none;
-
-            transition: color 0.3s ease;
-
-        }
-
-
-        .social-icons a:hover {
-
-            color: #03A9F4;
-
-        }
-
-
-        /* Media query pour les petits écrans */
-
+        
+        /* Responsive */
         @media (max-width: 768px) {
-
-            .text-8xl {
-
-                font-size: 4rem;
-
+            .main-title {
+                font-size: 3.5rem;
             }
-
-
-            .main-nav, .social-icons {
-
+            
+            .nav-container {
                 flex-direction: column;
-
-                align-items: center;
-
                 gap: 1rem;
-
             }
-
-
-            .main-text {
-
-                font-size: 1.5rem;
-
+            
+            .welcome-text {
+                padding: 1rem;
             }
-
         }
-
     </style>
-
 </head>
-
-<body>
-
-    <div class="main-content-area container mx-auto px-6">
-
-        <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
-        <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
-
-        <nav class="main-nav">
-
-            <a href="bio.html" class="hover-underline-animation">Bio</a>
-
-            <a href="music.html" class="hover-underline-animation">Music</a>
-
-        </nav>
-
-        <p class="main-text text-center">
-
-            Bienvenue sur le site officiel de David KRK, DJ Techno international.
-
-        </p>
-
-        <div class="social-icons">
-
-            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-
-            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-
-            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-
-            <a href="#" target="_blank" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
-
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    <main class="text-center max-w-4xl mx-auto px-4 py-8">
+        <!-- Logo with animated border -->
+        <div class="logo-container">
+            <div class="logo-border"></div>
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" 
+                 alt="Logo David KRK" 
+                 class="w-32 h-32 rounded-full border-4 border-white object-cover shadow-xl">
         </div>
+        
+        <!-- Main Title -->
+        <h1 class="main-title text-6xl md:text-8xl font-bold mb-8 opacity-0">
+            David KRK
+        </h1>
+        
+        <!-- Navigation -->
+        <nav class="nav-container flex justify-center gap-8 mb-12">
+            <a href="bio.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Bio
+            </a>
+            <a href="music.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Music
+            </a>
+            <a href="events.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Events
+            </a>
+            <a href="contact.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Contact
+            </a>
+        </nav>
+        
+        <!-- Main Text - Improved with better styling -->
+        <div class="welcome-text mb-12">
+            <p class="text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto">
+                Bienvenue sur le site officiel de David KRK, DJ et producteur de musique électronique spécialisé dans la Techno, 
+                la Trance et la Tech Trance. Actif depuis 2000, je me produis régulièrement en France, en Espagne et dans le Pays Basque, 
+                partageant ma passion pour les rythmes énergiques et les mélodies envoûtantes.
+            </p>
+        </div>
+        
+        <!-- Social Icons -->
+        <div class="flex justify-center gap-6 mb-8">
+            <a href="#" target="_blank" aria-label="Facebook" class="social-icon text-3xl text-white">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" target="_blank" aria-label="Twitter" class="social-icon text-3xl text-white">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" target="_blank" aria-label="Instagram" class="social-icon text-3xl text-white">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" target="_blank" aria-label="SoundCloud" class="social-icon text-3xl text-white">
+                <i class="fab fa-soundcloud"></i>
+            </a>
+            <a href="#" target="_blank" aria-label="YouTube" class="social-icon text-3xl text-white">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="#" target="_blank" aria-label="Spotify" class="social-icon text-3xl text-white">
+                <i class="fab fa-spotify"></i>
+            </a>
+        </div>
+        
+        <!-- Latest Track (Placeholder) -->
+        <div class="mt-12 p-6 bg-black bg-opacity-30 rounded-xl max-w-lg mx-auto transform transition-all hover:scale-105">
+            <h3 class="text-xl font-bold mb-4">Dernière sortie</h3>
+            <div class="p-4 bg-black bg-opacity-50 rounded-lg">
+                <p class="text-primary font-bold">KRK - Neon Dreams</p>
+                <p class="text-sm opacity-80 mb-3">Tech Trance • 2023</p>
+                <button class="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-black font-bold py-2 px-6 rounded-full transition-all transform hover:scale-105">
+                    Écouter <i class="ml-2 fas fa-play"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="mt-auto py-6 text-center text-sm opacity-70">
+        <p>© 2023 David KRK. Tous droits réservés.</p>
+    </footer>
 
-    </div>
-
+    <script>
+        // Simple script to ensure animations trigger after page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add a small delay to ensure CSS animations trigger
+            setTimeout(() => {
+                document.querySelector('.main-title').style.opacity = '1';
+            }, 100);
+            
+            // Add pulse animation to social icons on hover
+            const socialIcons = document.querySelectorAll('.social-icon');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    icon.classList.add('pulse');
+                });
+                icon.addEventListener('mouseleave', () => {
+                    icon.classList.remove('pulse');
+                });
+            });
+            
+            // Add subtle parallax effect to welcome text
+            const welcomeText = document.querySelector('.welcome-text');
+            window.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                welcomeText.style.transform = `perspective(500px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+        });
+    </script>
 </body>
-
 </html>
