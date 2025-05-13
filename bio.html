@@ -87,6 +87,7 @@
             overflow: hidden;
             color: white; 
             transition: color 0.3s ease; 
+            padding: 0.5rem 0.25rem; /* Ajout d'un léger padding pour éviter que le texte ne soit trop serré */
         }
        
         .nav-link::after { 
@@ -142,6 +143,8 @@
         }
         .social-icon .fa-mixcloud { color: #45a0e6; }
         .social-icon .fa-soundcloud { color: #ff8800; }
+        .social-icon .fa-whatsapp { color: #25D366; } /* Couleur pour l'icône WhatsApp */
+
        
         /* Animations */
         @keyframes float { 
@@ -238,7 +241,7 @@
         }
 
 
-        /* Styles responsives */
+        /* Styles responsifs */
         @media (max-width: 768px) {
             .main-title { 
                 font-size: 2.5rem; 
@@ -248,9 +251,11 @@
 
             .nav-container { 
                 flex-wrap: wrap;
-                gap: 0.5rem; 
+                gap: 0.25rem; /* Réduction du gap pour plus d'éléments */
             }
-            .nav-link { font-size: 1.25rem; } 
+            .nav-link { 
+                font-size: 1.1rem; /* Taille de police légèrement réduite pour plus d'éléments */
+            } 
 
             #biography-content nav a.lang-link {
                  font-size: 1rem; 
@@ -280,6 +285,15 @@
                  padding: 0.75rem 1rem; 
             }
         }
+        @media (max-width: 480px) { /* Ajustements supplémentaires pour très petits écrans */
+            .nav-link {
+                font-size: 1rem;
+                padding: 0.5rem 0.1rem;
+            }
+            .nav-container {
+                gap: 0.1rem;
+            }
+        }
 
     </style>
 </head>
@@ -290,11 +304,14 @@
         <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24"> 
     </div>
     
-    <nav class="nav-container flex justify-center gap-4 sm:gap-8 mb-8 sm:mb-12">
-        <a href="index.html" class="nav-link text-xl sm:text-2xl">Back</a> 
+    <nav class="nav-container flex justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+        <a href="index.html" class="nav-link text-xl sm:text-2xl">BACK</a> 
         <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a> 
         <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a> 
         <a href="events.html" class="nav-link text-xl sm:text-2xl">Events</a>
+        <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
+            <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Chat
+        </a>
     </nav>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full"> 
@@ -417,7 +434,7 @@
                     <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="social-icon">
                         <i class="fab fa-mixcloud"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCEMu_y5_m_9d51A22XnORLA" target="_blank" class="social-icon"> 
+                    <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" class="social-icon"> 
                         <i class="fab fa-youtube"></i>
                     </a>
                     <a href="https://soundcloud.com/david-krkofficial" target="_blank" class="social-icon">
@@ -434,15 +451,15 @@
     
     <footer class="mt-auto py-6 text-center w-full">
         <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4">
-            <a href="contact.html" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
+            <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20depuis%20le%20site" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
                 CONTACT
             </a>
             <span class="text-xs sm:text-sm opacity-30">|</span>
-            <a href="mailto:booking@davidkrkofficial.com?subject=Booking Request" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
+            <a href="mailto:davidkrkofficial@gmail.com?subject=Booking%20Request" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
                 BOOKING
             </a>
             <span class="text-xs sm:text-sm opacity-30">|</span>
-            <a href="mailto:remix@davidkrkofficial.com?subject=Remix Request" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
+            <a href="mailto:davidkrkofficial@gmail.com?subject=Remix%20Request" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
                 REMIX
             </a>
         </div>
