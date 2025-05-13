@@ -110,7 +110,6 @@
             opacity: 1 !important;
             transform: translateY(0) !important;
             visibility: visible !important;
-            /* position: relative !important; /* Retained from original if needed, but might not be necessary for simple show/hide */
         }
        
         /* Animations */
@@ -151,18 +150,20 @@
                 flex-wrap: wrap;
                 gap: 1rem;
             }
-            /* Ensure titles and text are responsive */
             #biography h1.title-animation {
-                font-size: 2.5rem; /* Adjusted for smaller screens */
+                font-size: 2.5rem; 
             }
             #biography h2.title-animation {
-                font-size: 2rem; /* Adjusted for smaller screens */
+                font-size: 2rem; 
             }
             .lang-content h3 {
-                font-size: 1.5rem; /* Adjusted for smaller screens */
+                font-size: 1.5rem; 
             }
-            .lang-content p {
-                font-size: 0.9rem; /* Adjusted for smaller screens */
+            .lang-content p { /* Cible les paragraphes directement dans .lang-content ou dans la div imbriquée */
+                font-size: 0.9rem; 
+            }
+             .lang-content .text-sm { /* Cible spécifiquement les classes de taille de texte de Tailwind */
+                font-size: 0.9rem !important; /* Assure la priorité si nécessaire */
             }
         }
 
@@ -184,22 +185,20 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Style for navigation links in the bio section for better visibility and interaction */
         #biography nav a {
-            color: var(--primary-color); /* Use a theme color */
+            color: var(--primary-color); 
             padding: 8px 12px;
             border-radius: 6px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        #biography nav a:hover, #biography nav a.active-lang-link { /* Style for hover and active link */
+        #biography nav a:hover, #biography nav a.active-lang-link { 
             background-color: var(--primary-color);
-            color: var(--dark-bg); /* Dark text on light background for contrast */
+            color: var(--dark-bg); 
         }
-        /* Simple underline animation for non-button style links if preferred */
         .hover-underline-animation {
             display: inline-block;
             position: relative;
-            color: var(--secondary-color); /* Example color */
+            color: var(--secondary-color); 
         }
 
         .hover-underline-animation::after {
@@ -210,7 +209,7 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background-color: var(--primary-color); /* Underline color */
+            background-color: var(--primary-color); 
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
         }
@@ -223,7 +222,9 @@
     </style>
 </head>
 <body>
-    <div id="biography" class="py-10 md:py-20"> <div class="container mx-auto px-4 sm:px-6"> <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
+    <div id="biography" class="py-10 md:py-20"> 
+        <div class="container mx-auto px-4 sm:px-6"> 
+            <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
             <div class="text-center mb-8 md:mb-12">
                 <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-blue-500 title-animation">Bio</h2>
             </div>
@@ -236,7 +237,8 @@
                 <a href="javascript:void(0);" onclick="showContent('ukrainian', this)" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">Ukrainian</a>
             </nav> 
 
-            <div id="francais" class="lang-content active"> <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">Français</h3>
+            <div id="francais" class="lang-content"> 
+                <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">Français</h3>
                 <div class="mb-4 title-animation text-sm sm:text-base text-justify p-4 bg-black bg-opacity-20 rounded-lg shadow-lg">
                     <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
                     <p>Son style de base : Trance - Tech Trance, se diversifie aujourd'hui en complément de sons plus Techno.</p>
@@ -326,51 +328,52 @@
             </div>
         </div>
     </div>
-    <div class="fixed bottom-0 right-0 mb-4 mr-4 flex items-center"> <footer class="py-6 px-4 text-left mr-4"> 
+    <div class="fixed bottom-0 right-0 mb-4 mr-4 flex items-center"> 
+        <footer class="py-6 px-4 text-left mr-4"> 
             <p class="text-gray-400 mb-2 text-xs sm:text-sm">© 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
             <p class="neon font-bold text-sm sm:text-lg">"May The Techno Be With You"</p>
         </footer>
-        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 sm:border-4 border-white rounded-full shadow-lg"> </div>
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 sm:border-4 border-white rounded-full shadow-lg"> 
+    </div>
 
     <script>
-        // Function to show the selected language content and hide others
+        // Fonction pour afficher le contenu de la langue sélectionnée et masquer les autres
         function showContent(langId, clickedLink) {
-            // Hide all language content sections
+            // Masquer toutes les sections de contenu linguistique
             var contents = document.querySelectorAll('.lang-content');
             contents.forEach(function(content) {
                 content.classList.remove('active');
             });
 
-            // Show the selected language content section
+            // Afficher la section de contenu linguistique sélectionnée
             var selectedContent = document.getElementById(langId);
             if (selectedContent) {
                 selectedContent.classList.add('active');
             }
 
-            // Optional: Style the active navigation link
+            // Facultatif : styliser le lien de navigation actif
             var navLinks = document.querySelectorAll('#biography nav a');
             navLinks.forEach(function(link) {
-                link.classList.remove('active-lang-link'); // Use a specific class for active language link
+                link.classList.remove('active-lang-link'); 
             });
             if (clickedLink) {
                 clickedLink.classList.add('active-lang-link');
             }
         }
 
-        // Ensure the default language (French) content and link are active on page load
+        // Assurer qu'aucune langue n'est active au chargement initial de la page
         document.addEventListener('DOMContentLoaded', function() {
-            // Find the link for French and simulate a click or directly apply active states
-            // More robust: directly call showContent for the default language
-            const defaultLangLink = document.querySelector('#biography nav a[onclick*="francais"]');
-            if (defaultLangLink) {
-                 showContent('francais', defaultLangLink);
-            } else {
-                // Fallback if the link isn't found, though it should be
-                const francaisContent = document.getElementById('francais');
-                if (francaisContent) {
-                    francaisContent.classList.add('active');
-                }
-            }
+            // Masquer toutes les sections de contenu linguistique au cas où une serait 'active' par erreur dans le HTML
+            var contents = document.querySelectorAll('.lang-content');
+            contents.forEach(function(content) {
+                content.classList.remove('active');
+            });
+
+            // S'assurer qu'aucun lien de langue n'est stylisé comme actif
+            var navLinks = document.querySelectorAll('#biography nav a.active-lang-link');
+            navLinks.forEach(function(link) {
+                link.classList.remove('active-lang-link');
+            });
         });
     </script>
 </body>
