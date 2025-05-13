@@ -1,359 +1,256 @@
 <!DOCTYPE html>
-<html lang="fr" class="bg-black">
-
+<html lang="en">
 <head>
-    <!-- Meta tags inchangés -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK - Techno DJ & Producer</title>
-    <meta name="description"
-        content="International Techno DJ and Electronic Music Producer. Discover the latest mixes, events, and news from David KRK.">
-    <meta name="keywords" content="David KRK, techno DJ, electronic music producer, techno music, mixes, events, France">
-    <link rel="canonical" href="https://www.davidkrk.com/">
-    <link rel="alternate" href="https://www.davidkrk.com/" hreflang="fr">
-    <link rel="alternate" href="https://www.davidkrk.com/en" hreflang="en">
-    <link rel="alternate" href="https://www.davidkrk.com/es" hreflang="es">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg"
-        as="image">
-    <link rel="preload" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg"
-        as="image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Contact David KRK | DJ Techno & Producer</title>
+    <meta name="description" content="Contact David KRK for bookings, remix requests, and collaborations. International Techno DJ performing in France, Spain and Basque Country since 2000.">
+   
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+   
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+   
     <style>
         :root {
-            --neon-red: #FF0000;
-            --animation-duration: 16s;
+            --primary-color: #FF69B4;
+            --secondary-color: #03A9F4;
+            --accent-color: #8BC34A;
+            --dark-bg: #0F0F0F;
+            --darker-bg: #080808;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
-
+       
         body {
-            font-family: 'Russo One', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            overflow-x: hidden;
-            overflow-y: auto;
-            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+            font-family: 'Russo One', sans-serif;
             color: white;
-            background-color: black;
-        }
-
-        .loading-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
-            background: rgba(10, 10, 10, 0.98);
-        }
-
-        .loading-container img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            border: 3px solid var(--neon-red);
-            box-shadow: 0 0 15px var(--neon-red);
-            animation: rotate 3s linear infinite, pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: scale(1.15);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-        }
-
-        .animation-container {
-            position: relative;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 40px 0 200px;
-            visibility: hidden;
+            overflow-x: hidden;
+        }
+       
+        .logo-container {
+            position: relative;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+       
+        .logo-border {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.7;
+        }
+       
+        .main-title {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
+        }
+       
+        .nav-link {
+            position: relative;
             overflow: hidden;
         }
-
-        .text-content {
-            text-align: center;
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .space-y-16 {
-            position: relative;
-            min-height: 200px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .space-y-16>div {
-            width: 100%;
-            opacity: 0;
-            animation: slideInUp 24s infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-        }
-
-        @keyframes slideInUp {
-            0% {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-
-            5% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            85% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-        }
-
-        .photo-slide {
+       
+        .nav-link::after {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            transition: opacity 1s ease;
-        }
-
-        .photo-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .neon-text {
-            color: var(--neon-red);
-            animation: neonPulse 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonPulse {
-            from {
-                text-shadow: 0 0 5px var(--neon-red);
-            }
-
-            to {
-                text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--neon-red);
-            }
-        }
-
-        .site-footer {
-            position: fixed;
             bottom: 0;
-            width: 100%;
-            z-index: 101;
-            padding: 20px 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px) contrast(70%);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .youtube-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin: 20px auto;
-            width: 90%;
-        }
-
-        .youtube-container iframe {
-            position: absolute;
-            top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            border: none;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transform: translateX(-100%);
+            transition: var(--transition);
         }
-
-        @media (max-width: 640px) {
-            .text-content h1 {
-                font-size: 2.5rem !important;
+       
+        .nav-link:hover::after {
+            transform: translateX(0);
+        }
+       
+        .social-icon {
+            transition: var(--transition);
+        }
+       
+        .social-icon:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+       
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+       
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+       
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
             }
-
-            .neon-text {
-                font-size: 1.25rem !important;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-
-            .loading-container img {
-                width: 140px;
-                height: 140px;
+        }
+       
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3.5rem;
             }
-
-            .animation-container {
-                padding: 20px 0 180px;
-            }
-
-            .space-y-16>div h2 {
-                font-size: 1.5rem !important;
-            }
-
-            .space-y-16>div p {
-                font-size: 1rem !important;
+           
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
             }
         }
     </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    <main class="text-center max-w-6xl mx-auto px-4 py-8 w-full">
+        <!-- Logo with animated border -->
+        <div class="logo-container">
+            <div class="logo-border"></div>
+            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png"
+                 alt="Logo David KRK"
+                 class="w-32 h-32 rounded-full border-4 border-white object-cover shadow-xl">
+        </div>
+       
+        <!-- Main Title -->
+        <h1 class="main-title text-6xl md:text-8xl font-bold mb-8 opacity-0">
+            Contact
+        </h1>
+       
+        <!-- Navigation -->
+        <nav class="nav-container flex justify-center gap-8 mb-12">
+            <a href="https://www.davidkrk.com/bio.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Bio
+            </a>
+            <a href="https://www.davidkrk.com/music.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Music
+            </a>
+            <a href="events.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Events
+            </a>
+            <a href="contact.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
+                Contact
+            </a>
+        </nav>
+       
+        <!-- Social Media -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Connect With Me</h2>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="social-icon w-16 h-16 rounded-full bg-black bg-opacity-30 flex items-center justify-center text-2xl hover:bg-opacity-50 transition-all">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/davidkrk/" target="_blank" class="social-icon w-16 h-16 rounded-full bg-black bg-opacity-30 flex items-center justify-center text-2xl hover:bg-opacity-50 transition-all">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="social-icon w-16 h-16 rounded-full bg-black bg-opacity-30 flex items-center justify-center text-2xl hover:bg-opacity-50 transition-all">
+                    <i class="fab fa-mixcloud"></i>
+                </a>
+                <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" class="social-icon w-16 h-16 rounded-full bg-black bg-opacity-30 flex items-center justify-center text-2xl hover:bg-opacity-50 transition-all">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://soundcloud.com/david-krkofficial" target="_blank" class="social-icon w-16 h-16 rounded-full bg-black bg-opacity-30 flex items-center justify-center text-2xl hover:bg-opacity-50 transition-all">
+                    <i class="fab fa-soundcloud"></i>
+                </a>
+                <a href="https://www.tiktok.com/@davidkrk" target="_blank" class="social-icon w-16 h-16 rounded-full bg-black bg-opacity-30 flex items-center justify-center text-2xl hover:bg-opacity-50 transition-all">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+   
+    <!-- Footer -->
+    <footer class="mt-auto py-6 text-center w-full">
+        <div class="flex flex-wrap justify-center gap-4 mb-4">
+            <a href="contact.html" class="text-sm opacity-70 hover:opacity-100 hover:text-primary transition-colors">
+                booking@davidkrkofficial.com
+            </a>
+            <span class="text-sm opacity-30">|</span>
+            <a href="mailto:booking@davidkrkofficial.com?subject=Booking Request" class="text-sm opacity-70 hover:opacity-100 hover:text-primary transition-colors">
+                booking@davidkrkofficial.com
+            </a>
+            <span class="text-sm opacity-30">|</span>
+            <a href="mailto:remix@davidkrkofficial.com?subject=Remix Request" class="text-sm opacity-70 hover:opacity-100 hover:text-primary transition-colors">
+                remix@davidkrkofficial.com
+            </a>
+        </div>
+        <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+    </footer>
 
-    <!-- Scripts et JSON-LD inchangés -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "David KRK",
-      "url": "https://www.davidkrk.com",
-      "logo": "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png"
-    }
-    </script>
+
     <script>
-        window.addEventListener('load', function () {
-            const assets = [
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png',
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/franck_moi1.jpg',
-                'https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg'
-            ];
-
-            let loadedCount = 0;
-
-            const checkAssetsLoaded = () => {
-                loadedCount++;
-                if (loadedCount === assets.length) {
-                    setTimeout(() => {
-                        document.getElementById('loadingContainer').style.opacity = '0';
-                        document.getElementById('animationContainer').style.visibility = 'visible';
-                        const photo1 = document.getElementById('photo1');
-                        const photo2 = document.getElementById('photo2');
-
-                        photo1.style.opacity = '1';
-                        photo2.style.opacity = '1';
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate title on load
+            setTimeout(() => {
+                document.querySelector('.main-title').style.opacity = '1';
+            }, 100);
+           
+            // Copy email to clipboard
+            const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+            emailLinks.forEach(emailLink => {
+                emailLink.addEventListener('click', (e) => {
+                    const email = emailLink.textContent.trim();
+                    if (email.includes('@')) {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(email);
+                       
+                        // Show copied tooltip
+                        const tooltip = document.createElement('div');
+                        tooltip.textContent = 'Copied!';
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.top = '-40px';
+                        tooltip.style.left = '50%';
+                        tooltip.style.transform = 'translateX(-50%)';
+                        tooltip.style.background = 'rgba(0,0,0,0.8)';
+                        tooltip.style.padding = '5px 10px';
+                        tooltip.style.borderRadius = '5px';
+                        tooltip.style.fontSize = '12px';
+                        tooltip.style.whiteSpace = 'nowrap';
+                        emailLink.appendChild(tooltip);
+                       
                         setTimeout(() => {
-                            document.getElementById('loadingContainer').remove();
-                        }, 500);
-                    }, 3000);
-                }
-            };
-
-            assets.forEach(asset => {
-                const img = new Image();
-                img.src = asset;
-                img.onload = checkAssetsLoaded;
-                img.onerror = checkAssetsLoaded;
+                            tooltip.remove();
+                            window.location.href = `mailto:${email}`;
+                        }, 1000);
+                    }
+                });
             });
         });
     </script>
-</head>
-
-<body class="bg-black">
-    <div class="loading-container" id="loadingContainer">
-        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK"
-            loading="lazy">
-        <p class="neon-text text-xl md:text-2xl">"MAY THE TECHNO BE WITH YOU"</p>
-    </div>
-
-    <div class="animation-container" id="animationContainer">
-        <div class="text-content" id="textContent">
-            <h1 class="text-6xl md:text-8xl mb-8 neon-text">DAVID KRK</h1>
-
-            <div class="space-y-16">
-                <!-- Contenu des slides inchangé -->
-                <div>
-                    <h2 class="text-4xl md:text-6xl neon-text mb-4">SITE EN CONSTRUCTION</h2>
-                    <p class="text-xl md:text-2xl text-white">Nouveau site bientôt disponible ! DJ Techno et Producteur.</p>
-                </div>
-
-                <div>
-                    <h2 class="text-4xl md:text-6xl neon-text mb-4">GUNEA ERAIKITZEN</h2>
-                    <p class="text-xl md:text-2xl text-white">Itzuli berandu gabe nire webgune berria deskubritzeko!</p>
-                </div>
-
-                <div>
-                    <h2 class="text-4xl md:text-6xl neon-text mb-4">SITIO EN CONSTRUCCIÓN</h2>
-                    <p class="text-xl md:text-2xl text-white">¡Vuelve pronto para descubrir mi nuevo sitio web!</p>
-                </div>
-
-                <div>
-                    <h2 class="text-4xl md:text-6xl neon-text mb-4">UNDER CONSTRUCTION</h2>
-                    <p class="text-xl md:text-2xl text-white">Come back soon to discover my new website!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slides photos -->
-        <div class="photo-slide" id="photo2" aria-label="Portrait de David KRK">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/received_921630123191476.jpeg"
-                alt="Portrait de David KRK">
-        </div>
-    </div>
-
-    <footer class="site-footer">
-        <div class="footer-content">
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK"
-                class="w-32 h-32 border-2 border-white rounded-full" loading="lazy">
-            <p class="neon-text text-2xl md:text-3xl font-bold mb-4">"MAY THE TECHNO BE WITH YOU"</p>
-            <div class="mb-4">
-                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank"
-                    class="text-gray-500 hover:text-white mx-2"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.youtube.com/user/DavidKRKofficial" target="_blank"
-                    class="text-gray-500 hover:text-white mx-2"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.instagram.com/davidkrk/" target="_blank"
-                    class="text-gray-500 hover:text-white mx-2"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="youtube-container">
-                <iframe src="https://www.youtube.com/embed/EKEl86ULmBE?autoplay=1&mute=1" title="David KRK - Live Set"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <a href="contact.html" class="text-gray-500 mt-4 text-sm hover:underline">Contact</a>
-            <p class="text-gray-500 mt-4 text-sm">© 2025 DAVID KRK - ALL RIGHTS RESERVED</p>
-        </div>
-    </footer>
 </body>
-
 </html>
+
+
+
