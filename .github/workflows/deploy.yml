@@ -16,9 +16,13 @@ jobs:
       - name: Build
         run: |
           echo 'Building the site...'
-          # Ajoutez ici vos commandes de construction
+          npm install
+          npm run build
 
       - name: Deploy
         run: |
           echo 'Deploying the site...'
           # Ajoutez ici vos commandes de déploiement
+          echo 'Déploiement en cours...'
+          # Exemple de déploiement à GitHub Pages
+          npm run deploy
