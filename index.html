@@ -16,6 +16,7 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
 
     <style>
+        /* Définition des variables de couleur et de transition pour le thème */
         :root {
             --primary-color: #FF69B4; /* Rose néon */
             --secondary-color: #03A9F4; /* Bleu cyan */
@@ -25,44 +26,49 @@
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
         
+        /* Styles généraux du corps de la page */
         body {
             background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             font-family: 'Russo One', sans-serif;
             color: white;
             margin: 0;
-            min-height: 100vh;
-            overflow-x: hidden;
+            min-height: 100vh; /* Hauteur minimale pour remplir l'écran */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: column; /* Organise les éléments enfants en colonne */
+            align-items: center; /* Centre les éléments horizontalement */
             padding: 1rem; 
             padding-top: 2rem; 
         }
+        /* Ajustement du padding supérieur pour les écrans plus larges */
         @media (min-width: 640px) { /* sm: */
             body {
                 padding-top: 3rem; 
             }
         }
        
+        /* Conteneur du logo avec animation */
         .logo-container {
             position: relative;
             margin-bottom: 2rem; 
-            animation: float 6s ease-in-out infinite;
+            animation: float 6s ease-in-out infinite; /* Animation de flottement */
             margin-left: auto;
             margin-right: auto;
         }
        
+        /* Bordure animée du logo */
         .logo-border {
             position: absolute;
             top: -5px; left: -5px; right: -5px; bottom: -5px; 
             border-radius: 50%;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             background-size: 300% 300%;
-            animation: gradient 8s ease infinite;
+            animation: gradient 8s ease infinite; /* Animation de dégradé */
             z-index: -1; 
             filter: blur(8px); 
             opacity: 0.7;
         }
+        /* Image du logo */
         .logo-container img {
             border: 4px solid white; 
             border-radius: 50%; 
@@ -71,16 +77,18 @@
             margin-right: auto;
         }
        
+        /* Titre principal avec effet de dégradé et animation */
         .main-title { 
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text;
+            -webkit-background-clip: text; /* Nécessaire pour le dégradé sur le texte */
             background-clip: text;
-            color: transparent;
+            color: transparent; /* Rend le texte transparent pour voir le dégradé */
             background-size: 200% auto;
             animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
             opacity: 0; /* État initial pour l'animation fadeInDown */
         }
        
+        /* Liens de navigation principaux */
         .nav-link { 
             position: relative;
             overflow: hidden;
@@ -89,6 +97,7 @@
             padding: 0.5rem 0.25rem; 
         }
        
+        /* Soulignement animé pour les liens de navigation */
         .nav-link::after { 
             content: '';
             position: absolute;
@@ -108,11 +117,12 @@
             color: var(--primary-color); 
         }
         
+        /* Icônes des réseaux sociaux */
         .social-icon {
             transition: var(--transition);
             width: 4rem; 
             height: 4rem; 
-            border-radius: 9999px; 
+            border-radius: 9999px; /* rounded-full */
             background-color: rgba(0, 0, 0, 0.3); 
             display: flex;
             align-items: center;
@@ -123,35 +133,39 @@
             transform: scale(1.1);
             background-color: rgba(0, 0, 0, 0.5); 
         }
+        /* Couleurs spécifiques pour certaines icônes sociales */
         .social-icon .fa-mixcloud { color: #45a0e6; }
         .social-icon .fa-soundcloud { color: #ff8800; }
         .social-icon .fa-whatsapp { color: #25D366; } 
 
+        /* Conteneur du flux Facebook */
         .facebook-feed-container {
             background-color: rgba(20, 20, 20, 0.7); 
             padding: 1rem;
-            border-radius: 0.5rem; /* rounded-lg */
+            border-radius: 0.5rem; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            max-width: 500px; /* Largeur maximale du plugin Facebook */
+            max-width: 500px; 
             width: 100%; 
             margin-left: auto;
             margin-right: auto;
+            min-height: 700px; /* Hauteur minimale pour le conteneur du flux */
+            overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
         }
 
 
-        /* Animations */
-        @keyframes float {
+        /* Animations clés */
+        @keyframes float { /* Animation de flottement */
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
         
-        @keyframes gradient {
+        @keyframes gradient { /* Animation de dégradé */
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
         
-        @keyframes fadeInDown {
+        @keyframes fadeInDown { /* Animation d'apparition depuis le haut */
             from {
                 opacity: 0;
                 transform: translateY(-30px); 
@@ -162,7 +176,7 @@
             }
         }
         
-        .rotate { 
+        .rotate { /* Animation de rotation (pour la citation) */
             animation: rotate 10s linear infinite;
         }
         @keyframes rotate {
@@ -170,17 +184,17 @@
             to { transform: rotate(360deg); }
         }
 
-        .neon { 
+        .neon { /* Animation néon pour la citation */
             animation: neon 2s ease-in-out infinite;
         }
         @keyframes neon {
-            0%, 100% { color: #FFFF00; } /* Jaune */
-            50% { color: #00FFFF; } /* Cyan */
-            100% { color: #FFFF00; } /* Jaune */
+            0%, 100% { color: #FFFF00; } 
+            50% { color: #00FFFF; } 
+            100% { color: #FFFF00; } 
         }
 
-        /* Styles responsifs */
-        @media (max-width: 768px) {
+        /* Styles responsifs pour différents tailles d'écran */
+        @media (max-width: 768px) { /* Tablettes et mobiles larges */
             .main-title { 
                 font-size: 2.8rem; 
             }
@@ -189,7 +203,7 @@
             }
             
             .nav-container {
-                flex-wrap: wrap;
+                flex-wrap: wrap; /* Permet aux liens de passer à la ligne */
                 gap: 0.25rem; 
             }
             .nav-link { 
@@ -201,7 +215,7 @@
                 height: 3.5rem; 
                 font-size: 1.25rem; 
             }
-            .social-connect-title { 
+            .social-connect-title { /* Titre "Connect With Me" pour mobile */
                 font-size: 1.5rem; 
             }
 
@@ -210,9 +224,10 @@
             }
             .facebook-feed-container {
                 padding: 0.5rem;
+                min-height: 500px; /* Hauteur minimale ajustée pour mobile */
             }
         }
-         @media (max-width: 480px) { 
+         @media (max-width: 480px) { /* Petits mobiles */
             .nav-link {
                 font-size: 1rem;
                 padding: 0.5rem 0.1rem;
@@ -225,7 +240,8 @@
 </head>
 <body class="flex flex-col items-center min-h-screen">
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v19.0" nonce="YOUR_NONCE_VALUE"></script> 
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v19.0"></script> 
+
     <div class="logo-container mt-8 mb-8"> 
         <div class="logo-border"></div>
         <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24"> 
@@ -273,7 +289,7 @@
                 <div class="fb-page" 
                      data-href="https://www.facebook.com/DavidKRKofficial" 
                      data-tabs="timeline" 
-                     data-width="" data-height="700" data-small-header="false" 
+                     data-width="" data-height="1000" data-small-header="false" 
                      data-adapt-container-width="true" 
                      data-hide-cover="false" 
                      data-show-facepile="true">
@@ -306,7 +322,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // L'animation fadeInDown pour le .main-title est gérée par CSS.
-            // Le SDK Facebook s'occupe du rendu du plugin.
+            // Le SDK Facebook s'occupe du rendu du plugin Page.
         });
     </script>
 </body>
