@@ -6,16 +6,13 @@
     <title>David KRK · DJ Techno & Producteur</title>
     <meta name="description" content="Site officiel de David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Trance, Tech Trance et Techno.">
    
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
    
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
    
     <style>
@@ -98,23 +95,22 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-
+        /* Styles for language content visibility and transitions */
         .lang-content {
-            display: none;
+            display: none; /* Hidden by default */
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.3s ease;
-            position: relative;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smoother transition */
             width: 100%;
-            visibility: hidden;
+            visibility: hidden; /* Ensures content is not accessible when hidden */
         }
        
         .lang-content.active {
-            display: block !important;
+            display: block !important; /* Shows the active content, overrides display: none */
             opacity: 1 !important;
             transform: translateY(0) !important;
             visibility: visible !important;
-            position: relative !important;
+            /* position: relative !important; /* Retained from original if needed, but might not be necessary for simple show/hide */
         }
        
         /* Animations */
@@ -140,7 +136,6 @@
             }
         }
 
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -156,50 +151,93 @@
                 flex-wrap: wrap;
                 gap: 1rem;
             }
+            /* Ensure titles and text are responsive */
+            #biography h1.title-animation {
+                font-size: 2.5rem; /* Adjusted for smaller screens */
+            }
+            #biography h2.title-animation {
+                font-size: 2rem; /* Adjusted for smaller screens */
+            }
+            .lang-content h3 {
+                font-size: 1.5rem; /* Adjusted for smaller screens */
+            }
+            .lang-content p {
+                font-size: 0.9rem; /* Adjusted for smaller screens */
+            }
         }
-
 
         .neon {
             animation: neon 2s ease-in-out infinite;
         }
-
 
         @keyframes neon {
             0%, 100% { color: #FFFF00; }
             50% { color: #00FFFF; }
         }
 
-
         .rotate {
             animation: rotate 10s linear infinite;
         }
-
 
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* Style for navigation links in the bio section for better visibility and interaction */
+        #biography nav a {
+            color: var(--primary-color); /* Use a theme color */
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #biography nav a:hover, #biography nav a.active-lang-link { /* Style for hover and active link */
+            background-color: var(--primary-color);
+            color: var(--dark-bg); /* Dark text on light background for contrast */
+        }
+        /* Simple underline animation for non-button style links if preferred */
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+            color: var(--secondary-color); /* Example color */
+        }
+
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color); /* Underline color */
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
     </style>
 </head>
 <body>
-    <div id="biography" class="py-20">
-        <div class="container mx-auto px-6">
-            <h1 class="text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
-            <div class="text-center mb-12">
-                <h2 class="text-6xl font-bold text-blue-500 title-animation">Bio</h2>
+    <div id="biography" class="py-10 md:py-20"> <div class="container mx-auto px-4 sm:px-6"> <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold text-center mb-4 title-animation">David KRK</h1>
+            <div class="text-center mb-8 md:mb-12">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-blue-500 title-animation">Bio</h2>
             </div>
-            <nav class="text-center mb-12">
-                <a href="index.html" class="text-xl mx-4 hover-underline-animation">Back</a>
-                <a href="javascript:void(0);" onclick="showContent('francais')" class="text-xl mx-4 hover-underline-animation">Français</a>
-                <a href="javascript:void(0);" onclick="showContent('castellano')" class="text-xl mx-4 hover-underline-animation">Castellano</a>
-                <a href="javascript:void(0);" onclick="showContent('euskara')" class="text-xl mx-4 hover-underline-animation">Euskara</a>
-                <a href="javascript:void(0);" onclick="showContent('english')" class="text-xl mx-4 hover-underline-animation">English</a>
-                <a href="javascript:void(0);" onclick="showContent('ukrainian')" class="text-xl mx-4 hover-underline-animation">Ukrainian</a>
+            <nav class="text-center mb-8 md:mb-12 flex flex-wrap justify-center gap-2 sm:gap-4">
+                <a href="index.html" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">Back</a>
+                <a href="javascript:void(0);" onclick="showContent('francais', this)" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">Français</a>
+                <a href="javascript:void(0);" onclick="showContent('castellano', this)" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">Castellano</a>
+                <a href="javascript:void(0);" onclick="showContent('euskara', this)" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">Euskara</a>
+                <a href="javascript:void(0);" onclick="showContent('english', this)" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">English</a>
+                <a href="javascript:void(0);" onclick="showContent('ukrainian', this)" class="text-lg sm:text-xl mx-2 sm:mx-4 hover-underline-animation">Ukrainian</a>
             </nav> 
 
-            <div id="francais" class="lang-content" style="display: none;">
-                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Français</h3>
-                <p class="mb-4 title-animation">
+            <div id="francais" class="lang-content active"> <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">Français</h3>
+                <div class="mb-4 title-animation text-sm sm:text-base text-justify p-4 bg-black bg-opacity-20 rounded-lg shadow-lg">
                     <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
                     <p>Son style de base : Trance - Tech Trance, se diversifie aujourd'hui en complément de sons plus Techno.</p>
                     <p>Il est apprécié autant dans les clubs Espagnols que dans les complexes Français.</p>
@@ -212,12 +250,12 @@
                     <p>Son toucher particulier fait de ce DJ un musicien hors pair, dix minutes lui suffisent pour vous transporter dans son univers.</p>
                     <p>Il choisit ses disques méticuleusement pour que cela lui corresponde au moment présent et pour partager cet enthousiasme à son public.</p>
                     <p>Son prochain projet sera de produire un son Techno, qui sera sa référence, et c'est avec impatience que nous l'attendons!</p>
-                </p>
+                </div>
             </div>
 
-            <div id="castellano" class="lang-content" style="display: none;">
-                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Castellano</h3>
-                <p class="mb-4 title-animation">
+            <div id="castellano" class="lang-content">
+                <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">Castellano</h3>
+                <div class="mb-4 title-animation text-sm sm:text-base text-justify p-4 bg-black bg-opacity-20 rounded-lg shadow-lg">
                     <p>David KRK, nacido en agosto de 1982, es un DJ que se presenta en España, Francia y la Costa Vasca desde 2000.</p>
                     <p>Su estilo base, Trance - Tech Trance, se ha diversificado hoy en día con la incorporación de sonidos más Techno.</p>
                     <p>Es apreciado tanto en los clubes españoles como en los complejos franceses.</p>
@@ -230,12 +268,12 @@
                     <p>Su toque particular hace de este DJ un músico excepcional; diez minutos son suficientes para transportarte a su universo.</p>
                     <p>Elige sus discos meticulosamente para que correspondan al momento presente y para compartir ese entusiasmo con su público.</p>
                     <p>Su próximo proyecto será producir un sonido Techno, que será su referencia, ¡y lo esperamos con impaciencia!</p>
-                </p>
+                </div>
             </div>
 
-            <div id="euskara" class="lang-content" style="display: none;">
-                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Euskara</h3>
-                <p class="mb-4 title-animation">
+            <div id="euskara" class="lang-content">
+                <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">Euskara</h3>
+                <div class="mb-4 title-animation text-sm sm:text-base text-justify p-4 bg-black bg-opacity-20 rounded-lg shadow-lg">
                     <p>David KRK-ren biografia: 1982-ko abuztuan jaioa, David KRK 2000-garren urtetik aurrera Espainian, Frantzian eta Euskadin hezitako “deejay” gazte bat da.</p>
                     <p>Bere estilo nagusia: Trance eta Techno - Trance dira. Gaur egun elektro-trance izeneko doinu elektronikoa ere jorratzen du.</p>
                     <p>Espainian eta Frantzian egindako hainbat jaialdi garrantzitsutan egon da DJ hauekin kabina konpartituz:</p>
@@ -248,12 +286,12 @@
                     <p>Diskoak xehetasunaz aukeratzen ditu une zehatz bakoitzean transmititu nahi duena adierazteko eta bere irrika publikoarekin partaide izateko.</p>
                     <p>David-en hurrengo proiektua Trance soinu propioa sortzea izango da.</p>
                     <p>Berehala entzu ahal izango ditugu bere produkzio guztiak.</p>
-                </p>
+                </div>
             </div>
 
-            <div id="english" class="lang-content" style="display: none;">
-                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">English</h3>
-                <p class="mb-4 title-animation">
+            <div id="english" class="lang-content">
+                <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">English</h3>
+                <div class="mb-4 title-animation text-sm sm:text-base text-justify p-4 bg-black bg-opacity-20 rounded-lg shadow-lg">
                     <p>David KRK, born in August 1982, is a DJ who has been performing in Spain, France, and the Basque Coast since 2000.</p>
                     <p>His primary style: Trance - Tech Trance, is now diversifying to include more Techno sounds.</p>
                     <p>He is appreciated in both Spanish clubs and French venues.</p>
@@ -266,12 +304,12 @@
                     <p>His unique touch makes this DJ an exceptional musician; ten minutes are enough to transport you into his universe.</p>
                     <p>He meticulously chooses his records to match his current feelings and to share this enthusiasm with his audience.</p>
                     <p>His next project will be to produce a Techno sound, which will be his reference, and we eagerly await it!</p>
-                </p>
+                </div>
             </div>
 
-           <div id="ukrainian" class="lang-content" style="display: none;">
-                <h3 class="text-2xl font-bold mt-4 mb-2 title-animation">Ukrainian</h3>
-                <p class="mb-4 title-animation">
+            <div id="ukrainian" class="lang-content">
+                <h3 class="text-xl sm:text-2xl font-bold mt-4 mb-2 title-animation text-center">Ukrainian</h3>
+                <div class="mb-4 title-animation text-sm sm:text-base text-justify p-4 bg-black bg-opacity-20 rounded-lg shadow-lg">
                     <p>Девід КРК, народився в серпні 1982 року, є DJ, який виступає в Іспанії, Франції та Країні Басків з 2000 року.</p>
                     <p>Його основний стиль: Trance - Tech Trance, зараз розширюється, доповнюючись більш Techno звучанням.</p>
                     <p>Він цінується як в іспанських клубах, так і у французьких комплексах.</p>
@@ -284,18 +322,56 @@
                     <p>Його особливий підхід робить цього DJ неперевершеним музикантом, десяти хвилин йому достатньо, щоб перенести вас у свій всесвіт.</p>
                     <p>Він ретельно обирає свої диски, щоб вони відповідали його поточному настрою та щоб поділитися цим ентузіазмом зі своєю публікою.</p>
                     <p>Його наступним проектом буде продюсування Techno звучання, яке стане його орієнтиром, і ми з нетерпінням чекаємо на це!</p>
-                </p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="fixed bottom-0 right-0 mb-4 mr-4 flex">
-        <footer class="py-6 px-4 text-left mr-4"> 
-            <p class="text-gray-400 mb-2">© 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
-            <p class="neon font-bold text-lg">"May The Techno Be With You"</p>
+    <div class="fixed bottom-0 right-0 mb-4 mr-4 flex items-center"> <footer class="py-6 px-4 text-left mr-4"> 
+            <p class="text-gray-400 mb-2 text-xs sm:text-sm">© 2025 <span class="rotate">David KRK</span> - All rights reserved</p>
+            <p class="neon font-bold text-sm sm:text-lg">"May The Techno Be With You"</p>
         </footer>
-        <img src="logo 30-01-25.png" alt="Logo David KRK" class="w-24 h-24 border-4 border-white rounded-full">
-    </div>
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" alt="Logo David KRK" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 sm:border-4 border-white rounded-full shadow-lg"> </div>
+
+    <script>
+        // Function to show the selected language content and hide others
+        function showContent(langId, clickedLink) {
+            // Hide all language content sections
+            var contents = document.querySelectorAll('.lang-content');
+            contents.forEach(function(content) {
+                content.classList.remove('active');
+            });
+
+            // Show the selected language content section
+            var selectedContent = document.getElementById(langId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // Optional: Style the active navigation link
+            var navLinks = document.querySelectorAll('#biography nav a');
+            navLinks.forEach(function(link) {
+                link.classList.remove('active-lang-link'); // Use a specific class for active language link
+            });
+            if (clickedLink) {
+                clickedLink.classList.add('active-lang-link');
+            }
+        }
+
+        // Ensure the default language (French) content and link are active on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find the link for French and simulate a click or directly apply active states
+            // More robust: directly call showContent for the default language
+            const defaultLangLink = document.querySelector('#biography nav a[onclick*="francais"]');
+            if (defaultLangLink) {
+                 showContent('francais', defaultLangLink);
+            } else {
+                // Fallback if the link isn't found, though it should be
+                const francaisContent = document.getElementById('francais');
+                if (francaisContent) {
+                    francaisContent.classList.add('active');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-
-
