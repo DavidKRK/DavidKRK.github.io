@@ -22,7 +22,7 @@ jobs:
       - name: Deploy
         run: |
           echo 'Deploying the site...'
-          # Ajoutez ici vos commandes de déploiement
+          npm run deploy
           echo 'Déploiement en cours...'
           # Exemple de déploiement à GitHub Pages
           npm run deploy
