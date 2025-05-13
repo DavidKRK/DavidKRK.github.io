@@ -130,6 +130,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             transform: perspective(500px) rotateX(0deg);
             transition: all 0.5s ease;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .welcome-text:hover {
@@ -146,6 +150,57 @@
             height: 3px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             border-radius: 0.5rem 0.5rem 0 0;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover, .language-btn.active {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scale(1.05);
+        }
+        
+        .welcome-message {
+            display: none;
+            text-align: center;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+        
+        .welcome-message.active {
+            display: block;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Mixcloud player styling */
+        .mixcloud-player {
+            width: 100%;
+            height: 120px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        .mixcloud-player:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
         
         /* Animations */
@@ -177,6 +232,11 @@
             100% { transform: scale(1); }
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
@@ -190,6 +250,14 @@
             
             .welcome-text {
                 padding: 1rem;
+            }
+            
+            .welcome-message {
+                font-size: 1.1rem;
+            }
+            
+            .mixcloud-player {
+                height: 100px;
             }
         }
     </style>
@@ -225,34 +293,66 @@
             </a>
         </nav>
         
-        <!-- Main Text - Improved with better styling -->
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <button class="language-btn active" data-lang="fr">Français</button>
+            <button class="language-btn" data-lang="es">Español</button>
+            <button class="language-btn" data-lang="en">English</button>
+            <button class="language-btn" data-lang="eu">Euskara</button>
+        </div>
+        
+        <!-- Main Text with language options -->
         <div class="welcome-text mb-12">
-            <p class="text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto">
-                Bienvenue sur le site officiel de David KRK, DJ et producteur de musique électronique spécialisé dans la Techno, 
-                la Trance et la Tech Trance. Actif depuis 2000, je me produis régulièrement en France, en Espagne et dans le Pays Basque, 
-                partageant ma passion pour les rythmes énergiques et les mélodies envoûtantes.
-            </p>
+            <!-- French -->
+            <div class="welcome-message active" data-lang="fr">
+                <p>Bienvenue sur le site officiel de David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Spécialisé en Trance, Tech Trance et Techno.</p>
+            </div>
+            
+            <!-- Spanish -->
+            <div class="welcome-message" data-lang="es">
+                <p>Bienvenido al sitio oficial de David KRK, DJ de Techno internacional actuando en Francia, España y el País Vasco desde 2000. Especializado en Trance, Tech Trance y Techno.</p>
+            </div>
+            
+            <!-- English -->
+            <div class="welcome-message" data-lang="en">
+                <p>Welcome to the official website of David KRK, international Techno DJ performing in France, Spain and the Basque Country since 2000. Specializing in Trance, Tech Trance and Techno.</p>
+            </div>
+            
+            <!-- Basque -->
+            <div class="welcome-message" data-lang="eu">
+                <p>Ongi etorri David KRK-ren webgune ofizialera, 2000. urtetik Frantziako, Espainiako eta Euskal Herriko Techno DJ internazionala. Trance, Tech Trance eta Techno espezialista.</p>
+            </div>
+        </div>
+        
+        <!-- Mixcloud Player -->
+        <div class="mixcloud-player">
+            <iframe 
+                width="100%" 
+                height="120" 
+                src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDavidKRK%2F" 
+                frameborder="0">
+            </iframe>
         </div>
         
         <!-- Social Icons -->
         <div class="flex justify-center gap-6 mb-8">
-            <a href="#" target="_blank" aria-label="Facebook" class="social-icon text-3xl text-white">
+            <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-3xl text-white">
                 <i class="fab fa-facebook"></i>
             </a>
-            <a href="#" target="_blank" aria-label="Twitter" class="social-icon text-3xl text-white">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" target="_blank" aria-label="Instagram" class="social-icon text-3xl text-white">
+            <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram" class="social-icon text-3xl text-white">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" target="_blank" aria-label="SoundCloud" class="social-icon text-3xl text-white">
-                <i class="fab fa-soundcloud"></i>
+            <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud" class="social-icon text-3xl text-white">
+                <i class="fab fa-mixcloud"></i>
             </a>
-            <a href="#" target="_blank" aria-label="YouTube" class="social-icon text-3xl text-white">
+            <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube" class="social-icon text-3xl text-white">
                 <i class="fab fa-youtube"></i>
             </a>
-            <a href="#" target="_blank" aria-label="Spotify" class="social-icon text-3xl text-white">
-                <i class="fab fa-spotify"></i>
+            <a href="https://soundcloud.com/david-krkofficial" target="_blank" aria-label="SoundCloud" class="social-icon text-3xl text-white">
+                <i class="fab fa-soundcloud"></i>
+            </a>
+            <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok" class="social-icon text-3xl text-white">
+                <i class="fab fa-tiktok"></i>
             </a>
         </div>
         
@@ -300,6 +400,61 @@
                 const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
                 welcomeText.style.transform = `perspective(500px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
             });
+            
+            // Language selector functionality
+            const languageBtns = document.querySelectorAll('.language-btn');
+            const welcomeMessages = document.querySelectorAll('.welcome-message');
+            
+            languageBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons and messages
+                    languageBtns.forEach(b => b.classList.remove('active'));
+                    welcomeMessages.forEach(msg => msg.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding message
+                    const lang = btn.dataset.lang;
+                    document.querySelector(`.welcome-message[data-lang="${lang}"]`).classList.add('active');
+                    
+                    // Reset the auto-rotation timer
+                    resetAutoRotation();
+                });
+            });
+            
+            // Auto-rotation of languages every 5 seconds
+            let rotationInterval;
+            const languages = ['fr', 'es', 'en', 'eu'];
+            let currentIndex = 0;
+            
+            function rotateLanguage() {
+                currentIndex = (currentIndex + 1) % languages.length;
+                const nextLang = languages[currentIndex];
+                
+                // Remove active class from all buttons and messages
+                languageBtns.forEach(b => b.classList.remove('active'));
+                welcomeMessages.forEach(msg => msg.classList.remove('active'));
+                
+                // Add active class to next language
+                document.querySelector(`.language-btn[data-lang="${nextLang}"]`).classList.add('active');
+                document.querySelector(`.welcome-message[data-lang="${nextLang}"]`).classList.add('active');
+            }
+            
+            function resetAutoRotation() {
+                clearInterval(rotationInterval);
+                rotationInterval = setInterval(rotateLanguage, 5000);
+            }
+            
+            // Start auto-rotation
+            resetAutoRotation();
+            
+            // Pause auto-rotation when hovering over welcome text
+            welcomeText.addEventListener('mouseenter', () => {
+                clearInterval(rotationInterval);
+            });
+            
+            welcomeText.addEventListener('mouseleave', resetAutoRotation);
         });
     </script>
 </body>
