@@ -177,7 +177,7 @@
             .nav-link { font-size: 1.25rem; } /* Taille des liens de nav principale sur mobile */
 
             /* Navigation des langues sur mobile */
-            #biography-content nav a {
+            #biography-content nav a.hover-underline-animation { /* Cible spécifiquement les liens de langue */
                  font-size: 1rem; 
                  margin: 0 0.25rem; 
             }
@@ -212,22 +212,22 @@
         }
 
         /* Styles pour les liens de navigation de langue */
-        #biography-content nav a {
+        #biography-content nav a.hover-underline-animation { /* Cible spécifiquement les liens de langue */
             color: var(--primary-color); 
             padding: 6px 10px; 
             border-radius: 6px;
             transition: background-color 0.3s ease, color 0.3s ease;
             font-size: 1.1rem; 
         }
-        #biography-content nav a:hover, 
-        #biography-content nav a.active-lang-link { /* Style pour lien de langue actif/survolé */
+        #biography-content nav a.hover-underline-animation:hover, 
+        #biography-content nav a.hover-underline-animation.active-lang-link { /* Style pour lien de langue actif/survolé */
             background-color: var(--primary-color);
             color: var(--dark-bg); 
         }
         .hover-underline-animation { /* Animation de soulignement pour les liens de langue */
             display: inline-block;
             position: relative;
-            color: var(--secondary-color); 
+            /* color: var(--secondary-color); /* Couleur gérée par le style plus spécifique ci-dessus si c'est un lien de langue */
         }
 
         .hover-underline-animation::after {
@@ -266,6 +266,7 @@
     </div>
     
     <nav class="nav-container flex justify-center gap-4 sm:gap-8 mb-8 sm:mb-12">
+        <a href="index.html" class="nav-link text-xl sm:text-2xl">Back</a> 
         <a href="index.html" class="nav-link text-xl sm:text-2xl">Accueil</a>
         <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a> 
         <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a>
@@ -408,7 +409,7 @@
             }
 
             // Styliser le lien de navigation de langue actif
-            var navLinks = document.querySelectorAll('#biography-content nav a'); 
+            var navLinks = document.querySelectorAll('#biography-content nav a.hover-underline-animation'); 
             navLinks.forEach(function(link) {
                 link.classList.remove('active-lang-link'); 
             });
