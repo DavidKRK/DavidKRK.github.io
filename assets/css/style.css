@@ -1,4 +1,5 @@
 /* Ensure :root variables are defined, e.g., in index.html's inline style or move them here */
+
 /*
 :root {
     --neon-red: #FF0000;
@@ -21,19 +22,20 @@
 }
 
 /* Media Queries for Footer Social Links */
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .footer-social-links a {
         font-size: 1.3rem;
         margin: 0 8px;
     }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
     .footer-social-links { /* Ensure flex display is maintained if needed */
         display: flex;
         justify-content: center;
         margin-bottom: 8px; /* Keep margin from original inline style */
     }
+
     .footer-social-links a {
         font-size: 1.2rem;
         margin: 0 8px;

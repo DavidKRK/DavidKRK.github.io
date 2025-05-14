@@ -1,0 +1,21 @@
+const fs = require('fs');
+
+// Lire le fichier JSON
+const filePath = 'c:\\Users\\LENOVO\\DavidKRK.github.io\\playwright-report\\report.json';
+let jsonData = [
+  {"id": 1, "name": "Alice"},
+  {"id": 2, "name": "Bob"},
+  {"id": 1, "name": "Alice"}
+];
+
+// Vérifier si le contenu est un tableau
+if (Array.isArray(jsonData)) {
+  // Supprimer les doublons
+  const uniqueData = Array.from(new Set(jsonData.map(JSON.stringify))).map(JSON.parse);
+
+  // Écrire le contenu nettoyé dans le fichier
+  fs.writeFileSync(filePath, JSON.stringify(uniqueData, null, 2), 'utf8');
+  console.log('Les doublons dans le fichier JSON ont été nettoyés.');
+} else {
+  console.error('Le contenu du fichier JSON n\'est pas un tableau.');
+}

@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: CI/CD
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  quality:
+  quality-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,41 +18,31 @@ jobs:
           node-version: '20'
           cache: 'npm'
           
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Check HTML files
-        run: npm run validate:html
-        
-      - name: Check CSS files
-        run: npm run validate:css
+      - run: npm install
+      - run: npm run validate
 
   build:
-    needs: quality
+    needs: quality-checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Build project
-        run: npm run build
-        
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+      - run: npm install
+      - run: npm run build
+
+      - name: List contents of dist/images/optimized
+        run: |
+          ls -l dist/images/optimized || echo "No optimized images found"
+      
+      - uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: |
-            dist/
-            !dist/node_modules/
-            !dist/package*.json
+          path: dist
 
   deploy:
     needs: build
@@ -61,23 +51,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
         with:
           name: dist
           path: dist
-          
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      - name: List contents of dist/images/optimized before deploy
+        run: |
+          ls -l dist/images/optimized || echo "No optimized images found"
+      
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
           commit_message: "Deploy: ${{ github.event.head_commit.message }}"
           
-            - name: Notifier Discord
-        uses: Ilshidur/action-discord@v1.0.1  # Mettez à jour avec une version qui existe
-        with: 
-          message: '🚀 Site déployé avec succès : ${{ github.repository }}'
+      - name: Discord Notification
+        if: success()
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "🚀 Déploiement réussi: ${{ github.repository }}"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+  sync:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync files
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: 'DavidKRK/DavidKRK.github.io'
+          source_branch: 'main'
+          destination_branch: 'gh-pages'
+          file_patterns: 'images/optimized/*'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
