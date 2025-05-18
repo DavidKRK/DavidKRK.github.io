@@ -45,6 +45,38 @@
             }
         }
 
+        .nav-container {
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+            color: white;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0.25rem;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            transform: translateX(0);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
         .logo-container {
             position: relative;
             margin-bottom: 2rem;
@@ -81,34 +113,6 @@
             background-size: 200% auto;
             animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
             opacity: 0;
-        }
-
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-            color: white;
-            transition: color 0.3s ease;
-            padding: 0.5rem 0.25rem;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            transform: translateX(-100%);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            transform: translateX(0);
-        }
-
-        .nav-link:hover {
-            color: var(--primary-color);
         }
 
         .social-icon {
@@ -172,22 +176,6 @@
             50% { color: #00FFFF; }
         }
 
-        .lang-content {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            width: 100%;
-            visibility: hidden;
-        }
-
-        .lang-content.active {
-            display: block !important;
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            visibility: visible !important;
-        }
-
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2.5rem;
@@ -233,14 +221,6 @@
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen">
-    <div class="logo-container mt-8 mb-8">
-        <div class="logo-border"></div>
-        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24">
-    </div>
-
-    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">David KRK</h1>
-    <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 mb-10 sm:mb-12">Accueil</h2>
-
     <nav class="nav-container flex justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
         <a href="index.html" class="nav-link text-xl sm:text-2xl">Back</a>
         <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a>
@@ -251,28 +231,16 @@
         </a>
     </nav>
 
+    <div class="logo-container mt-8 mb-8">
+        <div class="logo-border"></div>
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24">
+    </div>
+
+    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">David KRK</h1>
+    <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 mb-10 sm:mb-12">Accueil</h2>
+
     <main class="text-center max-w-4xl mx-auto px-4 w-full">
-        <div id="welcome-content">
-            <div id="francais" class="lang-content active">
-                <p>Bienvenue sur le site officiel de David KRK, DJ Techno international et producteur.</p>
-            </div>
-
-            <div id="castellano" class="lang-content">
-                <p>Bienvenido al sitio oficial de David KRK, DJ internacional de Techno y productor.</p>
-            </div>
-
-            <div id="euskara" class="lang-content">
-                <p>Ongi etorri David KRKren webgune ofizialera, DJ Techno nazioartekoa eta ekoizlea.</p>
-            </div>
-
-            <div id="english" class="lang-content">
-                <p>Welcome to the official website of David KRK, international Techno DJ and producer.</p>
-            </div>
-
-            <div id="ukrainian" class="lang-content">
-                <p>Ласкаво просимо на офіційний сайт David KRK, міжнародного Techno DJ та продюсера.</p>
-            </div>
-        </div>
+        <p>Bienvenue sur le site officiel de David KRK, DJ Techno international et producteur.</p>
     </main>
 
     <footer class="mt-auto py-6 text-center w-full">
@@ -294,32 +262,8 @@
     </footer>
 
     <script>
-        // Fonction pour afficher le contenu de la langue sélectionnée et masquer les autres
-        function showContent(langId) {
-            var contents = document.querySelectorAll('.lang-content');
-            contents.forEach(function(content) {
-                content.classList.remove('active');
-            });
-
-            var selectedContent = document.getElementById(langId);
-            if (selectedContent) {
-                selectedContent.classList.add('active');
-            }
-        }
-
-        // Fonction pour changer automatiquement de langue toutes les 5 secondes
-        function autoChangeLanguage() {
-            var languages = ['francais', 'castellano', 'euskara', 'english', 'ukrainian'];
-            var currentIndex = 0;
-
-            setInterval(function() {
-                currentIndex = (currentIndex + 1) % languages.length;
-                showContent(languages[currentIndex]);
-            }, 5000); // Change de langue toutes les 5 secondes
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
-            autoChangeLanguage();
+            // L'animation fadeInDown pour les .main-title est gérée par CSS.
         });
     </script>
 </body>
