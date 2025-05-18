@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK | DJ Techno & Producteur</title>
+    <title>David KRK · Accueil</title>
     <meta name="description" content="Site officiel de David KRK, DJ Techno international et producteur. Découvrez sa musique, biographie et événements.">
+
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,10 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png">
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" type="image/png">
 
     <style>
         :root {
@@ -135,19 +132,6 @@
         .social-icon .fa-soundcloud { color: #ff8800; }
         .social-icon .fa-whatsapp { color: #25D366; }
 
-        .facebook-feed-container {
-            background-color: rgba(20, 20, 20, 0.7);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            max-width: 500px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 700px;
-            overflow-y: auto;
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -162,7 +146,7 @@
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -188,14 +172,29 @@
             50% { color: #00FFFF; }
         }
 
+        .lang-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            width: 100%;
+            visibility: hidden;
+        }
+
+        .lang-content.active {
+            display: block !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            visibility: visible !important;
+        }
+
         @media (max-width: 768px) {
             .main-title {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
 
-            .connect-title, .facebook-title {
-                font-size: 1.8rem;
-            }
+            h1.main-title { font-size: 2.8rem; }
+            h2.main-title { font-size: 2.2rem; }
 
             .nav-container {
                 flex-wrap: wrap;
@@ -219,11 +218,6 @@
             footer .text-sm {
                 font-size: 0.75rem;
             }
-
-            .facebook-feed-container {
-                padding: 0.5rem;
-                min-height: 500px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -239,17 +233,16 @@
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen">
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v19.0"></script>
-
     <div class="logo-container mt-8 mb-8">
         <div class="logo-border"></div>
         <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24">
     </div>
 
-    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-10">David KRK</h1>
+    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">David KRK</h1>
+    <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 mb-10 sm:mb-12">Accueil</h2>
 
     <nav class="nav-container flex justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+        <a href="index.html" class="nav-link text-xl sm:text-2xl">Back</a>
         <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a>
         <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a>
         <a href="events.html" class="nav-link text-xl sm:text-2xl">Events</a>
@@ -259,46 +252,25 @@
     </nav>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full">
-        <div class="mb-12 sm:mb-16">
-            <h2 class="connect-title text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Connect With Me</h2>
-            <div class="flex justify-center gap-4 sm:gap-6 flex-wrap">
-                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" class="social-icon">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/davidkrk/" target="_blank" class="social-icon">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" class="social-icon">
-                    <i class="fab fa-mixcloud"></i>
-                </a>
-                <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" class="social-icon">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://soundcloud.com/david-krkofficial" target="_blank" class="social-icon">
-                    <i class="fab fa-soundcloud"></i>
-                </a>
-                <a href="https://www.tiktok.com/@davidkrk" target="_blank" class="social-icon">
-                    <i class="fab fa-tiktok"></i>
-                </a>
+        <div id="welcome-content">
+            <div id="francais" class="lang-content active">
+                <p>Bienvenue sur le site officiel de David KRK, DJ Techno international et producteur.</p>
             </div>
-        </div>
 
-        <div class="mb-12 sm:mb-16">
-            <h2 class="facebook-title text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Facebook Feed</h2>
-            <div class="facebook-feed-container">
-                <div class="fb-page"
-                     data-href="https://www.facebook.com/DavidKRKofficial"
-                     data-tabs="timeline"
-                     data-width=""
-                     data-height="1000"
-                     data-small-header="false"
-                     data-adapt-container-width="true"
-                     data-hide-cover="false"
-                     data-show-facepile="true">
-                    <blockquote cite="https://www.facebook.com/DavidKRKofficial" class="fb-xfbml-parse-ignore">
-                        <a href="https://www.facebook.com/DavidKRKofficial">David KRK</a>
-                    </blockquote>
-                </div>
+            <div id="castellano" class="lang-content">
+                <p>Bienvenido al sitio oficial de David KRK, DJ internacional de Techno y productor.</p>
+            </div>
+
+            <div id="euskara" class="lang-content">
+                <p>Ongi etorri David KRKren webgune ofizialera, DJ Techno nazioartekoa eta ekoizlea.</p>
+            </div>
+
+            <div id="english" class="lang-content">
+                <p>Welcome to the official website of David KRK, international Techno DJ and producer.</p>
+            </div>
+
+            <div id="ukrainian" class="lang-content">
+                <p>Ласкаво просимо на офіційний сайт David KRK, міжнародного Techno DJ та продюсера.</p>
             </div>
         </div>
     </main>
@@ -322,9 +294,32 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // L'animation fadeInDown pour le .main-title est gérée par CSS.
-            // Le SDK Facebook s'occupe du rendu du plugin Page.
+        // Fonction pour afficher le contenu de la langue sélectionnée et masquer les autres
+        function showContent(langId) {
+            var contents = document.querySelectorAll('.lang-content');
+            contents.forEach(function(content) {
+                content.classList.remove('active');
+            });
+
+            var selectedContent = document.getElementById(langId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+        }
+
+        // Fonction pour changer automatiquement de langue toutes les 5 secondes
+        function autoChangeLanguage() {
+            var languages = ['francais', 'castellano', 'euskara', 'english', 'ukrainian'];
+            var currentIndex = 0;
+
+            setInterval(function() {
+                currentIndex = (currentIndex + 1) % languages.length;
+                showContent(languages[currentIndex]);
+            }, 5000); // Change de langue toutes les 5 secondes
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            autoChangeLanguage();
         });
     </script>
 </body>
