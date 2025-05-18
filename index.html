@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,103 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David KRK | DJ Techno & Producteur</title>
     <meta name="description" content="Site officiel de David KRK, DJ Techno international et producteur. Découvrez sa musique, biographie et événements.">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" type="image/png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png">
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" type="image/png">
 
-
     <style>
-        /* Définition des variables de couleur et de transition pour le thème */
         :root {
-            --primary-color: #FF69B4; /* Rose néon */
-            --secondary-color: #03A9F4; /* Bleu cyan */
-            --accent-color: #8BC34A; /* Vert lime */
-            --dark-bg: #0F0F0F; /* Fond sombre principal */
-            --darker-bg: #080808; /* Fond plus sombre pour dégradé */
+            --primary-color: #FF69B4;
+            --secondary-color: #03A9F4;
+            --accent-color: #8BC34A;
+            --dark-bg: #0F0F0F;
+            --darker-bg: #080808;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
-        
-        /* Styles généraux du corps de la page */
+
         body {
             background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             font-family: 'Russo One', sans-serif;
             color: white;
             margin: 0;
-            min-height: 100vh; /* Hauteur minimale pour remplir l'écran */
-            overflow-x: hidden; /* Empêche le défilement horizontal */
+            min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
-            flex-direction: column; /* Organise les éléments enfants en colonne */
-            align-items: center; /* Centre les éléments horizontalement */
-            padding: 1rem; 
-            padding-top: 2rem; 
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            padding-top: 2rem;
         }
-        /* Ajustement du padding supérieur pour les écrans plus larges */
-        @media (min-width: 640px) { /* sm: */
+
+        @media (min-width: 640px) {
             body {
-                padding-top: 3rem; 
+                padding-top: 3rem;
             }
         }
-       
-        /* Conteneur du logo avec animation */
+
         .logo-container {
             position: relative;
-            margin-bottom: 2rem; 
-            animation: float 6s ease-in-out infinite; /* Animation de flottement */
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
             margin-left: auto;
             margin-right: auto;
         }
-       
-        /* Bordure animée du logo */
+
         .logo-border {
             position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px; 
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
             border-radius: 50%;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             background-size: 300% 300%;
-            animation: gradient 8s ease infinite; /* Animation de dégradé */
-            z-index: -1; 
-            filter: blur(8px); 
+            animation: gradient 8s ease infinite;
+            z-index: -1;
+            filter: blur(8px);
             opacity: 0.7;
         }
-        /* Image du logo */
+
         .logo-container img {
-            border: 4px solid white; 
-            border-radius: 50%; 
+            border: 4px solid white;
+            border-radius: 50%;
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-       
-        /* Titre principal avec effet de dégradé et animation */
-        .main-title { 
+
+        .main-title {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text; /* Nécessaire pour le dégradé sur le texte */
+            -webkit-background-clip: text;
             background-clip: text;
-            color: transparent; /* Rend le texte transparent pour voir le dégradé */
+            color: transparent;
             background-size: 200% auto;
             animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
-            opacity: 0; /* État initial pour l'animation fadeInDown */
+            opacity: 0;
         }
-       
-        /* Liens de navigation principaux */
-        .nav-link { 
+
+        .nav-link {
             position: relative;
             overflow: hidden;
-            color: white; 
-            transition: color 0.3s ease; 
-            padding: 0.5rem 0.25rem; 
+            color: white;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0.25rem;
         }
-       
-        /* Soulignement animé pour les liens de navigation */
-        .nav-link::after { 
+
+        .nav-link::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -112,129 +105,133 @@
             transform: translateX(-100%);
             transition: var(--transition);
         }
-       
+
         .nav-link:hover::after {
             transform: translateX(0);
         }
+
         .nav-link:hover {
-            color: var(--primary-color); 
+            color: var(--primary-color);
         }
-        
-        /* Icônes des réseaux sociaux */
+
         .social-icon {
             transition: var(--transition);
-            width: 4rem; 
-            height: 4rem; 
-            border-radius: 9999px; /* rounded-full */
-            background-color: rgba(0, 0, 0, 0.3); 
+            width: 4rem;
+            height: 4rem;
+            border-radius: 9999px;
+            background-color: rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem; 
+            font-size: 1.5rem;
         }
+
         .social-icon:hover {
             transform: scale(1.1);
-            background-color: rgba(0, 0, 0, 0.5); 
+            background-color: rgba(0, 0, 0, 0.5);
         }
-        /* Couleurs spécifiques pour certaines icônes sociales */
+
         .social-icon .fa-mixcloud { color: #45a0e6; }
         .social-icon .fa-soundcloud { color: #ff8800; }
-        .social-icon .fa-whatsapp { color: #25D366; } 
+        .social-icon .fa-whatsapp { color: #25D366; }
 
-        /* Conteneur du flux Facebook */
         .facebook-feed-container {
-            background-color: rgba(20, 20, 20, 0.7); 
+            background-color: rgba(20, 20, 20, 0.7);
             padding: 1rem;
-            border-radius: 0.5rem; 
+            border-radius: 0.5rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            max-width: 500px; 
-            width: 100%; 
+            max-width: 500px;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
-            min-height: 700px; /* Hauteur minimale pour le conteneur du flux */
-            overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
+            min-height: 700px;
+            overflow-y: auto;
         }
 
-
-        /* Animations clés */
-        @keyframes float { /* Animation de flottement */
+        @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
-        @keyframes gradient { /* Animation de dégradé */
+
+        @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
-        @keyframes fadeInDown { /* Animation d'apparition depuis le haut */
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px); 
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        .rotate { /* Animation de rotation (pour la citation) */
+
+        .rotate {
             animation: rotate 10s linear infinite;
         }
+
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .neon { /* Animation néon pour la citation */
+        .neon {
             animation: neon 2s ease-in-out infinite;
         }
+
         @keyframes neon {
-            0%, 100% { color: #FFFF00; } 
-            50% { color: #00FFFF; } 
-            100% { color: #FFFF00; } 
+            0%, 100% { color: #FFFF00; }
+            50% { color: #00FFFF; }
         }
 
-        /* Styles responsifs pour différents tailles d'écran */
-        @media (max-width: 768px) { /* Tablettes et mobiles larges */
-            .main-title { 
-                font-size: 2.8rem; 
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.8rem;
             }
-            .connect-title, .facebook-title { 
-                font-size: 1.8rem; 
+
+            .connect-title, .facebook-title {
+                font-size: 1.8rem;
             }
-            
+
             .nav-container {
-                flex-wrap: wrap; /* Permet aux liens de passer à la ligne */
-                gap: 0.25rem; 
+                flex-wrap: wrap;
+                gap: 0.25rem;
             }
-            .nav-link { 
-                font-size: 1.1rem; 
-            } 
+
+            .nav-link {
+                font-size: 1.1rem;
+            }
 
             .social-icon {
-                width: 3.5rem; 
-                height: 3.5rem; 
-                font-size: 1.25rem; 
-            }
-            .social-connect-title { /* Titre "Connect With Me" pour mobile */
-                font-size: 1.5rem; 
+                width: 3.5rem;
+                height: 3.5rem;
+                font-size: 1.25rem;
             }
 
-            footer .text-sm { 
+            .social-connect-title {
+                font-size: 1.5rem;
+            }
+
+            footer .text-sm {
                 font-size: 0.75rem;
             }
+
             .facebook-feed-container {
                 padding: 0.5rem;
-                min-height: 500px; /* Hauteur minimale ajustée pour mobile */
+                min-height: 500px;
             }
         }
-         @media (max-width: 480px) { /* Petits mobiles */
+
+        @media (max-width: 480px) {
             .nav-link {
                 font-size: 1rem;
                 padding: 0.5rem 0.1rem;
             }
+
             .nav-container {
                 gap: 0.1rem;
             }
@@ -243,24 +240,24 @@
 </head>
 <body class="flex flex-col items-center min-h-screen">
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v19.0"></script> 
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v19.0"></script>
 
-    <div class="logo-container mt-8 mb-8"> 
+    <div class="logo-container mt-8 mb-8">
         <div class="logo-border"></div>
-        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24"> 
+        <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24">
     </div>
-    
+
     <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-10">David KRK</h1>
-    
-    <nav class="nav-container flex justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12"> 
-        <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a> 
-        <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a> 
+
+    <nav class="nav-container flex justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+        <a href="bio.html" class="nav-link text-xl sm:text-2xl">Bio</a>
+        <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a>
         <a href="events.html" class="nav-link text-xl sm:text-2xl">Events</a>
         <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
             <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Chat
         </a>
     </nav>
-    
+
     <main class="text-center max-w-4xl mx-auto px-4 w-full">
         <div class="mb-12 sm:mb-16">
             <h2 class="connect-title text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Connect With Me</h2>
@@ -289,14 +286,14 @@
         <div class="mb-12 sm:mb-16">
             <h2 class="facebook-title text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Facebook Feed</h2>
             <div class="facebook-feed-container">
-                <div class="fb-page" 
-                     data-href="https://www.facebook.com/DavidKRKofficial" 
-                     data-tabs="timeline" 
-                     data-width="" 
-                     data-height="1000" 
-                     data-small-header="false" 
-                     data-adapt-container-width="true" 
-                     data-hide-cover="false" 
+                <div class="fb-page"
+                     data-href="https://www.facebook.com/DavidKRKofficial"
+                     data-tabs="timeline"
+                     data-width=""
+                     data-height="1000"
+                     data-small-header="false"
+                     data-adapt-container-width="true"
+                     data-hide-cover="false"
                      data-show-facepile="true">
                     <blockquote cite="https://www.facebook.com/DavidKRKofficial" class="fb-xfbml-parse-ignore">
                         <a href="https://www.facebook.com/DavidKRKofficial">David KRK</a>
@@ -305,8 +302,8 @@
             </div>
         </div>
     </main>
-    
-    <footer class="mt-auto py-6 text-center w-full"> 
+
+    <footer class="mt-auto py-6 text-center w-full">
         <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4">
             <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20depuis%20le%20site" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
                 CONTACT
