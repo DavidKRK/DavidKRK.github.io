@@ -6,7 +6,7 @@
   <title>David KRK · HOME</title>
   <meta name="description" content="Official website of David KRK, international Techno DJ and producer. Discover his music, biography, and events.">
 
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+  <link rel="icon" type="image/png" href="assets/images/logo%2030-01-25.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
       overflow-x: hidden;
     }
 
-    .hero {
+  .hero {
       position: relative;
       width: 100%;
       height: 80vh; /* réduit pour éviter de cacher le reste */
@@ -41,7 +41,7 @@
       background: black;
     }
 
-    .hero img {
+  .hero img {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -52,7 +52,7 @@
       will-change: transform;
     }
 
-    .hero-header {
+  .hero-header {
       position: absolute;
       top: 0; left: 0; right: 0;
       display: flex;
@@ -63,7 +63,7 @@
       z-index: 10;
     }
 
-    .hero-header a {
+  .hero-header a {
       color: white;
       text-decoration: none;
       margin: 0 1rem;
@@ -71,11 +71,11 @@
       transition: color 0.3s ease;
     }
 
-    .hero-header a:hover {
+  .hero-header a:hover {
       color: var(--primary-color);
     }
 
-    .main-title {
+  .main-title {
       text-align: center;
       background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
       -webkit-background-clip: text;
@@ -103,7 +103,7 @@
       padding: 2rem 1rem;
     }
 
-    .neon {
+  .neon {
       animation: neon 2s ease-in-out infinite;
     }
 
@@ -114,14 +114,13 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
-      .main-title { font-size: 2rem; }
+    .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
+    .main-title { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO SECTION -->
   <section class="hero" id="hero">
     <div class="hero-header">
       <a href="index.html">Home</a>
@@ -134,16 +133,13 @@
     <img src="assets/images/moi2.jpg" alt="David KRK" id="hero-img" />
   </section>
 
-  <!-- TITRES -->
   <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">David KRK</h1>
   <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 mb-10 sm:mb-12">Home</h2>
 
-  <!-- MAIN CONTENT -->
   <main class="text-center max-w-4xl mx-auto px-4 w-full">
     <p>Official website of David KRK, international Techno DJ and producer. Discover his music, biography, and events.</p>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4 text-sm">
       <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20depuis%20le%20site" class="hover:text-[var(--primary-color)]">CONTACT</a>
@@ -156,7 +152,6 @@
     <p class="neon font-bold text-lg mt-2">"May The Techno Be With You"</p>
   </footer>
 
-  <!-- SCRIPT PARALLAX -->
   <script>
     const img = document.getElementById('hero-img');
     const hero = document.getElementById('hero');
