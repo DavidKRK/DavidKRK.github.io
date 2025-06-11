@@ -34,12 +34,12 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 80vh; /* réduit pour éviter de cacher le reste */
+      height: 80vh;
       overflow: hidden;
       background: black;
     }
 
-    .hero img#hero-img { /* Cible plus spécifique pour l'image de fond */
+    .hero img#hero-img {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -48,7 +48,7 @@
       transform: translate(-50%, -50%) scale(1);
       transition: transform 0.2s ease-out;
       will-change: transform;
-      object-fit: cover; /* Assure que l'image couvre la zone sans se déformer */
+      object-fit: cover;
     }
 
     .hero-header {
@@ -97,15 +97,20 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Styles pour le logo sur l'image principale (Hero) */
     .hero-logo {
-      position: absolute !important; /* Force la position absolue */
-      bottom: 20px !important;      /* Marge de 20px depuis le bas */
-      right: 20px !important;       /* Marge de 20px depuis la droite */
-      width: 150px !important;      /* Taille moyenne pour desktop */
-      height: auto !important;      /* Maintient les proportions de l'image */
-      z-index: 11 !important;       /* Assure qu'il est au-dessus des autres éléments */
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 150px;
+      height: auto;
+      z-index: 11;
     }
+
+    .hero-logo img {
+        max-width: 100%;
+        height: auto;
+    }
+
 
     footer {
       text-align: center;
@@ -128,14 +133,18 @@
       }
     }
 
+    .fab {
+      color: #25D366; /* Defined here for better maintainability */
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
       .main-title { font-size: 2.5rem; }
       .hero-logo {
-        width: 100px !important;    /* Taille plus petite pour mobile */
-        bottom: 10px !important;
-        right: 10px !important;
+        width: 100px;
+        bottom: 10px;
+        right: 10px;
       }
     }
   </style>
@@ -148,27 +157,26 @@
       <a href="bio.html">Bio</a>
       <a href="music.html">Music</a>
       <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank">
-        <i class="fab fa-whatsapp mr-1" style="color: #25D366;"></i> Chat
+        <i class="fab fa-whatsapp"></i> Chat
       </a>
     </div>
-    <img src="https://github.com/DavidKRK/DavidKRK.github.io/blob/gh-pages/assets/images/david_krk_owl.jpg?raw=true" alt="David KRK performing" id="hero-img" />
+    <img src="assets/images/david_krk_owl.jpg" alt="David KRK performing" id="hero-img" />
+    <div class="hero-logo">
+        <img src="assets/images/logo.png" alt="David KRK Logo"> </div>  </section>
 
-  </section>
-
-  <!-- CORRECTION : Le contenu principal est maintenant dans la balise <main> pour une meilleure sémantique -->
-  <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
-    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">David KRK</h1>
-
-    <!-- CORRECTION : Le titre h2 "Home" redondant a été supprimé. Le paragraphe suivant sert de sous-titre/description. -->
-    <p class="mt-4 text-gray-300 text-lg">Official website of David KRK, international Techno DJ and producer. Discover his music, biography, and events.</p>
+  <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10"> 
+    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">David KRK</h1> 
+    <p class="mt-4 text-gray-300 text-lg">Official website of David KRK</p>
+    <p>International Techno DJ and producer.</p> 
+    <p>Discover his Music, Biography, and Events.</p>
   </main>
+
 
   <footer>
     <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
       <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
     </div>
-    <!-- CORRECTION : Année du copyright mise à jour -->
-    <p class="text-sm opacity-70">© 2024 David KRK. All Rights Reserved</p>
+    <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
     <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
   </footer>
 
@@ -176,23 +184,20 @@
     const img = document.getElementById('hero-img');
     const hero = document.getElementById('hero');
 
-    // Effet de zoom au scroll sur l'image du hero
     window.addEventListener('scroll', () => {
-      // Pour éviter l'effet sur mobile où le scroll est souvent moins fluide et l'effet moins pertinent
       if (window.innerWidth < 768) {
         return;
       }
-      
+
       const scrollTop = window.scrollY;
       const heroHeight = hero.offsetHeight;
-      
-      // On ne lance l'effet que lorsque le hero est visible
+
       if (scrollTop < heroHeight) {
         const scrollRatio = scrollTop / heroHeight;
-        const scale = 1 + scrollRatio * 0.15; // Augmente le zoom
-        const translateY = scrollRatio * 30; // Augmente le décalage vertical
-        
-        // Applique la transformation
+        let scale = 1 + scrollRatio * 0.15;
+        scale = Math.min(scale, 1.5);
+        const translateY = scrollRatio * 30; 
+
         img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
       }
     });
