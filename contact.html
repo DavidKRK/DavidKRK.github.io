@@ -112,6 +112,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       color: white;
       font-family: 'Russo One', sans-serif;
+      font-size: 16px;
     }
 
     .contact-form textarea {
@@ -184,10 +185,14 @@
     <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">CONTACT</h1> 
     
     <div class="contact-form">
-      <form action="https://formspree.io/f/davidkrkofficial@gmail.com" method="POST">
+      <form action="https://formspree.io/f/mzzvdbad" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <textarea name="message" placeholder="Your Message" required></textarea>
+        
+        <input type="hidden" name="_subject" value="New contact from David KRK website">
+        <input type="hidden" name="_language" value="fr">
+        
         <button type="submit">SEND MESSAGE</button>
       </form>
     </div>
