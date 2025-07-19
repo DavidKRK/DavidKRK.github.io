@@ -1,92 +1,235 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | David KRK</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            line-height: 1.5;
-            color: #000;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        h1 {
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-        nav {
-            margin-top: 15px;
-        }
-        nav a {
-            color: #000;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        form {
-            margin: 80px auto;
-            max-width: 500px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 5px 0;
-            margin-bottom: 20px;
-            border: none;
-            border-bottom: 1px solid #000;
-            background: transparent;
-            font-family: inherit;
-            font-size: 16px;
-        }
-        textarea {
-            height: 100px;
-            resize: none;
-        }
-        button {
-            background: #000;
-            color: #fff;
-            border: none;
-            padding: 8px 25px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 16px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 100px;
-            padding-top: 20px;
-            border-top: 1px solid #000;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David KRK · CONTACT</title>
+  <meta name="description" content="Contact David KRK for bookings, collaborations and more.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary-color: #FF69B4;
+      --secondary-color: #03A9F4;
+      --accent-color: #8BC34A;
+      --dark-bg: #0F0F0F;
+      --darker-bg: #080808;
+      --transition: all 0.4s ease;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Russo One', sans-serif;
+      background-color: #416E73;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      overflow: hidden;
+      background: black;
+    }
+
+    .hero img#hero-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: auto;
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+      object-fit: cover;
+    }
+
+    .hero-header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.2rem;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    .hero-header a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .hero-header a:hover {
+      color: var(--primary-color);
+    }
+
+    .main-title {
+      text-align: center;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% auto;
+      animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
+      opacity: 0;
+      margin-top: 1rem;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 0 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      font-family: 'Russo One', sans-serif;
+    }
+
+    .contact-form textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      background: black;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-family: 'Russo One', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .contact-form button:hover {
+      background: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+
+    .neon-text {
+      animation: neon 2s ease-in-out infinite;
+    }
+
+    @keyframes neon {
+      0%, 100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF69B4, 0 0 20px #FF69B4, 0 0 25px #FF69B4, 0 0 30px #FF69B4, 0 0 35px #FF69B4;
+        color: #fff;
+      }
+      50% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #03A9F4, 0 0 40px #03A9F4, 0 0 50px #03A9F4, 0 0 60px #03A9F4, 0 0 70px #03A9F4;
+        color: #e0e0e0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
+      .main-title { font-size: 2.5rem; }
+      .contact-form {
+        margin: 1rem auto;
+      }
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>DAVID KRK</h1>
-        <nav>
-            <a href="/">ACCUEIL</a>
-            <a href="/bio.html">BIO</a>
-            <a href="/music.html">MUSIC</a>
-            <a href="/contact.html">CONTACT</a>
-        </nav>
-    </header>
+<body class="antialiased">
 
-    <main>
-        <form action="https://formspree.io/f/davidkrkofficial@gmail.com" method="POST">
-            <input type="text" name="name" required placeholder="Nom">
-            <textarea name="message" required placeholder="Message"></textarea>
-            <button type="submit">ENVOYER</button>
-        </form>
-    </main>
+  <section class="hero" id="hero">
+    <div class="hero-header">
+      <a href="/">Home</a>
+      <a href="bio.html">Bio</a>
+      <a href="music.html">Music</a>
+      <a href="event.html">Event</a>
+      <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
+        <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp 
+      </a>
+    </div>
+    <img src="assets/images/david_krk_owl.jpg" alt="David KRK performing" id="hero-img" />
+  </section>
 
-    <footer>
-        <p>© 2024 DAVID KRK</p>
-    </footer>
+  <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10"> 
+    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">CONTACT</h1> 
+    
+    <div class="contact-form">
+      <form action="https://formspree.io/f/davidkrkofficial@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">SEND MESSAGE</button>
+      </form>
+    </div>
+
+    <div class="mt-8 text-lg">
+      <p>Or contact directly:</p>
+      <p class="mt-2">
+        <a href="mailto:davidkrkofficial@gmail.com" class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
+      <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
+    </div>
+    <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+    <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
+  </footer>
+
+  <script>
+    const img = document.getElementById('hero-img');
+    const hero = document.getElementById('hero');
+
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth < 768) {
+        return;
+      }
+
+      const scrollTop = window.scrollY;
+      const heroHeight = hero.offsetHeight;
+
+      if (scrollTop < heroHeight) {
+        const scrollRatio = scrollTop / heroHeight;
+        let scale = 1 + scrollRatio * 0.15;
+        scale = Math.min(scale, 1.5);
+        const translateY = scrollRatio * 30; 
+
+        img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
+      }
+    });
+  </script>
+
 </body>
 </html>
