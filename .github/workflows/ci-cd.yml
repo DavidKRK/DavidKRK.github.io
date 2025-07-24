@@ -74,19 +74,3 @@ jobs:
           args: "🚀 Déploiement réussi: ${{ github.repository }}"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-
-  sync:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Sync files
-        uses: repo-sync/github-sync@v2
-        with:
-          source_repo: 'DavidKRK/DavidKRK.github.io'
-          source_branch: 'main'
-          destination_branch: 'gh-pages'
-          file_patterns: 'images/optimized/*'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

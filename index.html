@@ -14,17 +14,17 @@
     <meta property="og:url" content="https://davidkrk.com/">
     <meta property="og:title" content="David KRK · DJ Techno & Producteur">
     <meta property="og:description" content="DJ Techno international - France, Espagne, Pays Basque">
-    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://davidkrk.com/">
     <meta property="twitter:title" content="David KRK · DJ Techno & Producteur">
     <meta property="twitter:description" content="DJ Techno international - France, Espagne, Pays Basque">
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
+    <link rel="icon" type="image/webp" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,13 +46,14 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             font-family: 'Russo One', sans-serif;
             color: white;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
             overflow-x: hidden;
+            background-color: var(--dark-bg);
+        }
+
+        .hero-background {
+            background-image: url('images/optimized/dj_crowd.webp');
         }
         
         .logo-container {
@@ -178,29 +179,12 @@
         .welcome-message {
             display: none;
             text-align: center;
-            font-size: 1.25rem;
             line-height: 1.6;
         }
         
         .welcome-message.active {
             display: block;
             animation: fadeIn 0.8s ease-out;
-        }
-        
-        /* Mixcloud player styling */
-        .mixcloud-player {
-            width: 100%;
-            height: 120px;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            margin: 2rem 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-        
-        .mixcloud-player:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
         
         /* Animations */
@@ -236,225 +220,153 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 3.5rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .welcome-text {
-                padding: 1rem;
-            }
-            
-            .welcome-message {
-                font-size: 1.1rem;
-            }
-            
-            .mixcloud-player {
-                height: 100px;
-            }
-        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4">
-    <main class="text-center max-w-4xl mx-auto px-4 py-8">
-        <!-- Logo with animated border -->
-        <div class="logo-container">
-            <div class="logo-border"></div>
-            <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png" 
-                 alt="Logo David KRK" 
-                 class="w-32 h-32 rounded-full border-4 border-white object-cover shadow-xl">
-        </div>
-        
-        <!-- Main Title -->
-        <h1 class="main-title text-6xl md:text-8xl font-bold mb-8 opacity-0">
-            David KRK
-        </h1>
-        
-        <!-- Navigation -->
-        <nav class="nav-container flex justify-center gap-8 mb-12">
-            <a href="bio.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
-                Bio
-            </a>
-            <a href="music.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
-                Music
-            </a>
-            <a href="events.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
-                Events
-            </a>
-            <a href="contact.html" class="nav-link text-2xl text-white hover:text-primary transition-colors">
-                Contact
-            </a>
-        </nav>
-        
-        <!-- Language Selector -->
-        <div class="language-selector">
-            <button class="language-btn active" data-lang="fr">Français</button>
-            <button class="language-btn" data-lang="es">Español</button>
-            <button class="language-btn" data-lang="en">English</button>
-            <button class="language-btn" data-lang="eu">Euskara</button>
-        </div>
-        
-        <!-- Main Text with language options -->
-        <div class="welcome-text mb-12">
-            <!-- French -->
-            <div class="welcome-message active" data-lang="fr">
-                <p>Bienvenue sur le site officiel de David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Spécialisé en Trance, Tech Trance et Techno.</p>
-            </div>
+<body>
+
+    <div class="hero-background relative min-h-screen bg-cover bg-center bg-fixed">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+        <div class="relative z-10 flex flex-col min-h-screen p-4 sm:p-6 md:p-8">
             
-            <!-- Spanish -->
-            <div class="welcome-message" data-lang="es">
-                <p>Bienvenido al sitio oficial de David KRK, DJ de Techno internacional actuando en Francia, España y el País Vasco desde 2000. Especializado en Trance, Tech Trance y Techno.</p>
-            </div>
+            <header class="w-full max-w-7xl mx-auto">
+                <nav class="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
+                    <a href="bio.html" class="nav-link text-lg md:text-xl text-white hover:text-primary transition-colors">Bio</a>
+                    <a href="music.html" class="nav-link text-lg md:text-xl text-white hover:text-primary transition-colors">Music</a>
+                    <a href="events.html" class="nav-link text-lg md:text-xl text-white hover:text-primary transition-colors">Events</a>
+                    <a href="contact.html" class="nav-link text-lg md:text-xl text-white hover:text-primary transition-colors">Contact</a>
+                    <a href="https://wa.me/33000000000" target="_blank" class="nav-link text-lg md:text-xl text-white hover:text-primary transition-colors flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Whatsapp</span>
+                    </a>
+                </nav>
+            </header>
+
+            <main class="flex-grow flex flex-col items-center justify-center text-center max-w-7xl mx-auto px-4 py-8">
+                
+                <div class="logo-container">
+                    <div class="logo-border"></div>
+                    <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp" 
+                         alt="Logo David KRK" 
+                         class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white object-cover shadow-xl">
+                </div>
+                
+                <h1 class="main-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 opacity-0">
+                    David KRK
+                </h1>
+                
+                <div class="language-selector flex-wrap">
+                    <button class="language-btn active" data-lang="fr">Français</button>
+                    <button class="language-btn" data-lang="es">Español</button>
+                    <button class="language-btn" data-lang="en">English</button>
+                    <button class="language-btn" data-lang="eu">Euskara</button>
+                </div>
+                
+                <div class="welcome-text mb-12 text-base sm:text-lg max-w-3xl">
+                    <div class="welcome-message active" data-lang="fr">
+                        <p>Bienvenue sur le site officiel de David KRK, DJ Techno international se produisant en France, Espagne et Pays Basque depuis 2000. Spécialisé en Trance, Tech Trance et Techno.</p>
+                    </div>
+                    <div class="welcome-message" data-lang="es">
+                        <p>Bienvenido al sitio oficial de David KRK, DJ de Techno internacional actuando en Francia, España y el País Vasco desde 2000. Especializado en Trance, Tech Trance y Techno.</p>
+                    </div>
+                    <div class="welcome-message" data-lang="en">
+                        <p>Welcome to the official website of David KRK, international Techno DJ performing in France, Spain and the Basque Country since 2000. Specializing in Trance, Tech Trance and Techno.</p>
+                    </div>
+                    <div class="welcome-message" data-lang="eu">
+                        <p>Ongi etorri David KRK-ren webgune ofizialera, 2000. urtetik Frantziako, Espainiako eta Euskal Herriko Techno DJ internazionala. Trance, Tech Trance eta Techno espezialista.</p>
+                    </div>
+                </div>
+
+            </main>
             
-            <!-- English -->
-            <div class="welcome-message" data-lang="en">
-                <p>Welcome to the official website of David KRK, international Techno DJ performing in France, Spain and the Basque Country since 2000. Specializing in Trance, Tech Trance and Techno.</p>
-            </div>
-            
-            <!-- Basque -->
-            <div class="welcome-message" data-lang="eu">
-                <p>Ongi etorri David KRK-ren webgune ofizialera, 2000. urtetik Frantziako, Espainiako eta Euskal Herriko Techno DJ internazionala. Trance, Tech Trance eta Techno espezialista.</p>
-            </div>
+            <footer class="w-full max-w-7xl mx-auto text-center text-xs sm:text-sm">
+                <div class="flex justify-center gap-6 mb-4">
+                    <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-mixcloud"></i></a>
+                    <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-youtube"></i></a>
+                    <a href="https://soundcloud.com/david-krkofficial" target="_blank" aria-label="SoundCloud" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
+                    <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <p class="opacity-70">© 2023 David KRK. Tous droits réservés.</p>
+            </footer>
         </div>
-        
-        <!-- Mixcloud Player -->
-        <div class="mixcloud-player">
-            <iframe 
-                width="100%" 
-                height="120" 
-                src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2FDavidKRK%2F" 
-                frameborder="0">
-            </iframe>
-        </div>
-        
-        <!-- Social Icons -->
-        <div class="flex justify-center gap-6 mb-8">
-            <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-3xl text-white">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram" class="social-icon text-3xl text-white">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud" class="social-icon text-3xl text-white">
-                <i class="fab fa-mixcloud"></i>
-            </a>
-            <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube" class="social-icon text-3xl text-white">
-                <i class="fab fa-youtube"></i>
-            </a>
-            <a href="https://soundcloud.com/david-krkofficial" target="_blank" aria-label="SoundCloud" class="social-icon text-3xl text-white">
-                <i class="fab fa-soundcloud"></i>
-            </a>
-            <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok" class="social-icon text-3xl text-white">
-                <i class="fab fa-tiktok"></i>
-            </a>
-        </div>
-        
-        <!-- Latest Track (Placeholder) -->
-        <div class="mt-12 p-6 bg-black bg-opacity-30 rounded-xl max-w-lg mx-auto transform transition-all hover:scale-105">
-            <h3 class="text-xl font-bold mb-4">Dernière sortie</h3>
-            <div class="p-4 bg-black bg-opacity-50 rounded-lg">
-                <p class="text-primary font-bold">KRK - Neon Dreams</p>
-                <p class="text-sm opacity-80 mb-3">Tech Trance • 2023</p>
-                <button class="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-black font-bold py-2 px-6 rounded-full transition-all transform hover:scale-105">
-                    Écouter <i class="ml-2 fas fa-play"></i>
-                </button>
-            </div>
-        </div>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="mt-auto py-6 text-center text-sm opacity-70">
-        <p>© 2023 David KRK. Tous droits réservés.</p>
-    </footer>
+    </div>
 
     <script>
-        // Simple script to ensure animations trigger after page load
         document.addEventListener('DOMContentLoaded', () => {
-            // Add a small delay to ensure CSS animations trigger
+            // --- Animation & Interaction Setup ---
+            
+            // Fade in main title
             setTimeout(() => {
-                document.querySelector('.main-title').style.opacity = '1';
+                const mainTitle = document.querySelector('.main-title');
+                if (mainTitle) mainTitle.style.opacity = '1';
             }, 100);
             
-            // Add pulse animation to social icons on hover
+            // Pulse animation for social icons
             const socialIcons = document.querySelectorAll('.social-icon');
             socialIcons.forEach(icon => {
-                icon.addEventListener('mouseenter', () => {
-                    icon.classList.add('pulse');
-                });
-                icon.addEventListener('mouseleave', () => {
-                    icon.classList.remove('pulse');
-                });
+                icon.addEventListener('mouseenter', () => icon.classList.add('pulse'));
+                icon.addEventListener('mouseleave', () => icon.classList.remove('pulse'));
             });
             
-            // Add subtle parallax effect to welcome text
+            // Parallax effect for welcome text (non-touch devices only)
             const welcomeText = document.querySelector('.welcome-text');
-            window.addEventListener('mousemove', (e) => {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                welcomeText.style.transform = `perspective(500px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
+            const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
             
-            // Language selector functionality
+            if (welcomeText && !isTouchDevice) {
+                window.addEventListener('mousemove', (e) => {
+                    const { innerWidth, innerHeight } = window;
+                    const xAxis = (innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (innerHeight / 2 - e.pageY) / 25;
+                    welcomeText.style.transform = `perspective(500px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                });
+            }
+
+            // --- Language Selector ---
             const languageBtns = document.querySelectorAll('.language-btn');
             const welcomeMessages = document.querySelectorAll('.welcome-message');
-            
-            languageBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Remove active class from all buttons and messages
-                    languageBtns.forEach(b => b.classList.remove('active'));
-                    welcomeMessages.forEach(msg => msg.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    btn.classList.add('active');
-                    
-                    // Show corresponding message
-                    const lang = btn.dataset.lang;
-                    document.querySelector(`.welcome-message[data-lang="${lang}"]`).classList.add('active');
-                    
-                    // Reset the auto-rotation timer
-                    resetAutoRotation();
-                });
-            });
-            
-            // Auto-rotation of languages every 5 seconds
-            let rotationInterval;
             const languages = ['fr', 'es', 'en', 'eu'];
             let currentIndex = 0;
-            
-            function rotateLanguage() {
-                currentIndex = (currentIndex + 1) % languages.length;
-                const nextLang = languages[currentIndex];
-                
-                // Remove active class from all buttons and messages
+            let rotationInterval;
+
+            function switchLanguage(lang) {
                 languageBtns.forEach(b => b.classList.remove('active'));
                 welcomeMessages.forEach(msg => msg.classList.remove('active'));
+
+                const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+                const activeMsg = document.querySelector(`.welcome-message[data-lang="${lang}"]`);
+
+                if (activeBtn) activeBtn.classList.add('active');
+                if (activeMsg) activeMsg.classList.add('active');
                 
-                // Add active class to next language
-                document.querySelector(`.language-btn[data-lang="${nextLang}"]`).classList.add('active');
-                document.querySelector(`.welcome-message[data-lang="${nextLang}"]`).classList.add('active');
+                currentIndex = languages.indexOf(lang);
             }
-            
+
+            function rotateLanguage() {
+                currentIndex = (currentIndex + 1) % languages.length;
+                switchLanguage(languages[currentIndex]);
+            }
+
             function resetAutoRotation() {
                 clearInterval(rotationInterval);
                 rotationInterval = setInterval(rotateLanguage, 5000);
             }
-            
-            // Start auto-rotation
-            resetAutoRotation();
-            
-            // Pause auto-rotation when hovering over welcome text
-            welcomeText.addEventListener('mouseenter', () => {
-                clearInterval(rotationInterval);
+
+            languageBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switchLanguage(btn.dataset.lang);
+                    resetAutoRotation();
+                });
             });
             
-            welcomeText.addEventListener('mouseleave', resetAutoRotation);
+            if (welcomeText) {
+                welcomeText.addEventListener('mouseenter', () => clearInterval(rotationInterval));
+                welcomeText.addEventListener('mouseleave', resetAutoRotation);
+            }
+
+            // Initial setup
+            resetAutoRotation();
         });
     </script>
 </body>
