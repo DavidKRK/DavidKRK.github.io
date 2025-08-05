@@ -437,58 +437,59 @@
         </div>
     </main>
 
-    <footer class="mt-auto py-6 text-center w-full">
-        <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4">
-            <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20depuis%20le%20site" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
-                CONTACT
-            </a>
-            <span class="text-xs sm:text-sm opacity-30">|</span>
-            <a href="mailto:davidkrkofficial@gmail.com?subject=Booking%20Request" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
-                BOOKING
-            </a>
-            <span class="text-xs sm:text-sm opacity-30">|</span>
-            <a href="mailto:davidkrkofficial@gmail.com?subject=Remix%20Request" class="text-xs sm:text-sm opacity-70 hover:opacity-100 hover:text-[var(--primary-color)] transition-colors">
-                REMIX
-            </a>
-        </div>
-        <p class="text-xs sm:text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-        <p class="neon font-bold text-lg mt-2">"May The Techno Be With You"</p>
-    </footer>
+  <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10"> 
+    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">CONTACT</h1> 
 
-    <script>
-        // Fonction pour afficher le contenu de la langue sélectionnée et masquer les autres
-        function showContent(langId, clickedLink) {
-            var contents = document.querySelectorAll('.lang-content');
-            contents.forEach(function(content) {
-                content.classList.remove('active');
-            });
+    <div class="contact-form">
+      <form action="https://formspree.io/f/mzzvdbad" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
 
-            var selectedContent = document.getElementById(langId);
-            if (selectedContent) {
-                selectedContent.classList.add('active');
-            }
+        <input type="hidden" name="_subject" value="New contact from David KRK website">
+        <input type="hidden" name="_language" value="fr">
 
-            // Styliser le lien de navigation de langue actif
-            var navLinks = document.querySelectorAll('#biography-content nav a.lang-link');
-            navLinks.forEach(function(link) {
-                link.classList.remove('active-lang-link');
-            });
-            if (clickedLink) {
-                clickedLink.classList.add('active-lang-link');
-            }
-        }
+        <button type="submit">SEND MESSAGE</button>
+      </form>
+    </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var contents = document.querySelectorAll('.lang-content');
-            contents.forEach(function(content) {
-                content.classList.remove('active');
-            });
+    <div class="mt-8 text-lg">
+      <p>Or contact directly:</p>
+      <p class="mt-2">
+        <a href="mailto:davidkrkofficial@gmail.com" class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a>
+      </p>
+    </div>
+  </main>
 
-            var navLinks = document.querySelectorAll('#biography-content nav a.active-lang-link');
-            navLinks.forEach(function(link) {
-                link.classList.remove('active-lang-link');
-            });
-        });
-    </script>
+  <footer>
+    <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
+      <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
+    </div>
+    <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+    <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
+  </footer>
+
+  <script>
+    const img = document.getElementById('hero-img');
+    const hero = document.getElementById('hero');
+
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth < 768) {
+        return;
+      }
+
+      const scrollTop = window.scrollY;
+      const heroHeight = hero.offsetHeight;
+
+      if (scrollTop < heroHeight) {
+        const scrollRatio = scrollTop / heroHeight;
+        let scale = 1 + scrollRatio * 0.15;
+        scale = Math.min(scale, 1.5);
+        const translateY = scrollRatio * 30; 
+
+        img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
+      }
+    });
+  </script>
 </body>
 </html>
