@@ -1,212 +1,242 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David KRK · HOME</title>
-  <meta name="description" content="Official website of David KRK, international Techno DJ and producer. Discover his music, biography, and events.">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>David KRK · Site Officiel</title>
+    <meta name="description" content="Site officiel de David KRK, DJ et producteur international de musique techno. Découvrez sa musique, sa biographie et ses événements." />
+    <meta name="author" content="David KRK" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta property="og:title" content="David KRK · DJ Techno & Producteur" />
+    <meta property="og:description" content="Découvrez l'univers de David KRK, DJ international de musique techno, Trance et Tech Trance." />
+    <meta property="og:image" content="https://www.davidkrk.com/images/optimized/logo%2030-01-25.webp" />
+    <meta property="og:url" content="https://www.davidkrk.com" />
 
-  <style>
-    :root {
-      --primary-color: #FF69B4;
-      --secondary-color: #03A9F4;
-      --accent-color: #8BC34A;
-      --dark-bg: #0F0F0F;
-      --darker-bg: #080808;
-      --transition: all 0.4s ease;
-    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="David KRK · DJ Techno & Producteur" />
+    <meta name="twitter:description" content="DJ international - France, Espagne, Pays Basque" />
+    <meta name="twitter:image" content="https://www.davidkrk.com/images/optimized/logo%2030-01-25.webp" />
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Russo One', sans-serif;
-  /* Change this line */
-  background-color: #416E73 ; /*e.g., #333333 for dark grey*/
-  color: white;
-  overflow-x: hidden;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-      overflow: hidden;
-      background: black;
-    }
+    <style>
+        :root {
+            --primary-color: #FF69B4;
+            --secondary-color: #03A9F4;
+            --accent-color: #8BC34A;
+            --dark-bg: #0F0F0F;
+            --darker-bg: #080808;
+            --transition: all 0.4s ease;
+        }
 
-    .hero img#hero-img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 120%;
-      height: auto;
-      transform: translate(-50%, -50%) scale(1);
-      transition: transform 0.2s ease-out;
-      will-change: transform;
-      object-fit: cover;
-    }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Russo One', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-    .hero-header {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.2rem;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 10;
-    }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+            background: black;
+        }
 
-    .hero-header a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-    }
+        .hero img#hero-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: auto;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+            object-fit: cover;
+        }
 
-    .hero-header a:hover {
-      color: var(--primary-color);
-    }
+        .hero-header {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.2rem;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
 
-    .main-title {
-      text-align: center;
-      background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
-      opacity: 0;
-      margin-top: 1rem;
-    }
+        .hero-header a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        .hero-header a:hover {
+            color: var(--primary-color);
+        }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        /* Styles pour le texte sur l'image de fond */
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9;
+            text-align: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 4rem; /* Grande taille pour le nom */
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
 
-    .hero-logo {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 150px;
-      height: auto;
-      z-index: 11;
-    }
+        .hero-text p {
+            font-size: 1.5rem;
+            margin: 0;
+        }
 
-    .hero-logo img {
-        max-width: 100%;
-        height: auto;
-    }
+        .main-title {
+            text-align: center;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
+            opacity: 0;
+            margin-top: 1rem;
+        }
 
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-    }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .neon-text {
-      animation: neon 2s ease-in-out infinite;
-    }
+        .hero-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: auto;
+            z-index: 11;
+        }
 
-    @keyframes neon {
-      0%, 100% {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF69B4, 0 0 20px #FF69B4, 0 0 25px #FF69B4, 0 0 30px #FF69B4, 0 0 35px #FF69B4;
-        color: #fff;
-      }
-      50% {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #03A9F4, 0 0 40px #03A9F4, 0 0 50px #03A9F4, 0 0 60px #03A9F4, 0 0 70px #03A9F4;
-        color: #e0e0e0;
-      }
-    }
+        .hero-logo img {
+            max-width: 100%;
+            height: auto;
+        }
 
-    .fab {
-      color: #25D366; /* Defined here for better maintainability */
-    }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
-      .main-title { font-size: 2.5rem; }
-      .hero-logo {
-        width: 100px;
-        bottom: 10px;
-        right: 10px;
-      }
-    }
-  </style>
+        .neon-text {
+            animation: neon 2s ease-in-out infinite;
+        }
+
+        @keyframes neon {
+            0%, 100% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF69B4, 0 0 20px #FF69B4, 0 0 25px #FF69B4, 0 0 30px #FF69B4, 0 0 35px #FF69B4;
+                color: #fff;
+            }
+            50% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #03A9F4, 0 0 40px #03A9F4, 0 0 50px #03A9F4, 0 0 60px #03A9F4, 0 0 70px #03A9F4;
+                color: #e0e0e0;
+            }
+        }
+        
+        .fab.fa-whatsapp {
+            color: #25D366;
+        }
+
+        @media (max-width: 768px) {
+            .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
+            .hero-text h1 { font-size: 3rem; }
+            .hero-text p { font-size: 1rem; }
+            .hero-logo {
+                width: 100px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
 </head>
 <body class="antialiased">
 
-  <section class="hero" id="hero">
-    <div class="hero-header">
-      <a href="bio.html">Bio</a>
-      <a href="music.html">Music</a>
-      <a href="event.html">Event</a>
-      <a href="/contact.html">Contact</a>
-      <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
-            <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp 
-        </a>
-    </div>
-    <img src="assets/images/david_krk_owl.jpg" alt="David KRK performing" id="hero-img" />
-    </section>
+    <header class="hero" id="hero">
+        <nav class="hero-header" aria-label="Main Navigation">
+            <a href="bio.html">Bio</a>
+            <a href="music.html">Music</a>
+            <a href="event.html">Event</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" rel="noopener noreferrer" class="nav-link text-xl sm:text-2xl flex items-center" aria-label="Rejoindre le groupe WhatsApp">
+                <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
+            </a>
+        </nav>
+        <img src="images/optimized/david_krk_owl.webp" alt="David KRK en train de mixer dans un club" id="hero-img" />
 
-  <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10"> 
-    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">David KRK</h1> 
-    <p class="mt-4 text-gray-300 text-lg">Official website of David KRK</p>
-    <p>International Techno DJ and producer.</p> 
-    <p>Discover his Music, Biography, and Events.</p>
+        <div class="hero-text text-center">
+            <h1>David KRK</h1>
+            <p>Official website of David KRK</p>
+            <p>International Techno DJ and producer.</p>
+            <p>Discover his Music, Biography, and Events.</p>
+        </div>
+    </header>
 
-    <div class="mt-8 mb-8">
-      <iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&autoplay=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
-    </div>
-  </main>
+    <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
+        <section id="latest-mix" class="mt-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Dernier Mix</h2>
+            <iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&autoplay=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" title="Dernier mix de David KRK sur Mixcloud"></iframe>
+        </section>
+    </main>
 
+    <footer class="mt-auto">
+        <hr class="border-t border-gray-700 my-8">
+        <p class="text-sm opacity-70">© 2025 David KRK. Tous droits réservés.</p>
+        <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
+    </footer>
 
-  <footer>
-    <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
-      <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
-    </div>
-    <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-    <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
-  </footer>
+    <script>
+        const img = document.getElementById('hero-img');
+        const hero = document.getElementById('hero');
 
-  <script>
-    const img = document.getElementById('hero-img');
-    const hero = document.getElementById('hero');
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth < 768) {
+                return;
+            }
 
-    window.addEventListener('scroll', () => {
-      if (window.innerWidth < 768) {
-        return;
-      }
+            const scrollTop = window.scrollY;
+            const heroHeight = hero.offsetHeight;
 
-      const scrollTop = window.scrollY;
-      const heroHeight = hero.offsetHeight;
+            if (scrollTop < heroHeight) {
+                const scrollRatio = scrollTop / heroHeight;
+                let scale = 1 + scrollRatio * 0.15;
+                scale = Math.min(scale, 1.5);
+                const translateY = scrollRatio * 30;
 
-      if (scrollTop < heroHeight) {
-        const scrollRatio = scrollTop / heroHeight;
-        let scale = 1 + scrollRatio * 0.15;
-        scale = Math.min(scale, 1.5);
-        const translateY = scrollRatio * 30; 
-
-        img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
-      }
-    });
-  </script>
-
+                img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
+            }
+        });
+    </script>
 </body>
 </html>
