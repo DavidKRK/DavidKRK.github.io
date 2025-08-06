@@ -22,22 +22,8 @@ body:not(.home-page) {
     background-color: #416E73 ;
 }
 
-body.home-page::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/david_krk_owl.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
-
-.hero-header, main, footer {
-    position: relative;
+body:not(.home-page) {
+    background-color: #416E73 ;
 }
 
 .hero-header {
