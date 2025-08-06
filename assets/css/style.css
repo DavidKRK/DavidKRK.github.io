@@ -20,7 +20,7 @@ html, body {
 }
 
 body.home-page {
-  background-image: url('assets/images/david_krk_owl.jpg');
+  background-image: url('../images/david_krk_owl.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
