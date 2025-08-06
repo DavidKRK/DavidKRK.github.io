@@ -227,3 +227,11 @@ footer {
     to { opacity: 1; transform: translateY(0);
     }
 }
+
+.social-icons-left {
+    margin-left: 2cm;
+}
+
+.social-icons-right {
+    margin-right: 2cm;
+}
