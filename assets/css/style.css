@@ -74,23 +74,24 @@ main {
 }
 
 .text-center .main-title {
-    font-size: 4rem; /* Taille par défaut pour les petits écrans */
+    font-size: 4rem !important; /* Taille par défaut pour les petits écrans */
+    text-align: center !important;
 }
 
 @media (min-width: 640px) {
     .text-center .main-title {
-        font-size: 5rem; /* sm:text-5xl */
+        font-size: 5rem !important; /* sm:text-5xl */
     }
 }
 
 @media (min-width: 768px) {
     .text-center .main-title {
-        font-size: 6rem; /* md:text-6xl */
+        font-size: 6rem !important; /* md:text-6xl */
     }
 }
 
 .text-center p {
-    text-align: center;
+    text-align: center !important;
 }
 
 @keyframes gradient {
