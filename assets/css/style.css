@@ -80,6 +80,7 @@ main {
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
+    color: transparent !important;
     background-size: 200% auto;
     animation: gradient 8s ease infinite;
     margin-top: 1rem;
