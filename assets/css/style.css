@@ -76,6 +76,13 @@ main {
 .text-center .main-title {
     font-size: 4rem !important; /* Taille par défaut pour les petits écrans */
     text-align: center !important;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradient 8s ease infinite;
+    margin-top: 1rem;
 }
 
 @media (min-width: 640px) {
