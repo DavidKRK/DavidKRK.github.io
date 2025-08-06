@@ -10,7 +10,8 @@
     --transition: all 0.4s ease;
 }
 
-body, html {
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Russo One', sans-serif;
@@ -18,8 +19,14 @@ body, html {
   overflow-x: hidden;
 }
 
-body:not(.home-page) {
-    background-color: #416E73 ;
+body.home-page {
+  background-image: url('assets/images/david_krk_owl.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 body:not(.home-page) {
@@ -27,14 +34,17 @@ body:not(.home-page) {
 }
 
 .hero-header {
-    position: absolute;
-    top: 0; left: 0; right: 0;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1.2rem;
     background: rgba(0, 0, 0, 0.4);
     z-index: 10;
+}
+
+main {
+    flex: 1;
 }
 
 .hero-header a {
