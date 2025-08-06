@@ -311,7 +311,13 @@
         }
     </style>
 </head>
-<body class="flex flex-col items-center min-h-screen">
+<body class="home-page">
+
+    <div class="background-image"></div>
+
+    <div class="content-wrapper">
+
+    <div class="content-wrapper">
     <nav class="nav-container flex justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
     <a href="index.html" class="nav-link text-xl sm:text-2xl">Home</a>
     <a href="music.html" class="nav-link text-xl sm:text-2xl">Music</a>
@@ -327,8 +333,8 @@
         <img src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png" alt="Logo David KRK" class="w-20 h-20 sm:w-24 sm:h-24">
     </div>
 
-    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">David KRK</h1>
-    <h2 class="main-title text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 mb-10 sm:mb-12">Bio</h2>
+    <h1 class="main-title">David KRK</h1>
+    <h2 class="main-title">Bio</h2>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full">
         <div id="biography-content">
@@ -469,28 +475,5 @@
     <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
   </footer>
 
-  <script>
-    const img = document.getElementById('hero-img');
-    const hero = document.getElementById('hero');
-
-    window.addEventListener('scroll', () => {
-      if (window.innerWidth < 768) {
-        return;
-      }
-
-      const scrollTop = window.scrollY;
-      const heroHeight = hero.offsetHeight;
-
-      if (scrollTop < heroHeight) {
-        const scrollRatio = scrollTop / heroHeight;
-        let scale = 1 + scrollRatio * 0.15;
-        scale = Math.min(scale, 1.5);
-        const translateY = scrollRatio * 30; 
-
-        img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
-      }
-    });
-  </script>
-
-</body>
+  </body>
 </html>
