@@ -62,7 +62,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 120%;
+      width: 100%; /* Ajusté pour ne pas être trop grand */
       height: auto;
       transform: translate(-50%, -50%) scale(1);
       transition: transform 0.2s ease-out;
@@ -132,6 +132,11 @@
       color: white;
       font-family: 'Russo One', sans-serif;
       font-size: 16px;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7); /* Rendre le texte plus visible */
+      opacity: 1; /* S'assurer que l'opacité est à 1 */
     }
 
     .contact-form textarea {
