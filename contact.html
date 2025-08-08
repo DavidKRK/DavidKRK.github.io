@@ -41,6 +41,13 @@
       --transition: all 0.4s ease;
     }
 
+    html, body, .content-wrapper {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      box-sizing: border-box;
+      overflow-x: hidden !important;
+    }
+
     body, html {
       margin: 0;
       padding: 0;
@@ -62,12 +69,14 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 100%; /* Ajusté pour ne pas être trop grand */
+      width: 100%; 
       height: auto;
       transform: translate(-50%, -50%) scale(1);
       transition: transform 0.2s ease-out;
       will-change: transform;
       object-fit: cover;
+      min-height: 250px;
+      max-height: 80vh;
     }
 
     .hero-header {
@@ -79,6 +88,8 @@
       padding: 1.2rem;
       background: rgba(0, 0, 0, 0.4);
       z-index: 10;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .hero-header a {
@@ -103,6 +114,7 @@
       animation: gradient 8s ease infinite, fadeInDown 1s ease-out forwards;
       opacity: 0;
       margin-top: 1rem;
+      font-size: 3.2rem;
     }
 
     @keyframes gradient {
@@ -118,8 +130,15 @@
 
     .contact-form {
       max-width: 500px;
+      width: 100%;
       margin: 2rem auto;
       padding: 0 20px;
+      box-sizing: border-box;
+      background: rgba(0,0,0,0.15);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+      min-width: 0;
+      word-break: break-word;
     }
 
     .contact-form input,
@@ -129,14 +148,16 @@
       margin-bottom: 20px;
       background: rgba(0,0,0,0.2);
       border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
       color: white;
       font-family: 'Russo One', sans-serif;
       font-size: 16px;
+      box-sizing: border-box;
     }
     .contact-form input::placeholder,
     .contact-form textarea::placeholder {
-      color: rgba(255, 255, 255, 0.7); /* Rendre le texte plus visible */
-      opacity: 1; /* S'assurer que l'opacité est à 1 */
+      color: rgba(255, 255, 255, 0.7);
+      opacity: 1;
     }
 
     .contact-form textarea {
@@ -148,15 +169,19 @@
       background: black;
       color: white;
       border: none;
+      border-radius: 6px;
       padding: 12px 30px;
       font-family: 'Russo One', sans-serif;
       font-size: 1rem;
       cursor: pointer;
       transition: var(--transition);
+      width: 100%;
+      margin-bottom: 10px;
     }
 
     .contact-form button:hover {
       background: var(--primary-color);
+      color: #fff;
     }
 
     footer {
@@ -180,15 +205,49 @@
       }
     }
 
-    /* Responsive */
+    /* ----------- Responsive Design ----------- */
+    @media (max-width: 1024px) {
+      .main-title { font-size: 2.4rem; }
+      .contact-form { max-width: 90vw;}
+    }
     @media (max-width: 768px) {
-      .hero-header a { font-size: 1rem; margin: 0 0.5rem; }
-      .main-title { font-size: 2.5rem; }
+      .main-title { font-size: 2rem; }
       .contact-form {
-        margin: 1rem auto;
+        max-width: 98vw;
+        padding: 0 2vw;
+      }
+      .hero-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.6rem;
+        position: static;
+      }
+      .hero-header a {
+        margin: 0.2rem 0;
+        font-size: 1.1rem;
+      }
+      footer {
+        padding: 1.2rem 0.2rem;
       }
     }
-  </style>
+    @media (max-width: 480px) {
+      .main-title { font-size: 1.5rem !important; }
+      .contact-form input,
+      .contact-form textarea {
+        font-size: 14px;
+        padding: 10px;
+      }
+      .contact-form {
+        margin: 0.5rem auto;
+        padding: 0 1vw !important;
+        max-width: 99vw;
+      }
+      .hero img#hero-img {
+        min-height: 120px;
+        max-height: 40vh;
+      }
+    }
+    </style>
 </head>
 <body class="home-page">
 
@@ -214,19 +273,17 @@
         <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
             <div class="contact-form">
                 <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    
-                    <input type="hidden" name="_subject" value="New contact from David KRK website">
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                    <input type="email" name="email" placeholder="Votre email" required>
+                    <textarea name="message" placeholder="Votre message" required></textarea>
+                    <input type="hidden" name="_subject" value="Nouveau contact depuis le site David KRK">
                     <input type="hidden" name="_language" value="fr">
-                    
-                    <button type="submit">SEND MESSAGE</button>
+                    <button type="submit">ENVOYER LE MESSAGE</button>
                 </form>
             </div>
 
             <div class="mt-8 text-lg">
-                <p>Or contact directly:</p>
+                <p>Ou contactez-moi directement :</p>
                 <p class="mt-2">
                     <a href="mailto:davidkrkofficial@gmail.com" class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a>
                 </p>
@@ -234,8 +291,8 @@
         </main>
 
         <footer class="w-full max-w-7xl mx-auto px-20">
-            <div class="mt-8 mb-8 player-container" style="display: none;"> <!-- Mixcloud player from index.html, hidden for contact page -->
-                <iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&autoplay=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F" frameborder="0" allow="autoplay; encrypted-media; fullscreen; idle-detection; speaker-selection; web-share;"></iframe>
+            <div class="mt-8 mb-8 player-container" style="display: none;">
+                <!-- Mixcloud player (masqué sur la page contact) -->
             </div>
             <div class="flex justify-center gap-6 mb-4">
                 <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
@@ -248,7 +305,7 @@
             <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
                 <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
             </div>
-            <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+            <p class="text-sm opacity-70">© 2025 David KRK. Tous droits réservés</p>
             <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
         </footer>
     </div>
