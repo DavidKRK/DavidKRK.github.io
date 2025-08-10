@@ -22,17 +22,7 @@ function pauseSound() {
 
 window.addEventListener('scroll', () => {
   if (window.innerWidth < 768) {
-    return;
-  }
-
-  const scrollTop = window.scrollY;
-  const heroHeight = hero.offsetHeight;
-
-  if (scrollTop < heroHeight) {
-    const scrollRatio = scrollTop / heroHeight;
-    let scale = 1 + scrollRatio * 0.15;
-    scale = Math.min(scale, 1.5);
-    const translateY = scrollRatio * 30;
+@@ -17,4 +36,4 @@ window.addEventListener('scroll', () => {
 
     img.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
   }
