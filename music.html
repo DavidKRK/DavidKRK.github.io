@@ -1,88 +1,40 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David KRK · MUSIC</title>
-    <meta name="description" content="Check out David KRK's upcoming events, international Techno DJ.">
-
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/logo%2030-01-25.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" defer></script>
+  <title>Music</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
 </head>
-<body class="home-page">
+<body>
+  <button id="play-btn-patrice">Play Patrice Bäumel - Glutes (Original Mix)</button>
+  <button id="pause-btn-patrice">Pause Patrice Bäumel - Glutes (Original Mix)</button>
 
+  <button id="play-btn-blue-monday">Play New Order - Blue Monday</button>
+  <button id="pause-btn-blue-monday">Pause New Order - Blue Monday</button>
 
-  <div class="content-wrapper">
-        <header class="hero-header">
-        <a href="index.html">Home</a>
-        <a href="bio.html">Bio</a>
-        <a href="/contact.html">Contact</a>
-        <a href="event.html">Event</a>
-        <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
-              <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp
-          </a>
-      </header>
+  <button id="play-btn-winx">Play Winx - Don't Laugh - Original Live Raw Mix</button>
+  <button id="pause-btn-winx">Pause Winx - Don't Laugh - Original Live Raw Mix</button>
 
-    
+  <script>
+    var patriceSound = new Howl({
+      src: ['/workspaces/DavidKRK.github.io/assets/music/Patrice Bäumel–Glutes (Original Mix).mp3']
+    });
 
-    
-    <div class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
-            <h1 class="main-title">David KRK</h1>
-            <h2 class="main-title">Music</h2>
-        </div>
+    var newOrderSound = new Howl({
+      src: ['/workspaces/DavidKRK.github.io/assets/music/New Order Blue Monday.ogg']
+    });
 
-    <main class="text-center max-w-4xl mx-auto px-4 w-full">
-        <div class="track-list" style="margin-top: 2rem;">
+    var winxSound = new Howl({
+      src: ['/workspaces/DavidKRK.github.io/assets/music/Winx - Don\'t Laugh - Original Live Raw Mix.ogg']
+    });
 
-          <div class="music-track" style="margin-bottom: 1.5rem;">
-            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">New Order - Blue Monday</h4>
-      <button onclick="playSound()">Play</button>
-      <button onclick="pauseSound()">Pause</button>
-      </div>
-          
+    document.getElementById('play-btn-patrice').addEventListener('click', () => patriceSound.play());
+    document.getElementById('pause-btn-patrice').addEventListener('click', () => patriceSound.pause());
 
-          <div class="music-track" style="margin-bottom: 1.5rem;">
-            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Patrice Bäumel - Glutes (Original Mix)</h4>
-      <button onclick="playSound('assets/music/Patrice Bäumel–Glutes (Original Mix).mp3')">Play</button>
-      <button onclick="pauseSound()">Pause</button>
-      </div>
+    document.getElementById('play-btn-blue-monday').addEventListener('click', () => newOrderSound.play());
+    document.getElementById('pause-btn-blue-monday').addEventListener('click', () => newOrderSound.pause());
 
-          <div class="music-track" style="margin-bottom: 1.5rem;">
-            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Winx - Don't Laugh (Original Live Raw Mix)</h4>
-      <button onclick="playSound('assets/music/Winx - Don\'t Laugh - Original Live Raw Mix.ogg')">Play</button>
-      <button onclick="pauseSound()">Pause</button>
-      </div>
-
-        </div>
-        <!-- Ajoutez plus de contenu d'événements ici -->
-    </main>
-
-    <footer class="w-full max-w-7xl mx-auto">
-      
-      <div class="flex justify-center gap-6 mb-4">
-        <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-mixcloud"></i></a>
-        <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-youtube"></i></a>
-        <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
-        <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok" class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
-      </div>
-      <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
-        <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
-      </div>
-      <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-      <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
-    </footer>
-
-  </div>
-
-  <script src="assets/js/main.js"></script>
+    document.getElementById('play-btn-winx').addEventListener('click', () => winxSound.play());
+    document.getElementById('pause-btn-winx').addEventListener('click', () => winxSound.pause());
+  </script>
 </body>
 </html>
