@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" defer></script>
 </head>
 <body class="home-page">
 
@@ -50,19 +50,15 @@
 
           <div class="music-track" style="margin-bottom: 1.5rem;">
             <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Patrice Bäumel - Glutes (Original Mix)</h4>
-            <audio controls style="width: 100%;">
-              <source src="assets/music/Patrice Bäumel–Glutes (Original Mix).mp3" type="audio/mpeg">
-              Votre navigateur ne supporte pas l'élément audio.
-            </audio>
-          </div>
+      <button onclick="playSound('assets/music/Patrice Bäumel–Glutes (Original Mix).mp3')">Play</button>
+      <button onclick="pauseSound()">Pause</button>
+      </div>
 
           <div class="music-track" style="margin-bottom: 1.5rem;">
             <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Winx - Don't Laugh (Original Live Raw Mix)</h4>
-            <audio controls style="width: 100%;">
-              <source src="assets/music/Winx - Don't Laugh - Original Live Raw Mix.ogg" type="audio/ogg">
-              Votre navigateur ne supporte pas l'élément audio.
-            </audio>
-          </div>
+      <button onclick="playSound('assets/music/Winx - Don\'t Laugh - Original Live Raw Mix.ogg')">Play</button>
+      <button onclick="pauseSound()">Pause</button>
+      </div>
 
         </div>
         <!-- Ajoutez plus de contenu d'événements ici -->
