@@ -61,7 +61,9 @@ Player.prototype = {
           // Display the duration.
           duration.innerHTML = self.formatTime(Math.round(sound.duration()));
 
-          // Start updating the progress of the track.
+          // Start the wave animation.
+      wave.start();
+      self.isPlaying = true;
           requestAnimationFrame(self.step.bind(self));
 
           // Start the wave animation if we have already loaded
