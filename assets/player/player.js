@@ -352,15 +352,18 @@ volume.addEventListener('touchmove', move);
 
 // Setup the "waveform" animation.
 var wave = new SiriWave({
-  container: waveform,
-  width: window.innerWidth,
-  height: window.innerHeight * 0.3,
-  cover: true,
-  speed: 0.03,
-  amplitude: 0.7,
-  frequency: 2
+  container: waveform,
+  width: window.innerWidth,
+  height: window.innerHeight * 0.3,
+  cover: true,
+  speed: 0.03,
+  amplitude: 0.7,
+  frequency: 2
 });
-wave.start();
+
+player.addEventListener('play', function() {
+  wave.start();
+});
 
 // Update the height of the wave animation.
 // These are basically some hacks to get SiriWave.js to do what we want.
