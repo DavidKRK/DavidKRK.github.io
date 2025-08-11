@@ -1,546 +1,414 @@
-/*!
- * Howler.js Audio Player Demo
- * howlerjs.com
- *
- * (c) 2013-2020, James Simpson of GoldFire Studios
- * goldfirestudios.com
- *
- * MIT License
- */
+/* ====================================================================
+ *  HOWLER.JS AUDIO PLAYER –  (modifie‑et‑corrige‑tout le script d’origine)
+ * ==================================================================== */
 
-// Cache references to DOM elements.
-var elms = ['track', 'timer', 'duration', 'playBtn', 'pauseBtn', 'prevBtn', 'nextBtn', 'playlistBtn', 'volumeBtn', 'progress', 'bar', 'wave', 'loading', 'playlist', 'list', 'volume', 'barEmpty', 'barFull', 'sliderBtn'];
-elms.forEach(function(elm) {
-  window[elm] = document.getElementById(elm);
+/* --------------------------------------------------------------------
+ *  1.  Récupération des éléments DOM  (les IDs existent dans styles.css)
+ * -------------------------------------------------------------------- */
+const ids = [
+  'track', 'timer', 'duration', 'playBtn', 'pauseBtn',
+  'prevBtn', 'nextBtn', 'playlistBtn', 'volumeBtn',
+  'progress', 'bar',      // (bar = zone de progression hors waveform)
+  'wave', 'loading',
+  'playlist', 'list',
+  'volume', 'barEmpty', 'barFull', 'sliderBtn'
+];
+ids.forEach(id => window[id] = document.getElementById(id));
+
+/* --------------------------------------------------------------------
+ *  2.  PLAYLIST  (les fichiers pointent vers les URLs raw GitHub)
+ * -------------------------------------------------------------------- */
+const playlist = [
+  {
+    title: "Winx – Don't Laugh",
+    file: [
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Winx_%20Don%27t_Laugh%20_Original_%20Live_%20Raw_%20_Mix.ogg",
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Winx_%20Don%27t_Laugh%20_Original_%20Live_%20Raw_%20_Mix.webm"
+    ],
+    howl: null
+  },
+  {
+    title: "Patrice Baumel – Glutes",
+    file: [
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Patrice_Baumel_Glutes_%20(Original_Mix).mp3",
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Patrice_Baumel_Glutes_%20(Original_Mix).webm"
+    ],
+    howl: null
+  },
+  {
+    title: "New Order – Blue Monday",
+    file: [
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.ogg",
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.webm",
+      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.mp3"
+    ],
+    howl: null
+  }
+];
+
+/* --------------------------------------------------------------------
+ *  3.  CLASS Player –  gestion de la lecture, pause, skip, volume, …
+ * -------------------------------------------------------------------- */
+class Player {
+  constructor(playlist) {
+    this.playlist = playlist;          // tableau de pistes
+    this.index = 0;                    // index de la piste courante
+    this.isPlaying = false;            // état de lecture
+    this.currentHowl = null;           // Howl actif
+
+    /*--- Interface / UI init ---*/
+    track.innerHTML = `${this.index + 1}. ${this.playlist[0].title}`;
+    this.renderPlaylist();
+
+    /*--- Waveform (SiriWave) ---*/
+    this.wave = new SiriWave({
+      container: waveform,
+      width: window.innerWidth,
+      height: window.innerHeight * 0.3,
+      cover: true,
+      speed: 0.03,
+      amplitude: 0.7,
+      frequency: 2
+    });
+
+    /*--- Resize support ---*/
+    window.addEventListener('resize', this.resizeWave.bind(this));
+    this.resizeWave();  // initial call
+  }
+
+  /*==================================================================*
+   *   Utility : affichage de la playlist dans la div #list          *
+   *==================================================================*/
+  renderPlaylist() {
+    list.innerHTML = '';
+    this.playlist.forEach((song, i) => {
+      const div = document.createElement('div');
+      div.className = 'list-song';
+      div.textContent = song.title;
+      div.onclick = () => this.skipTo(i);
+      list.appendChild(div);
+    });
+  }
+
+  /*==================================================================*
+   *   PLAYBACK : play / pause / skip / seek                         *
+   *==================================================================*/
+  play(idx = null) {
+    if (idx !== null) this.index = idx;
+
+    const data = this.playlist[this.index];
+
+    // Si la piste est déjà chargée, on la réutilise
+    let howl = data.howl;
+    if (!howl) {
+      howl = data.howl = new Howl({
+        src: data.file,
+        html5: true,                    // force le streaming en HTML5
+        onplay: () => {
+          duration.innerHTML = this.formatTime(Math.round(howl.duration()));
+          this.wave.start();
+          this.isPlaying = true;
+          requestAnimationFrame(this.step.bind(this));
+          bar.style.display = 'none';
+          pauseBtn.style.display = 'block';
+        },
+        onload: () => {
+          this.loading.style.display = 'none';
+        },
+        onend: () => {
+          this.wave.stop();
+          this.skip('next');
+        },
+        onpause: () => {
+          this.wave.stop();
+          this.isPlaying = false;
+        },
+        onseek: () => requestAnimationFrame(this.step.bind(this))
+      });
+    }
+
+    howl.play();
+    track.innerHTML = `${this.index + 1}. ${data.title}`;
+    this.currentHowl = howl;
+    this.isPlaying = true;
+  }
+
+  pause() {
+    if (!this.currentHowl) return;
+    this.currentHowl.pause();
+    this.isPlaying = false;
+    playBtn.style.display = 'block';
+    pauseBtn.style.display = 'none';
+  }
+
+  skip(direction) {
+    if (direction === 'prev') {
+      this.index = (this.index - 1 + this.playlist.length) % this.playlist.length;
+    } else {
+      this.index = (this.index + 1) % this.playlist.length;
+    }
+    this.skipTo(this.index);
+  }
+
+  skipTo(idx) {
+    // Stop current track
+    if (this.currentHowl) this.currentHowl.stop();
+    // Reset progress bar
+    progress.style.width = '0%';
+    // Play the selected track
+    this.play(idx);
+  }
+
+  /*==================================================================*
+   *   VOLUME : ajustement du volume global + position du slider      *
+   *==================================================================*/
+  volume(v) {
+    Howler.volume(v);
+    const barWidth = (v * 90) / 100;             // 90 % du slider
+    barFull.style.width = `${barWidth * 100}%`;
+    sliderBtn.style.left = `${window.innerWidth * barWidth + window.innerWidth * 0.05 - 25}px`;
+  }
+
+  /*==================================================================*
+   *   SEEK : position par rapport au pourcentage de la durée        *
+   *==================================================================*/
+  seek(percent) {
+    if (!this.currentHowl || !this.currentHowl.playing()) return;
+    this.currentHowl.seek(this.currentHowl.duration() * percent);
+  }
+
+  /*==================================================================*
+   *   STEP : animation de la barre de progression                   *
+   *==================================================================*/
+  step() {
+    if (!this.currentHowl) return;
+    const currentSeek = this.currentHowl.seek() || 0;
+    timer.innerHTML = this.formatTime(Math.round(currentSeek));
+    progress.style.width = `${(currentSeek / this.currentHowl.duration()) * 100}%`;
+
+    if (this.currentHowl.playing()) {
+      requestAnimationFrame(this.step.bind(this));
+    }
+  }
+
+  /*==================================================================*
+   *   TOGGLE : affichage des panneaux playlist / volume              *
+   *==================================================================*/
+  togglePlaylist() {
+    const target = playlist.style.display === 'block' ? 'none' : 'block';
+    playlist.style.display = target;
+    playlist.className = target === 'block' ? 'fadein' : 'fadeout';
+  }
+
+  toggleVolume() {
+    const target = volume.style.display === 'block' ? 'none' : 'block';
+    volume.style.display = target;
+    volume.className = target === 'block' ? 'fadein' : 'fadeout';
+  }
+
+  /*==================================================================*
+   *   UTIL  : formatage M:SS                                         *
+   *==================================================================*/
+  formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+  }
+
+  /*==================================================================*
+   *   RESIZE : adaptation du waveform et du slider volume           *
+   *==================================================================*/
+  resizeWave() {
+    const h = window.innerHeight * 0.3;
+    const w = window.innerWidth;
+
+    // wave
+    this.wave.height = h;
+    this.wave.height_2 = h / 2;
+    this.wave.MAX = this.wave.height_2 - 4;
+    this.wave.width = w;
+    this.wave.width_2 = w / 2;
+    this.wave.width_4 = w / 4;
+    this.wave.canvas.height = h;
+    this.wave.canvas.width = w;
+    this.wave.container.style.margin = `-${h / 2}px auto`;
+
+    // slider (si une piste est déjà chargée)
+    if (this.currentHowl) {
+      const vol = this.currentHowl.volume();
+      const barWidth = vol * 0.9;  // 90% de la largeur
+      sliderBtn.style.left = `${w * barWidth + w * 0.05 - 25}px`;
+    }
+  }
+}
+
+/* ====================================================================
+ *  4.  Instanciation du Player & binding des contrôles
+ * ==================================================================== */
+const player = new Player(playlist);
+
+/* -- Bind Basic Controls -------------------------------------------*/
+playBtn.addEventListener('click', () => player.play());
+pauseBtn.addEventListener('click', () => player.pause());
+prevBtn.addEventListener('click', () => player.skip('prev'));
+nextBtn.addEventListener('click', () => player.skip('next'));
+
+waveform.addEventListener('click', e => {
+  const percent = e.clientX / window.innerWidth;
+  player.seek(percent);
 });
 
-/**
- * Player class containing the state of our playlist and where we are in it.
- * Includes all methods for playing, skipping, updating the display, etc.
- * @param {Array} playlist Array of objects with playlist song details ({title, file, howl}).
- */
-var Player = function(playlist) {
-  this.playlist = playlist;
-  this.index = 0;
+playlistBtn.addEventListener('click', () => player.togglePlaylist());
+volumeBtn.addEventListener('click', () => player.toggleVolume());
 
-  // Display the title of the first track.
-  track.innerHTML = '1. ' + playlist[0].title;
+/* -- Sliding Volume --------------------------------------------------*/
+barEmpty.addEventListener('click', e => {
+  const per = e.layerX / barEmpty.scrollWidth;
+  player.volume(per);
+});
+sliderBtn.addEventListener('mousedown', () => window.sliderDown = true);
+sliderBtn.addEventListener('touchstart', () => window.sliderDown = true);
+volume.addEventListener('mouseup', () => window.sliderDown = false);
+volume.addEventListener('touchend', () => window.sliderDown = false);
 
-  // Setup the playlist display.
-  playlist.forEach(function(song) {
-    var div = document.createElement('div');
-    div.className = 'list-song';
-    div.innerHTML = song.title;
-    div.onclick = function() {
-      player.skipTo(playlist.indexOf(song));
-    };
-    list.appendChild(div);
-  });
+const move = e => {
+  if (!window.sliderDown) return;
+  const x = e.clientX || (e.touches && e.touches[0].clientX);
+  const per = Math.min(1, Math.max(0, (x - window.innerWidth * 0.05) / barEmpty.scrollWidth));
+  player.volume(per);
 };
-Player.prototype = {
-  /**
-   * Play a song in the playlist.
-   * @param  {Number} index Index of the song in the playlist (leave empty to play the first or current).
-   */
-  play: function(index) {
-    var self = this;
-    var sound;
-
-    index = typeof index === 'number' ? index : self.playlist.indexOf(self.currentSound);
-    var data = self.playlist[index];
-
-    // If we already loaded this track, use the current one.
-    // Otherwise, setup and load a new Howl.
-    if (data.howl) {
-      sound = data.howl;
-    } else {
-      sound = self.playlist[index].howl = new Howl({
-    src: self.playlist[index].file,
-        html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
-            onplay: function() {
-      // Display the duration.
-      duration.innerHTML = self.formatTime(Math.round(sound.duration()));
-
-      // Start the wave animation.
-      wave.start();
-      self.isPlaying = true;
-         
-
-          // Start the wave animation.
-      wave.start();
-      self.isPlaying = true;
-          requestAnimationFrame(self.step.bind(self));
-
-          // Start the wave animation if we have already loaded
-          wave.container.style.display = 'block';
-          bar.style.display = 'none';
-          pauseBtn.style.display = 'block';
-        },
-        onload: function() {
-          // Start the wave animation.
-          wave.container.style.display = 'block';
-          bar.style.display = 'none';
-          loading.style.display = 'none';
-        },
-        onend: function() {
-          // Stop the wave animation.
-          wave.container.style.display = 'none';
-          bar.style.display = 'block';
-          self.skip('next');
-        },
-        onpause: function() {
-          // Stop the wave animation.
-          wave.container.style.display = 'none';
-          bar.style.display = 'block';
-        },
-        onstop: function() {
-          // Stop the wave animation.
-          wave.container.style.display = 'none';
-          bar.style.display = 'block';
-        },
-        onseek: function() {
-          // Start updating the progress of the track.
-          requestAnimationFrame(self.step.bind(self));
-        }
-      });
-    }
-
-    // Begin playing the sound.
-    sound.play();
-
-    // Update the track display.
-    track.innerHTML = (index + 1) + '. ' + data.title;
-
-    // Show the pause button.
-    if (sound.state() === 'loaded') {
-      playBtn.style.display = 'none';
-      pauseBtn.style.display = 'block';
-    } else {
-      loading.style.display = 'block';
-      playBtn.style.display = 'none';
-      pauseBtn.style.display = 'none';
-    }
-
-    // Keep track of the index we are currently playing.
-    self.index = index;
-  },
-
-  /**
-   * Pause the currently playing track.
-   */
-  pause: function() {
-    var self = this;
-
-    // Get the Howl we want to manipulate.
-    var sound = self.playlist[self.index].howl;
-
-    // Puase the sound.
-    sound.pause();
-
-    // Show the play button.
-    playBtn.style.display = 'block';
-    pauseBtn.style.display = 'none';
-  },
-
-  /**
-   * Skip to the next or previous track.
-   * @param  {String} direction 'next' or 'prev'.
-   */
-  skip: function(direction) {
-    var self = this;
-
-    // Get the next track based on the direction of the track.
-    var index = 0;
-    if (direction === 'prev') {
-      index = self.index - 1;
-      if (index < 0) {
-        index = self.playlist.length - 1;
-      }
-    } else {
-      index = self.index + 1;
-      if (index >= self.playlist.length) {
-        index = 0;
-      }
-    }
-
-    self.skipTo(index);
-  },
-
-  /**
-   * Skip to a specific track based on its playlist index.
-   * @param  {Number} index Index in the playlist.
-   */
-  skipTo: function(index) {
-    var self = this;
-
-    // Stop the current track.
-    if (self.playlist[self.index].howl) {
-      self.playlist[self.index].howl.stop();
-    }
-
-    // Reset progress.
-    progress.style.width = '0%';
-
-    // Play the new track.
-    self.play(index);
-  },
-
-  /**
-   * Set the volume and update the volume slider display.
-   * @param  {Number} val Volume between 0 and 1.
-   */
-  volume: function(val) {
-    var self = this;
-
-    // Update the global volume (affecting all Howls).
-    Howler.volume(val);
-
-    // Update the display on the slider.
-    var barWidth = (val * 90) / 100;
-    barFull.style.width = (barWidth * 100) + '%';
-    sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
-  },
-
-  /**
-   * Seek to a new position in the currently playing track.
-   * @param  {Number} per Percentage through the song to skip.
-   */
-  seek: function(per) {
-    var self = this;
-
-    // Get the Howl we want to manipulate.
-    var sound = self.playlist[self.index].howl;
-
-    // Convert the percent into a seek position.
-    if (sound.playing()) {
-      sound.seek(sound.duration() * per);
-    }
-  },
-
-  /**
-   * The step called within requestAnimationFrame to update the playback position.
-   */
-  step: function() {
-    var self = this;
-
-    // Get the Howl we want to manipulate.
-    var sound = self.playlist[self.index].howl;
-
-    // Determine our current seek position.
-    var seek = sound.seek() || 0;
-    timer.innerHTML = self.formatTime(Math.round(seek));
-    progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
-
-    // If the sound is still playing, continue stepping.
-    if (sound.playing()) {
-      requestAnimationFrame(self.step.bind(self));
-    }
-  },
-
-  /**
-   * Toggle the playlist display on/off.
-   */
-  togglePlaylist: function() {
-    var self = this;
-    var display = (playlist.style.display === 'block') ? 'none' : 'block';
-
-    setTimeout(function() {
-      playlist.style.display = display;
-    }, (display === 'block') ? 0 : 500);
-    playlist.className = (display === 'block') ? 'fadein' : 'fadeout';
-  },
-
-  /**
-   * Toggle the volume display on/off.
-   */
-  toggleVolume: function() {
-    var self = this;
-    var display = (volume.style.display === 'block') ? 'none' : 'block';
-
-    setTimeout(function() {
-      volume.style.display = display;
-    }, (display === 'block') ? 0 : 500);
-    volume.className = (display === 'block') ? 'fadein' : 'fadeout';
-  },
-
-  /**
-   * Format the time from seconds to M:SS.
-   * @param  {Number} secs Seconds to format.
-   * @return {String}      Formatted time.
-   */
-  formatTime: function(secs) {
-    var minutes = Math.floor(secs / 60) || 0;
-    var seconds = (secs - minutes * 60) || 0;
-
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
-};
-
-// Setup our new audio player class and pass it the playlist.
-var player = new Player([
-  {
-    title: 'Winx - Don\'t Laugh',
-    file: 'Winx_ Dont_Laugh _Original_ Live_ Raw _Mix',
-    howl: null
-  },
-  {
-    title: 'Patrice Baumel - Glutes',
-    file: 'Patrice_Baumel_Glutes_ (Original_Mix)',
-    howl: null
-  },
-  {
-    title: 'New Order - Blue Monday',
-    file: 'New_Order_ Blue_ Monday',
-    howl: null
-  }
-]);
-
-// Bind our player controls.
-playBtn.addEventListener('click', function() {
-  player.play();
-});
-pauseBtn.addEventListener('click', function() {
-  player.pause();
-});
-prevBtn.addEventListener('click', function() {
-  player.skip('prev');
-});
-nextBtn.addEventListener('click', function() {
-  player.skip('next');
-});
-waveform.addEventListener('click', function(event) {
-  player.seek(event.clientX / window.innerWidth);
-});
-playlistBtn.addEventListener('click', function() {
-  player.togglePlaylist();
-});
-playlist.addEventListener('click', function() {
-  player.togglePlaylist();
-});
-volumeBtn.addEventListener('click', function() {
-  player.toggleVolume();
-});
-volume.addEventListener('click', function() {
-  player.toggleVolume();
-});
-
-// Setup the event listeners to enable dragging of volume slider.
-barEmpty.addEventListener('click', function(event) {
-  var per = event.layerX / parseFloat(barEmpty.scrollWidth);
-  player.volume(per);
-});
-sliderBtn.addEventListener('mousedown', function() {
-  window.sliderDown = true;
-});
-sliderBtn.addEventListener('touchstart', function() {
-  window.sliderDown = true;
-});
-volume.addEventListener('mouseup', function() {
-  window.sliderDown = false;
-});
-volume.addEventListener('touchend', function() {
-  window.sliderDown = false;
-});
-
-var move = function(event) {
-  if (window.sliderDown) {
-    var x = event.clientX || event.touches[0].clientX;
-    var startX = window.innerWidth * 0.05;
-    var layerX = x - startX;
-    var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
-    player.volume(per);
-  }
-};
-
 volume.addEventListener('mousemove', move);
 volume.addEventListener('touchmove', move);
 
-// Setup the "waveform" animation.
-var wave = new SiriWave({
-  container: waveform,
-  width: window.innerWidth,
-  height: window.innerHeight * 0.3,
-  cover: true,
-  speed: 0.03,
-  amplitude: 0.7,
-  frequency: 2
-});
-
-player.addEventListener('play', function() {
-  wave.start();
-});
-
-// Update the height of the wave animation.
-// These are basically some hacks to get SiriWave.js to do what we want.
-var resize = function() {
-  var height = window.innerHeight * 0.3;
-  var width = window.innerWidth;
-  wave.height = height;
-  wave.height_2 = height / 2;
-  wave.MAX = wave.height_2 - 4;
-  wave.width = width;
-  wave.width_2 = width / 2;
-  wave.width_4 = width / 4;
-  wave.canvas.height = height;
-  wave.canvas.width = width;
-  wave.container.style.margin = -(height / 2) + 'px auto';
-
-  // Update the position of the slider.
-  var sound = player.playlist[player.index].howl;
-  if (sound) {
-    var vol = sound.volume();
-    var barWidth = (vol * 0.9);
-    sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
-  }
-};
-window.addEventListener('resize', resize);
-resize();
-
-/* Modified from https://github.com/CaffeinaLab/SiriWaveJS */
-
+/* ====================================================================
+ *  5.  SiriWave –  (le code d'origine est conservé, aucune modification)
+ * ==================================================================== */
 (function() {
+  function SiriWave(opt) {
+    opt = opt || {};
 
-function SiriWave(opt) {
-  opt = opt || {};
+    this.phase = 0;
+    this.run = false;
 
-  this.phase = 0;
-  this.run = false;
+    this.ratio = opt.ratio || window.devicePixelRatio || 1;
+    this.width = this.ratio * (opt.width || 320);
+    this.width_2 = this.width / 2;
+    this.width_4 = this.width / 4;
 
-  // UI vars
+    this.height = this.ratio * (opt.height || 100);
+    this.height_2 = this.height / 2;
+    this.MAX = (this.height_2) - 4;
 
-  this.ratio = opt.ratio || window.devicePixelRatio || 1;
+    this.amplitude = opt.amplitude || 1;
+    this.speed = opt.speed || 0.2;
+    this.frequency = opt.frequency || 6;
+    this.color = (function hex2rgb(hex){
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m,r,g,b) { return r + r + g + g + b + b; });
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ?
+      parseInt(result[1],16).toString()+','+parseInt(result[2], 16).toString()+','+parseInt(result[3], 16).toString()
+      : null;
+    })(opt.color || '#fff') || '255,255,255';
 
-  this.width = this.ratio * (opt.width || 320);
-  this.width_2 = this.width / 2;
-  this.width_4 = this.width / 4;
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    if (opt.cover) {
+      this.canvas.style.width = this.canvas.style.height = '100%';
+    } else {
+      this.canvas.style.width = (this.width / this.ratio) + 'px';
+      this.canvas.style.height = (this.height / this.ratio) + 'px';
+    }
 
-  this.height = this.ratio * (opt.height || 100);
-  this.height_2 = this.height / 2;
+    this.container = opt.container || document.body;
+    this.container.appendChild(this.canvas);
 
-  this.MAX = (this.height_2) - 4;
+    this.ctx = this.canvas.getContext('2d');
 
-  // Constructor opt
+    if (opt.autostart) this.start();
+  }
 
-  this.amplitude = opt.amplitude || 1;
-  this.speed = opt.speed || 0.2;
-  this.frequency = opt.frequency || 6;
-  this.color = (function hex2rgb(hex){
-    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function(m,r,g,b) { return r + r + g + g + b + b; });
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ?
-    parseInt(result[1],16).toString()+','+parseInt(result[2], 16).toString()+','+parseInt(result[3], 16).toString()
-    : null;
-  })(opt.color || '#fff') || '255,255,255';
+  SiriWave.prototype._GATF_cache = {};
+  SiriWave.prototype._globAttFunc = function(x) {
+    if (SiriWave.prototype._GATF_cache[x] == null) {
+      SiriWave.prototype._GATF_cache[x] = Math.pow(4/(4+Math.pow(x,4)), 4);
+    }
+    return SiriWave.prototype._GATF_cache[x];
+  };
 
-  // Canvas
+  SiriWave.prototype._xpos = function(i) {
+    return this.width_2 + i * this.width_4;
+  };
 
-  this.canvas = document.createElement('canvas');
-  this.canvas.width = this.width;
-  this.canvas.height = this.height;
-  if (opt.cover) {
-    this.canvas.style.width = this.canvas.style.height = '100%';
-  } else {
-    this.canvas.style.width = (this.width / this.ratio) + 'px';
-    this.canvas.style.height = (this.height / this.ratio) + 'px';
-  };
+  SiriWave.prototype._ypos = function(i, attenuation) {
+    var att = (this.MAX * this.amplitude) / attenuation;
+    return this.height_2 + this._globAttFunc(i) * att * Math.sin(this.frequency * i - this.phase);
+  };
 
-  this.container = opt.container || document.body;
-  this.container.appendChild(this.canvas);
+  SiriWave.prototype._drawLine = function(attenuation, color, width){
+    this.ctx.moveTo(0,0);
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = color;
+    this.ctx.lineWidth = width || 1;
 
-  this.ctx = this.canvas.getContext('2d');
+    var i = -2;
+    while ((i += 0.01) <= 2) {
+      var y = this._ypos(i, attenuation);
+      if (Math.abs(i) >= 1.90) y = this.height_2;
+      this.ctx.lineTo(this._xpos(i), y);
+    }
 
-  // Start
+    this.ctx.stroke();
+  };
 
-  if (opt.autostart) {
-    this.start();
-  }
-}
+  SiriWave.prototype._clear = function() {
+    this.ctx.globalCompositeOperation = 'destination-out';
+    this.ctx.fillRect(0, 0, this.width, this.height);
+    this.ctx.globalCompositeOperation = 'source-over';
+  };
 
-SiriWave.prototype._GATF_cache = {};
-SiriWave.prototype._globAttFunc = function(x) {
-  if (SiriWave.prototype._GATF_cache[x] == null) {
-    SiriWave.prototype._GATF_cache[x] = Math.pow(4/(4+Math.pow(x,4)), 4);
-  }
-  return SiriWave.prototype._GATF_cache[x];
-};
+  SiriWave.prototype._draw = function() {
+    if (this.run === false) return;
 
-SiriWave.prototype._xpos = function(i) {
-  return this.width_2 + i * this.width_4;
-};
+    this.phase = (this.phase + Math.PI*this.speed) % (2*Math.PI);
 
-SiriWave.prototype._ypos = function(i, attenuation) {
-  var att = (this.MAX * this.amplitude) / attenuation;
-  return this.height_2 + this._globAttFunc(i) * att * Math.sin(this.frequency * i - this.phase);
-};
+    this._clear();
+    this._drawLine(-2, 'rgba(' + this.color + ',0.1)');
+    this._drawLine(-6, 'rgba(' + this.color + ',0.2)');
+    this._drawLine(4,  'rgba(' + this.color + ',0.4)');
+    this._drawLine(2,  'rgba(' + this.color + ',0.6)');
+    this._drawLine(1,  'rgba(' + this.color + ',1)', 1.5);
 
-SiriWave.prototype._drawLine = function(attenuation, color, width){
-  this.ctx.moveTo(0,0);
-  this.ctx.beginPath();
-  this.ctx.strokeStyle = color;
-  this.ctx.lineWidth = width || 1;
+    if (window.requestAnimationFrame) {
+      requestAnimationFrame(this._draw.bind(this));
+      return;
+    };
+    setTimeout(this._draw.bind(this), 20);
+  };
 
-  var i = -2;
-  while ((i += 0.01) <= 2) {
-    var y = this._ypos(i, attenuation);
-    if (Math.abs(i) >= 1.90) y = this.height_2;
-    this.ctx.lineTo(this._xpos(i), y);
-  }
+  SiriWave.prototype.start = function() {
+    this.phase = 0;
+    this.run = true;
+    this._draw();
+  };
 
-  this.ctx.stroke();
-};
+  SiriWave.prototype.stop = function() {
+    this.phase = 0;
+    this.run = false;
+  };
 
-SiriWave.prototype._clear = function() {
-  this.ctx.globalCompositeOperation = 'destination-out';
-  this.ctx.fillRect(0, 0, this.width, this.height);
-  this.ctx.globalCompositeOperation = 'source-over';
-};
+  SiriWave.prototype.setSpeed = function(v) {
+    this.speed = v;
+  };
 
-SiriWave.prototype._draw = function() {
-  if (this.run === false) return;
+  SiriWave.prototype.setNoise = SiriWave.prototype.setAmplitude = function(v) {
+    this.amplitude = Math.max(Math.min(v, 1), 0);
+  };
 
-  this.phase = (this.phase + Math.PI*this.speed) % (2*Math.PI);
-
-  this._clear();
-  this._drawLine(-2, 'rgba(' + this.color + ',0.1)');
-  this._drawLine(-6, 'rgba(' + this.color + ',0.2)');
-  this._drawLine(4, 'rgba(' + this.color + ',0.4)');
-  this._drawLine(2, 'rgba(' + this.color + ',0.6)');
-  this._drawLine(1, 'rgba(' + this.color + ',1)', 1.5);
-
-  if (window.requestAnimationFrame) {
-    requestAnimationFrame(this._draw.bind(this));
-    return;
-  };
-  setTimeout(this._draw.bind(this), 20);
-};
-
-/* API */
-
-SiriWave.prototype.start = function() {
-  this.phase = 0;
-  this.run = true;
-  this._draw();
-};
-
-SiriWave.prototype.stop = function() {
-  this.phase = 0;
-  this.run = false;
-};
-
-SiriWave.prototype.setSpeed = function(v) {
-  this.speed = v;
-};
-
-SiriWave.prototype.setNoise = SiriWave.prototype.setAmplitude = function(v) {
-  this.amplitude = Math.max(Math.min(v, 1), 0);
-};
-
-
-if (typeof define === 'function' && define.amd) {
-  define(function(){ return SiriWave; });
-  return;
-};
-window.SiriWave = SiriWave;
-
+  if (typeof define === 'function' && define.amd) {
+    define(function(){ return SiriWave; });
+    return;
+  };
+  window.SiriWave = SiriWave;
 })();
