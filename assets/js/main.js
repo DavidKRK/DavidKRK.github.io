@@ -1,52 +1,76 @@
-var patriceSound = new Howl({
-  src: ['/workspaces/DavidKRK.github.io/assets/music/Patrice Bäumel–Glutes (Original Mix).mp3']
+/* ==============================
+ *   Howler.js – Audio controls
+ * ==============================
+ */
+
+import { Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js';
+
+/* -----------------------------
+   1️⃣  Paths –  relative à la racine
+   ----------------------------- */
+const getAsset = p => `assets/music/${p}`;
+
+/* -----------------------------
+   2️⃣  Player objects
+   ----------------------------- */
+const patriceSound = new Howl({
+  src: [ getAsset('Patrice Bäumel–Glutes (Original Mix).mp3') ],
+  html5: true            // streamable on all devices (large files)
 });
 
-var newOrderSound = new Howl({
-  src: ['/workspaces/DavidKRK.github.io/assets/music/New Order Blue Monday.ogg']
+const newOrderSound = new Howl({
+  src: [ getAsset('New Order Blue Monday.ogg') ],
+  html5: true
 });
 
-var winxSound = new Howl({
-  src: ['/workspaces/DavidKRK.github.io/assets/music/Winx - Don\'t Laugh - Original Live Raw Mix.ogg']
+const winxSound = new Howl({
+  src: [ getAsset("Winx - Don't Laugh - Original Live Raw Mix.ogg") ],
+  html5: true
 });
 
-document.getElementById('play-btn-patrice').addEventListener('click', () => patriceSound.play());
-document.getElementById('pause-btn-patrice').addEventListener('click', () => patriceSound.pause());
+/* -----------------------------
+   3️⃣  Event listeners (buttons)
+   ----------------------------- */
+document.querySelector('#play-btn-patrice')?.addEventListener('click', () => patriceSound.play());
+document.querySelector('#pause-btn-patrice')?.addEventListener('click', () => patriceSound.pause());
 
-document.getElementById('play-btn-blue-monday').addEventListener('click', () => newOrderSound.play());
-document.getElementById('pause-btn-blue-monday').addEventListener('click', () => newOrderSound.pause());
+document.querySelector('#play-btn-blue-monday')?.addEventListener('click', () => newOrderSound.play());
+document.querySelector('#pause-btn-blue-monday')?.addEventListener('click', () => newOrderSound.pause());
 
-document.getElementById('play-btn-winx').addEventListener('click', () => winxSound.play());
-document.getElementById('pause-btn-winx').addEventListener('click', () => winxSound.pause());
+document.querySelector('#play-btn-winx')?.addEventListener('click', () => winxSound.play());
+document.querySelector('#pause-btn-winx')?.addEventListener('click', () => winxSound.pause());
 
-// Pour démarrer les sons
-function playPatriceSound() {
-  patriceSound.play();
+/* -----------------------------
+   4️⃣  Helpers UI (facultatif)
+   ----------------------------- */
+function setStatus(id, playing) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (playing) {
+    el.style.display = 'none';
+  } else {
+    el.style.display = 'block';
+  }
 }
 
-function playNewOrderSound() {
-  newOrderSound.play();
-}
+/* E.g. if you want a visual indicator that a track is playing: */
+patriceSound.on('play', () => setStatus('play-btn-patrice', true));
+patriceSound.on('pause', () => setStatus('play-btn-patrice', false));
+patriceSound.on('stop',  () => setStatus('play-btn-patrice', false));
 
-function playWinxSound() {
-  winxSound.play();
-}
+newOrderSound.on('play', () => setStatus('play-btn-blue-monday', true));
+newOrderSound.on('pause', () => setStatus('play-btn-blue-monday', false));
+newOrderSound.on('stop',  () => setStatus('play-btn-blue-monday', false));
 
-// Pour mettre en pause les sons
-function pausePatriceSound() {
-  patriceSound.pause();
-}
+winxSound.on('play', () => setStatus('play-btn-winx', true));
+winxSound.on('pause', () => setStatus('play-btn-winx', false));
+winxSound.on('stop',  () => setStatus('play-btn-winx', false));
 
-function pauseNewOrderSound() {
-  newOrderSound.pause();
-}
-
-function pauseWinxSound() {
-  winxSound.pause();
-}
-
+/* -----------------------------
+   5️⃣  Responsive/scroll helper (example)
+   ----------------------------- */
 window.addEventListener('scroll', () => {
   if (window.innerWidth < 768) {
-    // ...
+    // Your logic for mobile scroll here (e.g., hide nav)
   }
 });
