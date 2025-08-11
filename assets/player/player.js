@@ -46,7 +46,7 @@ Player.prototype = {
     var self = this;
     var sound;
 
-    index = typeof index === 'number' ? index : self.index;
+    index = typeof index === 'number' ? index : self.playlist.indexOf(self.currentSound);
     var data = self.playlist[index];
 
     // If we already loaded this track, use the current one.
@@ -54,12 +54,17 @@ Player.prototype = {
     if (data.howl) {
       sound = data.howl;
     } else {
-      sound = data.howl = new Howl({
-        src: ['./audio/' + data.file + '.webm', './audio/' + data.file + '.mp3'],
+      sound = self.playlist[index].howl = new Howl({
+    src: self.playlist[index].file,
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
-        onplay: function() {
-          // Display the duration.
-          duration.innerHTML = self.formatTime(Math.round(sound.duration()));
+            onplay: function() {
+      // Display the duration.
+      duration.innerHTML = self.formatTime(Math.round(sound.duration()));
+
+      // Start the wave animation.
+      wave.start();
+      self.isPlaying = true;
+         
 
           // Start updating the progress of the track.
           requestAnimationFrame(self.step.bind(self));
