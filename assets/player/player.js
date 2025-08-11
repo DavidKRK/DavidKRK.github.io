@@ -37,16 +37,11 @@ var Player = function(playlist) {
     list.appendChild(div);
   });
 };
-Player.prototype = {
-  /**
-   * Play a song in the playlist.
-   * @param  {Number} index Index of the song in the playlist (leave empty to play the first or current).
-   */
-  play: function(index) {
-    var self = this;
-    var sound;
+Player.prototype.play = function(index) {
+  var self = this;
+  var sound;
 
-    index = typeof index === 'number' ? index : self.index;
+    index = typeof index === 'number' ? index : self.playlist.indexOf(self.currentSound);
     var data = self.playlist[index];
 
     // If we already loaded this track, use the current one.
@@ -54,12 +49,13 @@ Player.prototype = {
     if (data.howl) {
       sound = data.howl;
     } else {
-      sound = data.howl = new Howl({
-        src: ['./audio/' + data.file + '.webm', './audio/' + data.file + '.mp3'],
-        html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
-        onplay: function() {
-          // Display the duration.
-          duration.innerHTML = self.formatTime(Math.round(sound.duration()));
+      sound = self.playlist[index].howl = new Howl({
+    src: self.playlist[index].file,
+    html5: true, // Force to HTML5 so that the audio can stream in iOS.
+    onplay: function() {
+      // Démarrer l'animation ici
+      wave.start(); // <-- AJOUTEZ CETTE LIGNE
+      self.isPlaying = true;
 
           // Start updating the progress of the track.
           requestAnimationFrame(self.step.bind(self));
