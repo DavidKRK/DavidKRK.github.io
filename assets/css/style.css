@@ -315,6 +315,15 @@ footer {
     font-size: 5rem !important; /* sm:text-5xl */
   }
 }
+
+.fab.fa-whatsapp {
+    color: #25D366;
+}
+
+.social-icon {
+    font-size: 2.5rem; /* mobile */
+}
+
 @media (min-width: 768px) {
   .text-center .main-title {
     font-size: 6rem !important; /* md:text-6xl */
