@@ -157,6 +157,10 @@ footer {
     color: #25D366;
 }
 
+.fab.fa-whatsapp {
+    color: #25D366;
+}
+
 .social-icon {
     font-size: 2.5rem; /* Taille par défaut pour les petits écrans */
 }
