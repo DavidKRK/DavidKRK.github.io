@@ -22,25 +22,24 @@ const playlist = [
   {
     title: "Winx – Don't Laugh",
     file: [
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Winx_%20Don%27t_Laugh%20_Original_%20Live_%20Raw_%20_Mix.ogg",
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Winx_%20Don%27t_Laugh%20_Original_%20Live_%20Raw_%20_Mix.webm"
+      "../music/Winx - Don't Laugh - Original Live Raw Mix.ogg",
+      "../music/Winx - Dont Laugh - Original Live Raw Mix.webm"
     ],
     howl: null
   },
   {
     title: "Patrice Baumel – Glutes",
     file: [
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Patrice_Baumel_Glutes_%20(Original_Mix).mp3",
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Patrice_Baumel_Glutes_%20(Original_Mix).webm"
+      "../music/Patrice Bäumel–Glutes (Original Mix).mp3",
+      "../music/Patrice Bäumel–Glutes (Original Mix).webm"
     ],
     howl: null
   },
   {
     title: "New Order – Blue Monday",
     file: [
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.ogg",
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.webm",
-      "https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.mp3"
+      "../music/New Order Blue Monday.ogg",
+      "../music/New Order Blue Monday.webm"
     ],
     howl: null
   }

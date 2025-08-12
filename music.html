@@ -18,6 +18,9 @@
 
   <!-- Style principal -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Player styles -->
+  <link rel="stylesheet" href="assets/player/styles.css">
+
 </head>
 <body class="home-page">
 
@@ -44,38 +47,38 @@
       <h2 class="main-title">Music</h2>
     </div>
 
-    <!-- ==== TRACK LIST (audio fallback) ==== -->
+    <!-- ==== HOWLER.JS PLAYER ==== -->
     <main class="text-center max-w-4xl mx-auto px-4 w-full" style="margin-top:2rem;">
-      
-      <!-- Track 1 : New Order – Blue Monday -->
-      <div class="music-track mb-6">
-        <h4 class="mb-2 text-lg">New Order – Blue Monday</h4>
-        <audio controls class="w-full">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.ogg" type="audio/ogg">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.webm" type="audio/webm">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/New_Order_%20Blue_%20Monday.mp3" type="audio/mpeg">
-          Votre navigateur ne supporte pas l'élément audio.
-        </audio>
+      <div id="title">
+        <span id="track"></span>
+        <div id="timer">0:00</div>
+        <div id="duration">0:00</div>
       </div>
 
-      <!-- Track 2 : Patrice Bäumel – Glutes (Original Mix) -->
-      <div class="music-track" style="margin-bottom:1.5rem;">
-        <h4 style="margin-bottom:0.5rem;font-size:1.1rem;">Patrice Bäumel – Glutes (Original Mix)</h4>
-        <audio controls style="width:100%;">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Patrice_Baumel_Glutes_%20(Original_Mix).mp3" type="audio/mpeg">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Patrice_Baumel_Glutes_%20(Original_Mix).webm" type="audio/webm">
-          Votre navigateur ne supporte pas l'élément audio.
-        </audio>
+      <div class="controlsOuter">
+        <div class="controlsInner">
+          <div id="loading"></div>
+          <div class="btn" id="playBtn"></div>
+          <div class="btn" id="pauseBtn"></div>
+          <div class="btn" id="prevBtn"></div>
+          <div class="btn" id="nextBtn"></div>
+        </div>
+        <div class="btn" id="playlistBtn"></div>
+        <div class="btn" id="volumeBtn"></div>
       </div>
 
-      <!-- Track 3 : Winx – Don't Laugh (Original Live Raw Mix) -->
-      <div class="music-track" style="margin-bottom:1.5rem;">
-        <h4 style="margin-bottom:0.5rem;font-size:1.1rem;">Winx – Don't Laugh (Original Live Raw Mix)</h4>
-        <audio controls style="width:100%;">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Winx_%20Don%27t_Laugh%20_Original_%20Live_%20Raw_%20_Mix.ogg" type="audio/ogg">
-          <source src="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/assets/player/audio/Winx_%20Don%27t_Laugh%20_Original_%20Live_%20Raw_%20_Mix.webm" type="audio/webm">
-          Votre navigateur ne supporte pas l'élément audio.
-        </audio>
+      <div id="waveform"></div>
+      <div id="bar"></div>
+      <div id="progress"></div>
+
+      <div id="playlist">
+        <div id="list"></div>
+      </div>
+
+      <div id="volume" class="fadeout">
+        <div id="barFull" class="bar"></div>
+        <div id="barEmpty" class="bar"></div>
+        <div id="sliderBtn"></div>
       </div>
     </main>
 
@@ -109,7 +112,9 @@
     </footer>
   </div>  <!-- /content-wrapper -->
 
-  <!-- ==== Global scripts ==== -->
-  <script src="assets/js/main.js"></script>
+  <!-- ==== Player scripts ==== -->
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.core.min.js"></script>
+  <script src="assets/player/siriwave.js"></script>
+  <script src="assets/player/player.js"></script>
 </body>
 </html>
