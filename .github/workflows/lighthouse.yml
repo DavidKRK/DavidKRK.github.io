@@ -1,0 +1,16 @@
+name: Lighthouse
+on:
+  pull_request:
+    branches: [ gh-pages ]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: treosh/lighthouse-ci-action@v9
+      with:
+        urls: |
+          https://davidkrk.github.io/
+          https://davidkrk.github.io/music.html
+        uploadArtifacts: true
