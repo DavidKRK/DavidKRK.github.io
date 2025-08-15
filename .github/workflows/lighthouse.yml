@@ -2,6 +2,7 @@ name: Lighthouse
 on:
   pull_request:
     branches: [ gh-pages ]
+  workflow_dispatch:   # <-- Ajoutez cette ligne
 
 jobs:
   audit:
@@ -10,7 +11,4 @@ jobs:
     - uses: actions/checkout@v4
     - uses: treosh/lighthouse-ci-action@v9
       with:
-        urls: |
-          https://davidkrk.github.io/
-          https://davidkrk.github.io/music.html
-        uploadArtifacts: true
+        urls: https://davidkrk.github.io/
