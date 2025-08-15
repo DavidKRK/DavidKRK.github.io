@@ -1,10 +1,10 @@
 name: CI
 on:
+  workflow_dispatch:  # <-- Une seule occurrence ici
   push:
     branches: [ "**" ]
   pull_request:
     branches: [ "**" ]
-  workflow_dispatch:   # <-- Cette ligne permet le déclenchement manuel
 
 jobs:
   build:
