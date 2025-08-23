@@ -51,24 +51,29 @@
   </div>
 
   <!-- Form -->
-  <main class="text-center max-w-4xl mx-auto px-4 w-full">
-    <div class="contact-form">
-      <form action="https://formspree.io/f/mzzvdbad" method="POST">
-        <input type="text" name="name" placeholder="Votre nom" required>
-        <input type="email" name="email" placeholder="Votre email" required>
-        <textarea name="message" placeholder="Votre message" required></textarea>
-        <input type="hidden" name="_subject" value="Nouveau contact depuis le site David KRK">
-        <input type="hidden" name="_language" value="fr">
-        <button type="submit">ENVOYER LE MESSAGE</button>
-      </form>
+  <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
+    <h1 class="main-title text-4xl sm:text-5xl md:text-6xl font-bold">CONTACT</h1>
+    
+    <div class="contact-form mt-8">
+        <form action="https://formspree.io/f/mzzvdbad" method="POST" class="flex flex-col gap-4 items-center">
+            <input type="text" name="name" placeholder="Your Name" required class="w-full max-w-sm p-3 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <input type="email" name="email" placeholder="Your Email" required class="w-full max-w-sm p-3 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <textarea name="message" placeholder="Your Message" required class="w-full max-w-sm h-32 p-3 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+            
+            <input type="hidden" name="_subject" value="New contact from David KRK website">
+            <input type="hidden" name="_language" value="fr">
+            
+            <button type="submit" class="w-full max-w-sm py-3 px-6 font-bold text-white bg-purple-600 rounded-md hover:bg-purple-700 transition duration-300 ease-in-out">SEND MESSAGE</button>
+        </form>
     </div>
 
     <div class="mt-8 text-lg">
-      <p>Ou contactez‑moi directement :</p>
-      <p class="mt-2"><a href="mailto:davidkrkofficial@gmail.com"
-                       class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a></p>
+        <p>Or contact directly:</p>
+        <p class="mt-2">
+            <a href="mailto:davidkrkofficial@gmail.com" class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a>
+        </p>
     </div>
-  </main>
+</main>
 
   <!-- Footer, sans widget Mixcloud -->
   <footer class="w-full max-w-7xl mx-auto">
