@@ -293,38 +293,4 @@ body {
   cursor: pointer;
 }
 
-/* Fade-In */
-.fadeout {
-  webkit-animation: fadeout 0.5s;
-  -ms-animation: fadeout 0.5s;
-  animation: fadeout 0.5s;
-}
-.fadein {
-  webkit-animation: fadein 0.5s;
-  -ms-animation: fadein 0.5s;
-  animation: fadein 0.5s;
-}
-@keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@-webkit-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@-ms-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-@-webkit-keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-@-ms-keyframes fadeout {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
+
