@@ -1,379 +1,432 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>David KRK · Contact · DJ Techno & Producteur</title>
-    <meta name="description" content="Contactez David KRK pour les bookings, collaborations et plus encore.">
-    <meta name="keywords" content="David KRK, DJ techno, producteur, contact, booking, collaboration">
-    <meta name="author" content="David KRK">
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://davidkrk.com/contact.html">
-    <meta property="og:title" content="David KRK · Contact · DJ Techno & Producteur">
-    <meta property="og:description" content="Contactez David KRK pour les bookings, collaborations et plus encore.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
+    <meta name="description" content="Contactez David KRK pour les bookings, collaborations et plus encore." />
+    <meta name="keywords" content="David KRK, DJ techno, producteur, contact, booking, collaboration" />
+    <meta name="author" content="David KRK" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://davidkrk.com/contact.html" />
+    <meta property="og:title" content="David KRK · Contact · DJ Techno & Producteur" />
+    <meta property="og:description" content="Contactez David KRK pour les bookings, collaborations et plus encore." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://davidkrk.com/contact.html">
-    <meta property="twitter:title" content="David KRK · Contact · DJ Techno & Producteur">
-    <meta property="twitter:description" content="Contactez David KRK pour les bookings, collaborations et plus encore.">
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://davidkrk.com/contact.html" />
+    <meta property="twitter:title" content="David KRK · Contact · DJ Techno & Producteur" />
+    <meta property="twitter:description" content="Contactez David KRK pour les bookings, collaborations et plus encore." />
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="logo 30-01-25.png">
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="icon" type="image/png" href="logo 30-01-25.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <style>
-    :root {
-      --primary-color: #aa8d77;
-      --secondary-color: #406367;
-      --accent-color: #f0f4f1;
-      --dark-bg: #0f1518;
-      --darker-bg: #1e3439;
-      --transition: all 0.4s ease;
-    }
+      :root {
+          --primary-color: #aa8d77;
+          --secondary-color: #406367;
+          --accent-color: #f0f4f1;
+          --dark-bg: #0f1518;
+          --darker-bg: #1e3439;
+          --transition: all 0.4s ease;
+      }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Russo One', sans-serif;
-      color: #f0f4f1;
-      overflow-x: hidden;
-    }
+      body, html {
+          margin: 0;
+          padding: 0;
+          font-family: 'Russo One', sans-serif;
+          color: #f0f4f1;
+          overflow-x: hidden;
+      }
 
-    body.home-page {
-      background-image: url("assets/images/david_krk_owl.jpg");
-      background-size: cover;
-      background-position: left center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      display: flex;
-      flex-direction: column;
-    }
+      body.home-page {
+          background-image: url("assets/images/david_krk_owl.jpg");
+          background-size: cover;
+          background-position: left center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          display: flex;
+          flex-direction: column;
+      }
 
-    body:not(.home-page) {
-        background-color: var(--dark-bg);
-    }
+      body:not(.home-page) {
+          background-color: var(--dark-bg);
+      }
 
-    .content-wrapper { max-width: 100%; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+      .content-wrapper {
+          max-width: 100%;
+          overflow-x: hidden;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+      }
 
-    .hero-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.2rem;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 10;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+      .hero-header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 1.2rem;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: 10;
+          flex-wrap: wrap;
+          gap: 1rem;
+      }
 
-    .hero-header a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-    }
+      .hero-header a {
+          color: white;
+          text-decoration: none;
+          margin: 0 1rem;
+          font-size: 1.2rem;
+          transition: color 0.3s ease;
+      }
 
-    .hero-header a:hover { color: var(--primary-color); }
+      .hero-header a:hover {
+          color: var(--primary-color);
+      }
 
-    main { flex: 1; }
+      main {
+          flex: 1;
+      }
 
-    .main-title {
-      text-align: center;
-      background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: gradient 8s ease infinite;
-      font-size: 3.2rem;
-    }
+      .main-title {
+          text-align: center;
+          background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          background-size: 200% auto;
+          animation: gradient 8s ease infinite;
+          font-size: 3.2rem;
+      }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+      @keyframes gradient {
+          0% {
+              background-position: 0% 50%;
+          }
+          50% {
+              background-position: 100% 50%;
+          }
+          100% {
+              background-position: 0% 50%;
+          }
+      }
 
-    .contact-form-container {
-      max-width: 500px;
-      width: 100%;
-      margin: 1rem auto 2rem auto;
-      padding: 20px;
-      box-sizing: border-box;
-      background: rgba(0,0,0,0.15);
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
-    }
+      .contact-form-container {
+          max-width: 500px;
+          width: 100%;
+          margin: 1rem auto 2rem auto;
+          padding: 20px;
+          box-sizing: border-box;
+          background: rgba(0,0,0,0.15);
+          border-radius: 12px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+      }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
-      color: white;
-      font-family: 'Russo One', sans-serif;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder { color: rgba(255,255,255, 0.7); opacity: 1; }
+      .contact-form input,
+      .contact-form textarea {
+          width: 100%;
+          padding: 12px;
+          margin-bottom: 20px;
+          background: rgba(0,0,0,0.2);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 6px;
+          color: white;
+          font-family: 'Russo One', sans-serif;
+          font-size: 16px;
+          box-sizing: border-box;
+      }
 
-    .contact-form textarea { height: 150px; resize: vertical; }
+      .contact-form input::placeholder,
+      .contact-form textarea::placeholder {
+          color: rgba(255,255,255, 0.7);
+          opacity: 1;
+      }
 
-    .contact-form button {
-      background: black;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 12px 30px;
-      font-family: 'Russo One', sans-serif;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: var(--transition);
-      width: 100%;
-      margin-bottom: 10px;
-    }
+      .contact-form textarea {
+          height: 150px;
+          resize: vertical;
+      }
 
-    .contact-form button:hover { background: var(--primary-color); color: #fff; }
+      .contact-form button {
+          background: black;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          padding: 12px 30px;
+          font-family: 'Russo One', sans-serif;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: var(--transition);
+          width: 100%;
+          margin-bottom: 10px;
+      }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: auto;
-    }
+      .contact-form button:hover {
+          background: var(--primary-color);
+          color: #fff;
+      }
 
-    .neon-text { animation: neon 2s ease-in-out infinite; }
+      footer {
+          text-align: center;
+          padding: 2rem 1rem;
+          margin-top: auto;
+      }
 
-    @keyframes neon {
-      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary-color), 0 0 20px var(--primary-color), 0 0 25px var(--primary-color), 0 0 30px var(--primary-color), 0 0 35px var(--primary-color); color: #fff; }
-      50% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--secondary-color), 0 0 40px var(--secondary-color), 0 0 50px var(--secondary-color), 0 0 60px var(--secondary-color), 0 0 70px var(--secondary-color); color: #e0e0e0; }
-    }
-    
-    .language-selector {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-    .language-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-    .language-btn:hover,
-    .language-btn.active {
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      transform: scale(1.05);
-    }
+      .neon-text {
+          animation: neon 2s ease-in-out infinite;
+      }
 
-    .lang-content { display: none; }
-    .lang-content.active { display: block; }
+      @keyframes neon {
+          0%, 100% {
+              text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary-color), 0 0 20px var(--primary-color), 0 0 25px var(--primary-color), 0 0 30px var(--primary-color), 0 0 35px var(--primary-color);
+              color: #fff;
+          }
+          50% {
+              text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--secondary-color), 0 0 40px var(--secondary-color), 0 0 50px var(--secondary-color), 0 0 60px var(--secondary-color), 0 0 70px var(--secondary-color);
+              color: #e0e0e0;
+          }
+      }
 
-    @media (max-width: 768px) {
-      .hero-header { flex-direction: column; gap: 0.5rem; padding: 0.6rem; }
-      .hero-header a { margin: 0.2rem 0; font-size: 1.1rem; }
-    }
+      .language-selector {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin: 2rem 0;
+          flex-wrap: wrap;
+      }
+
+      .language-btn {
+          background: rgba(255, 255, 255, 0.1);
+          border: none;
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 2rem;
+          cursor: pointer;
+          transition: var(--transition);
+          font-size: 0.9rem;
+      }
+
+      .language-btn:hover,
+      .language-btn.active {
+          background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+          transform: scale(1.05);
+      }
+
+      .lang-content {
+          display: none;
+      }
+
+      .lang-content.active {
+          display: block;
+      }
+
+      @media (max-width: 768px) {
+          .hero-header {
+              flex-direction: column;
+              gap: 0.5rem;
+              padding: 0.6rem;
+          }
+          .hero-header a {
+              margin: 0.2rem 0;
+              font-size: 1.1rem;
+          }
+      }
     </style>
-</head>
-<body class="home-page">
+  </head>
 
+  <body class="home-page">
     <div class="content-wrapper">
-        <header class="hero-header">
-            <a href="index.html">Home</a>
-            <a href="bio.html">Bio</a>
-            <a href="music.html">Music</a>
-            <a href="event.html">Events</a>
-            <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
-                <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp
-            </a>
-        </header>
+      <header class="hero-header">
+        <a href="index.html">Home</a>
+        <a href="bio.html">Bio</a>
+        <a href="music.html">Music</a>
+        <a href="event.html">Events</a>
+        <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link flex items-center text-xl sm:text-2xl"> <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp </a>
+      </header>
 
-        <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
-            <div class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
-                <h1 class="main-title">David KRK</h1>
-                <h2 class="main-title">Contact</h2>
+      <main class="mx-auto mt-10 w-full max-w-4xl px-4 text-center">
+        <div class="mx-auto mt-10 w-full max-w-4xl px-4 text-center">
+          <h1 class="main-title">David KRK</h1>
+          <h2 class="main-title">Contact</h2>
+        </div>
+
+        <div class="language-selector">
+          <button type="button" class="language-btn" data-lang="fr">Français</button>
+          <button type="button" class="language-btn" data-lang="en">English</button>
+          <button type="button" class="language-btn" data-lang="es">Castellano</button>
+          <button type="button" class="language-btn" data-lang="eu">Euskara</button>
+          <button type="button" class="language-btn" data-lang="ar">العربية</button>
+          <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
+        </div>
+
+        <div class="contact-form-container">
+          <div class="lang-content" data-lang="fr">
+            <div class="contact-form">
+              <form action="https://formspree.io/f/mzzvdbad" method="POST">
+                <input type="text" name="name" placeholder="Votre nom" required />
+                <input type="email" name="email" placeholder="Votre email" required />
+                <textarea name="message" placeholder="Votre message" required></textarea>
+                <input type="hidden" name="_subject" value="Nouveau contact depuis le site David KRK" />
+                <input type="hidden" name="_language" value="fr" />
+                <button type="submit">ENVOYER LE MESSAGE</button>
+              </form>
             </div>
-
-            <div class="language-selector">
-                <button type="button" class="language-btn" data-lang="fr">Français</button>
-                <button type="button" class="language-btn" data-lang="en">English</button>
-                <button type="button" class="language-btn" data-lang="es">Castellano</button>
-                <button type="button" class="language-btn" data-lang="eu">Euskara</button>
-                <button type="button" class="language-btn" data-lang="ar">العربية</button>
-                <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
-            </div>
-
-            <div class="contact-form-container">
-                <!-- French Form -->
-                <div class="lang-content" data-lang="fr">
-                    <div class="contact-form">
-                        <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                            <input type="text" name="name" placeholder="Votre nom" required>
-                            <input type="email" name="email" placeholder="Votre email" required>
-                            <textarea name="message" placeholder="Votre message" required></textarea>
-                            <input type="hidden" name="_subject" value="Nouveau contact depuis le site David KRK">
-                            <input type="hidden" name="_language" value="fr">
-                            <button type="submit">ENVOYER LE MESSAGE</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- English Form -->
-                <div class="lang-content" data-lang="en">
-                    <div class="contact-form">
-                        <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <textarea name="message" placeholder="Your Message" required></textarea>
-                            <input type="hidden" name="_subject" value="New contact from David KRK website">
-                            <input type="hidden" name="_language" value="en">
-                            <button type="submit">SEND MESSAGE</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Spanish Form -->
-                <div class="lang-content" data-lang="es">
-                    <div class="contact-form">
-                        <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                            <input type="text" name="name" placeholder="Tu Nombre" required>
-                            <input type="email" name="email" placeholder="Tu Email" required>
-                            <textarea name="message" placeholder="Tu Mensaje" required></textarea>
-                            <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio web de David KRK">
-                            <input type="hidden" name="_language" value="es">
-                            <button type="submit">ENVIAR MENSAJE</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Basque Form -->
-                <div class="lang-content" data-lang="eu">
-                    <div class="contact-form">
-                        <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                            <input type="text" name="name" placeholder="Zure Izena" required>
-                            <input type="email" name="email" placeholder="Zure E-posta" required>
-                            <textarea name="message" placeholder="Zure Mezua" required></textarea>
-                            <input type="hidden" name="_subject" value="David KRK webgunetik kontaktu berria">
-                            <input type="hidden" name="_language" value="eu">
-                            <button type="submit">MEZUA BIDALI</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Arabic Form -->
-                <div class="lang-content" data-lang="ar" dir="rtl">
-                    <div class="contact-form">
-                        <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                            <input type="text" name="name" placeholder="اسمك" required>
-                            <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
-                            <textarea name="message" placeholder="رسالتك" required></textarea>
-                            <input type="hidden" name="_subject" value="جهة اتصال جديدة من موقع ديفيد كرك">
-                            <input type="hidden" name="_language" value="ar">
-                            <button type="submit">إرسال الرسالة</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Ukrainian Form -->
-                <div class="lang-content" data-lang="uk">
-                    <div class="contact-form">
-                        <form action="https://formspree.io/f/mzzvdbad" method="POST">
-                            <input type="text" name="name" placeholder="Ваше ім'я" required>
-                            <input type="email" name="email" placeholder="Ваша електронна пошта" required>
-                            <textarea name="message" placeholder="Ваше повідомлення" required></textarea>
-                            <input type="hidden" name="_subject" value="Новий контакт з веб-сайту David KRK">
-                            <input type="hidden" name="_language" value="uk">
-                            <button type="submit">НАДІСЛАТИ ПОВІДОМЛЕННЯ</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 text-lg">
-                <div class="lang-content" data-lang="fr"><p>Ou contactez-moi directement :</p></div>
-                <div class="lang-content" data-lang="en"><p>Or contact me directly:</p></div>
-                <div class="lang-content" data-lang="es"><p>O contáctame directamente:</p></div>
-                <div class="lang-content" data-lang="eu"><p>Edo nirekin harremanetan jarri zuzenean:</p></div>
-                <div class="lang-content" data-lang="ar" dir="rtl"><p>أو تواصل معي مباشرة:</p></div>
-                <div class="lang-content" data-lang="uk"><p>Або зв'яжіться зі мною безпосередньо:</p></div>
-                <p class="mt-2">
-                    <a href="mailto:davidkrkofficial@gmail.com" class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a>
-                </p>
-            </div>
-        </main>
-
-        <footer class="w-full max-w-7xl mx-auto">
-          <div class="flex justify-center gap-6 mb-4">
-            <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
-               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram"
-               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud"
-               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-mixcloud"></i></a>
-            <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube"
-               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-youtube"></i></a>
-            <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud"
-               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
-            <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok"
-               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
           </div>
-    
-          <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
-            <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website"
-               class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
+
+          <div class="lang-content" data-lang="en">
+            <div class="contact-form">
+              <form action="https://formspree.io/f/mzzvdbad" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <input type="hidden" name="_subject" value="New contact from David KRK website" />
+                <input type="hidden" name="_language" value="en" />
+                <button type="submit">SEND MESSAGE</button>
+              </form>
+            </div>
           </div>
-    
-          <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-          <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
-        </footer>
+
+          <div class="lang-content" data-lang="es">
+            <div class="contact-form">
+              <form action="https://formspree.io/f/mzzvdbad" method="POST">
+                <input type="text" name="name" placeholder="Tu Nombre" required />
+                <input type="email" name="email" placeholder="Tu Email" required />
+                <textarea name="message" placeholder="Tu Mensaje" required></textarea>
+                <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio web de David KRK" />
+                <input type="hidden" name="_language" value="es" />
+                <button type="submit">ENVIAR MENSAJE</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="lang-content" data-lang="eu">
+            <div class="contact-form">
+              <form action="https://formspree.io/f/mzzvdbad" method="POST">
+                <input type="text" name="name" placeholder="Zure Izena" required />
+                <input type="email" name="email" placeholder="Zure E-posta" required />
+                <textarea name="message" placeholder="Zure Mezua" required></textarea>
+                <input type="hidden" name="_subject" value="David KRK webgunetik kontaktu berria" />
+                <input type="hidden" name="_language" value="eu" />
+                <button type="submit">MEZUA BIDALI</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="lang-content" data-lang="ar" dir="rtl">
+            <div class="contact-form">
+              <form action="https://formspree.io/f/mzzvdbad" method="POST">
+                <input type="text" name="name" placeholder="اسمك" required />
+                <input type="email" name="email" placeholder="بريدك الإلكتروني" required />
+                <textarea name="message" placeholder="رسالتك" required></textarea>
+                <input type="hidden" name="_subject" value="جهة اتصال جديدة من موقع ديفيد كرك" />
+                <input type="hidden" name="_language" value="ar" />
+                <button type="submit">إرسال الرسالة</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="lang-content" data-lang="uk">
+            <div class="contact-form">
+              <form action="https://formspree.io/f/mzzvdbad" method="POST">
+                <input type="text" name="name" placeholder="Ваше ім'я" required />
+                <input type="email" name="email" placeholder="Ваша електронна пошта" required />
+                <textarea name="message" placeholder="Ваше повідомлення" required></textarea>
+                <input type="hidden" name="_subject" value="Новий контакт з веб-сайту David KRK" />
+                <input type="hidden" name="_language" value="uk" />
+                <button type="submit">НАДІСЛАТИ ПОВІДОМЛЕННЯ</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 text-lg">
+          <div class="lang-content" data-lang="fr">
+            <p>Ou contactez-moi directement :</p>
+          </div>
+          <div class="lang-content" data-lang="en">
+            <p>Or contact me directly:</p>
+          </div>
+          <div class="lang-content" data-lang="es">
+            <p>O contáctame directamente:</p>
+          </div>
+          <div class="lang-content" data-lang="eu">
+            <p>Edo nirekin harremanetan jarri zuzenean:</p>
+          </div>
+          <div class="lang-content" data-lang="ar" dir="rtl">
+            <p>أو تواصل معي مباشرة:</p>
+          </div>
+          <div class="lang-content" data-lang="uk">
+            <p>Або зв'яжіться зі мною безпосередньо:</p>
+          </div>
+          <p class="mt-2">
+            <a href="mailto:davidkrkofficial@gmail.com" class="hover:text-[var(--primary-color)]">davidkrkofficial@gmail.com</a>
+          </p>
+        </div>
+      </main>
+
+      <footer class="mx-auto w-full max-w-7xl">
+        <div class="mb-4 flex justify-center gap-6">
+          <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-2xl text-white md:text-3xl">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram" class="social-icon text-2xl text-white md:text-3xl">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud" class="social-icon text-2xl text-white md:text-3xl">
+            <i class="fab fa-mixcloud"></i>
+          </a>
+          <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube" class="social-icon text-2xl text-white md:text-3xl">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud" class="social-icon text-2xl text-white md:text-3xl">
+            <i class="fab fa-soundcloud"></i>
+          </a>
+          <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok" class="social-icon text-2xl text-white md:text-3xl">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+
+        <div class="mb-4 flex flex-wrap items-center justify-center gap-3 text-sm sm:gap-4">
+          <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="transition-colors hover:text-[var(--primary-color)]">CONTACT | BOOKING | REMIX</a>
+        </div>
+
+        <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+        <p class="neon-text mt-4 text-lg font-bold">"May The Techno Be With You"</p>
+      </footer>
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const langBtns = document.querySelectorAll('.language-btn');
-        const langContents = document.querySelectorAll('.lang-content');
+      document.addEventListener('DOMContentLoaded', () => {
+          const langBtns = document.querySelectorAll('.language-btn');
+          const langContents = document.querySelectorAll('.lang-content');
 
-        function switchLanguage(lang) {
-            langContents.forEach(content => content.classList.remove('active'));
-            langBtns.forEach(b => b.classList.remove('active'));
+          function switchLanguage(lang) {
+              langContents.forEach(content => content.classList.remove('active'));
+              langBtns.forEach(b => b.classList.remove('active'));
 
-            const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
-            contentsToShow.forEach(content => content.classList.add('active'));
-            
-            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-            }
-        }
+              const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
+              contentsToShow.forEach(content => content.classList.add('active'));
 
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchLanguage(btn.dataset.lang);
-            });
-        });
+              const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+              if (activeBtn) {
+                  activeBtn.classList.add('active');
+              }
+          }
 
-        // Set default language to French
-        switchLanguage('fr');
-    });
+          langBtns.forEach(btn => {
+              btn.addEventListener('click', () => {
+                  switchLanguage(btn.dataset.lang);
+              });
+          });
+
+          // Set default language to French
+          switchLanguage('fr');
+      });
     </script>
-</body>
+  </body>
 </html>
