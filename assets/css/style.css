@@ -4,7 +4,6 @@
 
 /*!
  * tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
- * (copied wholesale – no change)
  */
 *,
 *:after,
@@ -483,6 +482,9 @@ footer {
   display: block;
   animation: fadeIn 0.8s ease-out;
 }
+
+.lang-content { display: none; }
+.lang-content.active { display: block; animation: fadeIn 0.8s ease-out; }
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes fadeIn {

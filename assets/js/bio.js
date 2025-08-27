@@ -27,4 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             switchLanguage(btn.dataset.lang);
         });
     });
+
+    // Set default language
+    switchLanguage('fr');
 });

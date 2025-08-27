@@ -4,7 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>David KRK · Events</title>
-  <meta name="description" content="Upcoming events and shows for David KRK.">
+  <meta name="description" content="Découvrez les prochains événements et dates de David KRK.">
+  <meta name="author" content="David KRK">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://davidkrk.com/event.html">
+  <meta property="og:title" content="David KRK · Events">
+  <meta property="og:description" content="Découvrez les prochains événements et dates de David KRK.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://davidkrk.com/event.html">
+  <meta property="twitter:title" content="David KRK · Events">
+  <meta property="twitter:description" content="Découvrez les prochains événements et dates de David KRK.">
+  <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo 30-01-25.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -17,11 +36,11 @@
 <div class="background-image"></div>
 
 <div class="content-wrapper">
-  <!-- Header -->
   <header class="hero-header">
     <a href="index.html">Home</a>
     <a href="bio.html">Bio</a>
     <a href="music.html">Music</a>
+    <a href="event.html">Event</a>
     <a href="contact.html">Contact</a>
     <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc"
        target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
@@ -29,21 +48,35 @@
     </a>
   </header>
 
-  <!-- Title -->
   <div class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
     <h1 class="main-title">David KRK</h1>
-    <h2 class="main-title">Event</h2>
-    <p class="mt-4 text-gray-300 text-lg">Stay tuned for upcoming events!</p>
+    <div class="language-selector flex-wrap">
+        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn" data-lang="en">English</button>
+        <button type="button" class="language-btn" data-lang="es">Castellano</button>
+        <button type="button" class="language-btn" data-lang="eu">Euskara</button>
+        <button type="button" class="language-btn" data-lang="ar">العربية</button>
+        <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
+    </div>
+    <div class="lang-content" data-lang="fr"><h2 class="main-title">Événements</h2></div>
+    <div class="lang-content" data-lang="en"><h2 class="main-title">Events</h2></div>
+    <div class="lang-content" data-lang="es"><h2 class="main-title">Eventos</h2></div>
+    <div class="lang-content" data-lang="eu"><h2 class="main-title">Ekitaldiak</h2></div>
+    <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">الفعاليات</h2></div>
+    <div class="lang-content" data-lang="uk"><h2 class="main-title">Події</h2></div>
   </div>
 
-  <!-- Placeholder -->
   <main class="text-center max-w-4xl mx-auto px-4 w-full">
     <div class="mt-8 mb-8">
-      <p>No upcoming events at the moment. Please check back later.</p>
+        <div class="lang-content" data-lang="fr"><p>Aucun événement à venir pour le moment. Veuillez revenir plus tard.</p></div>
+        <div class="lang-content" data-lang="en"><p>No upcoming events at the moment. Please check back later.</p></div>
+        <div class="lang-content" data-lang="es"><p>No hay eventos próximos por el momento. Por favor, vuelve más tarde.</p></div>
+        <div class="lang-content" data-lang="eu"><p>Momentuz ez dago ekitaldirik. Mesedez, saiatu berriro geroago.</p></div>
+        <div class="lang-content" data-lang="ar" dir="rtl"><p>لا توجد فعاليات قادمة في الوقت الحالي. يرجى التحقق مرة أخرى في وقت لاحق.</p></div>
+        <div class="lang-content" data-lang="uk"><p>На даний момент майбутніх подій немає. Будь ласка, перевірте пізніше.</p></div>
     </div>
   </main>
 
-  <!-- Footer with player widget -->
   <footer class="w-full max-w-7xl mx-auto">
     <div class="mt-8 mb-8 player-container">
       <iframe width="100%" height="120"
@@ -75,19 +108,19 @@
     <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
     <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
   </footer>
-</div> <!-- /content-wrapper -->
+</div>
 
 <script src="assets/js/main.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const langBtns = document.querySelectorAll('.language-btn');
-        const langContents = document.querySelectorAll('.bio-message');
+        const langContents = document.querySelectorAll('.lang-content');
 
         function switchLanguage(lang) {
             langContents.forEach(content => content.classList.remove('active'));
             langBtns.forEach(b => b.classList.remove('active'));
 
-            const contentsToShow = document.querySelectorAll(`.bio-message[data-lang="${lang}"]`);
+            const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
             contentsToShow.forEach(content => content.classList.add('active'));
             
             const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
