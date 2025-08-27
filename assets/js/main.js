@@ -24,10 +24,7 @@ if (hero) {
 
 /* =============================
  *   Howler.js – Audio controls
- * ==============================
- */
-
-import { Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js';
+ * ============================== */
 
 /* -----------------------------
    1️⃣  Paths –  relative à la racine
@@ -39,17 +36,20 @@ const getAsset = p => `assets/music/${p}`;
    ----------------------------- */
 const patriceSound = new Howl({
   src: [ getAsset('Patrice Bäumel–Glutes (Original Mix).mp3') ],
-  html5: true            // streamable on all devices (large files)
+  html5: true,            // streamable on all devices (large files)
+  preload: false
 });
 
 const newOrderSound = new Howl({
   src: [ getAsset('New Order Blue Monday.ogg') ],
-  html5: true
+  html5: true,
+  preload: false
 });
 
 const winxSound = new Howl({
   src: [ getAsset("Winx - Don't Laugh - Original Live Raw Mix.ogg") ],
-  html5: true
+  html5: true,
+  preload: false
 });
 
 /* -----------------------------
