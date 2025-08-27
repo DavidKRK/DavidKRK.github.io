@@ -54,13 +54,15 @@
       background-position: left center;
       background-repeat: no-repeat;
       background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
     }
 
     body:not(.home-page) {
-        background-color: #416E73;
+        background-color: var(--dark-bg);
     }
 
-    .content-wrapper { max-width: 100%; overflow-x: hidden; }
+    .content-wrapper { max-width: 100%; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
     .hero-header {
       display: flex;
@@ -82,6 +84,8 @@
     }
 
     .hero-header a:hover { color: var(--primary-color); }
+
+    main { flex: 1; }
 
     .main-title {
       text-align: center;
@@ -148,14 +152,14 @@
     footer {
       text-align: center;
       padding: 2rem 1rem;
-      margin-top: 2rem;
+      margin-top: auto;
     }
 
     .neon-text { animation: neon 2s ease-in-out infinite; }
 
     @keyframes neon {
-      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF69B4, 0 0 20px #FF69B4, 0 0 25px #FF69B4, 0 0 30px #FF69B4, 0 0 35px #FF69B4; color: #fff; }
-      50% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #03A9F4, 0 0 40px #03A9F4, 0 0 50px #03A9F4, 0 0 60px #03A9F4, 0 0 70px #03A9F4; color: #e0e0e0; }
+      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary-color), 0 0 20px var(--primary-color), 0 0 25px var(--primary-color), 0 0 30px var(--primary-color), 0 0 35px var(--primary-color); color: #fff; }
+      50% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--secondary-color), 0 0 40px var(--secondary-color), 0 0 50px var(--secondary-color), 0 0 60px var(--secondary-color), 0 0 70px var(--secondary-color); color: #e0e0e0; }
     }
     
     .language-selector {
@@ -198,7 +202,6 @@
             <a href="bio.html">Bio</a>
             <a href="music.html">Music</a>
             <a href="event.html">Events</a>
-            <a href="contact.html">Contact</a>
             <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
                 <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp
             </a>
@@ -319,28 +322,28 @@
         </main>
 
         <footer class="w-full max-w-7xl mx-auto">
-            <div class="flex justify-center gap-6 mb-4">
-                <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
-                   class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram"
-                   class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud"
-                   class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-mixcloud"></i></a>
-                <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube"
-                   class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-youtube"></i></a>
-                <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud"
-                   class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
-                <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok"
-                   class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
-            </div>
-
-            <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
-                <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website"
-                   class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
-            </div>
-
-            <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-            <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
+          <div class="flex justify-center gap-6 mb-4">
+            <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
+               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram"
+               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud"
+               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-mixcloud"></i></a>
+            <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube"
+               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-youtube"></i></a>
+            <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud"
+               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
+            <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok"
+               class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
+          </div>
+    
+          <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
+            <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website"
+               class="hover:text-[var(--primary-color)] transition-colors">CONTACT | BOOKING | REMIX</a>
+          </div>
+    
+          <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+          <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
         </footer>
     </div>
 
