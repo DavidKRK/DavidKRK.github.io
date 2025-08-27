@@ -40,7 +40,7 @@
         <header class="hero-header">
             <a href="index.html">Home</a>
             <a href="music.html">Music</a>
-            <a href="event.html">Events</a>
+            <a href="event.html">Event</a>
             <a href="contact.html">Contact</a>
             <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
                 <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp
@@ -54,16 +54,16 @@
 
         <main class="text-center max-w-4xl mx-auto px-4 w-full">
            <div class="language-selector flex-wrap">
-                <button type="button" class="language-btn active" data-lang="fr">Français</button>
+                <button type="button" class="language-btn" data-lang="fr">Français</button>
+                <button type="button" class="language-btn" data-lang="en">English</button>
                 <button type="button" class="language-btn" data-lang="es">Castellano</button>
                 <button type="button" class="language-btn" data-lang="eu">Euskara</button>
-                <button type="button" class="language-btn" data-lang="en">English</button>
                 <button type="button" class="language-btn" data-lang="ar">العربية</button> 
                 <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
             </div>
 
             <div class="bio-content mb-12 text-base sm:text-lg max-w-3xl mx-auto">
-                <div class="bio-message active" data-lang="fr">
+                <div class="lang-content" data-lang="fr">
                     <div class="bio-text-container text-sm sm:text-base text-justify">
                         <p>David KRK né en Août 1982, est un DJ qui se produit en Espagne, France et Côte Basque depuis 2000.</p>
                         <p>Son style de base : Trance - Tech Trance, se diversifie aujourd'hui en complément de sons plus Techno.</p>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <div class="bio-message" data-lang="es">
+                <div class="lang-content" data-lang="es">
                     <div class="bio-text-container text-sm sm:text-base text-justify">
                         <p>David KRK, nacido en agosto de 1982, es un DJ que se presenta en España, Francia y la Costa Vasca desde 2000.</p>
                         <p>Su estilo base, Trance - Tech Trance, se ha diversificado hoy en día con la incorporación de sonidos más Techno.</p>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="bio-message" data-lang="eu">
+                <div class="lang-content" data-lang="eu">
                     <div class="bio-text-container text-sm sm:text-base text-justify">
                         <p>David KRK-ren biografia: 1982-ko abuztuan jaioa, David KRK 2000-garren urtetik aurrera Espainian, Frantzian eta Euskadin hezitako “deejay” gazte bat da.</p>
                         <p>Bere estilo nagusia: Trance eta Techno - Trance dira. Gaur egun elektro-trance izeneko doinu elektronikoa ere jorratzen du.</p>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <div class="bio-message" data-lang="ar" dir="rtl">
+                <div class="lang-content" data-lang="ar" dir="rtl">
                     <div class="bio-text-container text-sm sm:text-base text-justify">
                         <p>ديفيد كرك (David KRK)، من مواليد أغسطس 1982، هو دي جي يقدم عروضه في إسبانيا وفرنسا وإقليم الباسك منذ عام 2000.</p>
                         <p>أسلوبه الأساسي هو الترانس والتيك-ترانس (Trance - Tech Trance)، لكنه يتجه اليوم نحو التنويع بإضافة المزيد من إيقاعات التيكنو (Techno).</p>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <div class="bio-message" data-lang="en">
+                <div class="lang-content" data-lang="en">
                     <div class="bio-text-container text-sm sm:text-base text-justify">
                         <p>David KRK, born in August 1982, is a DJ who has been performing in Spain, France, and the Basque Coast since 2000.</p>
                         <p>His primary style: Trance - Tech Trance, is now diversifying to include more Techno sounds.</p>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
 
-               <div class="bio-message" data-lang="uk">
+               <div class="lang-content" data-lang="uk">
                     <div class="bio-text-container text-sm sm:text-base text-justify">
                         <p>Девід КРК, народився в серпні 1982 року, є DJ, який виступає в Іспанії, Франції та Країні Басків з 2000 року.</p>
                         <p>Його основний стиль: Trance - Tech Trance, зараз розширюється, доповнюючись більш Techno звучанням.</p>
@@ -195,33 +195,5 @@
     </div>
 
     <script src="assets/js/bio.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const langBtns = document.querySelectorAll('.language-btn');
-        const langContents = document.querySelectorAll('.bio-message');
-
-        function switchLanguage(lang) {
-            langContents.forEach(content => content.classList.remove('active'));
-            langBtns.forEach(b => b.classList.remove('active'));
-
-            const contentsToShow = document.querySelectorAll(`.bio-message[data-lang="${lang}"]`);
-            contentsToShow.forEach(content => content.classList.add('active'));
-            
-            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-            }
-        }
-
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchLanguage(btn.dataset.lang);
-            });
-        });
-
-        // Set default language to French
-        switchLanguage('fr');
-    });
-    </script>
 </body>
 </html>

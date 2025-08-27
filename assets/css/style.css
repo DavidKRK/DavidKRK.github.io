@@ -211,8 +211,6 @@ summary {
  *   VARIABLES & CUSTOM SETTINGS
  * ============================== */
 
-* { border: 1px solid red !important; }
-
 /* A little CSS reset for better responsive behavior */
 html {
   box-sizing: border-box;
@@ -457,6 +455,7 @@ footer {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 .language-btn {
   background: rgba(255, 255, 255, 0.1);
@@ -474,19 +473,14 @@ footer {
   transform: scale(1.05);
 }
 
-/* ---------- BIO MESSAGE (language toggler) ---------- */
-.bio-message {
+/* ---------- LANGUAGE CONTENT (language toggler) ---------- */
+.lang-content {
   display: none;
-  text-align: center;
-  line-height: 1.6;
 }
-.bio-message.active {
+.lang-content.active {
   display: block;
   animation: fadeIn 0.8s ease-out;
 }
-
-.lang-content { display: none; }
-.lang-content.active { display: block; animation: fadeIn 0.8s ease-out; }
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes fadeIn {
