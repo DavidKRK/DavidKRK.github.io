@@ -6,12 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const clickedBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
         const activeMsg = document.querySelector(`.bio-message[data-lang="${lang}"]`);
 
-        const wasActive = clickedBtn && clickedBtn.classList.contains('active');
+        // Check if the clicked button is already active
+        if (clickedBtn && clickedBtn.classList.contains('active')) {
+            // If active, deactivate all and hide all messages
+            languageBtns.forEach(b => b.classList.remove('active'));
+            bioMessages.forEach(msg => msg.classList.remove('active'));
+        } else {
+            // If not active, deactivate all and hide all messages first
+            languageBtns.forEach(b => b.classList.remove('active'));
+            bioMessages.forEach(msg => msg.classList.remove('active'));
 
-        languageBtns.forEach(b => b.classList.remove('active'));
-        bioMessages.forEach(msg => msg.classList.remove('active'));
-
-        if (!wasActive) {
+            // Then activate the clicked button and show its message
             if (clickedBtn) clickedBtn.classList.add('active');
             if (activeMsg) activeMsg.classList.add('active');
         }
@@ -22,7 +27,4 @@ document.addEventListener('DOMContentLoaded', () => {
             switchLanguage(btn.dataset.lang);
         });
     });
-
-    // Initial setup: no language active by default
-    // No call to switchLanguage here
 });
