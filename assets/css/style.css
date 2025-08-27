@@ -211,6 +211,8 @@ summary {
  *   VARIABLES & CUSTOM SETTINGS
  * ============================== */
 
+* { border: 1px solid red !important; }
+
 /* A little CSS reset for better responsive behavior */
 html {
   box-sizing: border-box;
