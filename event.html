@@ -78,5 +78,33 @@
 </div> <!-- /content-wrapper -->
 
 <script src="assets/js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const langBtns = document.querySelectorAll('.language-btn');
+        const langContents = document.querySelectorAll('.bio-message');
+
+        function switchLanguage(lang) {
+            langContents.forEach(content => content.classList.remove('active'));
+            langBtns.forEach(b => b.classList.remove('active'));
+
+            const contentsToShow = document.querySelectorAll(`.bio-message[data-lang="${lang}"]`);
+            contentsToShow.forEach(content => content.classList.add('active'));
+            
+            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
+        });
+
+        // Set default language to French
+        switchLanguage('fr');
+    });
+    </script>
 </body>
 </html>

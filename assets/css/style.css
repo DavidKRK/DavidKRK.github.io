@@ -211,6 +211,22 @@ summary {
 /* ==============================
  *   VARIABLES & CUSTOM SETTINGS
  * ============================== */
+
+/* A little CSS reset for better responsive behavior */
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img, iframe, video {
+  max-width: 100%;
+  height: auto;
+}
+
 :root {
   --primary-color: #ff69b4;
   --secondary-color: #03a9f4;
@@ -376,15 +392,36 @@ footer {
 }
 
 /* ---------- RESPONSIVE OVERRIDES ---------- */
+/* For tablets and smaller */
+@media (max-width: 1024px) {
+  .hero-header a {
+    font-size: 1.1rem;
+    margin: 0 0.8rem;
+  }
+  .text-center .main-title {
+    font-size: 4.5rem !important;
+  }
+}
+
+/* For mobile phones */
 @media (max-width: 768px) {
+  .hero-header {
+    padding: 1rem;
+    flex-wrap: wrap; /* Allows items to wrap */
+    gap: 0.5rem 1rem; /* Adds spacing between wrapped items */
+  }
   .hero-header a {
     font-size: 1rem;
     margin: 0 0.5rem;
   }
 
   /* Override .main-title size within responsive breakpoint */
-  .main-title {
-    font-size: 2.5rem;
+  .text-center .main-title {
+    font-size: 3rem !important;
+  }
+
+  .player-container {
+    width: 80%; /* Make player wider on mobile */
   }
 
   .hero-logo {

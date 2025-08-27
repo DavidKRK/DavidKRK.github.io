@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- CSS principal (assurez-vous qu'il contient les classes Tailwind CSS si vous les utilisez) -->
+  <!-- CSS principal -->
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
 </head>
@@ -23,7 +23,6 @@
 
   <div id="hero" class="content-wrapper">
     <header class="hero-header">
-      <!-- Amélioration sémantique : ajout de la balise <nav> pour la navigation principale -->
       <nav>
         <a href="bio.html">Bio</a>
         <a href="music.html">Music</a>
@@ -37,20 +36,78 @@
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
       <h1 class="main-title">David KRK</h1>
-      <div class="text-lg">
-          <p class="mt-4 text-gray-300">Site officiel de David KRK</p>
-          <p>DJ et producteur international de musique Techno.</p>
-          <p>Découvrez sa musique, sa biographie et ses événements.</p>
+
+      <div class="language-selector flex-wrap">
+        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn" data-lang="en">English</button>
+        <button type="button" class="language-btn" data-lang="es">Castellano</button>
+        <button type="button" class="language-btn" data-lang="eu">Euskara</button>
+        <button type="button" class="language-btn" data-lang="ar">العربية</button>
+        <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
 
-      <!-- Slider “player‑widget” -->
+      <!-- French Content -->
+      <div class="bio-message" data-lang="fr">
+        <div class="text-lg">
+            <p class="mt-4 text-gray-300">Site officiel de David KRK</p>
+            <p>DJ et producteur international de musique Techno.</p>
+            <p>Découvrez sa musique, sa biographie et ses événements.</p>
+        </div>
+      </div>
+
+      <!-- English Content -->
+      <div class="bio-message" data-lang="en">
+        <div class="text-lg">
+            <p class="mt-4 text-gray-300">Official Website of David KRK</p>
+            <p>International Techno Music DJ & Producer.</p>
+            <p>Discover his music, biography, and events.</p>
+        </div>
+      </div>
+
+      <!-- Spanish Content -->
+      <div class="bio-message" data-lang="es">
+        <div class="text-lg">
+            <p class="mt-4 text-gray-300">Sitio web oficial de David KRK</p>
+            <p>DJ y productor internacional de música Techno.</p>
+            <p>Descubre su música, biografía y eventos.</p>
+        </div>
+      </div>
+
+      <!-- Basque Content -->
+      <div class="bio-message" data-lang="eu">
+        <div class="text-lg">
+            <p class="mt-4 text-gray-300">David KRK-ren webgune ofiziala</p>
+            <p>Techno musikako nazioarteko DJ eta ekoizlea.</p>
+            <p>Ezagutu bere musika, biografia eta ekitaldiak.</p>
+        </div>
+      </div>
+
+      <!-- Arabic Content -->
+      <div class="bio-message" data-lang="ar" dir="rtl">
+        <div class="text-lg">
+            <p class="mt-4 text-gray-300">الموقع الرسمي لديفيد كرك</p>
+            <p>دي جي ومنتج عالمي لموسيقى التكنو.</p>
+            <p>اكتشف موسيقاه وسيرته الذاتية وفعالياته.</p>
+        </div>
+      </div>
+
+      <!-- Ukrainian Content -->
+      <div class="bio-message" data-lang="uk">
+        <div class="text-lg">
+            <p class="mt-4 text-gray-300">Офіційний сайт David KRK</p>
+            <p>Міжнародний техно-діджей та продюсер.</p>
+            <p>Відкрийте для себе його музику, біографію та події.</p>
+        </div>
+      </div>
+
+      <!-- Player Widget -->
       <section class="mt-8 mb-8 player-container">
-        <!-- Correction : remplacement de l'attribut obsolète 'frameborder' par du style CSS -->
         <iframe title="Mixcloud player" width="100%" height="120"
                 style="border:0;"
                 src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&autoplay=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F"
                 allow="autoplay; encrypted-media; fullscreen; idle-detection; speaker-selection; web-share"></iframe>
       </section>
+
     </main>
 
     <!-- Footer -->
@@ -82,5 +139,33 @@
 
   <!-- Global scripts -->
   <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const langBtns = document.querySelectorAll('.language-btn');
+        const langContents = document.querySelectorAll('.bio-message');
+
+        function switchLanguage(lang) {
+            langContents.forEach(content => content.classList.remove('active'));
+            langBtns.forEach(b => b.classList.remove('active'));
+
+            const contentsToShow = document.querySelectorAll(`.bio-message[data-lang="${lang}"]`);
+            contentsToShow.forEach(content => content.classList.add('active'));
+            
+            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
+        });
+
+        // Set default language to French
+        switchLanguage('fr');
+    });
+    </script>
 </body>
 </html>
