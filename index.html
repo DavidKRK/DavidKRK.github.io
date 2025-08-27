@@ -6,13 +6,14 @@
   <title>David KRK · HOME</title>
   <meta name="description" content="Site officiel de David KRK, DJ et producteur international de musique Techno. Découvrez sa musique, sa biographie et ses événements.">
   <meta name="keywords" content="David KRK, DJ techno, producteur, événements, musique">
-  <link rel="icon" type="image/webp" href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/images/optimized/logo.webp">
-  <!-- Fonts + Icones + Tailwind -->
+  <!-- Utilisation d'une ressource locale pour le favicon -->
+  <link rel="icon" type="image/png" href="logo 30-01-25.png">
+  <!-- Fonts + Icones -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- CSS principal -->
+  <!-- CSS principal (assurez-vous qu'il contient les classes Tailwind CSS si vous les utilisez) -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="home-page">
@@ -21,28 +22,34 @@
 
   <div id="hero" class="content-wrapper">
     <header class="hero-header">
+      <!-- Amélioration sémantique : ajout de la balise <nav> pour la navigation principale -->
+      <nav>
         <a href="bio.html">Bio</a>
         <a href="music.html">Music</a>
         <a href="event.html">Event</a>
         <a href="contact.html">Contact</a>
         <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
-              <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
-          </a>
-      </header>
+          <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
+        </a>
+      </nav>
+    </header>
+
     <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
       <h1 class="main-title">David KRK</h1>
-      <p class="mt-4 text-gray-300 text-lg">Site officiel de David KRK</p>
-      <p>DJ et producteur international de musique Techno.</p>
-      <p>Découvrez sa musique, sa biographie et ses événements.</p>
+      <div class="text-lg">
+          <p class="mt-4 text-gray-300">Site officiel de David KRK</p>
+          <p>DJ et producteur international de musique Techno.</p>
+          <p>Découvrez sa musique, sa biographie et ses événements.</p>
+      </div>
 
-      <!-- Slider “player‑widget” (optionnel) -->
+      <!-- Slider “player‑widget” -->
       <section class="mt-8 mb-8 player-container">
+        <!-- Correction : remplacement de l'attribut obsolète 'frameborder' par du style CSS -->
         <iframe title="Mixcloud player" width="100%" height="120"
+                style="border:0;"
                 src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&autoplay=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F"
-                frameborder="0"
                 allow="autoplay; encrypted-media; fullscreen; idle-detection; speaker-selection; web-share"></iframe>
       </section>
-
     </main>
 
     <!-- Footer -->
