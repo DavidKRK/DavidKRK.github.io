@@ -4,7 +4,6 @@
 
 /*!
  * tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
- * (copied wholesale – no change)
  */
 *,
 *:after,
@@ -211,6 +210,22 @@ summary {
 /* ==============================
  *   VARIABLES & CUSTOM SETTINGS
  * ============================== */
+
+/* A little CSS reset for better responsive behavior */
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img, iframe, video {
+  max-width: 100%;
+  height: auto;
+}
+
 :root {
   --primary-color: #ff69b4;
   --secondary-color: #03a9f4;
@@ -226,7 +241,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Russo One", sans-serif;
-  color: white;
+  color: #D9D9D9;
   overflow-x: hidden;
 }
 
@@ -262,7 +277,7 @@ body:not(.home-page) {
   background: rgba(0, 0, 0, 0.4);
 }
 .hero-header a {
-  color: white;
+  color: #D9D9D9;
   text-decoration: none;
   margin: 0 1rem;
   font-size: 1.2rem;
@@ -295,18 +310,8 @@ footer {
 .text-center .main-title {
   font-size: 4rem !important; /* Taille par défaut (mobile) */
   text-align: center !important;
-  background: linear-gradient(
-      to right,
-      var(--primary-color),
-      var(--secondary-color),
-      var(--accent-color)
-  );
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent !important;
-  background-size: 200% auto;
-  animation: gradient 8s ease infinite;
+  color: #F24957;
+  animation: flicker 1.5s infinite;
   margin-top: 1rem;
   font-weight: bold;
 }
@@ -332,15 +337,12 @@ footer {
 .text-center p {
   text-align: center !important;
 }
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
+@keyframes flicker {
+  0%, 100% {
+    text-shadow: 0 0 2px #F24957, 0 0 5px #F24957, 0 0 10px #F24957;
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    text-shadow: 0 0 5px #F24957, 0 0 10px #F24957, 0 0 15px #F24957;
   }
 }
 
@@ -353,12 +355,12 @@ footer {
   100% {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff69b4, 0 0 20px #ff69b4, 0 0 25px #ff69b4, 0 0 30px #ff69b4,
       0 0 35px #ff69b4;
-    color: #fff;
+    color: #D9D9D9;
   }
   50% {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #03a9f4, 0 0 40px #03a9f4, 0 0 50px #03a9f4, 0 0 60px #03a9f4,
       0 0 70px #03a9f4;
-    color: #e0e0e0;
+    color: #D9D9D9;
   }
 }
 
@@ -376,15 +378,36 @@ footer {
 }
 
 /* ---------- RESPONSIVE OVERRIDES ---------- */
+/* For tablets and smaller */
+@media (max-width: 1024px) {
+  .hero-header a {
+    font-size: 1.1rem;
+    margin: 0 0.8rem;
+  }
+  .text-center .main-title {
+    font-size: 4.5rem !important;
+  }
+}
+
+/* For mobile phones */
 @media (max-width: 768px) {
+  .hero-header {
+    padding: 1rem;
+    flex-wrap: wrap; /* Allows items to wrap */
+    gap: 0.5rem 1rem; /* Adds spacing between wrapped items */
+  }
   .hero-header a {
     font-size: 1rem;
     margin: 0 0.5rem;
   }
 
   /* Override .main-title size within responsive breakpoint */
-  .main-title {
-    font-size: 2.5rem;
+  .text-center .main-title {
+    font-size: 3rem !important;
+  }
+
+  .player-container {
+    width: 80%; /* Make player wider on mobile */
   }
 
   .hero-logo {
@@ -419,11 +442,12 @@ footer {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 .language-btn {
   background: rgba(255, 255, 255, 0.1);
   border: none;
-  color: white;
+  color: #D9D9D9;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   cursor: pointer;
@@ -436,13 +460,11 @@ footer {
   transform: scale(1.05);
 }
 
-/* ---------- BIO MESSAGE (language toggler) ---------- */
-.bio-message {
+/* ---------- LANGUAGE CONTENT (language toggler) ---------- */
+.lang-content {
   display: none;
-  text-align: center;
-  line-height: 1.6;
 }
-.bio-message.active {
+.lang-content.active {
   display: block;
   animation: fadeIn 0.8s ease-out;
 }

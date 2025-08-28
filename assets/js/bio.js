@@ -1,30 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const languageBtns = document.querySelectorAll('.language-btn');
-    const bioMessages = document.querySelectorAll('.bio-message');
+    const langBtns = document.querySelectorAll('.language-btn');
+    const langContents = document.querySelectorAll('.lang-content');
 
     function switchLanguage(lang) {
         const clickedBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
-        const activeMsg = document.querySelector(`.bio-message[data-lang="${lang}"]`);
+        
+        // Hide all content and deactivate all buttons
+        langContents.forEach(content => content.classList.remove('active'));
+        langBtns.forEach(b => b.classList.remove('active'));
 
-        // Check if the clicked button is already active
-        if (clickedBtn && clickedBtn.classList.contains('active')) {
-            // If active, deactivate all and hide all messages
-            languageBtns.forEach(b => b.classList.remove('active'));
-            bioMessages.forEach(msg => msg.classList.remove('active'));
-        } else {
-            // If not active, deactivate all and hide all messages first
-            languageBtns.forEach(b => b.classList.remove('active'));
-            bioMessages.forEach(msg => msg.classList.remove('active'));
-
-            // Then activate the clicked button and show its message
-            if (clickedBtn) clickedBtn.classList.add('active');
-            if (activeMsg) activeMsg.classList.add('active');
+        // Show the selected content and activate the button
+        const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
+        contentsToShow.forEach(content => content.classList.add('active'));
+        if (clickedBtn) {
+            clickedBtn.classList.add('active');
         }
     }
 
-    languageBtns.forEach(btn => {
+    langBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            switchLanguage(btn.dataset.lang);
+            // Toggle functionality
+            if (btn.classList.contains('active')) {
+                // If already active, hide everything
+                langContents.forEach(content => content.classList.remove('active'));
+                langBtns.forEach(b => b.classList.remove('active'));
+            } else {
+                // Otherwise, switch to the new language
+                switchLanguage(btn.dataset.lang);
+            }
         });
     });
+
+    // NO default language on page load
 });
