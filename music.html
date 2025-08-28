@@ -4,11 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>David KRK · MUSIC</title>
-  <meta name="description" content="Check out David KRK's upcoming events, international Techno DJ.">
+  <meta name="description" content="Découvrez la musique de David KRK, DJ et producteur de musique Techno.">
+  <meta name="author" content="David KRK">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://davidkrk.com/music.html">
+  <meta property="og:title" content="David KRK · MUSIC">
+  <meta property="og:description" content="Découvrez la musique de David KRK, DJ et producteur de musique Techno.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://davidkrk.com/music.html">
+  <meta property="twitter:title" content="David KRK · MUSIC">
+  <meta property="twitter:description" content="Découvrez la musique de David KRK, DJ et producteur de musique Techno.">
+  <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png"
-        href="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/gh-pages/logo%2030-01-25.png">
+  <link rel="icon" type="image/png" href="logo 30-01-25.png">
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,37 +36,45 @@
 </head>
 <body class="home-page">
 
-  <!-- ==== BACKGROUND & WRAPPER ==== -->
   <div class="background-image"></div>
 
   <div class="content-wrapper">
 
-    <!-- ==== HEADER ==== -->
     <header class="hero-header">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
-      <a href="contact.html">Contact</a>
       <a href="event.html">Event</a>
+      <a href="contact.html">Contact</a>
       <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc"
          target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
         <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color:#25D366;"></i>Whatsapp
       </a>
     </header>
 
-    <!-- ==== TITLE ==== -->
     <div class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
       <h1 class="main-title">David KRK</h1>
-      <h2 class="main-title">Music</h2>
+      <div class="language-selector flex-wrap">
+        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn" data-lang="en">English</button>
+        <button type="button" class="language-btn" data-lang="es">Castellano</button>
+        <button type="button" class="language-btn" data-lang="eu">Euskara</button>
+        <button type="button" class="language-btn" data-lang="ar">العربية</button>
+        <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
+      </div>
+      <div class="lang-content" data-lang="fr"><h2 class="main-title">Musique</h2></div>
+      <div class="lang-content" data-lang="en"><h2 class="main-title">Music</h2></div>
+      <div class="lang-content" data-lang="es"><h2 class="main-title">Música</h2></div>
+      <div class="lang-content" data-lang="eu"><h2 class="main-title">Musika</h2></div>
+      <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">الموسيقى</h2></div>
+      <div class="lang-content" data-lang="uk"><h2 class="main-title">Музика</h2></div>
     </div>
 
-    <!-- ==== TRACK LIST (audio fallback) ==== -->
-        <main class="text-center max-w-4xl mx-auto px-4 w-full music-main-content">
-      <script src="https://static.elfsight.com/platform/platform.js" async></script><div class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy></div>
+    <main class="text-center max-w-4xl mx-auto px-4 w-full music-main-content">
+      <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+      <div class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy></div>
     </main>
 
-    <!-- ==== FOOTER (identique à index) ==== -->
     <footer class="w-full max-w-7xl mx-auto">
-      
       <div class="flex justify-center gap-6 mb-4">
         <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-facebook"></i></a>
@@ -78,20 +100,19 @@
       <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
       <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
     </footer>
-  </div>  <!-- /content-wrapper -->
+  </div>
 
-  <!-- ==== Global scripts ==== -->
-  <script src="https://elfsightcdn.com/platform.js" async></script><script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const langBtns = document.querySelectorAll('.language-btn');
-        const langContents = document.querySelectorAll('.bio-message');
+        const langContents = document.querySelectorAll('.lang-content');
 
         function switchLanguage(lang) {
             langContents.forEach(content => content.classList.remove('active'));
             langBtns.forEach(b => b.classList.remove('active'));
 
-            const contentsToShow = document.querySelectorAll(`.bio-message[data-lang="${lang}"]`);
+            const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
             contentsToShow.forEach(content => content.classList.add('active'));
             
             const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
