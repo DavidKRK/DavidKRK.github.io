@@ -661,3 +661,7 @@ footer {
     opacity: 0;
   }
 }
+
+.footer-contact-link:hover {
+    color: var(--primary-color);
+}
