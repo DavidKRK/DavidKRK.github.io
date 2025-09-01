@@ -36,7 +36,7 @@ Ce Code de Conduite s'applique à la fois dans les espaces du projet et dans les
 
 ## Application
 
-Les cas de comportement abusif, harcelant ou autrement inacceptable peuvent être signalés aux leaders de la communauté responsables de l'application à [INSÉRER L'ADRESSE E-MAIL]. Toutes les plaintes seront examinées et feront l'objet d'une enquête rapide et équitable.
+Les cas de comportement abusif, harcelant ou autrement inacceptable peuvent être signalés aux leaders de la communauté responsables de l'application à davidkrkofficial@gmail.com Toutes les plaintes seront examinées et feront l'objet d'une enquête rapide et équitable.
 
 Tous les leaders de la communauté sont tenus de respecter la vie privée et la sécurité du rapporteur de tout incident.
 
