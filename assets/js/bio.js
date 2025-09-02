@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const langBtns = document.querySelectorAll('.language-btn');
-    const langContents = document.querySelectorAll('.lang-content');
+    const languageButtons = document.querySelectorAll('.language-btn');
+    const languageContents = document.querySelectorAll('.lang-content');
 
     function switchLanguage(lang) {
         const clickedBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
