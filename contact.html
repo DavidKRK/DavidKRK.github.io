@@ -20,13 +20,13 @@
     <meta property="twitter:description" content="Contactez David KRK pour les bookings, collaborations et plus encore." />
     <meta property="twitter:image" content="https://raw.githubusercontent.com/DavidKRK/DavidKRK.github.io/main/images/optimized/logo.webp" />
 
-    <link rel="icon" type="image/png" href="logo 30-01-25.png" />
+    <link rel="icon" type="image/png" href="./logo 30-01-25.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body class="home-page">
@@ -191,33 +191,7 @@
       </footer>
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const langBtns = document.querySelectorAll('.language-btn');
-          const langContents = document.querySelectorAll('.lang-content');
 
-          function switchLanguage(lang) {
-              langContents.forEach(content => content.classList.remove('active'));
-              langBtns.forEach(b => b.classList.remove('active'));
-
-              const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
-              contentsToShow.forEach(content => content.classList.add('active'));
-
-              const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
-              if (activeBtn) {
-                  activeBtn.classList.add('active');
-              }
-          }
-
-          langBtns.forEach(btn => {
-              btn.addEventListener('click', () => {
-                  switchLanguage(btn.dataset.lang);
-              });
-          });
-
-          // Set default language to French
-          switchLanguage('fr');
-      });
-    </script>
+    <script src="assets/js/language-selector.js"></script>
   </body>
 </html>
