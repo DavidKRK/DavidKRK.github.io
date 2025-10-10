@@ -1,0 +1,3 @@
+---
+BUNDLE_PATH: "/opt/build/cache/bundle"
+BUNDLE_BIN: "/opt/build/cache/binstubs"
