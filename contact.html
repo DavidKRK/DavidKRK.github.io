@@ -25,28 +25,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
 
   <body class="home-page">
-    <div class="content-wrapper">
+
+    <div class="background-image"></div>
+
+    <div id="hero" class="content-wrapper">
       <header class="hero-header">
         <a href="index.html">Home</a>
         <a href="bio.html">Bio</a>
         <a href="music.html">Music</a>
         <a href="event.html">Events</a>
         <a style="pointer-events: none; color: var(--primary-color);">Contact</a>
-        <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link flex items-center text-xl sm:text-2xl"> <i class="fab fa-whatsapp mr-1 sm:mr-2" style="color: #25D366;"></i>Whatsapp </a>
+        <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
+          <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
+        </a>
       </header>
 
-      <main class="mx-auto mt-10 w-full max-w-4xl px-4 text-center">
-        <div class="mx-auto mt-10 w-full max-w-4xl px-4 text-center">
-          <h1 class="main-title">David KRK</h1>
-          <h2 class="main-title">Contact</h2>
-        </div>
+      <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
+        <h1 class="main-title">David KRK</h1>
+        <h2 class="main-title">Contact</h2>
 
-        <div class="language-selector">
+        <div class="language-selector flex-wrap">
           <button type="button" class="language-btn" data-lang="fr">Français</button>
           <button type="button" class="language-btn" data-lang="en">English</button>
           <button type="button" class="language-btn" data-lang="es">Castellano</button>
@@ -160,37 +163,34 @@
         </div>
       </main>
 
-      <footer class="mx-auto w-full max-w-7xl">
-        <div class="mb-4 flex justify-center gap-6">
-          <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook" class="social-icon text-2xl text-white md:text-3xl">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram" class="social-icon text-2xl text-white md:text-3xl">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud" class="social-icon text-2xl text-white md:text-3xl">
-            <i class="fab fa-mixcloud"></i>
-          </a>
-          <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube" class="social-icon text-2xl text-white md:text-3xl">
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud" class="social-icon text-2xl text-white md:text-3xl">
-            <i class="fab fa-soundcloud"></i>
-          </a>
-          <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok" class="social-icon text-2xl text-white md:text-3xl">
-            <i class="fab fa-tiktok"></i>
-          </a>
+      <footer class="w-full max-w-7xl mx-auto">
+        <div class="flex justify-center items-center gap-6 mb-4">
+          <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
+             class="social-icon text-2xl md:text-3xl"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram"
+             class="social-icon text-2xl md:text-3xl"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud"
+             class="social-icon text-2xl md:text-3xl"><i class="fab fa-mixcloud"></i></a>
+          <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube"
+             class="social-icon text-2xl md:text-3xl"><i class="fab fa-youtube"></i></a>
+          <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud"
+             class="social-icon text-2xl md:text-3xl"><i class="fab fa-soundcloud"></i></a>
+          <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok"
+             class="social-icon text-2xl md:text-3xl"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" aria-label="Buy Me A Coffee" class="social-icon"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px;"></a><br>
         </div>
 
-        <div class="mb-4 flex flex-wrap items-center justify-center gap-3 text-sm sm:gap-4">
-          <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="transition-colors hover:text-[var(--primary-color)] footer-contact-link">CONTACT | BOOKING | REMIX</a>
+        <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
+          <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website"
+             class="hover:text-[var(--primary-color)] transition-colors footer-contact-link">CONTACT | BOOKING | REMIX</a>
         </div>
 
         <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
-        <p class="neon-text mt-4 text-lg font-bold">"May The Techno Be With You"</p>
+        <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
       </footer>
     </div>
 
+    <script src="assets/js/main.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
           const langBtns = document.querySelectorAll('.language-btn');
