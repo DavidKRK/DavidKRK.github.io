@@ -160,3 +160,22 @@
 
             const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
             contentsToShow.forEach(content => content.classList.add('active'));
+
+            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
+        });
+
+        // Set default language to French
+        switchLanguage('fr');
+    });
+  </script>
+</body>
+</html>
