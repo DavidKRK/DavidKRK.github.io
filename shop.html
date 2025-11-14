@@ -6,7 +6,7 @@
   <title>David KRK · SHOP</title>
   <meta name="description" content="Boutique officielle de David KRK. T-shirts et goodies exclusifs.">
   <meta name="keywords" content="David KRK, boutique, t-shirt, vêtements">
-  <link rel="icon" type="image/png" href="logo 30-01-25.png">
+  <link rel="icon" type="image/png" href="logo-30-01-25.png">
   <!-- Fonts + Icones -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,79 +27,239 @@
       <a href="event.html">Event</a>
       <a href="contact.html">Contact</a>
       <a href="shop.html" class="active">Shop</a>
-      <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
+      <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" rel="noopener noreferrer" class="nav-link text-xl sm:text-2xl flex items-center">
         <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
       </a>
     </header>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
-      <h1 class="main-title">BOUTIQUE OFFICIELLE</h1>
+      <h1 class="main-title">David KRK</h1>
 
-      <div class="shop-container">
-        <div class="products-grid">
-          <!-- Produit 1 -->
-          <div class="product-card">
-            <img src="https://via.placeholder.com/300x300?text=T-Shirt+Limited" alt="T-Shirt Édition Limitée" class="product-image">
-            <div class="product-info">
-              <h3 class="product-name">T-Shirt David KRK Limited</h3>
-              <div class="product-price">29,99 €</div>
-              <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-          </div>
-          
-          <!-- Produit 2 -->
-          <div class="product-card">
-            <img src="https://via.placeholder.com/300x300?text=T-Shirt+Black" alt="T-Shirt Logo" class="product-image">
-            <div class="product-info">
-              <h3 class="product-name">T-Shirt Logo Noir</h3>
-              <div class="product-price">24,99 €</div>
-              <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-          </div>
-          
-          <!-- Produit 3 -->
-          <div class="product-card">
-            <img src="https://via.placeholder.com/300x300?text=Hoodie" alt="Hoodie" class="product-image">
-            <div class="product-info">
-              <h3 class="product-name">Hoodie David KRK</h3>
-              <div class="product-price">49,99 €</div>
-              <button class="add-to-cart">Ajouter au panier</button>
-            </div>
-          </div>
-          
-          <!-- Produit 4 -->
-          <div class="product-card">
-            <img src="https://via.placeholder.com/300x300?text=Casquette" alt="Casquette" class="product-image">
-            <div class="product-info">
-              <h3 class="product-name">Casquette David KRK</h3>
-              <div class="product-price">19,99 €</div>
-              <button class="add-to-cart">Ajouter au panier</button>
+      <div class="language-selector flex-wrap">
+        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn" data-lang="en">English</button>
+        <button type="button" class="language-btn" data-lang="es">Castellano</button>
+        <button type="button" class="language-btn" data-lang="eu">Euskara</button>
+        <button type="button" class="language-btn" data-lang="ar">العربية</button>
+        <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
+      </div>
+
+      <div class="lang-content" data-lang="fr">
+        <div class="text-lg">
+            <p class="mt-4">Site officiel de David KRK</p>
+            <p>DJ et producteur international de musique Techno.</p>
+            <p>Découvrez sa musique, sa biographie et ses événements.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="en">
+        <div class="text-lg">
+            <p class="mt-4">Official Website of David KRK</p>
+            <p>International Techno Music DJ & Producer.</p>
+            <p>Discover his music, biography, and events.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="es">
+        <div class="text-lg">
+            <p class="mt-4">Sitio web oficial de David KRK</p>
+            <p>DJ y productor internacional de música Techno.</p>
+            <p>Descubre su música, biografía y eventos.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="eu">
+        <div class="text-lg">
+            <p class="mt-4">David KRK-ren webgune ofiziala</p>
+            <p>Techno musikako nazioarteko DJ eta ekoizlea.</p>
+            <p>Ezagutu bere musika, biografia eta ekitaldiak.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="ar" dir="rtl">
+        <div class="text-lg">
+            <p class="mt-4">الموقع الرسمي لديفيد كرك</p>
+            <p>دي جي ومنتج عالمي لموسيقى التكنو.</p>
+            <p>اكتشف موسيقاه وسيرته الذاتية وفعالياته.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="uk">
+        <div class="text-lg">
+            <p class="mt-4">Офіційний сайт David KRK</p>
+            <p>Міжнародний техно-діджей та продюсер.</p>
+            <p>Відкрийте для себе його музику, біографію та події.</p>
+        </div>
+      </div>
+
+      <section class="mt-8 mb-8 player-container">
+        <iframe title="Mixcloud player" width="100%" height="120"
+                style="border:0;"
+                src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F"
+                allow="autoplay; encrypted-media; fullscreen; idle-detection; speaker-selection; web-share"></iframe>
+      </section>
+
+      <!-- Section produit multilingue -->
+      <section class="shop-promo max-w-4xl mx-auto px-4 text-left mt-8 mb-8">
+        <h2 class="main-title">Boutique Officielle</h2>
+
+        <!-- Français -->
+        <div class="lang-content promo" data-lang="fr">
+          <div class="promo-text text-lg mt-4">
+            <p>Vous avez ressenti l'énergie dans mes sets, vous avez vibré sur mes mix.</p>
+            <p>Notre connexion ne s'arrête pas au dancefloor, elle se transmet.</p>
+            <p>En vous procurant ce T-shirt, vous répandez notre affinité musicale auprès de ceux qui n'ont pas encore vécu cette alchimie.</p>
+            <p>Aussi agréable à porter qu'une basse profonde qui te fait vibrer, ce T-Shirt premium vous accompagne en rythme dans tous vos déplacements.</p>
+            <h3 class="mt-4">PERSONNALISEZ VOTRE STYLE:</h3>
+            <p>Disponible en plusieurs couleurs tendance pour qu'elle corresponde parfaitement à votre style.</p>
+            <h4 class="mt-3">C'est la pièce indispensable pour:</h4>
+            <ul>
+              <li>Briller en soirée ou en backstage, et afficher votre soutien inconditionnel à ma sphère rythmique</li>
+              <li>Créer la connexion autour de vous et initier vos proches à mon univers sonore</li>
+              <li>M'accompagner dans mon ascension, pour nous produire sur des scènes toujours plus grandes et plus folles</li>
+            </ul>
+            <p class="font-bold mt-4">FRAIS DE PORT OFFERTS! Ne manquez pas cette occasion de faire partie de l'aventure. REJOIGNEZ LE MOUVEMENT!</p>
+            <p class="mt-4">Scannez le QR code pour commander votre T-shirt à <strong>24,90€</strong> (FRAIS DE PORT INCLUS)</p>
+            <div class="qr-cta mt-4">
+              <img src="https://via.placeholder.com/180x180?text=QR+Code" alt="QR code commande T-Shirt" loading="lazy">
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- English -->
+        <div class="lang-content promo" data-lang="en">
+          <div class="promo-text text-lg mt-4">
+            <p>You felt the energy in my sets, you vibed to my mixes.</p>
+            <p>Our connection doesn't stop at the dancefloor — it carries on.</p>
+            <p>By getting this T-shirt, you spread our musical affinity to those who haven't yet experienced this alchemy.</p>
+            <p>As comfortable to wear as a deep bass that makes you move, this premium T-Shirt accompanies you in rhythm everywhere you go.</p>
+            <h3 class="mt-4">PERSONALIZE YOUR STYLE:</h3>
+            <p>Available in several trendy colors so it matches your look perfectly.</p>
+            <h4 class="mt-3">It's the must-have for:</h4>
+            <ul>
+              <li>Shining at parties or backstage, and showing your unconditional support for my rhythmic world</li>
+              <li>Creating connections around you and introducing your friends to my sonic universe</li>
+              <li>Supporting me on my rise, so we can play on bigger and crazier stages</li>
+            </ul>
+            <p class="font-bold mt-4">FREE SHIPPING! Don't miss this chance to be part of the journey. JOIN THE MOVEMENT!</p>
+            <p class="mt-4">Scan the QR code to order your T-Shirt for <strong>€24.90</strong> (SHIPPING INCLUDED)</p>
+            <div class="qr-cta mt-4">
+              <img src="https://via.placeholder.com/180x180?text=QR+Code" alt="Order QR code T-Shirt" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Español -->
+        <div class="lang-content promo" data-lang="es">
+          <div class="promo-text text-lg mt-4">
+            <p>Has sentido la energía en mis sets, has vibrado con mis mezclas.</p>
+            <p>Nuestra conexión no se detiene en la pista de baile, se transmite.</p>
+            <p>Al conseguir esta camiseta, difundes nuestra afinidad musical entre quienes aún no han vivido esta alquimia.</p>
+            <p>Tan cómoda de llevar como un bajo profundo que te hace vibrar, esta camiseta premium te acompaña al ritmo de todos tus movimientos.</p>
+            <h3 class="mt-4">PERSONALIZA TU ESTILO:</h3>
+            <p>Disponible en varios colores de tendencia para que encaje con tu estilo.</p>
+            <h4 class="mt-3">Es la prenda imprescindible para:</h4>
+            <ul>
+              <li>Brillar en fiestas o backstage y mostrar tu apoyo incondicional a mi mundo rítmico</li>
+              <li>Crear conexión alrededor tuyo e introducir a tus allegados en mi universo sonoro</li>
+              <li>Acompañarme en mi ascenso, para que toquemos en escenarios cada vez más grandes y locos</li>
+            </ul>
+            <p class="font-bold mt-4">ENVÍO GRATIS! No pierdas la ocasión de formar parte de la aventura. ÚNETE AL MOVIMIENTO!</p>
+            <p class="mt-4">Escanea el código QR para pedir tu camiseta por <strong>24,90€</strong> (ENVÍO INCLUIDO)</p>
+            <div class="qr-cta mt-4">
+              <img src="https://via.placeholder.com/180x180?text=QR+Code" alt="Código QR pedido camiseta" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Euskara (Basque) -->
+        <div class="lang-content promo" data-lang="eu">
+          <div class="promo-text text-lg mt-4">
+            <p>Gure setetan energiaren eragina sentitu duzu, nire nahasketetan vibratu duzu.</p>
+            <p>Gure konexioa ez da discoan bukatzen, transmititzen da.</p>
+            <p>Kamisa hau erosten baduzu, gure muzikarekiko lotura oraindik ez dutenengana zabaltzen duzu.</p>
+            <p>Oso eroso eramateko eta baxu sakon baten berdin vibratzen duen T-Shirt premium honek zure eguneroko mugimenduetan erritmoan lagunduko dizu.</p>
+            <h3 class="mt-4">ZAUZTU ZURE ESTILOA:</h3>
+            <p>Kolore joera anitzetan eskuragarri, zure estiloarekin ondo moldatzen dena.</p>
+            <h4 class="mt-3">Funtsezko piezak dira:</h4>
+            <ul>
+              <li>Gaua edo backstagean distiratzeko eta nire erritmo munduarekiko babesa erakusteko</li>
+              <li>Zure inguruan konexioa sortzeko eta zure senideak nire soinuzko unibertsoarekin ezagutzeko</li>
+              <li>Nire gorakadan laguntzeko, taula handiago eta zirraragarriagoetan jotzeko</li>
+            </ul>
+            <p class="font-bold mt-4">DOHAINIKKO BIDALKETA! Ez galdu abenturan parte hartzeko aukera. BATU ZAITEZ!</p>
+            <p class="mt-4">Eskaneatu QR kodea eta eskatu zure kamiseta <strong>24,90€</strong>-ren truke (BIDALKETA BARNE)</p>
+            <div class="qr-cta mt-4">
+              <img src="https://via.placeholder.com/180x180?text=QR+Code" alt="QR kodea kamiseta eskaera" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- العربية (Arabic) -->
+        <div class="lang-content promo" data-lang="ar" dir="rtl">
+          <div class="promo-text text-lg mt-4">
+            <p>لقد شعرت بالطاقة في حفلاتي، واهتزت على إيقاعات مكساتي.</p>
+            <p>لا تتوقف صلتنا عند حلبة الرقص، بل تنتقل.</p>
+            <p>باقتناء هذا القميص، تنشر رابطنا الموسيقي لأولئك الذين لم يعايشوا بعد هذه الكيمياء.</p>
+            <p>مريح للارتداء مثل باس عميق يجعلك تهتز، هذا القميص المتميز يرافقك بإيقاعك في كل تنقلاتك.</p>
+            <h3 class="mt-4">خصص أسلوبك:</h3>
+            <p>متوفر بعدة ألوان عصرية ليتناسب تمامًا مع أسلوبك.</p>
+            <h4 class="mt-3">هذه القطعة ضرورية من أجل:</h4>
+            <ul>
+              <li>التألق في الحفلات أو خلف الكواليس، وإظهار دعمك غير المشروط لعالمي الإيقاعي</li>
+              <li>خلق التواصل من حولك وتعريف المقربين على عالمي الصوتي</li>
+              <li>مرافقتي في صعودي لنؤدي على مسارح أكبر وأكثر جنونًا</li>
+            </ul>
+            <p class="font-bold mt-4">الشحن مجاني! لا تفوت فرصة الانضمام إلى المغامرة. انضم للحركة!</p>
+            <p class="mt-4">امسح رمز الاستجابة السريعة لطلب قميصك مقابل <strong>24.90€</strong> (شامل الشحن)</p>
+            <div class="qr-cta mt-4">
+              <img src="https://via.placeholder.com/180x180?text=QR+Code" alt="رمز QR لطلب القميص" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Українська (Ukrainian) -->
+        <div class="lang-content promo" data-lang="uk">
+          <div class="promo-text text-lg mt-4">
+            <p>Ви відчули енергію в моїх сетах, ви вібрували під мої мікси.</p>
+            <p>Наш зв'язок не зупиняється на танцполі — він продовжується.</p>
+            <p>Придбавши цю футболку, ви поширюєте нашу музичну спорідненість серед тих, хто ще не відчув цю алхімію.</p>
+            <p>Так само приємна до носіння, як глибокий бас, що змушує вас вібрувати, ця преміальна футболка супроводжуватиме вас у ритмі повсякденних переміщень.</p>
+            <h3 class="mt-4">ПЕРСОНАЛІЗУЙТЕ СВІЙ СТИЛЬ:</h3>
+            <p>Доступна в декількох модних кольорах, щоб ідеально пасувати до вашого стилю.</p>
+            <h4 class="mt-3">Це необхідний елемент для:</h4>
+            <ul>
+              <li>сяяти на вечірках або за лаштунками та демонструвати безумовну підтримку моєму ритмічному світу</li>
+              <li>створювати зв'язки навколо себе та знайомити близьких з моїм звуковим всесвітом</li>
+              <li>супроводжувати мене в моєму злеті, щоб ми виступали на більших і шаленіших сценах</li>
+            </ul>
+            <p class="font-bold mt-4">БЕЗКОШТОВНА ДОСТАВКА! Не пропустіть шанс стати частиною пригоди. ПРИЄДНУЙТЕСЬ ДО РУХУ!</p>
+            <p class="mt-4">Скануйте QR-код, щоб замовити футболку за <strong>24,90€</strong> (ДОСТАВКА ВКЛЮЧЕНА)</p>
+            <div class="qr-cta mt-4">
+              <img src="https://via.placeholder.com/180x180?text=QR+Code" alt="QR код для за��овлення футболки" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Galerie photos commune -->
+        <div class="shop-gallery grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          <img src="https://via.placeholder.com/600x600?text=T-Shirt+1" alt="T-Shirt David KRK - 1" loading="lazy">
+          <img src="https://via.placeholder.com/600x600?text=T-Shirt+2" alt="T-Shirt David KRK - 2" loading="lazy">
+          <img src="https://via.placeholder.com/600x600?text=T-Shirt+3" alt="T-Shirt David KRK - 3" loading="lazy">
+          <img src="https://via.placeholder.com/600x600?text=T-Shirt+4" alt="T-Shirt David KRK - 4" loading="lazy">
+        </div>
+      </section>
+
     </main>
 
     <footer class="w-full max-w-7xl mx-auto">
       <div class="flex justify-center items-center gap-6 mb-4">
-        <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-mixcloud"></i></a>
-        <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-youtube"></i></a>
-        <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-soundcloud"></i></a>
-        <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-tiktok"></i></a>
-        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" aria-label="Buy Me A Coffee" class="social-icon"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px;"></a>
+        <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon text-2xl md:text-3xl"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/davidkrk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon text-2xl md:text-3xl"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer" aria-label="Mixcloud" class="social-icon text-2xl md:text-3xl"><i class="fab fa-mixcloud"></i></a>
+        <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-icon text-2xl md:text-3xl"><i class="fab fa-youtube"></i></a>
+        <a href="https://soundcloud.com/david-krkofficial/" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud" class="social-icon text-2xl md:text-3xl"><i class="fab fa-soundcloud"></i></a>
+        <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-icon text-2xl md:text-3xl"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee"></a>
       </div>
 
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
-        <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website"
-           class="hover:text-[var(--primary-color)] transition-colors footer-contact-link">CONTACT | BOOKING | REMIX</a>
+        <a href="mailto:davidkrkofficial@gmail.com?subject=Contact%20from%20Website" class="hover:text-[var(--primary-color)] transition-colors footer-contact-link" aria-label="Contact email">CONTACT | BOOKING | REMIX</a>
       </div>
 
       <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
@@ -107,111 +267,33 @@
     </footer>
   </div>
 
-  <style>
-    .shop-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 1rem;
-    }
-    
-    .product-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      background: rgba(255, 255, 255, 0.1);
-    }
-    
-    .product-image {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    
-    .product-info {
-      padding: 1.5rem;
-      color: #fff;
-    }
-    
-    .product-name {
-      font-size: 1.1rem;
-      margin: 0 0 0.5rem 0;
-      font-weight: bold;
-      font-family: 'Russo One', sans-serif;
-    }
-    
-    .product-price {
-      font-size: 1.3rem;
-      color: #00ff88;
-      margin-bottom: 1rem;
-      font-weight: bold;
-    }
-    
-    .add-to-cart {
-      display: block;
-      width: 100%;
-      background: #00ff88;
-      color: #000;
-      padding: 0.8rem 1.2rem;
-      border-radius: 5px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      font-size: 1rem;
-    }
-    
-    .add-to-cart:hover {
-      background: #00dd66;
-    }
-    
-    @media (max-width: 768px) {
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-
   <script src="assets/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const addToCartButtons = document.querySelectorAll('.add-to-cart');
-      
-      addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          const productName = this.parentElement.querySelector('.product-name').textContent;
-          const productPrice = this.parentElement.querySelector('.product-price').textContent;
-          
-          this.textContent = '✓ Ajouté !';
-          this.style.backgroundColor = '#4CAF50';
-          
-          setTimeout(() => {
-            this.textContent = 'Ajouter au panier';
-            this.style.backgroundColor = '';
-          }, 2000);
+    document.addEventListener('DOMContentLoaded', () => {
+        const langBtns = document.querySelectorAll('.language-btn');
+        const langContents = document.querySelectorAll('.lang-content');
+
+        function switchLanguage(lang) {
+            langContents.forEach(content => content.classList.remove('active'));
+            langBtns.forEach(b => b.classList.remove('active'));
+
+            const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
+            contentsToShow.forEach(content => content.classList.add('active'));
+
+            const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
         });
-      });
+
+        // Set default language to French
+        switchLanguage('fr');
     });
   </script>
 </body>
