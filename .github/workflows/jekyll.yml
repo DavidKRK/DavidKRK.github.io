@@ -36,20 +36,20 @@ build:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.3'  # Version compatible avec Bundler 2.7.2
+        ruby-version: '3.3'  
         bundler-cache: true
         cache-version: 0
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
-        env:
-          JEKYLL_ENV: production
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v3
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v5
+    - name: Build with Jekyll
+      run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+      env:
+        JEKYLL_ENV: production
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+
+
 
   # Deployment job
   deploy:
