@@ -1,0 +1,15 @@
+# Digest du dépôt DavidKRK.github.io
+
+Ce digest est généré par Gitingest pour permettre une analyse approfondie du code source.
+
+## Structure du dépôt
+
+- Contient des fichiers HTML, CSS, JavaScript pour un site web personnel.
+
+## Objectif
+
+Fournir un contexte clair pour des analyses automatisées ou revue de code par IA.
+
+---------------------------------------------------------------------------------------------------------
+
+(Le contenu complet du dépôt pourra être inséré ici par morceaux via Gitingest lors du traitement complet.)
