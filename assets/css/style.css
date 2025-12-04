@@ -5,3 +5,28 @@
 }
 
 /* Other styles... */
+/* Mise en page de la boutique */
+.shop-page .shop-promo {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.shop-page .shop-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.shop-page .shop-gallery img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+}
+
+/* Texte mieux lisible dans la partie produit */
+.shop-page .promo-text {
+  max-width: 900px;
+  margin: 0 auto 2rem auto;
+}
