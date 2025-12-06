@@ -2,6 +2,7 @@
  *   TAILWIND  – 3.4.1 (Base CSS)  +  Vos styles personnels
  * ========================================================== */
 
+
 /*!
  * tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
  * (copied wholesale – no change)
@@ -208,6 +209,7 @@ summary {
   border-radius: 5px;
 }
 
+
 /* ==============================
  *   VARIABLES & CUSTOM SETTINGS
  * ============================== */
@@ -220,6 +222,7 @@ summary {
   --transition: all 0.4s ease;
 }
 
+
 /* ===== GLOBAL ===== */
 html,
 body {
@@ -229,6 +232,7 @@ body {
   color: white;
   overflow-x: hidden;
 }
+
 
 /* ---------- HOME PAGE BACKGROUND ---------- */
 body.home-page {
@@ -244,6 +248,7 @@ body:not(.home-page) {
   background-color: #416e73;
 }
 
+
 /* ---------- MAIN WRAPPER ---------- */
 .content-wrapper {
   position: relative;
@@ -252,6 +257,7 @@ body:not(.home-page) {
   flex-direction: column;
   min-height: 100vh;
 }
+
 
 /* ---------- HEADER ---------- */
 .hero-header {
@@ -272,6 +278,7 @@ body:not(.home-page) {
   color: var(--primary-color);
 }
 
+
 /* ---------- MAIN & FOOTER ---------- */
 main {
   flex: 1;
@@ -282,6 +289,7 @@ footer {
   padding: 2rem 1rem;
 }
 
+
 /* ---------- PLAYER CONTAINER (mixcloud widget area) ---------- */
 .player-container {
   background-color: rgba(0, 0, 0, 0.3);
@@ -290,6 +298,7 @@ footer {
   width: 33%;
   margin: 0.5rem auto 2rem auto;
 }
+
 
 /* ---------- TYPOGRAPHY ---------- */
 .text-center .main-title {
@@ -315,15 +324,6 @@ footer {
     font-size: 5rem !important; /* sm:text-5xl */
   }
 }
-
-.fab.fa-whatsapp {
-    color: #25D366;
-}
-
-.social-icon {
-    font-size: 2.5rem; /* mobile */
-}
-
 @media (min-width: 768px) {
   .text-center .main-title {
     font-size: 6rem !important; /* md:text-6xl */
@@ -344,6 +344,7 @@ footer {
   }
 }
 
+
 /* ---------- NEON TEXT ---------- */
 .neon-text {
   animation: neon 2s ease-in-out infinite;
@@ -362,6 +363,7 @@ footer {
   }
 }
 
+
 /* ---------- ICONS ---------- */
 .fab {
   color: #25d366;
@@ -375,6 +377,7 @@ footer {
   }
 }
 
+
 /* ---------- RESPONSIVE OVERRIDES ---------- */
 @media (max-width: 768px) {
   .hero-header a {
@@ -382,10 +385,12 @@ footer {
     margin: 0 0.5rem;
   }
 
+
   /* Override .main-title size within responsive breakpoint */
   .main-title {
     font-size: 2.5rem;
   }
+
 
   .hero-logo {
     width: 100px;
@@ -393,6 +398,7 @@ footer {
     right: 10px;
   }
 }
+
 
 /* ---------- BIO PAGE ---------- */
 .bio-text-container {
@@ -412,6 +418,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
 }
+
 
 /* ---------- LANGUAGE SELECTOR ---------- */
 .language-selector {
@@ -436,6 +443,7 @@ footer {
   transform: scale(1.05);
 }
 
+
 /* ---------- BIO MESSAGE (language toggler) ---------- */
 .bio-message {
   display: none;
@@ -446,6 +454,7 @@ footer {
   display: block;
   animation: fadeIn 0.8s ease-out;
 }
+
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes fadeIn {
@@ -475,6 +484,7 @@ footer {
     transform: translateY(-15px);
   }
 }
+
 
 /* ---------- PLAYER (SiriWave) ---------- */
 #waveform {
@@ -513,6 +523,7 @@ footer {
   z-index: -1;
 }
 
+
 /* ---------- LOADING SPINNER ---------- */
 #loading {
   position: absolute;
@@ -547,6 +558,7 @@ footer {
     opacity: 0;
   }
 }
+
 
 /* ---------- PLAYLIST ---------- */
 #playlist {
@@ -583,6 +595,7 @@ footer {
   background: rgba(255, 255, 255, 0.1);
   cursor: pointer;
 }
+
 
 /* ---------- VOLUME SLIDER ---------- */
 #volume {
@@ -626,6 +639,7 @@ footer {
   border-radius: 25px;
   cursor: pointer;
 }
+
 
 /* ---------- FADE IN/OUT ---------- */
 .fadeout {
