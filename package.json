@@ -1,0 +1,16 @@
+{
+  "name": "davidkrk-website",
+  "version": "2.0.0",
+  "description": "Site officiel DJ David KRK",
+  "scripts": {
+    "build": "npm run minify:css && npm run minify:js",
+    "minify:css": "mkdir -p dist/assets/css && npx csso assets/css/style.css -o dist/assets/css/style.min.css",
+    "minify:js": "mkdir -p dist/assets/js && npx terser assets/js/main.js -o dist/assets/js/main.min.js",
+    "dev": "npx live-server --port=8080"
+  },
+  "devDependencies": {
+    "csso-cli": "^4.0.2",
+    "terser": "^5.27.0",
+    "live-server": "^1.2.2"
+  }
+}
