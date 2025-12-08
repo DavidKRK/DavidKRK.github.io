@@ -664,3 +664,18 @@ footer {
     opacity: 0;
   }
 }
+
+.language-btn {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.language-btn.active {
+  opacity: 1;
+  font-weight: bold;
+}
+.lang-content {
+  display: none;
+}
+.lang-content.active {
+  display: block;
+}
