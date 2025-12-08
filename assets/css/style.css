@@ -679,3 +679,37 @@ footer {
 .lang-content.active {
   display: block;
 }
+
+/* Langues toggle */
+.language-selector {
+  gap: 10px;
+  justify-content: center;
+}
+.language-btn {
+  background: rgba(0,0,0,0.7);
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0.8;
+}
+.language-btn:hover, .language-btn.active {
+  background: #00ff00;
+  color: #000;
+  opacity: 1;
+}
+.lang-content {
+  display: none;
+  background: rgba(0,0,0,0.9);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.lang-content.active {
+  display: block;
+}
+.text-lg {
+  font-size: 1.2rem;
+}
