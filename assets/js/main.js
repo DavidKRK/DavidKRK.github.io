@@ -89,3 +89,33 @@ newOrderSound.on('stop',  () => setStatus('play-btn-blue-monday', false));
 winxSound.on('play', () => setStatus('play-btn-winx', true));
 winxSound.on('pause', () => setStatus('play-btn-winx', false));
 winxSound.on('stop',  () => setStatus('play-btn-winx', false));
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btns = document.querySelectorAll('.language-btn');
+  const contents = document.querySelectorAll('.lang-content');
+  
+  // Par défaut, cache tout sauf Français
+  contents.forEach((c, i) => {
+    if (i === 0) c.classList.add('active');
+    else c.style.display = 'none';
+  });
+  btns[0].classList.add('active');
+  
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      
+      // Toggle active
+      btn.classList.toggle('active');
+      
+      // Montre/cacher contenu
+      contents.forEach(c => {
+        if (c.dataset.lang === lang) {
+          c.style.display = c.style.display === 'none' ? 'block' : 'none';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+    });
+  });
+});
