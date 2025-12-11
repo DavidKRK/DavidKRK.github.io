@@ -1,0 +1,6 @@
+[build]
+  command = ""
+  publish = "."
+
+[[plugins]]
+  package = "netlify-plugin-formspree"
