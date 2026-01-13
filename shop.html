@@ -15,6 +15,11 @@
   <!-- CSS principal -->
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
+  <style>
+    /* Masquer les blocs de langue par défaut pour éviter le "flash" de contenus multiples */
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
+  </style>
 </head>
 <body class="home-page">
 
@@ -22,30 +27,32 @@
 
   <div id="hero" class="content-wrapper">
     <header class="hero-header">
-      <a href="index.html">Home</a>
-      <a href="bio.html">Bio</a>
-      <a href="music.html">Music</a>
-      <a href="event.html">Event</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" class="nav-link text-xl sm:text-2xl flex items-center">
-        <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
-      </a>
+      <nav aria-label="Navigation principale">
+        <a href="index.html">Home</a>
+        <a href="bio.html">Bio</a>
+        <a href="music.html">Music</a>
+        <a href="event.html">Event</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" rel="noopener noreferrer" class="nav-link text-xl sm:text-2xl flex items-center">
+          <i class="fab fa-whatsapp mr-1 sm:mr-2" aria-hidden="true"></i><span>Whatsapp</span>
+        </a>
+      </nav>
     </header>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
       <h1 class="main-title">David KRK</h1>
 
-      <div class="language-selector flex-wrap">
-        <button type="button" class="language-btn" data-lang="fr">Français</button>
-        <button type="button" class="language-btn" data-lang="en">English</button>
-        <button type="button" class="language-btn" data-lang="es">Castellano</button>
-        <button type="button" class="language-btn" data-lang="eu">Euskara</button>
-        <button type="button" class="language-btn" data-lang="ar">العربية</button>
-        <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
+      <div class="language-selector flex-wrap" role="tablist" aria-label="Sélecteur de langue">
+        <button type="button" class="language-btn" data-lang="fr" role="tab" aria-controls="lang-fr" aria-selected="false">Français</button>
+        <button type="button" class="language-btn" data-lang="en" role="tab" aria-controls="lang-en" aria-selected="false">English</button>
+        <button type="button" class="language-btn" data-lang="es" role="tab" aria-controls="lang-es" aria-selected="false">Castellano</button>
+        <button type="button" class="language-btn" data-lang="eu" role="tab" aria-controls="lang-eu" aria-selected="false">Euskara</button>
+        <button type="button" class="language-btn" data-lang="ar" role="tab" aria-controls="lang-ar" aria-selected="false">العربية</button>
+        <button type="button" class="language-btn" data-lang="uk" role="tab" aria-controls="lang-uk" aria-selected="false">Українська</button>
       </div>
 
       <!-- FR -->
-      <div class="lang-content" data-lang="fr">
+      <div id="lang-fr" class="lang-content" data-lang="fr" lang="fr" aria-hidden="true">
         <div class="text-lg">
           <h2 class="mt-4">Boutique Officielle</h2>
           <p>Vous avez ressenti l'énergie dans mes sets, vous avez vibré sur mes mix.</p>
@@ -66,7 +73,7 @@
       </div>
 
       <!-- EN -->
-      <div class="lang-content" data-lang="en">
+      <div id="lang-en" class="lang-content" data-lang="en" lang="en" aria-hidden="true">
         <div class="text-lg">
           <h2 class="mt-4">Official Shop</h2>
           <p>You felt the energy in my sets and vibrated on my mixes.</p>
@@ -84,7 +91,7 @@
       </div>
 
       <!-- ES -->
-      <div class="lang-content" data-lang="es">
+      <div id="lang-es" class="lang-content" data-lang="es" lang="es" aria-hidden="true">
         <div class="text-lg">
           <h2 class="mt-4">Tienda Oficial</h2>
           <p>Has sentido la energía en mis sets y has vibrado con mis mezclas.</p>
@@ -101,12 +108,12 @@
         </div>
       </div>
 
-      <!-- EU -->
-      <div class="lang-content" data-lang="eu">
+      <!-- EU (Basque) -->
+      <div id="lang-eu" class="lang-content" data-lang="eu" lang="eu" aria-hidden="true">
         <div class="text-lg">
           <h2 class="mt-4">Denda Ofiziala</h2>
           <p>Nire setetan energia sentitu duzu eta nire mixekin dardara egin duzu.</p>
-          <p>Camiseta premium honek konexio hori dantzalekutik harago eramaten du.</p>
+          <p>Kamiseta premium honek konexio hori dantzalekutik harago eramaten du.</p>
           <p>Erosoa eta leuna, baxu sakon baten moduan laguntzen dizu uneoro.</p>
           <p class="mt-4"><strong>Prezioa: 24,90&nbsp;€ bidalketa barne.</strong></p>
           <p>Eskaneatu QR kodea zure kamiseta eskatzeko eta mugimenduarekin bat egiteko.</p>
@@ -120,10 +127,10 @@
       </div>
 
       <!-- AR -->
-      <div class="lang-content" data-lang="ar" dir="rtl">
+      <div id="lang-ar" class="lang-content" data-lang="ar" lang="ar" dir="rtl" aria-hidden="true">
         <div class="text-lg">
           <h2 class="mt-4">المتجر الرسمي</h2>
-          <p>شعرت بالطاقة في مجموعاتي واهتزيت مع مزيجاتي.</p>
+          <p>شعرت بالطاقة في مجموعاتي واهتزت مع مزيجاتي.</p>
           <p>هذا القميص الفاخر يسمح لك بحمل هذا الاتصال إلى ما بعد أرضية الرقص.</p>
           <p>مريح وناعم، يرافقك مثل خط بايس عميق في كل خطوة.</p>
           <p class="mt-4"><strong>السعر: 24.90&nbsp;€ مع الشحن.</strong></p>
@@ -137,8 +144,8 @@
         </div>
       </div>
 
-      <!-- UK -->
-      <div class="lang-content" data-lang="uk">
+      <!-- UK (Ukrainian) -->
+      <div id="lang-uk" class="lang-content" data-lang="uk" lang="uk" aria-hidden="true">
         <div class="text-lg">
           <h2 class="mt-4">Офіційний магазин</h2>
           <p>Ти відчував енергію в моїх сетах і вібрував під мої мікси.</p>
@@ -159,19 +166,19 @@
 
     <footer class="w-full max-w-7xl mx-auto">
       <div class="flex justify-center items-center gap-6 mb-4">
-        <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" aria-label="Facebook"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/davidkrk/" target="_blank" aria-label="Instagram"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" aria-label="Mixcloud"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-mixcloud"></i></a>
-        <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" aria-label="YouTube"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-youtube"></i></a>
-        <a href="https://soundcloud.com/david-krkofficial/" target="_blank" aria-label="SoundCloud"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-soundcloud"></i></a>
-        <a href="https://www.tiktok.com/@davidkrk" target="_blank" aria-label="TikTok"
-           class="social-icon text-2xl md:text-3xl"><i class="fab fa-tiktok"></i></a>
-        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" aria-label="Buy Me A Coffee" class="social-icon">
+        <a href="https://www.facebook.com/DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+           class="social-icon text-2xl md:text-3xl"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/davidkrk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+           class="social-icon text-2xl md:text-3xl"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer" aria-label="Mixcloud"
+           class="social-icon text-2xl md:text-3xl"><i class="fab fa-mixcloud" aria-hidden="true"></i></a>
+        <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+           class="social-icon text-2xl md:text-3xl"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+        <a href="https://soundcloud.com/david-krkofficial/" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"
+           class="social-icon text-2xl md:text-3xl"><i class="fab fa-soundcloud" aria-hidden="true"></i></a>
+        <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
+           class="social-icon text-2xl md:text-3xl"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon">
           <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px;">
         </a>
       </div>
@@ -181,7 +188,7 @@
            class="hover:text-[var(--primary-color)] transition-colors footer-contact-link">CONTACT | BOOKING | REMIX</a>
       </div>
 
-      <p class="text-sm opacity-70">© 2025 David KRK. All Rights Reserved</p>
+      <p class="text-sm opacity-70">© <span id="year"></span> David KRK. All Rights Reserved</p>
       <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
     </footer>
   </div>
@@ -189,18 +196,37 @@
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const langBtns = document.querySelectorAll('.language-btn');
-      const langContents = document.querySelectorAll('.lang-content');
+      const langBtns = Array.from(document.querySelectorAll('.language-btn'));
+      const langContents = Array.from(document.querySelectorAll('.lang-content'));
+
+      function setActiveLangElement(btn, content) {
+        // visible state and aria-hidden
+        langContents.forEach(c => {
+          const isActive = (c === content);
+          c.classList.toggle('active', isActive);
+          c.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+
+        // buttons ARIA state
+        langBtns.forEach(b => {
+          const selected = (b === btn);
+          b.classList.toggle('active', selected);
+          b.setAttribute('aria-selected', selected ? 'true' : 'false');
+        });
+
+        // set document language and direction (rtl for Arabic)
+        const lang = content.getAttribute('data-lang') || content.lang || 'fr';
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
 
       function switchLanguage(lang) {
-        langContents.forEach(content => content.classList.remove('active'));
-        langBtns.forEach(b => b.classList.remove('active'));
-
-        const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
-        contentsToShow.forEach(content => content.classList.add('active'));
-
-        const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
-        if (activeBtn) activeBtn.classList.add('active');
+        const content = document.querySelector(`.lang-content[data-lang="${lang}"]`);
+        const btn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+        if (content && btn) {
+          setActiveLangElement(btn, content);
+          btn.focus();
+        }
       }
 
       langBtns.forEach(btn => {
@@ -209,7 +235,12 @@
         });
       });
 
+      // initial language
       switchLanguage('fr');
+
+      // footer year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
     });
   </script>
 </body>
