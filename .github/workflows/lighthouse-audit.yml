@@ -1,0 +1,64 @@
+name: Lighthouse Performance & SEO Audit
+
+on:
+  push:
+    branches: [gh-pages]
+  schedule:
+    # Audit automatique chaque jour à 2h du matin (UTC)
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  lighthouse-audit:
+    name: Audit Lighthouse de davidkrk.com
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Attendre le déploiement GitHub Pages
+        run: sleep 60
+
+      - name: Audit Lighthouse
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://www.davidkrk.com
+            https://www.davidkrk.com/music.html
+            https://www.davidkrk.com/bio.html
+            https://www.davidkrk.com/contact.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Créer badge de performance
+        run: |
+          mkdir -p .github/badges
+          echo '{"schemaVersion": 1, "label": "Lighthouse", "message": "Performance", "color": "brightgreen"}' > .github/badges/lighthouse.json
+
+      - name: Commit du badge
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .github/badges/lighthouse.json || true
+          git commit -m "chore: mise à jour du badge Lighthouse" || true
+          git push || true
+
+      - name: Créer issue si score faible
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Score Lighthouse faible détecté',
+              body: `Le score Lighthouse est tombé en dessous du seuil acceptable.\n\nVérifiez les résultats de l'audit dans les artifacts de ce workflow.`,
+              labels: ['performance', 'automated']
+            })
