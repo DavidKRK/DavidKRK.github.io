@@ -2,9 +2,7 @@ name: Deploy David KRK Site
 
 on:
   push:
-    branches: [main, gh-pages]
-  pull_request:
-    branches: [main]
+    branches: [gh-pages]
   workflow_dispatch:
 
 permissions:
