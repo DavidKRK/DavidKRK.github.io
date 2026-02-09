@@ -1,4 +1,4 @@
-# 🎵 David KRK - Site Officiel
+# 🎵 David KRK - Official Website
 
 [![Deploy Status](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/deploy.yml)
 [![Lighthouse Audit](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse-audit.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse-audit.yml)
@@ -6,35 +6,44 @@
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.davidkrk.com&label=davidkrk.com)
 ![GitHub last commit](https://img.shields.io/github/last-commit/DavidKRK/DavidKRK.github.io)
 
-## 🔥 DJ & Producteur depuis 1999
+## 🔥 DJ & Producer since 1999
 
-Site officiel de **David KRK**, DJ et producteur basé à Saint-Jean-de-Luz.
+Official website of **David KRK**, DJ and music producer based in Saint-Jean-de-Luz, France.
 
-🎧 **Visitez** : [www.davidkrk.com](https://www.davidkrk.com)
+🎧 **Visit** : [www.davidkrk.com](https://www.davidkrk.com)
 
-### ✨ Fonctionnalités
+### ✨ Features
 
-- 🎵 Player audio personnalisé
-- 📱 Design responsive (mobile, tablette, desktop)
-- ⚡ Performance optimisée (Lighthouse)
-- 🔄 Déploiement automatique
-- 🛡️ Tests et audits automatiques
+- 🎵 Custom audio player with waveform visualization
+- 📱 Fully responsive design (mobile, tablet, desktop)
+- ⚡ Performance optimized (Lighthouse tested)
+- 🔄 Continuous deployment
+- 🛡️ Automated testing & security audits
 
-### 🤖 Automatisations actives
+### 🤖 Active Automations
 
-- **Déploiement continu** : Chaque commit déclenche un déploiement automatique
-- **Audits quotidiens** : Tests de performance Lighthouse chaque jour à 3h
-- **Maintenance hebdomadaire** : Mise à jour des dépendances et vérification des liens chaque lundi
-- **Optimisation d'images** : Compression automatique lors de l'ajout d'images
+- **Continuous Deployment** : Every commit triggers automatic deployment
+- **Daily Performance Audits** : Lighthouse tests run daily at 3 AM
+- **Weekly Maintenance** : Dependency updates and broken link checks every Monday
+- **Image Optimization** : Automatic compression when adding new images
 
-### 🛠️ Technologies
+### 🛠️ Tech Stack
 
 - HTML5 / CSS3 / JavaScript
 - GitHub Pages
 - GitHub Actions (CI/CD)
-- NPM (build tools)
+- NPM Build Tools
 - Lighthouse CI
+- Service Worker (PWA ready)
+
+### 📊 Performance
+
+This website is continuously monitored for:
+- ⚡ Page Speed
+- ♿ Accessibility
+- 🎯 SEO Optimization
+- 💡 Best Practices
 
 ---
 
-**© 2026 David KRK** | DJ depuis Septembre 1999 🎧
+**© 2026 David KRK** | Spinning since September 1999 🎧
