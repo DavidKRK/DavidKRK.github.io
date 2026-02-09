@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "csso-cli": "^4.0.2",
-    "terser": "^5.27.0",
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.0",
+    "terser": "^5.27.0"
   }
 }
