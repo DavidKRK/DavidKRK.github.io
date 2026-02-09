@@ -1,0 +1,98 @@
+name: Automation Suite - Dependencies & Optimization
+
+on:
+  schedule:
+    # Mise à jour des dépendances chaque lundi à 9h (UTC)
+    - cron: '0 9 * * 1'
+  push:
+    branches: [gh-pages]
+    paths:
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  update-dependencies:
+    name: Mise à jour des dépendances npm
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Update dependencies
+        run: |
+          npm update
+          npm audit fix --force || true
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore: mise à jour automatique des dépendances npm'
+          title: '🤖 Mise à jour automatique des dépendances'
+          body: |
+            Mise à jour automatique des dépendances npm effectuée le $(date +%Y-%m-%d)
+            
+            - Dépendances mises à jour via `npm update`
+            - Corrections de sécurité appliquées via `npm audit fix`
+            
+            Merci de vérifier les changements avant de fusionner.
+          branch: auto-update-dependencies
+          delete-branch: true
+
+  optimize-images:
+    name: Optimisation des images
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Compress Images
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true
+          jpegQuality: '85'
+          pngQuality: '85'
+          webpQuality: '85'
+
+  check-links:
+    name: Vérification des liens morts
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Check for broken links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose --no-progress '**/*.html' '**/*.md'
+          fail: false
+
+      - name: Create issue if broken links found
+        if: env.lychee_exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: '🔗 Liens morts détectés sur le site'
+          content-filepath: ./lychee/out.md
+          labels: bug, maintenance
