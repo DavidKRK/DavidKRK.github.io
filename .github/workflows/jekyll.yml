@@ -1,2 +1,32 @@
-# Workflow désactivé temporairement pour éviter les conflits avec deploy.yml
-# Le workflow deploy.yml gère maintenant tous les déploiements sur gh-pages
+name: Site Build Check (no deploy)
+
+on:
+  pull_request:
+    branches: [gh-pages]
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Build site assets
+        run: npm run build
