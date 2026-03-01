@@ -93,6 +93,9 @@ git push origin gh-pages
 
 All rights reserved © 2026 David KRK
 
+" MAY THE TECHNO BE WITH YOU "
+David KRK 
+
 ---
 
 **© 2026 David KRK** | Spinning since September 1999 🎧
