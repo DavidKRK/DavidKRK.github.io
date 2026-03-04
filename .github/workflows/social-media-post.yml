@@ -1,5 +1,8 @@
 name: social-media-post
 
+permissions:
+  contents: read
+
 on:
   # Pour l’instant: uniquement déclenché à la main depuis l’onglet Actions
   workflow_dispatch:
