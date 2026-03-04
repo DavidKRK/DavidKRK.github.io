@@ -2,7 +2,6 @@ name: Weekly Backup & Archive
 
 on:
   schedule:
-    # Sauvegarde automatique chaque dimanche à 00:00 (UTC)
     - cron: '0 0 * * 0'
   workflow_dispatch:
 
@@ -13,6 +12,7 @@ jobs:
   create-backup:
     name: Create Weekly Backup
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout gh-pages
         uses: actions/checkout@v4
@@ -20,60 +20,34 @@ jobs:
           ref: gh-pages
           fetch-depth: 0
 
-      - name: Create backup branch if not exists
-        run: |
-          git fetch origin backups || git branch backups
-          git checkout -B backups
-          git push -f origin backups
-
       - name: Generate backup
         run: |
           DATE=$(date +%Y-%m-%d_%H-%M-%S)
           BACKUP_DIR="backup-$DATE"
           mkdir -p "$BACKUP_DIR"
-          
-          # Copy all files except .git and backups
+
+          # Copie du site en excluant .git et anciens backups
           rsync -av --exclude='.git' --exclude='backup-*' ./ "$BACKUP_DIR/"
-          
-          # Create archive
+
+          # Archive compressée
           tar -czf "$BACKUP_DIR.tar.gz" "$BACKUP_DIR"
-          
+
           echo "Backup created: $BACKUP_DIR.tar.gz"
           ls -lh "$BACKUP_DIR.tar.gz"
 
-      - name: Commit backup to backups branch
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          
-          DATE=$(date +%Y-%m-%d_%H-%M-%S)
-          
-          # Keep only the archive, not the folder
-          rm -rf backup-*/
-          
-          git add *.tar.gz
-          git commit -m "backup: weekly archive $DATE" || echo "No changes to commit"
-          git push origin backups
-
-      - name: Cleanup old backups (keep last 8 weeks)
-        run: |
-          # Keep only the 8 most recent backup files
-          ls -t backup-*.tar.gz | tail -n +9 | xargs -r rm
-          git add -A
-          git commit -m "chore: cleanup old backups" || echo "No old backups to remove"
-          git push origin backups || true
+      # ⚠️ Plus de commit/push des .tar.gz dans 'backups'
 
       - name: Create GitHub Release with backup
         uses: softprops/action-gh-release@v1
         with:
           tag_name: backup-${{ github.run_number }}
-          name: Weekly Backup - $(date +%Y-%m-%d)
+          name: Weekly Backup - ${{ github.run_number }}
           body: |
-            🗄️ **Automatic Weekly Backup**
-            
-            Created: $(date)
+            🗄️ Automatic Weekly Backup
+
+            Created: ${{ github.run_id }}
             Trigger: Scheduled (every Sunday)
-            
+
             This backup contains a complete snapshot of the website.
           files: backup-*.tar.gz
           draft: false
