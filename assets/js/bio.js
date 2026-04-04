@@ -31,5 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // NO default language on page load
+    // Set default language to French
+    switchLanguage('fr');
 });
