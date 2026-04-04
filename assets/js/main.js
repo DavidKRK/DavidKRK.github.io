@@ -94,13 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btns = document.querySelectorAll('.language-btn');
   const contents = document.querySelectorAll('.lang-content');
   
-  // Par défaut, cache tout sauf Français
-  contents.forEach((c, i) => {
-    if (i === 0) c.classList.add('active');
-    else c.style.display = 'none';
-  });
-  btns[0].classList.add('active');
-  
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
