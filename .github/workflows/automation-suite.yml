@@ -37,7 +37,11 @@ jobs:
       - name: Update dependencies
         run: |
           npm update
-          npm audit fix --force || true
+          npm audit fix || true
+
+      - name: Get current date
+        id: get_date
+        run: echo "date=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
@@ -48,7 +52,7 @@ jobs:
           commit-message: 'chore: mise à jour automatique des dépendances npm'
           title: '🤖 Mise à jour automatique des dépendances'
           body: |
-            Mise à jour automatique des dépendances npm effectuée le $(date +%Y-%m-%d)
+            Mise à jour automatique des dépendances npm effectuée le ${{ steps.get_date.outputs.date }}
             
             - Dépendances mises à jour via `npm update`
             - Corrections de sécurité appliquées via `npm audit fix`
@@ -68,7 +72,7 @@ jobs:
           ref: gh-pages
 
       - name: Compress Images
-        uses: calibreapp/image-actions@main
+        uses: calibreapp/image-actions@v1
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
@@ -87,13 +91,14 @@ jobs:
           ref: gh-pages
 
       - name: Check for broken links
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
           args: --verbose --no-progress '**/*.html' '**/*.md'
           fail: false
 
       - name: Create issue if broken links found
-        if: env.lychee_exit_code != 0
+        if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: '🔗 Liens morts détectés sur le site'
