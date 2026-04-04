@@ -31,5 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // NO default language on page load
 });

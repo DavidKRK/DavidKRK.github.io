@@ -46,9 +46,8 @@
         </a>
       </header>
 
-      <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
+      <div class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
         <h1 class="main-title">David KRK</h1>
-        <h2 class="main-title">Contact</h2>
 
         <div class="language-selector flex-wrap">
           <button type="button" class="language-btn" data-lang="fr">Français</button>
@@ -59,6 +58,15 @@
           <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
         </div>
 
+        <div class="lang-content" data-lang="fr"><h2 class="main-title">Contact</h2></div>
+        <div class="lang-content" data-lang="en"><h2 class="main-title">Contact</h2></div>
+        <div class="lang-content" data-lang="es"><h2 class="main-title">Contacto</h2></div>
+        <div class="lang-content" data-lang="eu"><h2 class="main-title">Kontaktua</h2></div>
+        <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">تواصل</h2></div>
+        <div class="lang-content" data-lang="uk"><h2 class="main-title">Контакт</h2></div>
+      </div>
+
+      <main class="text-center max-w-4xl mx-auto px-4 w-full">
         <div class="contact-form-container">
           <div class="lang-content" data-lang="fr">
             <div class="contact-form">
@@ -169,7 +177,10 @@
           const langContents = document.querySelectorAll('.lang-content');
 
           function switchLanguage(lang) {
-              langContents.forEach(content => content.classList.remove('active'));
+              langContents.forEach(content => {
+                  content.classList.remove('active');
+                  content.style.display = '';
+              });
               langBtns.forEach(b => b.classList.remove('active'));
 
               const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
@@ -187,8 +198,6 @@
               });
           });
 
-          // Set default language to French
-          switchLanguage('fr');
       });
     </script>
   </body>
