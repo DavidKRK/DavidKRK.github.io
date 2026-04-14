@@ -1,0 +1,12 @@
+# Lychee link checker configuration
+# See: https://lychee.cli.rs/usage/config/
+
+# Exclude patterns that are known to produce false positives or are not real links
+# - mailto: links are not real HTTP URLs
+# - soundcloud.com: blocks automated link checkers with 403 (anti-bot protection)
+# - formspree.io: form POST endpoints return 405 for GET requests (expected behavior)
+exclude = [
+  "^mailto:",
+  "soundcloud\\.com",
+  "formspree\\.io"
+]
