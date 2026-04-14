@@ -72,7 +72,7 @@ jobs:
           ref: gh-pages
 
       - name: Compress Images
-        uses: calibreapp/image-actions@v1
+        uses: calibreapp/image-actions@main
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
