@@ -3,7 +3,7 @@
 ![Audio Player](https://s3.amazonaws.com/howler.js/screenshot-player.jpg "Player Screenshot")
 
 ## Description
-This example displays how to construct a basic audio player using howler.js as the engine powering it. The only outside framework being used is [SiriWave.js](https://github.com/CaffeinaLab/SiriWaveJS) to provide some visual sugar.
+This example displays how to construct a basic audio player using howler.js as the engine powering it. The only outside framework being used is [SiriWave.js](https://github.com/kopiro/siriwave) to provide some visual sugar.
 
 * Controls: play, pause, next, previous, volume.
 * Implements playlist support.
@@ -17,4 +17,4 @@ This example displays how to construct a basic audio player using howler.js as t
 2. Open `index.html` in your favorite browser.
 
 ## Credits
-Sample audio tracks by [FoolBoyMedia](http://www.foolboymedia.co.uk/), licensed under [Creative Commons](http://creativecommons.org/licenses/by-nc/3.0/).
+Sample audio tracks by FoolBoyMedia, licensed under [Creative Commons](https://creativecommons.org/licenses/by-nc/3.0/).
