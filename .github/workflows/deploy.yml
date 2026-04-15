@@ -3,8 +3,6 @@ name: Deploy David KRK Site
 on:
   push:
     branches: [gh-pages]
-  pull_request:
-    branches: [gh-pages]
   workflow_dispatch:
 
 permissions:
@@ -36,21 +34,17 @@ jobs:
         run: npm run build
       
       - name: Setup Pages
-        if: github.event_name == 'push'
         uses: actions/configure-pages@v4
       
       - name: Remove node_modules before upload
-        if: github.event_name == 'push'
         run: rm -rf node_modules
 
       - name: Upload artifact
-        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
   deploy:
-    if: github.event_name == 'push'
     permissions:
       contents: read
       pages: write
