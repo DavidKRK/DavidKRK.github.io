@@ -1,21 +1,106 @@
-name: social-media-post
-
-permissions:
-  contents: read
+name: 🎵 YouTube Auto-Sync
 
 on:
-  # Pour l’instant: uniquement déclenché à la main depuis l’onglet Actions
+  schedule:
+    # Vérifie les nouvelles vidéos tous les jours à 10h UTC (12h CEST)
+    - cron: '0 10 * * *'
+  push:
+    branches: [gh-pages]
+    paths:
+      - 'music.html'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  social-post:
+  youtube-sync:
+    name: Sync dernières vidéos YouTube
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: gh-pages
 
-      - name: Placeholder social post
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dépendances
+        run: pip install requests
+
+      - name: Récupérer les dernières vidéos YouTube
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          echo "Social media auto-post non configuré pour le moment."
-          echo "Ce workflow existe juste pour que le badge soit vert."
+          python3 << 'EOF'
+          import requests
+          import json
+          import os
+
+          api_key = os.environ.get('YOUTUBE_API_KEY')
+          channel_handle = 'DavidKRKofficial'
+
+          # Étape 1 : Trouver le channelId depuis le handle
+          search_url = f'https://www.googleapis.com/youtube/v3/search?key={api_key}&q={channel_handle}&type=channel&part=snippet&maxResults=1'
+          r = requests.get(search_url)
+          data = r.json()
+
+          if 'items' not in data or len(data['items']) == 0:
+              print('Erreur: chaîne YouTube introuvable')
+              exit(1)
+
+          channel_id = data['items'][0]['snippet']['channelId']
+          print(f'Channel ID trouvé: {channel_id}')
+
+          # Étape 2 : Récupérer les 6 dernières vidéos
+          videos_url = f'https://www.googleapis.com/youtube/v3/search?key={api_key}&channelId={channel_id}&part=snippet,id&order=date&maxResults=6&type=video'
+          r2 = requests.get(videos_url)
+          videos = r2.json()
+
+          if 'items' not in videos:
+              print('Erreur: impossible de récupérer les vidéos')
+              print(videos)
+              exit(1)
+
+          # Étape 3 : Générer le JSON pour le site
+          video_list = []
+          for item in videos['items']:
+              video_id = item['id']['videoId']
+              title = item['snippet']['title']
+              thumb = item['snippet']['thumbnails']['high']['url']
+              published = item['snippet']['publishedAt'][:10]
+              video_list.append({
+                  'id': video_id,
+                  'title': title,
+                  'thumbnail': thumb,
+                  'published': published,
+                  'url': f'https://www.youtube.com/watch?v={video_id}'
+              })
+
+          with open('assets/data/youtube-videos.json', 'w', encoding='utf-8') as f:
+              json.dump(video_list, f, ensure_ascii=False, indent=2)
+
+          print(f'{len(video_list)} vidéos sauvegardées dans assets/data/youtube-videos.json')
+          for v in video_list:
+              print(f" - [{v[\"published\"]}] {v[\"title\"]}")
+          EOF
+
+      - name: Créer le dossier data si nécessaire
+        run: mkdir -p assets/data
+
+      - name: Commit et push si nouvelles vidéos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/data/youtube-videos.json
+          if git diff --staged --quiet; then
+            echo "Aucune nouvelle vidéo détectée."
+          else
+            git commit -m "🎵 Auto-sync: mise à jour des vidéos YouTube $(date +%Y-%m-%d)"
+            git push
+            echo "Vidéos mises à jour et pushées !"
+          fi
