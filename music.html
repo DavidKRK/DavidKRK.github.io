@@ -120,12 +120,48 @@
         <button type="button" class="language-btn" data-lang="ar">العربية</button>
         <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
-      <div class="lang-content" data-lang="fr"><h2 class="main-title">Musique</h2></div>
-      <div class="lang-content" data-lang="en"><h2 class="main-title">Music</h2></div>
-      <div class="lang-content" data-lang="es"><h2 class="main-title">Música</h2></div>
-      <div class="lang-content" data-lang="eu"><h2 class="main-title">Musika</h2></div>
-      <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">الموسيقى</h2></div>
-      <div class="lang-content" data-lang="uk"><h2 class="main-title">Музика</h2></div>
+      <div class="lang-content" data-lang="fr">
+        <h2 class="main-title">Musique</h2>
+        <div class="text-lg">
+          <p class="mt-4">Découvrez la musique de David KRK, DJ et producteur de musique Techno.</p>
+          <p>Retrouvez ses derniers mixes et productions.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="en">
+        <h2 class="main-title">Music</h2>
+        <div class="text-lg">
+          <p class="mt-4">Discover the music of David KRK, Techno DJ and producer.</p>
+          <p>Find his latest mixes and productions.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="es">
+        <h2 class="main-title">Música</h2>
+        <div class="text-lg">
+          <p class="mt-4">Descubre la música de David KRK, DJ y productor de música Techno.</p>
+          <p>Encuentra sus últimas mezclas y producciones.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="eu">
+        <h2 class="main-title">Musika</h2>
+        <div class="text-lg">
+          <p class="mt-4">Ezagutu David KRK-ren musika, Techno DJ eta ekoizlea.</p>
+          <p>Aurkitu bere azken nahasketak eta ekoizpenak.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="ar" dir="rtl">
+        <h2 class="main-title">الموسيقى</h2>
+        <div class="text-lg">
+          <p class="mt-4">اكتشف موسيقى ديفيد كرك، دي جي ومنتج موسيقى التكنو.</p>
+          <p>اعثر على أحدث ميكساته وإنتاجاته.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="uk">
+        <h2 class="main-title">Музика</h2>
+        <div class="text-lg">
+          <p class="mt-4">Відкрийте для себе музику David KRK, діджея та продюсера техно.</p>
+          <p>Знайдіть його останні мікси та продукції.</p>
+        </div>
+      </div>
     </div>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full music-main-content">
@@ -231,6 +267,12 @@
             if (titleEl) titleEl.textContent = t.youtube_title;
             const btnEl = document.getElementById('youtube-btn-text');
             if (btnEl) btnEl.textContent = t.youtube_button;
+            const headingEl = document.getElementById('youtube-section-title');
+            if (headingEl) headingEl.textContent = t.youtube_title;
+
+            // Update document language and text direction for accessibility and RTL support
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
         }
 
         langBtns.forEach(btn => {

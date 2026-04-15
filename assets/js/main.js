@@ -98,15 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const lang = btn.dataset.lang;
       
-      // Toggle active
-      btn.classList.toggle('active');
+      // Set active button
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       
-      // Montre/cacher contenu
+      // Show/hide content via CSS classes (no inline styles)
       contents.forEach(c => {
         if (c.dataset.lang === lang) {
-          c.style.display = c.style.display === 'none' ? 'block' : 'none';
+          c.classList.add('active');
         } else {
-          c.style.display = 'none';
+          c.classList.remove('active');
         }
       });
     });
