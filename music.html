@@ -205,7 +205,7 @@
         const langBtns = document.querySelectorAll('.language-btn');
         const langContents = document.querySelectorAll('.lang-content');
 
-        const langContent = {
+        const youtubeTranslations = {
           fr: { youtube_button: 'Voir toutes les vidéos' },
           en: { youtube_button: 'View all videos' },
           es: { youtube_button: 'Ver todos los vídeos' },
@@ -226,7 +226,7 @@
                 activeBtn.classList.add('active');
             }
 
-            const t = langContent[lang] || langContent['fr'];
+            const t = youtubeTranslations[lang] || youtubeTranslations['fr'];
             const btnEl = document.getElementById('youtube-btn-text');
             if (btnEl) btnEl.textContent = t.youtube_button;
         }
