@@ -134,14 +134,14 @@
 
       <!-- YOUTUBE-AUTO-START -->
       <section class="youtube-section">
-        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> Dernières vidéos YouTube</h3>
+        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> <span id="youtube-title-text">Dernières vidéos YouTube</span></h3>
         <div class="youtube-grid" id="youtube-grid">
           <!-- Les vidéos sont chargées dynamiquement depuis youtube-videos.json -->
         </div>
         <div style="margin-top:1.2rem;">
           <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer"
              style="display:inline-flex;align-items:center;gap:0.5rem;background:#ff0000;color:#fff;padding:0.6rem 1.4rem;border-radius:6px;font-family:'Russo One',sans-serif;font-size:0.9rem;text-decoration:none;transition:background 0.2s;">
-            <i class="fab fa-youtube"></i> Voir toutes les vidéos
+            <i class="fab fa-youtube"></i> <span id="youtube-btn-text">Voir toutes les vidéos</span>
           </a>
         </div>
       </section>
@@ -205,6 +205,15 @@
         const langBtns = document.querySelectorAll('.language-btn');
         const langContents = document.querySelectorAll('.lang-content');
 
+        const langContent = {
+          fr: { youtube_title: 'Dernières vidéos YouTube', youtube_button: 'Voir toutes les vidéos' },
+          en: { youtube_title: 'Latest YouTube Videos', youtube_button: 'View all videos' },
+          es: { youtube_title: 'Últimos vídeos de YouTube', youtube_button: 'Ver todos los vídeos' },
+          eu: { youtube_title: 'Azken YouTube bideoak', youtube_button: 'Ikusi bideo guztiak' },
+          ar: { youtube_title: 'أحدث مقاطع يوتيوب', youtube_button: 'عرض جميع مقاطع الفيديو' },
+          uk: { youtube_title: 'Останні відео на YouTube', youtube_button: 'Переглянути всі відео' }
+        };
+
         function switchLanguage(lang) {
             langContents.forEach(content => content.classList.remove('active'));
             langBtns.forEach(b => b.classList.remove('active'));
@@ -216,6 +225,12 @@
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
+
+            const t = langContent[lang] || langContent['fr'];
+            const titleEl = document.getElementById('youtube-title-text');
+            if (titleEl) titleEl.textContent = t.youtube_title;
+            const btnEl = document.getElementById('youtube-btn-text');
+            if (btnEl) btnEl.textContent = t.youtube_button;
         }
 
         langBtns.forEach(btn => {
@@ -223,6 +238,8 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
+
+        switchLanguage('fr');
     });
   </script>
 </body>
