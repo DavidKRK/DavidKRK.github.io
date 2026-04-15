@@ -29,16 +29,14 @@ jobs:
           # Copie du site en excluant .git et anciens backups
           rsync -av --exclude='.git' --exclude='backup-*' ./ "$BACKUP_DIR/"
 
-          # Archive compressée
+          # Archive compressee
           tar -czf "$BACKUP_DIR.tar.gz" "$BACKUP_DIR"
 
           echo "Backup created: $BACKUP_DIR.tar.gz"
           ls -lh "$BACKUP_DIR.tar.gz"
 
-      # ⚠️ Plus de commit/push des .tar.gz dans 'backups'
-
       - name: Create GitHub Release with backup
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: backup-${{ github.run_number }}
           name: Weekly Backup - ${{ github.run_number }}
