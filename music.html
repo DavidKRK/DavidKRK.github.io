@@ -134,7 +134,7 @@
 
       <!-- YOUTUBE-AUTO-START -->
       <section class="youtube-section">
-        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> Dernières vidéos YouTube</h3>
+        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> <span id="youtube-title-text">Dernières vidéos YouTube</span></h3>
         <div class="youtube-grid" id="youtube-grid">
           <!-- Les vidéos sont chargées dynamiquement depuis youtube-videos.json -->
         </div>
@@ -206,12 +206,12 @@
         const langContents = document.querySelectorAll('.lang-content');
 
         const langContent = {
-          fr: { youtube_button: 'Voir toutes les vidéos' },
-          en: { youtube_button: 'View all videos' },
-          es: { youtube_button: 'Ver todos los vídeos' },
-          eu: { youtube_button: 'Ikusi bideo guztiak' },
-          ar: { youtube_button: 'عرض جميع مقاطع الفيديو' },
-          uk: { youtube_button: 'Переглянути всі відео' }
+          fr: { youtube_title: 'Dernières vidéos YouTube', youtube_button: 'Voir toutes les vidéos' },
+          en: { youtube_title: 'Latest YouTube Videos', youtube_button: 'View all videos' },
+          es: { youtube_title: 'Últimos vídeos de YouTube', youtube_button: 'Ver todos los vídeos' },
+          eu: { youtube_title: 'Azken YouTube bideoak', youtube_button: 'Ikusi bideo guztiak' },
+          ar: { youtube_title: 'أحدث مقاطع يوتيوب', youtube_button: 'عرض جميع مقاطع الفيديو' },
+          uk: { youtube_title: 'Останні відео на YouTube', youtube_button: 'Переглянути всі відео' }
         };
 
         function switchLanguage(lang) {
@@ -227,6 +227,8 @@
             }
 
             const t = langContent[lang] || langContent['fr'];
+            const titleEl = document.getElementById('youtube-title-text');
+            if (titleEl) titleEl.textContent = t.youtube_title;
             const btnEl = document.getElementById('youtube-btn-text');
             if (btnEl) btnEl.textContent = t.youtube_button;
         }
