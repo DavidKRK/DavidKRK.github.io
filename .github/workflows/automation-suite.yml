@@ -74,7 +74,7 @@ jobs:
       - name: Compress Images
         uses: calibreapp/image-actions@1.4.1
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
           jpegQuality: '85'
           pngQuality: '85'
