@@ -2,7 +2,7 @@ name: Automation Suite - Dependencies & Optimization
 
 on:
   schedule:
-    # Mise à jour des dépendances chaque lundi à 9h (UTC)
+    # Mise a jour des dependances chaque lundi a 9h (UTC)
     - cron: '0 9 * * 1'
   push:
     branches: [gh-pages]
@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   update-dependencies:
-    name: Mise à jour des dépendances npm
+    name: Mise a jour des dependances npm
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     steps:
@@ -49,15 +49,15 @@ jobs:
           add-paths: |
             package.json
             package-lock.json
-          commit-message: 'chore: mise à jour automatique des dépendances npm'
-          title: '🤖 Mise à jour automatique des dépendances'
+          commit-message: 'chore: mise a jour automatique des dependances npm'
+          title: 'Mise a jour automatique des dependances'
           body: |
-            Mise à jour automatique des dépendances npm effectuée le ${{ steps.get_date.outputs.date }}
-            
-            - Dépendances mises à jour via `npm update`
-            - Corrections de sécurité appliquées via `npm audit fix`
-            
-            Merci de vérifier les changements avant de fusionner.
+            Mise a jour automatique des dependances npm effectuee le ${{ steps.get_date.outputs.date }}
+
+            - Dependances mises a jour via npm update
+            - Corrections de securite appliquees via npm audit fix
+
+            Merci de verifier les changements avant de fusionner.
           branch: auto-update-dependencies
           delete-branch: true
 
@@ -74,14 +74,14 @@ jobs:
       - name: Compress Images
         uses: calibreapp/image-actions@1.4.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
           jpegQuality: '85'
           pngQuality: '85'
           webpQuality: '85'
 
   check-links:
-    name: Vérification des liens morts
+    name: Verification des liens morts
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     steps:
@@ -101,6 +101,6 @@ jobs:
         if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v5
         with:
-          title: '🔗 Liens morts détectés sur le site'
+          title: 'Liens morts detectes sur le site'
           content-filepath: ./lychee/out.md
           labels: bug, maintenance
