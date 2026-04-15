@@ -1,4 +1,4 @@
-name: 🌐 Mise à jour section YouTube du site
+name: Mise a jour section YouTube du site
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   update-music-page:
-    name: Injecter les vidéos dans music.html
+    name: Injecter les videos dans music.html
     runs-on: ubuntu-latest
 
     steps:
@@ -26,42 +26,44 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Injecter les vidéos YouTube dans music.html
+      - name: Injecter les videos YouTube dans music.html
+        shell: python
         run: |
-          python3 << 'EOF'
           import json
           import re
 
           with open('assets/data/youtube-videos.json', 'r', encoding='utf-8') as f:
               videos = json.load(f)
 
-          # Générer le HTML de la grille vidéos
           cards = ''
           for v in videos:
-              if v['id'] == 'placeholder':
+              if v.get('id') == 'placeholder':
                   continue
-              cards += f'''
-            <a href="{v['url']}" target="_blank" rel="noopener noreferrer" class="yt-card">
-              <div class="yt-thumb">
-                <img src="{v['thumbnail']}" alt="{v['title']}" loading="lazy" width="320" height="180">
-                <span class="yt-play">▶</span>
-              </div>
-              <p class="yt-title">{v['title']}</p>
-              <span class="yt-date">{v['published']}</span>
-            </a>'''
+              card = (
+                  '<a href="' + v['url'] + '" target="_blank" rel="noopener noreferrer" class="yt-card">'
+                  '<div class="yt-thumb">'
+                  '<img src="' + v['thumbnail'] + '" alt="" loading="lazy" width="320" height="180">'
+                  '<span class="yt-play">&#9654;</span>'
+                  '</div>'
+                  '<p class="yt-title">' + v['title'] + '</p>'
+                  '<span class="yt-date">' + v['published'] + '</span>'
+                  '</a>'
+              )
+              cards += card
 
-          youtube_block = f'''<!-- YOUTUBE-AUTO-START -->
-      <div class="yt-grid">
-        <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer" class="yt-channel-link">🎬 Voir toutes les vidéos sur YouTube</a>
-        <div class="yt-cards">{cards}
-        </div>
-      </div>
-      <!-- YOUTUBE-AUTO-END -->'''
+          channel_link = '<a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer" class="yt-channel-link">&#127909; Voir toutes les videos sur YouTube</a>'
+          youtube_block = (
+              '<!-- YOUTUBE-AUTO-START -->\n'
+              '      <div class="yt-grid">\n'
+              '        ' + channel_link + '\n'
+              '        <div class="yt-cards">' + cards + '</div>\n'
+              '      </div>\n'
+              '      <!-- YOUTUBE-AUTO-END -->'
+          )
 
           with open('music.html', 'r', encoding='utf-8') as f:
               content = f.read()
 
-          # Remplacer le bloc existant ou injecter avant </main>
           pattern = r'<!-- YOUTUBE-AUTO-START -->.*?<!-- YOUTUBE-AUTO-END -->'
           if re.search(pattern, content, re.DOTALL):
               content = re.sub(pattern, youtube_block, content, flags=re.DOTALL)
@@ -71,8 +73,7 @@ jobs:
           with open('music.html', 'w', encoding='utf-8') as f:
               f.write(content)
 
-          print('music.html mis à jour avec les vidéos YouTube !')
-          EOF
+          print('music.html mis a jour avec les videos YouTube !')
 
       - name: Injecter le CSS YouTube dans assets/css/style.css
         run: |
@@ -92,9 +93,9 @@ jobs:
 .yt-title { padding: 0.6rem 0.8rem 0.2rem; font-size: 0.9rem; font-weight: 600; text-align: left; }
 .yt-date { padding: 0 0.8rem 0.8rem; font-size: 0.75rem; color: #aaa; text-align: left; }
 CSSEOF
-            echo 'CSS YouTube ajouté à style.css'
+            echo 'CSS YouTube ajoute a style.css'
           else
-            echo 'CSS YouTube déjà présent dans style.css'
+            echo 'CSS YouTube deja present dans style.css'
           fi
 
       - name: Commit et push
@@ -103,8 +104,8 @@ CSSEOF
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add music.html assets/css/style.css
           if git diff --staged --quiet; then
-            echo "Aucun changement à commiter."
+            echo "Aucun changement a commiter."
           else
-            git commit -m "🌐 Auto-update: section YouTube mise à jour sur music.html"
+            git commit -m "Auto-update: section YouTube mise a jour sur music.html"
             git push
           fi
