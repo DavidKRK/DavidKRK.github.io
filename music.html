@@ -270,6 +270,10 @@
             if (btnEl) btnEl.textContent = t.youtube_button;
             const headingEl = document.getElementById('youtube-section-title');
             if (headingEl) headingEl.textContent = t.youtube_heading;
+
+            // Update document language and text direction for accessibility and RTL support
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
         }
 
         langBtns.forEach(btn => {
