@@ -206,12 +206,12 @@
         const langContents = document.querySelectorAll('.lang-content');
 
         const langContent = {
-          fr: { youtube_title: 'Dernières vidéos YouTube', youtube_button: 'Voir toutes les vidéos' },
-          en: { youtube_title: 'Latest YouTube Videos', youtube_button: 'View all videos' },
-          es: { youtube_title: 'Últimos vídeos de YouTube', youtube_button: 'Ver todos los vídeos' },
-          eu: { youtube_title: 'Azken YouTube bideoak', youtube_button: 'Ikusi bideo guztiak' },
-          ar: { youtube_title: 'أحدث مقاطع فيديو يوتيوب', youtube_button: 'عرض جميع مقاطع الفيديو' },
-          uk: { youtube_title: 'Останні відео YouTube', youtube_button: 'Переглянути всі відео' }
+          fr: { youtube_button: 'Voir toutes les vidéos' },
+          en: { youtube_button: 'View all videos' },
+          es: { youtube_button: 'Ver todos los vídeos' },
+          eu: { youtube_button: 'Ikusi bideo guztiak' },
+          ar: { youtube_button: 'عرض جميع مقاطع الفيديو' },
+          uk: { youtube_button: 'Переглянути всі відео' }
         };
 
         function switchLanguage(lang) {
@@ -227,9 +227,7 @@
             }
 
             const t = langContent[lang] || langContent['fr'];
-            const titleEl = document.getElementById('youtube-section-title');
             const btnEl = document.getElementById('youtube-btn-text');
-            if (titleEl) titleEl.textContent = t.youtube_title;
             if (btnEl) btnEl.textContent = t.youtube_button;
         }
 
@@ -238,6 +236,8 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
+
+        switchLanguage('fr');
     });
   </script>
 </body>
