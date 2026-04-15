@@ -33,6 +33,64 @@
   <!-- Style principal -->
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
+
+  <style>
+    .youtube-section {
+      margin: 2rem auto;
+      max-width: 900px;
+      padding: 0 1rem;
+    }
+    .youtube-section h3 {
+      font-family: 'Russo One', sans-serif;
+      color: var(--primary-color, #ff0000);
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .youtube-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .youtube-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      display: block;
+    }
+    .youtube-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(255,0,0,0.2);
+    }
+    .youtube-card img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .youtube-card-body {
+      padding: 0.7rem 0.9rem;
+    }
+    .youtube-card-title {
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+    .youtube-card-date {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+    }
+  </style>
 </head>
 <body class="home-page">
 
@@ -75,6 +133,18 @@
       <div class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy></div>
 
       <!-- YOUTUBE-AUTO-START -->
+      <section class="youtube-section">
+        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> Dernières vidéos YouTube</h3>
+        <div class="youtube-grid" id="youtube-grid">
+          <!-- Les vidéos sont chargées dynamiquement depuis youtube-videos.json -->
+        </div>
+        <div style="margin-top:1.2rem;">
+          <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer"
+             style="display:inline-flex;align-items:center;gap:0.5rem;background:#ff0000;color:#fff;padding:0.6rem 1.4rem;border-radius:6px;font-family:'Russo One',sans-serif;font-size:0.9rem;text-decoration:none;transition:background 0.2s;">
+            <i class="fab fa-youtube"></i> Voir toutes les vidéos
+          </a>
+        </div>
+      </section>
       <!-- YOUTUBE-AUTO-END -->
     </main>
 
@@ -109,6 +179,28 @@
 
   <script src="assets/js/main.js"></script>
   <script>
+    // Chargement dynamique des vidéos YouTube depuis youtube-videos.json
+    fetch('assets/data/youtube-videos.json')
+      .then(r => r.json())
+      .then(videos => {
+        const grid = document.getElementById('youtube-grid');
+        if (!grid || !videos.length) return;
+        grid.innerHTML = videos.map(v => `
+          <a class="youtube-card" href="${v.url}" target="_blank" rel="noopener noreferrer">
+            <img src="${v.thumbnail}" alt="${v.title}" loading="lazy" width="480" height="270">
+            <div class="youtube-card-body">
+              <div class="youtube-card-title">${v.title}</div>
+              <div class="youtube-card-date">${v.published}</div>
+            </div>
+          </a>
+        `).join('');
+      })
+      .catch(() => {
+        const grid = document.getElementById('youtube-grid');
+        if (grid) grid.innerHTML = '<p style="color:rgba(255,255,255,0.5);text-align:center;">Vidéos temporairement indisponibles.</p>';
+      });
+
+    // Sélecteur de langue
     document.addEventListener('DOMContentLoaded', () => {
         const langBtns = document.querySelectorAll('.language-btn');
         const langContents = document.querySelectorAll('.lang-content');
@@ -131,8 +223,7 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
-
     });
-    </script>
+  </script>
 </body>
 </html>
