@@ -54,7 +54,7 @@ jobs:
 
           channel_link = ('<a href="https://www.youtube.com/@DavidKRKofficial"'
                           ' target="_blank" rel="noopener noreferrer"'
-                          ' class="yt-channel-link">&#127909; Voir toutes les videos sur YouTube</a>')
+                          ' class="yt-channel-link">&#127909; <span id="youtube-btn-text">Voir toutes les vidéos</span></a>')
 
           youtube_block = (
               '<!-- YOUTUBE-AUTO-START -->\n'
