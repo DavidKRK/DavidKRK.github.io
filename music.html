@@ -262,6 +262,9 @@
                 activeBtn.classList.add('active');
             }
 
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
             const t = langContent[lang] || langContent['fr'];
             const btnEl = document.getElementById('youtube-btn-text');
             if (btnEl) btnEl.textContent = t.youtube_button;
