@@ -58,6 +58,7 @@ jobs:
 
           youtube_block = (
               '<!-- YOUTUBE-AUTO-START -->\n'
+              '      <h2 id="youtube-section-title">YouTube</h2>\n'
               '      <div class="yt-grid">\n'
               '        ' + channel_link + '\n'
               '        <div class="yt-cards">' + cards + '</div>\n'
