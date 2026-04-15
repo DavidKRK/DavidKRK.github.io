@@ -120,12 +120,48 @@
         <button type="button" class="language-btn" data-lang="ar">العربية</button>
         <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
-      <div class="lang-content" data-lang="fr"><h2 class="main-title">Musique</h2></div>
-      <div class="lang-content" data-lang="en"><h2 class="main-title">Music</h2></div>
-      <div class="lang-content" data-lang="es"><h2 class="main-title">Música</h2></div>
-      <div class="lang-content" data-lang="eu"><h2 class="main-title">Musika</h2></div>
-      <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">الموسيقى</h2></div>
-      <div class="lang-content" data-lang="uk"><h2 class="main-title">Музика</h2></div>
+      <div class="lang-content" data-lang="fr">
+        <h2 class="main-title">Musique</h2>
+        <div class="text-lg">
+          <p class="mt-4">Découvrez la musique de David KRK, DJ et producteur de musique Techno.</p>
+          <p>Retrouvez ses derniers mixes et productions.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="en">
+        <h2 class="main-title">Music</h2>
+        <div class="text-lg">
+          <p class="mt-4">Discover the music of David KRK, Techno DJ and producer.</p>
+          <p>Find his latest mixes and productions.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="es">
+        <h2 class="main-title">Música</h2>
+        <div class="text-lg">
+          <p class="mt-4">Descubre la música de David KRK, DJ y productor de música Techno.</p>
+          <p>Encuentra sus últimas mezclas y producciones.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="eu">
+        <h2 class="main-title">Musika</h2>
+        <div class="text-lg">
+          <p class="mt-4">Ezagutu David KRK-ren musika, Techno DJ eta ekoizlea.</p>
+          <p>Aurkitu bere azken nahasketak eta ekoizpenak.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="ar" dir="rtl">
+        <h2 class="main-title">الموسيقى</h2>
+        <div class="text-lg">
+          <p class="mt-4">اكتشف موسيقى ديفيد كرك، دي جي ومنتج موسيقى التكنو.</p>
+          <p>اعثر على أحدث ميكساته وإنتاجاته.</p>
+        </div>
+      </div>
+      <div class="lang-content" data-lang="uk">
+        <h2 class="main-title">Музика</h2>
+        <div class="text-lg">
+          <p class="mt-4">Відкрийте для себе музику David KRK, діджея та продюсера техно.</p>
+          <p>Знайдіть його останні мікси та продукції.</p>
+        </div>
+      </div>
     </div>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full music-main-content">
@@ -134,7 +170,7 @@
 
       <!-- YOUTUBE-AUTO-START -->
       <section class="youtube-section">
-        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> Dernières vidéos YouTube</h3>
+        <h3><i class="fab fa-youtube" style="color:#ff0000;"></i> <span id="youtube-section-title">Dernières vidéos YouTube</span></h3>
         <div class="youtube-grid" id="youtube-grid">
           <!-- Les vidéos sont chargées dynamiquement depuis youtube-videos.json -->
         </div>
@@ -206,12 +242,12 @@
         const langContents = document.querySelectorAll('.lang-content');
 
         const langContent = {
-          fr: { youtube_button: 'Voir toutes les vidéos' },
-          en: { youtube_button: 'View all videos' },
-          es: { youtube_button: 'Ver todos los vídeos' },
-          eu: { youtube_button: 'Ikusi bideo guztiak' },
-          ar: { youtube_button: 'عرض جميع مقاطع الفيديو' },
-          uk: { youtube_button: 'Переглянути всі відео' }
+          fr: { youtube_heading: 'Dernières vidéos YouTube', youtube_button: 'Voir toutes les vidéos' },
+          en: { youtube_heading: 'Latest YouTube Videos', youtube_button: 'View all videos' },
+          es: { youtube_heading: 'Últimos vídeos de YouTube', youtube_button: 'Ver todos los vídeos' },
+          eu: { youtube_heading: 'Azken YouTube bideoak', youtube_button: 'Ikusi bideo guztiak' },
+          ar: { youtube_heading: 'آخر مقاطع YouTube', youtube_button: 'عرض جميع مقاطع الفيديو' },
+          uk: { youtube_heading: 'Останні відео YouTube', youtube_button: 'Переглянути всі відео' }
         };
 
         function switchLanguage(lang) {
@@ -229,6 +265,8 @@
             const t = langContent[lang] || langContent['fr'];
             const btnEl = document.getElementById('youtube-btn-text');
             if (btnEl) btnEl.textContent = t.youtube_button;
+            const headingEl = document.getElementById('youtube-section-title');
+            if (headingEl) headingEl.textContent = t.youtube_heading;
         }
 
         langBtns.forEach(btn => {
