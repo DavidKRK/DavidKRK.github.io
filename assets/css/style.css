@@ -261,7 +261,6 @@ body:not(.home-page) {
   background-color: #416e73;
 }
 body.music-page {
-  background-color: #416e73;
   display: flex;
   flex-direction: column;
 }
