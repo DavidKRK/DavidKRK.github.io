@@ -259,6 +259,8 @@ body.home-page {
 }
 body:not(.home-page) {
   background-color: #416e73;
+  display: flex;
+  flex-direction: column;
 }
 
 
