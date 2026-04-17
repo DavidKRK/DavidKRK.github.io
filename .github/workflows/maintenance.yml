@@ -91,6 +91,7 @@ jobs:
       - name: Checkout complet du dépôt
         uses: actions/checkout@v4
         with:
+          ref: gh-pages
           fetch-depth: 0
 
       # Créer une archive compressée du site (en excluant .git et node_modules)
