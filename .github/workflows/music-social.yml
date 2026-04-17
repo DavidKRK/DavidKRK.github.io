@@ -47,8 +47,8 @@ jobs:
           ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
 
           # Compter les lignes modifiées en excluant les en-têtes de diff (+++ / ---)
-          LINES_ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | grep -c . || echo "0")
-          LINES_REMOVED=$(echo "$DIFF" | grep "^-" | grep -v "^---" | grep -c . || echo "0")
+          LINES_ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | wc -l)
+          LINES_REMOVED=$(echo "$DIFF" | grep "^-" | grep -v "^---" | wc -l)
 
           # Sauvegarder les infos dans les outputs
           echo "lines_added=$LINES_ADDED" >> "$GITHUB_OUTPUT"
