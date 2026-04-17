@@ -1,0 +1,82 @@
+name: 🔒 Sécurité - CodeQL & Gitleaks
+
+on:
+  push:
+    branches: [main, gh-pages]
+  pull_request:
+    branches: [main, gh-pages]
+  schedule:
+    # Analyse de sécurité hebdomadaire chaque lundi à 3h UTC
+    - cron: '0 3 * * 1'
+
+# Permissions minimales : lecture du code + écriture des événements de sécurité
+permissions:
+  contents: read
+  security-events: write
+  packages: read
+  actions: read
+
+jobs:
+  # ─────────────────────────────────────────────────────────────
+  # Analyse statique du code avec CodeQL
+  # ─────────────────────────────────────────────────────────────
+  codeql:
+    name: Analyse CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Analyse JavaScript / TypeScript (code front-end)
+          - language: javascript-typescript
+            build-mode: none
+          # Analyse des workflows GitHub Actions
+          - language: actions
+            build-mode: none
+
+    steps:
+      # Récupérer le code source du dépôt
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      # Initialiser les outils CodeQL avec les requêtes de sécurité étendues
+      - name: Initialisation de CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          queries: security-extended
+
+      # Exécuter l'analyse de sécurité et publier les résultats dans l'onglet Security
+      - name: Analyse CodeQL
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:${{ matrix.language }}"
+
+  # ─────────────────────────────────────────────────────────────
+  # Détection de secrets exposés avec Gitleaks
+  # ─────────────────────────────────────────────────────────────
+  gitleaks:
+    name: Détection de secrets (Gitleaks)
+    runs-on: ubuntu-latest
+    # Permissions minimales pour ce job
+    permissions:
+      contents: read
+      # Nécessaire pour annoter les pull requests en cas de secret détecté
+      pull-requests: read
+
+    steps:
+      # Récupérer l'historique GIT complet pour analyser tous les commits
+      - name: Checkout complet du dépôt
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Scanner l'intégralité du dépôt à la recherche de secrets exposés
+      # (clés API, mots de passe, tokens, etc.)
+      - name: Scan Gitleaks pour les secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Désactiver les commentaires automatiques sur les PR (bruit)
+          GITLEAKS_ENABLE_COMMENTS: false

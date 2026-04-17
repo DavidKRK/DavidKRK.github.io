@@ -1,0 +1,150 @@
+name: 🎵 Mise à jour musicale - Notification & Réseaux Sociaux
+
+on:
+  push:
+    branches: [main, gh-pages]
+    # Déclencher uniquement quand music.html est modifié
+    paths:
+      - 'music.html'
+  # Déclenchement manuel pour tester le workflow
+  workflow_dispatch:
+
+# Permissions minimales : lecture du code + création d'issues
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  detect-music-update:
+    name: Détecter les changements dans music.html
+    runs-on: ubuntu-latest
+
+    steps:
+      # Récupérer le code source avec l'historique pour comparer les versions
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # Extraire les changements apportés à music.html depuis le dernier commit
+      - name: Analyser les modifications de music.html
+        id: diff
+        run: |
+          # Récupérer le diff de music.html par rapport au commit précédent
+          DIFF=$(git diff HEAD~1 HEAD -- music.html 2>/dev/null || git show HEAD -- music.html)
+
+          # Extraire les lignes ajoutées (nouvelles entrées)
+          ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
+
+          # Compter les lignes modifiées
+          LINES_ADDED=$(echo "$DIFF" | grep -c "^+" || echo "0")
+          LINES_REMOVED=$(echo "$DIFF" | grep -c "^-" || echo "0")
+
+          # Sauvegarder les infos dans les outputs
+          echo "lines_added=$LINES_ADDED" >> "$GITHUB_OUTPUT"
+          echo "lines_removed=$LINES_REMOVED" >> "$GITHUB_OUTPUT"
+
+          # Sauvegarder le diff dans un fichier temporaire pour l'issue
+          echo "$ADDED" > /tmp/music_changes.txt
+
+          # Détecter la présence de nouveaux titres (balises audio ou liens)
+          if echo "$DIFF" | grep -qiE '(audio|track|mix|set|release|soundcloud|youtube)'; then
+            echo "has_music_content=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_music_content=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Créer une issue GitHub récapitulative de la mise à jour musicale
+      - name: Créer une issue "New Music Update"
+        uses: actions/github-script@v7
+        env:
+          LINES_ADDED: ${{ steps.diff.outputs.lines_added }}
+          LINES_REMOVED: ${{ steps.diff.outputs.lines_removed }}
+          COMMIT_SHA: ${{ github.sha }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          COMMIT_AUTHOR: ${{ github.event.head_commit.author.name }}
+        with:
+          script: |
+            const sha = process.env.COMMIT_SHA.slice(0, 7);
+            const commitMsg = process.env.COMMIT_MSG || 'Mise à jour manuelle';
+            const author = process.env.COMMIT_AUTHOR || 'DavidKRK';
+            const linesAdded = process.env.LINES_ADDED;
+            const linesRemoved = process.env.LINES_REMOVED;
+            const now = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+
+            // ─────────────────────────────────────────
+            // Template de post pour réseaux sociaux
+            // ─────────────────────────────────────────
+            const socialTemplate = [
+              '## 📱 Template de post pour réseaux sociaux',
+              '',
+              '### Instagram / Facebook',
+              '```',
+              '🎵 Nouvelle mise à jour sur mon site !',
+              '',
+              '🔥 Nouveau contenu musical disponible sur www.davidkrk.com',
+              '',
+              '🎧 DJ & Producteur Techno depuis 1999',
+              '📍 Saint-Jean-de-Luz, France',
+              '',
+              '#DavidKRK #Techno #DJ #Music #NewRelease #TechnoMusic #Underground',
+              '#BasqueCountry #SaintJeanDeLuz #ElectronicMusic',
+              '```',
+              '',
+              '### Twitter / X',
+              '```',
+              '🎵 Nouveau contenu musical sur https://davidkrk.com !',
+              '#DavidKRK #Techno #DJ #NewMusic',
+              '```',
+              '',
+              '### SoundCloud / Bandcamp',
+              '```',
+              '🔥 New track/mix available! Check it out on www.davidkrk.com',
+              '#techno #underground #dj #producer #saintjeandeLuz',
+              '```',
+            ].join('\n');
+
+            // ─────────────────────────────────────────
+            // Contenu principal de l'issue
+            // ─────────────────────────────────────────
+            const issueBody = [
+              '## 🎵 Mise à jour de la page musicale détectée',
+              '',
+              '### 📋 Détails du commit',
+              `- **Commit** : [\`${sha}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.payload.head_commit?.id || sha})`,
+              `- **Message** : ${commitMsg}`,
+              `- **Auteur** : ${author}`,
+              `- **Date** : ${now} (heure de Paris)`,
+              `- **Lignes modifiées** : +${linesAdded} / -${linesRemoved}`,
+              '',
+              '### 🔗 Liens utiles',
+              `- 🌐 [Voir music.html en ligne](https://www.davidkrk.com/music.html)`,
+              `- 📝 [Voir le diff sur GitHub](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.payload.head_commit?.id || sha})`,
+              '',
+              '---',
+              '',
+              socialTemplate,
+              '',
+              '---',
+              '',
+              '### ✅ Checklist de publication',
+              '- [ ] Vérifier que le nouveau contenu est visible sur [davidkrk.com/music.html](https://www.davidkrk.com/music.html)',
+              '- [ ] Poster sur Instagram',
+              '- [ ] Poster sur Facebook',
+              '- [ ] Poster sur Twitter / X',
+              '- [ ] Partager sur SoundCloud si nouveau mix/track',
+              '- [ ] Mettre à jour la bio si nécessaire',
+              '',
+              '_Issue créée automatiquement par le workflow music-social._'
+            ].join('\n');
+
+            // Créer l'issue de notification
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🎵 New Music Update — ${now}`,
+              body: issueBody,
+              labels: ['music', 'social-media', 'automated']
+            });
+
+            console.log('✅ Issue "New Music Update" créée avec succès !');

@@ -1,0 +1,157 @@
+name: 📡 Monitoring Uptime - davidkrk.com
+
+on:
+  schedule:
+    # Vérification de disponibilité toutes les 30 minutes
+    - cron: '*/30 * * * *'
+  # Déclenchement manuel pour un test immédiat
+  workflow_dispatch:
+
+# Permissions minimales : lecture du code + gestion des issues
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  uptime-check:
+    name: Vérification de disponibilité
+    runs-on: ubuntu-latest
+
+    steps:
+      # Récupérer le code source pour mettre à jour le badge de statut
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      # Tester la disponibilité du site via une requête HTTP
+      # Timeout de 30 secondes pour éviter les faux positifs réseau
+      - name: Vérifier la disponibilité de davidkrk.com
+        id: check
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            --max-time 30 \
+            --retry 2 \
+            --retry-delay 5 \
+            "https://www.davidkrk.com/" || echo "000")
+
+          echo "status_code=$HTTP_STATUS" >> "$GITHUB_OUTPUT"
+
+          # Le site est considéré en ligne si le code HTTP est entre 200 et 399
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ] 2>/dev/null; then
+            echo "is_up=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Site en ligne (HTTP $HTTP_STATUS)"
+          else
+            echo "is_up=false" >> "$GITHUB_OUTPUT"
+            echo "❌ Site hors ligne ou erreur (HTTP $HTTP_STATUS)"
+          fi
+
+      # Mettre à jour le fichier de statut pour le badge shields.io
+      - name: Mettre à jour le fichier de statut
+        run: |
+          mkdir -p .github/badges
+
+          if [ "${{ steps.check.outputs.is_up }}" = "true" ]; then
+            STATUS="up"
+            COLOR="brightgreen"
+            MESSAGE="en ligne"
+          else
+            STATUS="down"
+            COLOR="red"
+            MESSAGE="hors ligne"
+          fi
+
+          # Fichier JSON compatible avec shields.io endpoint
+          cat > .github/badges/uptime.json << EOF
+          {
+            "schemaVersion": 1,
+            "label": "davidkrk.com",
+            "message": "$MESSAGE",
+            "color": "$COLOR"
+          }
+          EOF
+
+          # Sauvegarder le dernier statut pour la logique d'issue
+          echo "$STATUS" > .github/badges/uptime-status.txt
+
+      # Commiter le fichier de statut si changement
+      - name: Commiter le statut de disponibilité
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/badges/uptime.json .github/badges/uptime-status.txt || true
+          if git diff --staged --quiet; then
+            echo "Aucun changement de statut à commiter."
+          else
+            git commit -m "chore: mise à jour du statut uptime [skip ci]"
+            git push
+          fi
+
+      # Si le site est de nouveau en ligne, fermer les issues d'alerte ouvertes
+      - name: Fermer l'alerte uptime si le site est revenu en ligne
+        if: steps.check.outputs.is_up == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Rechercher les issues d'alerte uptime ouvertes
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'uptime',
+              state: 'open'
+            });
+
+            // Fermer chaque issue et ajouter un commentaire de résolution
+            for (const issue of issues.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `✅ **Site de nouveau en ligne** — davidkrk.com répond normalement.\n\n_Résolu automatiquement le ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })} (heure de Paris)._`
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+            }
+
+      # Si le site est hors ligne, créer une issue d'alerte (une seule à la fois)
+      - name: Créer une alerte si le site est hors ligne
+        if: steps.check.outputs.is_up == 'false'
+        uses: actions/github-script@v7
+        env:
+          STATUS_CODE: ${{ steps.check.outputs.status_code }}
+        with:
+          script: |
+            // Vérifier si une issue d'alerte uptime est déjà ouverte
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'uptime',
+              state: 'open'
+            });
+
+            // Ne créer qu'une seule alerte à la fois pour éviter le spam
+            if (existing.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🚨 Alerte : davidkrk.com est hors ligne',
+                body: [
+                  '## ⚠️ Le site davidkrk.com est inaccessible',
+                  '',
+                  `- **URL surveillée** : https://www.davidkrk.com/`,
+                  `- **Code HTTP reçu** : \`${process.env.STATUS_CODE}\``,
+                  `- **Détecté le** : ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })} (heure de Paris)`,
+                  '',
+                  '### Actions recommandées',
+                  '1. Vérifier l\'onglet **Déploiements** → GitHub Pages',
+                  '2. Consulter les logs du workflow **Deploy**',
+                  '3. Vérifier le DNS (CNAME → `davidkrk.github.io`)',
+                  '',
+                  '_Issue créée automatiquement par le workflow de monitoring uptime._',
+                  '_Elle sera fermée automatiquement quand le site sera de nouveau accessible._'
+                ].join('\n'),
+                labels: ['uptime', 'urgent']
+              });
+            }
