@@ -9,9 +9,9 @@
         "categories:best-practices": ["warn", { "minScore": 0.85 }],
         "aria-command-name": "off",
         "cls-culprits-insight": "off",
-        "color-contrast": "off",
-        "errors-in-console": "off",
-        "font-display": "off",
+        "color-contrast": "warn",
+        "errors-in-console": "warn",
+        "font-display": "warn",
         "font-display-insight": "off",
         "image-delivery-insight": "off",
         "inspector-issues": "off",
@@ -19,12 +19,12 @@
         "lcp-lazy-loaded": "off",
         "network-dependency-tree-insight": "off",
         "third-party-cookies": "off",
-        "total-byte-weight": "off",
-        "unsized-images": "off",
-        "unused-css-rules": "off",
-        "unused-javascript": "off",
-        "uses-optimized-images": "off",
-        "uses-responsive-images": "off"
+        "total-byte-weight": "warn",
+        "unsized-images": "warn",
+        "unused-css-rules": "warn",
+        "unused-javascript": "warn",
+        "uses-optimized-images": "warn",
+        "uses-responsive-images": "warn"
       }
     },
     "collect": {
