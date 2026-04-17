@@ -18,9 +18,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Récupérer le code source pour mettre à jour le badge de statut
+      # Récupérer explicitement la branche qui héberge les badges/statuts
       - name: Checkout du dépôt
         uses: actions/checkout@v4
+        with:
+          ref: gh-pages
 
       # Tester la disponibilité du site via une requête HTTP
       # Timeout de 30 secondes pour éviter les faux positifs réseau
