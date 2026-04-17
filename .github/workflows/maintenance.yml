@@ -81,8 +81,8 @@ jobs:
   backup:
     name: 💾 Backup hebdomadaire (GitHub Releases)
     runs-on: ubuntu-latest
-    # Exécuter lors des déclenchements planifiés (dimanche) ou manuels
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    # Exécuter uniquement le cron du dimanche ou un déclenchement manuel
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 1 * * 0')
     permissions:
       contents: write
 
