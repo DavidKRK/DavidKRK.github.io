@@ -28,7 +28,7 @@ jobs:
 
       # Lancer l'audit Lighthouse sur les pages principales du site
       # Les seuils sont définis dans .lighthouserc.json :
-      #   - Performance  : minimum 80/100
+      #   - Performance  : minimum 70/100
       #   - SEO          : minimum 90/100
       # Le workflow échoue si un seuil n'est pas atteint.
       - name: Audit Lighthouse CI
@@ -106,7 +106,7 @@ jobs:
                   '## 🔦 Alerte Performance / SEO',
                   '',
                   'L\'audit Lighthouse automatique a détecté des scores inférieurs aux seuils définis :',
-                  '- **Performance** : minimum requis **80/100**',
+                  '- **Performance** : minimum requis **70/100**',
                   '- **SEO** : minimum requis **90/100**',
                   '',
                   `**Workflow déclenché** : ${context.workflow}`,
