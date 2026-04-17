@@ -140,7 +140,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # ─────────────────────────────────────────────────────────────
-  # QUOTIDIEN : Fermeture automatique des issues inactives (Stale)
+  # LUNDI + DIMANCHE : Fermeture automatique des issues inactives (Stale)
   # ─────────────────────────────────────────────────────────────
   stale:
     name: 🧹 Fermeture des issues inactives (Stale)
