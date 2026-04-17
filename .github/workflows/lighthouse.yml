@@ -30,7 +30,9 @@ jobs:
       # Les seuils sont définis dans .lighthouserc.json :
       #   - Performance  : minimum 70/100
       #   - SEO          : minimum 90/100
-      # Le workflow échoue si un seuil n'est pas atteint.
+      # Le workflow échoue uniquement si les seuils bloquants définis dans
+      # .lighthouserc.json ne sont pas atteints (par ex. Performance/SEO).
+      # Les assertions configurées en `warn` n'échouent pas le job.
       - name: Audit Lighthouse CI
         id: lighthouse
         uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
