@@ -36,9 +36,9 @@ jobs:
           # Extraire les lignes ajoutées (nouvelles entrées)
           ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
 
-          # Compter les lignes modifiées
-          LINES_ADDED=$(echo "$DIFF" | grep -c "^+" || echo "0")
-          LINES_REMOVED=$(echo "$DIFF" | grep -c "^-" || echo "0")
+          # Compter les lignes modifiées en excluant les en-têtes de diff (+++ / ---)
+          LINES_ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | grep -c . || echo "0")
+          LINES_REMOVED=$(echo "$DIFF" | grep "^-" | grep -v "^---" | grep -c . || echo "0")
 
           # Sauvegarder les infos dans les outputs
           echo "lines_added=$LINES_ADDED" >> "$GITHUB_OUTPUT"
@@ -51,7 +51,7 @@ jobs:
           if echo "$DIFF" | grep -qiE '(audio|track|mix|set|release|soundcloud|youtube)'; then
             echo "has_music_content=true" >> "$GITHUB_OUTPUT"
           else
-            echo "has_music_content=true" >> "$GITHUB_OUTPUT"
+            echo "has_music_content=false" >> "$GITHUB_OUTPUT"
           fi
 
       # Créer une issue GitHub récapitulative de la mise à jour musicale
@@ -112,7 +112,7 @@ jobs:
               '## 🎵 Mise à jour de la page musicale détectée',
               '',
               '### 📋 Détails du commit',
-              `- **Commit** : [\`${sha}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.payload.head_commit?.id || sha})`,
+              `- **Commit** : [\`${shortSha}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.payload.head_commit?.id || sha})`,
               `- **Message** : ${commitMsg}`,
               `- **Auteur** : ${author}`,
               `- **Date** : ${now} (heure de Paris)`,
@@ -139,13 +139,41 @@ jobs:
               '_Issue créée automatiquement par le workflow music-social._'
             ].join('\n');
 
+            // S'assurer que les labels requis existent avant de créer l'issue
+            const requiredLabels = [
+              { name: 'music',        color: '1d76db', description: 'Mise à jour musicale' },
+              { name: 'social-media', color: 'bfd4f2', description: 'Post réseaux sociaux' },
+              { name: 'automated',    color: 'ededed', description: 'Créée automatiquement par un workflow' }
+            ];
+            for (const label of requiredLabels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name
+                });
+              } catch (err) {
+                if (err.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: label.name,
+                    color: label.color,
+                    description: label.description
+                  });
+                } else {
+                  throw err;
+                }
+              }
+            }
+
             // Créer l'issue de notification
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `🎵 New Music Update — ${now}`,
               body: issueBody,
-              labels: ['music', 'social-media', 'automated']
+              labels: requiredLabels.map(l => l.name)
             });
 
             console.log('✅ Issue "New Music Update" créée avec succès !');

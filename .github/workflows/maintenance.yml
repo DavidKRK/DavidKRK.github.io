@@ -6,18 +6,8 @@ on:
     - cron: '0 8 * * 1'
     # Backup complet chaque dimanche à 1h UTC
     - cron: '0 1 * * 0'
-  # Déclenchement manuel pour tester chaque job
+  # Déclenchement manuel du workflow
   workflow_dispatch:
-    inputs:
-      job:
-        description: 'Job à exécuter'
-        required: false
-        default: 'all'
-        type: choice
-        options:
-          - all
-          - check-links
-          - backup
 
 # Permissions minimales pour les opérations de maintenance
 permissions:
@@ -36,9 +26,11 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 8 * * 1')
 
     steps:
-      # Récupérer le code source contenant les fichiers HTML et Markdown
+      # Récupérer le contenu du site publié (branche gh-pages) pour scanner ses liens
       - name: Checkout du dépôt
         uses: actions/checkout@v4
+        with:
+          ref: gh-pages
 
       # Lancer Lychee pour vérifier tous les liens dans les fichiers HTML et Markdown
       # La configuration est définie dans .lychee.toml (exclusions : mailto, soundcloud, etc.)
@@ -56,6 +48,39 @@ jobs:
             '**/*.md'
           # Ne pas faire échouer le workflow (on crée une issue à la place)
           fail: false
+
+      # S'assurer que les labels requis existent avant de créer l'issue
+      - name: Créer les labels si absents
+        if: steps.lychee.outputs.exit_code != 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const requiredLabels = [
+              { name: 'bug',         color: 'd73a4a', description: 'Un problème a été identifié' },
+              { name: 'maintenance', color: 'e4e669', description: 'Tâche de maintenance' },
+              { name: 'automated',   color: 'ededed', description: 'Créée automatiquement par un workflow' }
+            ];
+            for (const label of requiredLabels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name
+                });
+              } catch (err) {
+                if (err.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: label.name,
+                    color: label.color,
+                    description: label.description
+                  });
+                } else {
+                  throw err;
+                }
+              }
+            }
 
       # Créer une issue si des liens morts ont été trouvés
       - name: Créer une issue si des liens morts sont détectés
@@ -87,7 +112,7 @@ jobs:
       contents: write
 
     steps:
-      # Récupérer le code source complet avec tout l'historique
+      # Récupérer le contenu du site publié (branche gh-pages) pour l'archiver
       - name: Checkout complet du dépôt
         uses: actions/checkout@v4
         with:
