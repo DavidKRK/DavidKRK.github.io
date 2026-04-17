@@ -71,15 +71,12 @@ jobs:
           }
           EOF
 
-          # Sauvegarder le dernier statut pour la logique d'issue
-          echo "$STATUS" > .github/badges/uptime-status.txt
-
       # Commiter le fichier de statut si changement
       - name: Commiter le statut de disponibilité
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .github/badges/uptime.json .github/badges/uptime-status.txt || true
+          git add .github/badges/uptime.json || true
           if git diff --staged --quiet; then
             echo "Aucun changement de statut à commiter."
           else
