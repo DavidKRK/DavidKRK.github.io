@@ -32,8 +32,8 @@ jobs:
   check-links:
     name: 🔗 Vérification des liens morts (Lychee)
     runs-on: ubuntu-latest
-    # Exécuter lors des déclenchements planifiés (lundi) ou manuels
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    # Exécuter uniquement le cron du lundi, ou lors d'un déclenchement manuel
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 8 * * 1')
 
     steps:
       # Récupérer le code source contenant les fichiers HTML et Markdown
