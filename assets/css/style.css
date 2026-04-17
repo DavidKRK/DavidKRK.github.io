@@ -243,6 +243,7 @@ body {
 
 /* ---------- BACKGROUND ---------- */
 body {
+  background-color: #416e73;
   background-image: url("../images/david_krk_owl.jpg");
   background-size: cover;
   background-position: left center;
