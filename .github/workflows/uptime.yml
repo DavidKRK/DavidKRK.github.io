@@ -123,6 +123,33 @@ jobs:
           STATUS_CODE: ${{ steps.check.outputs.status_code }}
         with:
           script: |
+            // Créer les labels requis s'ils n'existent pas encore dans le dépôt
+            const requiredLabels = [
+              { name: 'uptime',  color: '0075ca', description: 'Monitoring uptime du site' },
+              { name: 'urgent',  color: 'd93f0b', description: 'Nécessite une attention immédiate' }
+            ];
+            for (const label of requiredLabels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name
+                });
+              } catch (err) {
+                if (err.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: label.name,
+                    color: label.color,
+                    description: label.description
+                  });
+                } else {
+                  throw err;
+                }
+              }
+            }
+
             // Vérifier si une issue d'alerte uptime est déjà ouverte
             const existing = await github.rest.issues.listForRepo({
               owner: context.repo.owner,

@@ -62,7 +62,7 @@ jobs:
     # Permissions minimales pour ce job
     permissions:
       contents: read
-      # Nécessaire pour annoter les pull requests en cas de secret détecté
+      # Accès en lecture aux pull requests ; aucun commentaire automatique n'est publié
       pull-requests: read
 
     steps:
@@ -75,7 +75,7 @@ jobs:
       # Scanner l'intégralité du dépôt à la recherche de secrets exposés
       # (clés API, mots de passe, tokens, etc.)
       - name: Scan Gitleaks pour les secrets
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Désactiver les commentaires automatiques sur les PR (bruit)

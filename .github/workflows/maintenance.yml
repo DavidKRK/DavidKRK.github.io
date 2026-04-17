@@ -44,7 +44,7 @@ jobs:
       # La configuration est définie dans .lychee.toml (exclusions : mailto, soundcloud, etc.)
       - name: Vérification des liens avec Lychee
         id: lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
         with:
           args: >
             --verbose
@@ -60,7 +60,7 @@ jobs:
       # Créer une issue si des liens morts ont été trouvés
       - name: Créer une issue si des liens morts sont détectés
         if: steps.lychee.outputs.exit_code != 0
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@e8ef132d6df98ed982188e460ebb3b5d4ef3a9cd # v5
         with:
           title: '🔗 Liens morts détectés sur davidkrk.com'
           content-filepath: ./lychee/out.md
@@ -116,7 +116,7 @@ jobs:
 
       # Publier l'archive dans une GitHub Release taguée
       - name: Publier le backup dans GitHub Releases
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
           tag_name: backup-${{ steps.archive.outputs.date }}
           name: "💾 Backup hebdomadaire — ${{ steps.archive.outputs.date }}"
