@@ -241,8 +241,8 @@ body {
 }
 
 
-/* ---------- HOME PAGE BACKGROUND ---------- */
-body.home-page {
+/* ---------- BACKGROUND ---------- */
+body {
   background-image: url("../images/david_krk_owl.jpg");
   background-size: cover;
   background-position: left center;
@@ -253,14 +253,9 @@ body.home-page {
 }
 /* background-attachment: fixed breaks on iOS Safari — use scroll on touch devices */
 @media (hover: none) {
-  body.home-page {
+  body {
     background-attachment: scroll;
   }
-}
-body:not(.home-page) {
-  background-color: #416e73;
-  display: flex;
-  flex-direction: column;
 }
 
 
