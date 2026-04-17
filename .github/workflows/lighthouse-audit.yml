@@ -27,7 +27,7 @@ jobs:
         run: sleep 180
 
       - name: Audit Lighthouse
-        uses: treosh/lighthouse-ci-action@v11
+        uses: treosh/lighthouse-ci-action@12.6.2
         with:
           urls: |
             https://www.davidkrk.com
