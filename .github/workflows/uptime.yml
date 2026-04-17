@@ -35,8 +35,8 @@ jobs:
 
           echo "status_code=$HTTP_STATUS" >> "$GITHUB_OUTPUT"
 
-          # Le site est considéré en ligne si le code HTTP est entre 200 et 399
-          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ] 2>/dev/null; then
+          # Le site est considéré en ligne si le code HTTP est un entier entre 200 et 399
+          if [[ "$HTTP_STATUS" =~ ^[0-9]+$ ]] && [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
             echo "is_up=true" >> "$GITHUB_OUTPUT"
             echo "✅ Site en ligne (HTTP $HTTP_STATUS)"
           else

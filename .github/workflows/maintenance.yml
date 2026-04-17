@@ -32,10 +32,8 @@ jobs:
   check-links:
     name: 🔗 Vérification des liens morts (Lychee)
     runs-on: ubuntu-latest
-    # Exécuter uniquement le lundi (cron 1) ou en mode manuel
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'schedule' && startsWith(github.event.schedule, '0 8'))
+    # Exécuter lors des déclenchements planifiés (lundi) ou manuels
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
 
     steps:
       # Récupérer le code source contenant les fichiers HTML et Markdown
@@ -83,10 +81,8 @@ jobs:
   backup:
     name: 💾 Backup hebdomadaire (GitHub Releases)
     runs-on: ubuntu-latest
-    # Exécuter uniquement le dimanche (cron 2) ou en mode manuel
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'schedule' && startsWith(github.event.schedule, '0 1'))
+    # Exécuter lors des déclenchements planifiés (dimanche) ou manuels
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
 
