@@ -5,10 +5,10 @@ on:
     branches: [main, gh-pages]
     # Déclencher uniquement quand des images sont modifiées / ajoutées
     paths:
-      - '**.jpg'
-      - '**.jpeg'
-      - '**.png'
-      - '**.webp'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.png'
+      - '**/*.webp'
       - 'images/**'
       - 'assets/images/**'
   # Déclenchement manuel
@@ -22,6 +22,8 @@ jobs:
   optimize-images:
     name: Compression et optimisation des images
     runs-on: ubuntu-latest
+    # Ne pas re-déclencher sur les commits automatiques du bot
+    if: github.actor != 'github-actions[bot]'
 
     steps:
       # Récupérer le code source avec les nouvelles images

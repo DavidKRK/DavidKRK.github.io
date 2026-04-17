@@ -20,18 +20,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Récupérer le code source avec l'historique pour comparer les versions
+      # Récupérer le code source avec l'historique complet pour comparer tout le push
       - name: Checkout du dépôt
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       # Extraire les changements apportés à music.html depuis le dernier commit
       - name: Analyser les modifications de music.html
         id: diff
         run: |
-          # Récupérer le diff de music.html par rapport au commit précédent
-          DIFF=$(git diff HEAD~1 HEAD -- music.html 2>/dev/null || git show HEAD -- music.html)
+          # Sur un push, comparer la plage exacte de commits de l'événement.
+          # En exécution manuelle (workflow_dispatch), revenir au commit précédent.
+          if [ "${{ github.event_name }}" = "push" ] && \
+             [ -n "${{ github.event.before }}" ] && \
+             [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            DIFF=$(git diff "${{ github.event.before }}" "${{ github.sha }}" -- music.html)
+          elif git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+            DIFF=$(git diff HEAD^ HEAD -- music.html)
+          else
+            EMPTY_TREE=$(git hash-object -t tree /dev/null)
+            DIFF=$(git diff "$EMPTY_TREE" HEAD -- music.html)
+          fi
 
           # Extraire les lignes ajoutées (nouvelles entrées)
           ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
