@@ -17,7 +17,6 @@ on:
 # Permissions minimales : écriture du contenu pour commiter les images optimisées
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   optimize-images:
