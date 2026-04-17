@@ -29,12 +29,17 @@ jobs:
       - name: Vérifier la disponibilité de davidkrk.com
         id: check
         run: |
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          if ! HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             --max-time 30 \
             --retry 2 \
             --retry-delay 5 \
-            "https://www.davidkrk.com/" || echo "000")
+            "https://www.davidkrk.com/"); then
+            HTTP_STATUS="000"
+          fi
 
+          if [ -z "$HTTP_STATUS" ]; then
+            HTTP_STATUS="000"
+          fi
           echo "status_code=$HTTP_STATUS" >> "$GITHUB_OUTPUT"
 
           # Le site est considéré en ligne si le code HTTP est un entier entre 200 et 399
