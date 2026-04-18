@@ -1,0 +1,67 @@
+name: 🖼️ Optimisation des images
+
+on:
+  push:
+    branches: [main, gh-pages]
+    # Déclencher uniquement quand des images sont modifiées / ajoutées
+    paths:
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.png'
+      - '**/*.webp'
+      - 'images/**'
+      - 'assets/images/**'
+  # Déclenchement manuel
+  workflow_dispatch:
+
+# Permissions minimales : écriture du contenu pour commiter les images optimisées
+permissions:
+  contents: write
+
+jobs:
+  optimize-images:
+    name: Compression et optimisation des images
+    runs-on: ubuntu-latest
+    # Ne pas re-déclencher sur les commits automatiques du bot
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      # Récupérer le code source avec les nouvelles images
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      # Optimiser automatiquement les images JPEG, PNG et WebP
+      # Qualité 85% : bon compromis entre poids et fidélité visuelle
+      # La version est épinglée sur le commit de la version 1.4.1 pour la sécurité
+      - name: Optimisation des images (calibreapp/image-actions)
+        id: optimize
+        uses: calibreapp/image-actions@f32575787d333b0579f0b7d506ff03be63a669d1
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Ne pas créer de PR automatique : commiter directement
+          compressOnly: true
+          jpegQuality: '85'
+          pngQuality: '85'
+          webpQuality: '85'
+
+      # Afficher un résumé des optimisations effectuées
+      - name: Résumé de l'optimisation
+        if: steps.optimize.outputs.markdown != ''
+        run: |
+          echo "## 🖼️ Résumé de l'optimisation des images" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.optimize.outputs.markdown }}" >> "$GITHUB_STEP_SUMMARY"
+
+      # Commiter les images optimisées si des changements ont été effectués
+      - name: Commiter les images optimisées
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "✅ Toutes les images sont déjà optimisées, aucun commit nécessaire."
+          else
+            git commit -m "chore(images): optimisation automatique des images [skip ci]"
+            git push
+            echo "✅ Images optimisées et commitées avec succès."
+          fi

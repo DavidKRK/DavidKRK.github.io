@@ -1,10 +1,12 @@
 # 🎵 David KRK - Official Website
 
 [![Deploy Status](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/deploy.yml)
-[![Lighthouse Audit](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse-audit.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse-audit.yml)
-[![Automation Suite](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/automation-suite.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/automation-suite.yml)
-[![Weekly Backup](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/backup.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/backup.yml)
-[![Social Media](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/social-media-post.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/social-media-post.yml)
+[![Security](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/security.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/security.yml)
+[![Lighthouse CI](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse.yml)
+[![Uptime Monitor](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml)
+[![Images](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml)
+[![Music Social](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml)
+[![Maintenance](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.davidkrk.com&label=davidkrk.com)
 ![GitHub last commit](https://img.shields.io/github/last-commit/DavidKRK/DavidKRK.github.io)
 
@@ -67,10 +69,12 @@ This website is continuously monitored for:
 | Workflow | Purpose | Schedule | Status |
 |----------|---------|----------|--------|
 | **deploy.yml** | Main site deployment | On push | [![Deploy](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/deploy.yml) |
-| **lighthouse-audit.yml** | Performance testing | Daily 3 AM | [![Lighthouse](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse-audit.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse-audit.yml) |
-| **automation-suite.yml** | Maintenance & updates | Monday 10 AM | [![Automation](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/automation-suite.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/automation-suite.yml) |
-| **backup.yml** | Weekly backups | Sunday 1 AM | [![Backup](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/backup.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/backup.yml) |
-| **social-media-post.yml** | New music detection | On music.html change | [![Social](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/social-media-post.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/social-media-post.yml) |
+| **security.yml** | CodeQL + Gitleaks security scan | On PR / push / Monday | [![Security](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/security.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/security.yml) |
+| **lighthouse.yml** | Performance & SEO audit (fail < 80/90) | On PR / Daily 2 AM | [![Lighthouse CI](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/lighthouse.yml) |
+| **uptime.yml** | HTTP uptime monitoring + issue alerts | Every 30 min | [![Uptime](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml) |
+| **images.yml** | Auto image compression (JPEG/PNG/WebP) | On image push | [![Images](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml) |
+| **music-social.yml** | New music detection + social post template | On music.html change | [![Music Social](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml) |
+| **maintenance.yml** | Lychee link check + backup + stale issues | Mon 8 AM / Sun 1 AM | [![Maintenance](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml) |
 
 ### 🚀 Getting Started
 

@@ -1,0 +1,123 @@
+name: 🔦 Lighthouse CI - Performance & SEO
+
+on:
+  # Audit sur chaque Pull Request ciblant la branche principale
+  pull_request:
+    branches: [main, gh-pages]
+  # Audit quotidien à 2h du matin (UTC) pour surveillance continue
+  schedule:
+    - cron: '0 2 * * *'
+  # Déclenchement manuel depuis l'onglet Actions
+  workflow_dispatch:
+
+# Permissions minimales pour ce workflow
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  lighthouse:
+    name: Audit Lighthouse - davidkrk.com
+    runs-on: ubuntu-latest
+
+    steps:
+      # Récupérer le code source (nécessaire pour lire la config .lighthouserc.json)
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      # Lancer l'audit Lighthouse sur les pages principales du site
+      # Les seuils sont définis dans .lighthouserc.json :
+      #   - Performance  : minimum 70/100
+      #   - SEO          : minimum 90/100
+      # Le workflow échoue uniquement si les seuils bloquants définis dans
+      # .lighthouserc.json ne sont pas atteints (par ex. Performance/SEO).
+      # Les assertions configurées en `warn` n'échouent pas le job.
+      - name: Audit Lighthouse CI
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
+        with:
+          urls: |
+            https://www.davidkrk.com/
+            https://www.davidkrk.com/music.html
+            https://www.davidkrk.com/bio.html
+            https://www.davidkrk.com/contact.html
+          configPath: .lighthouserc.json
+          # Sauvegarder les rapports en artefacts téléchargeables
+          uploadArtifacts: true
+          # Publier temporairement les rapports pour accès immédiat (lien dans le log)
+          temporaryPublicStorage: true
+
+      # Sauvegarder les résultats JSON pour analyse ou tableau de bord
+      - name: Sauvegarder les résultats en artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results-${{ github.run_id }}
+          path: '.lighthouseci/'
+          retention-days: 30
+
+      # Créer une issue GitHub si les scores sont inférieurs aux seuils
+      - name: Créer une issue si les scores sont insuffisants
+        if: failure() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Créer les labels requis s'ils n'existent pas encore
+            const requiredLabels = [
+              { name: 'performance', color: 'e4e669', description: 'Scores de performance' },
+              { name: 'automated',   color: 'ededed', description: 'Créée automatiquement par un workflow' }
+            ];
+            for (const label of requiredLabels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name
+                });
+              } catch (err) {
+                if (err.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: label.name,
+                    color: label.color,
+                    description: label.description
+                  });
+                } else {
+                  throw err;
+                }
+              }
+            }
+
+            // Chercher si une issue de performance est déjà ouverte
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'performance',
+              state: 'open'
+            });
+
+            // Ne créer qu'une seule issue à la fois
+            if (issues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '⚠️ Score Lighthouse sous le seuil acceptable',
+                body: [
+                  '## 🔦 Alerte Performance / SEO',
+                  '',
+                  'L\'audit Lighthouse automatique a détecté des scores inférieurs aux seuils définis :',
+                  '- **Performance** : minimum requis **70/100**',
+                  '- **SEO** : minimum requis **90/100**',
+                  '',
+                  `**Workflow déclenché** : ${context.workflow}`,
+                  `**Run ID** : ${context.runId}`,
+                  '',
+                  '📊 Consultez les artefacts du workflow pour les rapports détaillés.',
+                  '',
+                  '_Issue créée automatiquement par le workflow Lighthouse CI._'
+                ].join('\n'),
+                labels: ['performance', 'automated']
+              });
+            }
