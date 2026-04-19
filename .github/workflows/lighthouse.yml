@@ -28,9 +28,9 @@ jobs:
 
       # Lancer l'audit Lighthouse sur les pages principales du site
       # Les seuils sont définis dans .lighthouserc.json :
-      #   - Performance  : avertissement sous 50/100 (`warn`, minScore 0.5)
+      #   - Performance  : échec sous 60/100 (`error`, minScore 0.6)
       #   - SEO          : échec sous 85/100 (`error`, minScore 0.85)
-      # Le workflow n'échoue que pour les seuils configurés en `error`.
+      # Le workflow échoue si un de ces seuils n'est pas atteint.
       - name: Audit Lighthouse CI
         id: lighthouse
         uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
@@ -106,7 +106,7 @@ jobs:
                   '## 🔦 Alerte Performance / SEO',
                   '',
                   'L\'audit Lighthouse automatique a détecté des scores inférieurs aux seuils définis :',
-                  '- **Performance** : minimum requis **50/100**',
+                  '- **Performance** : minimum requis **60/100**',
                   '- **SEO** : minimum requis **85/100**',
                   '',
                   `**Workflow déclenché** : ${context.workflow}`,
