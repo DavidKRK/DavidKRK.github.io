@@ -28,7 +28,7 @@ jobs:
     steps:
       # Récupérer le contenu du site publié (branche gh-pages) pour scanner ses liens
       - name: Checkout du dépôt
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: gh-pages
 
@@ -52,7 +52,7 @@ jobs:
       # S'assurer que les labels requis existent avant de créer l'issue
       - name: Créer les labels si absents
         if: steps.lychee.outputs.exit_code != 0
-        uses: actions/github-script@v7
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
             const requiredLabels = [
@@ -114,7 +114,7 @@ jobs:
     steps:
       # Récupérer le contenu du site publié (branche gh-pages) pour l'archiver
       - name: Checkout complet du dépôt
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: gh-pages
           fetch-depth: 0
@@ -142,7 +142,7 @@ jobs:
 
       # Publier l'archive dans une GitHub Release taguée
       - name: Publier le backup dans GitHub Releases
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
         with:
           tag_name: backup-${{ steps.archive.outputs.date }}
           name: "💾 Backup hebdomadaire — ${{ steps.archive.outputs.date }}"
@@ -179,7 +179,7 @@ jobs:
       # Marquer les issues sans activité depuis 60 jours comme "stale"
       # et les fermer automatiquement après 7 jours supplémentaires
       - name: Gérer les issues et PR inactives
-        uses: actions/stale@v9
+        uses: actions/stale@v10
         with:
           # ── Issues ──────────────────────────────────────────
           days-before-issue-stale: 60

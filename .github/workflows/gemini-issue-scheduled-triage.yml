@@ -31,7 +31,7 @@ jobs:
         id: 'generate_token'
         if: |-
           ${{ vars.APP_ID }}
-        uses: 'actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e' # ratchet:actions/create-github-app-token@v2
+        uses: 'actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3' # ratchet:actions/create-github-app-token@v3
         with:
           app-id: '${{ vars.APP_ID }}'
           private-key: '${{ secrets.APP_PRIVATE_KEY }}'
@@ -64,7 +64,7 @@ jobs:
 
       - name: 'Get Repository Labels'
         id: 'get_labels'
-        uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea'
+        uses: 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3' # v9
         with:
           github-token: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           script: |-
@@ -80,7 +80,7 @@ jobs:
       - name: 'Run Gemini Issue Analysis'
         if: |-
           ${{ steps.find_issues.outputs.issues_to_triage != '[]' }}
-        uses: 'google-github-actions/run-gemini-cli@v0.1.10'
+        uses: 'google-github-actions/run-gemini-cli@06123c6a203eb7a964ce3be7c48479cc66059f23' # v0.1.10
         id: 'gemini_issue_analysis'
         env:
           GITHUB_TOKEN: '' # Do not pass any auth token here since this runs on untrusted inputs
@@ -152,7 +152,7 @@ jobs:
         env:
           REPOSITORY: '${{ github.repository }}'
           LABELS_OUTPUT: '${{ steps.gemini_issue_analysis.outputs.summary }}'
-        uses: 'actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea'
+        uses: 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3' # v9
         with:
           github-token: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           script: |-

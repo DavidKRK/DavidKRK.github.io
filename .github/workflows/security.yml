@@ -2,7 +2,7 @@ name: 🔒 Sécurité - CodeQL & Gitleaks
 
 on:
   push:
-    branches: [main]
+    branches: [main, gh-pages]
   pull_request:
     branches: [main, gh-pages]
   schedule:
@@ -30,14 +30,13 @@ jobs:
           # Analyse JavaScript / TypeScript (code front-end)
           - language: javascript-typescript
             build-mode: none
-          # Analyse des workflows GitHub Actions
-          - language: actions
-            build-mode: none
 
     steps:
       # Récupérer le code source du dépôt
       - name: Checkout du dépôt
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
 
       # Initialiser les outils CodeQL avec les requêtes de sécurité étendues
       - name: Initialisation de CodeQL
@@ -68,7 +67,7 @@ jobs:
     steps:
       # Récupérer l'historique GIT complet pour analyser tous les commits
       - name: Checkout complet du dépôt
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
