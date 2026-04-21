@@ -8,5 +8,7 @@
 exclude = [
   "^mailto:",
   "soundcloud\\.com",
-  "formspree\\.io"
+  "formspree\\.io",
+  "mysql\\.com",
+  "scripts\\.sil\\.org"
 ]
