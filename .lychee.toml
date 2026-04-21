@@ -3,6 +3,7 @@
 
 # Exclude patterns that are known to produce false positives or are not real links
 # - mailto: links are not real HTTP URLs
+# - chat.whatsapp.com: group invite links redirect to app, return 403 for bots
 # - facebook.com: blocks automated crawlers (redirect to login, 403)
 # - formspree.io: form POST endpoints return 405 for GET requests (expected behavior)
 # - instagram.com: returns 401/429 to all bots regardless of link validity
@@ -10,15 +11,18 @@
 # - mysql.com: returns 403 for bots
 # - scripts.sil.org: known redirect issues
 # - soundcloud.com: blocks automated link checkers with 403 (anti-bot protection)
+# - tiktok.com: redirects unauthenticated crawlers to homepage (403/redirect loop)
 # - file://: local filesystem paths used by GitHub Actions runner (not real web links)
 exclude = [
   "^file://",
   "^mailto:",
+  "chat\\.whatsapp\\.com",
   "facebook\\.com",
   "formspree\\.io",
   "instagram\\.com",
   "mixcloud\\.com",
   "mysql\\.com",
   "scripts\\.sil\\.org",
-  "soundcloud\\.com"
+  "soundcloud\\.com",
+  "tiktok\\.com"
 ]
