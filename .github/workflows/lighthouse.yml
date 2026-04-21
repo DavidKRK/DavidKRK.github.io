@@ -4,9 +4,9 @@ on:
   # Audit sur chaque Pull Request ciblant la branche principale
   pull_request:
     branches: [main, gh-pages]
-  # Audit quotidien à 2h du matin (UTC) pour surveillance continue
+  # Audit hebdomadaire le lundi à 3h UTC (au lieu de quotidien)
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 3 * * 1'
   # Déclenchement manuel depuis l'onglet Actions
   workflow_dispatch:
 
@@ -61,7 +61,6 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Créer les labels requis s'ils n'existent pas encore
             const requiredLabels = [
               { name: 'performance', color: 'e4e669', description: 'Scores de performance' },
               { name: 'automated',   color: 'ededed', description: 'Créée automatiquement par un workflow' }
@@ -88,7 +87,6 @@ jobs:
               }
             }
 
-            // Chercher si une issue de performance est déjà ouverte
             const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -96,7 +94,6 @@ jobs:
               state: 'open'
             });
 
-            // Ne créer qu'une seule issue à la fois
             if (issues.data.length === 0) {
               await github.rest.issues.create({
                 owner: context.repo.owner,

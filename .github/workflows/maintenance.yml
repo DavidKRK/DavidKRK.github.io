@@ -42,8 +42,8 @@ jobs:
             --verbose
             --no-progress
             --config .lychee.toml
-            --timeout 30
-            --max-retries 3
+            --timeout 20
+            --max-retries 2
             '**/*.html'
             '**/*.md'
           # Ne pas faire échouer le workflow (on crée une issue à la place)
@@ -182,9 +182,7 @@ jobs:
         uses: actions/stale@v9
         with:
           # ── Issues ──────────────────────────────────────────
-          # Marquer comme stale après 60 jours d'inactivité
           days-before-issue-stale: 60
-          # Fermer 7 jours après avoir été marquée stale
           days-before-issue-close: 7
           stale-issue-label: 'stale'
           stale-issue-message: |
@@ -197,7 +195,6 @@ jobs:
             Elle peut être réouverte si nécessaire.
 
           # ── Pull Requests ────────────────────────────────────
-          # Marquer les PR comme stale après 30 jours d'inactivité
           days-before-pr-stale: 30
           days-before-pr-close: 7
           stale-pr-label: 'stale'
@@ -209,10 +206,7 @@ jobs:
             Elle peut être réouverte si nécessaire.
 
           # ── Exclusions ───────────────────────────────────────
-          # Ne jamais fermer automatiquement les issues/PR avec ces labels
           exempt-issue-labels: 'pinned,security,urgent,uptime,in-progress'
           exempt-pr-labels: 'pinned,security,do-not-merge,in-progress'
-          # Limiter le nombre d'opérations par exécution
           operations-per-run: 30
-          # Supprimer le label stale si l'issue redevient active
           remove-stale-when-updated: true
