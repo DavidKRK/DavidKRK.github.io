@@ -3,16 +3,22 @@
 
 # Exclude patterns that are known to produce false positives or are not real links
 # - mailto: links are not real HTTP URLs
-# - soundcloud.com: blocks automated link checkers with 403 (anti-bot protection)
+# - facebook.com: blocks automated crawlers (redirect to login, 403)
 # - formspree.io: form POST endpoints return 405 for GET requests (expected behavior)
-# - file://: local filesystem paths used by GitHub Actions runner (not real web links)
+# - instagram.com: returns 401/429 to all bots regardless of link validity
+# - mixcloud.com: anti-bot protection similar to SoundCloud (403)
 # - mysql.com: returns 403 for bots
 # - scripts.sil.org: known redirect issues
+# - soundcloud.com: blocks automated link checkers with 403 (anti-bot protection)
+# - file://: local filesystem paths used by GitHub Actions runner (not real web links)
 exclude = [
+  "^file://",
   "^mailto:",
-  "soundcloud\\.com",
+  "facebook\\.com",
   "formspree\\.io",
+  "instagram\\.com",
+  "mixcloud\\.com",
   "mysql\\.com",
   "scripts\\.sil\\.org",
-  "^file://"
+  "soundcloud\\.com"
 ]
