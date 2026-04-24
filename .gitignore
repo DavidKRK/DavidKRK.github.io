@@ -9,6 +9,26 @@ node_modules/
 .AppleDouble
 .LSOverride
 
+# Linux
+*~
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Build output
+_site/
+dist/
+build/
+
+# Netlify
+.netlify/
+
+# Environment / secrets
 # Logs
 *.log
 npm-debug.log*

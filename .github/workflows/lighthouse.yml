@@ -24,7 +24,7 @@ jobs:
     steps:
       # Récupérer le code source (nécessaire pour lire la config .lighthouserc.json)
       - name: Checkout du dépôt
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       # Lancer l'audit Lighthouse sur les pages principales du site
       # Les seuils sont définis dans .lighthouserc.json :
@@ -58,7 +58,7 @@ jobs:
       # Créer une issue GitHub si les scores sont inférieurs aux seuils
       - name: Créer une issue si les scores sont insuffisants
         if: failure() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-        uses: actions/github-script@v7
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
             const requiredLabels = [
