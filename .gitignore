@@ -1,14 +1,38 @@
 # Dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Netlify
-.netlify/
+# Logs
+*.log
+logs/
 
 # macOS
 .DS_Store
 .AppleDouble
 .LSOverride
 
+# Linux
+*~
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Build output
+_site/
+dist/
+build/
+
+# Netlify
+.netlify/
+
+# Environment / secrets
 # Logs
 *.log
 npm-debug.log*
@@ -26,14 +50,7 @@ dist/
 .env.local
 .env.*.local
 
-# Editor directories
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS generated
+# Misc
 Thumbs.db
 ehthumbs.db
 Desktop.ini
