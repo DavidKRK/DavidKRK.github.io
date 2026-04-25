@@ -26,12 +26,13 @@
   <!-- Fonts + Icones -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <!-- CSS principal -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
 </head>
 <body class="home-page">
 
@@ -111,7 +112,7 @@
 
 
       <div class="image-container">
-        <img src="assets/images/david_krk_owl.jpg" alt="David KRK Owl" class="responsive-image">
+        <img src="assets/images/david_krk_owl.jpg" alt="David KRK Owl" class="responsive-image" width="1366" height="768">
       </div>
 
 
@@ -138,7 +139,7 @@
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
         <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
-        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon text-2xl md:text-3xl"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="" style="height: 1em; vertical-align: middle;"></a>
+        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon text-2xl md:text-3xl"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="" width="217" height="60" style="height: 1em; vertical-align: middle;"></a>
       </div>
 
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
@@ -151,6 +152,7 @@
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
