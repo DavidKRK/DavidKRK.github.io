@@ -126,16 +126,17 @@ jobs:
           DATE=$(date +%Y-%m-%d)
           ARCHIVE_NAME="davidkrk-backup-${DATE}.tar.gz"
 
-          # Créer l'archive en excluant les dossiers inutiles
-          tar -czf "$ARCHIVE_NAME" \
+          # Créer l'archive dans /tmp pour éviter "file changed as we read it"
+          # (tar modifie le répertoire courant en écrivant l'archive, ce qui cause une erreur)
+          tar -czf "/tmp/$ARCHIVE_NAME" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='dist' \
             --exclude='*.tar.gz' \
             .
 
-          ARCHIVE_SIZE=$(du -sh "$ARCHIVE_NAME" | cut -f1)
-          echo "archive_name=$ARCHIVE_NAME" >> "$GITHUB_OUTPUT"
+          ARCHIVE_SIZE=$(du -sh "/tmp/$ARCHIVE_NAME" | cut -f1)
+          echo "archive_name=/tmp/$ARCHIVE_NAME" >> "$GITHUB_OUTPUT"
           echo "archive_size=$ARCHIVE_SIZE" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "✅ Archive créée : $ARCHIVE_NAME ($ARCHIVE_SIZE)"
