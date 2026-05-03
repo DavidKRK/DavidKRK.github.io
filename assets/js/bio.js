@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (clickedBtn) {
             clickedBtn.classList.add('active');
         }
+
+        // Update document language and text direction for accessibility and RTL support
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     }
 
     langBtns.forEach(btn => {
@@ -31,4 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    switchLanguage('fr');
 });
