@@ -1,0 +1,12 @@
+title = "Gitleaks Configuration"
+
+# Étend la configuration par défaut de Gitleaks
+[extend]
+useDefault = true
+
+# Exclut les fichiers tiers WordPress (faux positifs)
+[allowlist]
+description = "Ignorer les fichiers WordPress tiers (wp-content/)"
+paths = [
+    '''wp-content/''',
+]
