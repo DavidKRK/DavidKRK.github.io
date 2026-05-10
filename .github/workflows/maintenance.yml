@@ -127,7 +127,8 @@ jobs:
           ARCHIVE_NAME="davidkrk-backup-${DATE}.tar.gz"
 
           # Créer l'archive dans /tmp pour éviter "file changed as we read it"
-          # (tar modifie le répertoire courant en écrivant l'archive, ce qui cause une erreur)
+          # (si l'archive est écrite dans le répertoire courant, un nouveau fichier y est créé
+          # pendant que tar lit '.', ce qui peut déclencher cette erreur)
           tar -czf "/tmp/$ARCHIVE_NAME" \
             --exclude='.git' \
             --exclude='node_modules' \
