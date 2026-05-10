@@ -152,7 +152,7 @@ jobs:
           } >> "${GITHUB_OUTPUT}"
 
       - name: 'Run Gemini PR Review'
-        uses: 'google-github-actions/run-gemini-cli@06123c6a203eb7a964ce3be7c48479cc66059f23' # v0.1.10
+        uses: 'google-github-actions/run-gemini-cli@f77273f4c914e4bf38440cf36a0369cb64a37489' # v0.1.22
         id: 'gemini_pr_review'
         env:
           GITHUB_TOKEN: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
