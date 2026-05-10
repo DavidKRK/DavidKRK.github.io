@@ -1,0 +1,13 @@
+title = "Gitleaks Configuration"
+
+# Étend la configuration par défaut de Gitleaks
+[extend]
+useDefault = true
+
+# Faux positifs connus dans des fichiers tiers WordPress
+[allowlist]
+description = "Faux positifs dans des fichiers tiers WordPress spécifiques"
+paths = [
+    '''^wp-content/plugins/akismet/class\.akismet-rest-api\.php$''',
+    '''^wp-content/themes/twentytwentyfive/patterns/page-cv-bio\.php$''',
+]
