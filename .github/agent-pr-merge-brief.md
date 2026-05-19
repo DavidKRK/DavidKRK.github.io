@@ -4,6 +4,11 @@
 Traiter et finaliser la file de PR suivante dans cet ordre :
 `232 → 219 → 218 → 217 → 216 → 214 → 233 → 225 → 223 → 222`
 
+## Validité de la file
+- File définie le **2026-05-19**.
+- Cette file est **opérationnelle uniquement pour cette vague**.
+- Avant chaque nouvelle exécution, remplacer la liste par la file PR courante.
+
 ## Règles d’exécution
 1. Toujours traiter **une seule PR à la fois**, dans l’ordre indiqué.
 2. Avant tout merge, vérifier strictement :
@@ -11,7 +16,7 @@ Traiter et finaliser la file de PR suivante dans cet ordre :
    - les checks CI,
    - l’absence de conflit.
 3. Merge autorisé uniquement si tout est vert.
-4. Pour la PR **#223 (WIP)** :
+4. Pour toute PR marquée **WIP/Draft** (ici #223 dans cette vague) :
    - ne pas merger tant qu’elle n’est pas passée en **Ready for review**,
    - puis merger seulement si checks verts + pas de conflit.
 5. Méthode de merge attendue : **squash**.
