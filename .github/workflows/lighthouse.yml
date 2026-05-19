@@ -49,7 +49,7 @@ jobs:
       # Sauvegarder les résultats JSON pour analyse ou tableau de bord
       - name: Sauvegarder les résultats en artefact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-results-${{ github.run_id }}
           path: '.lighthouseci/'

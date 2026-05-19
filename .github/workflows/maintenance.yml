@@ -85,7 +85,7 @@ jobs:
       # Créer une issue si des liens morts ont été trouvés
       - name: Créer une issue si des liens morts sont détectés
         if: steps.lychee.outputs.exit_code != 0
-        uses: peter-evans/create-issue-from-file@e8ef132d6df98ed982188e460ebb3b5d4ef3a9cd # v5
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6.0.0
         with:
           title: '🔗 Liens morts détectés sur davidkrk.com'
           content-filepath: ./lychee/out.md
@@ -94,7 +94,7 @@ jobs:
       # Sauvegarder le rapport complet en artefact
       - name: Sauvegarder le rapport Lychee
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lychee-report-${{ github.run_id }}
           path: lychee/
@@ -125,17 +125,17 @@ jobs:
         run: |
           DATE=$(date +%Y-%m-%d)
           ARCHIVE_NAME="davidkrk-backup-${DATE}.tar.gz"
+          # Écrire l'archive hors du répertoire courant pour éviter "file changed as we read it"
+          ARCHIVE_PATH="${RUNNER_TEMP}/${ARCHIVE_NAME}"
 
-          # Créer l'archive en excluant les dossiers inutiles
-          tar -czf "$ARCHIVE_NAME" \
+          tar -czf "$ARCHIVE_PATH" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='dist' \
-            --exclude='*.tar.gz' \
             .
 
-          ARCHIVE_SIZE=$(du -sh "$ARCHIVE_NAME" | cut -f1)
-          echo "archive_name=$ARCHIVE_NAME" >> "$GITHUB_OUTPUT"
+          ARCHIVE_SIZE=$(du -sh "$ARCHIVE_PATH" | cut -f1)
+          echo "archive_name=$ARCHIVE_PATH" >> "$GITHUB_OUTPUT"
           echo "archive_size=$ARCHIVE_SIZE" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "✅ Archive créée : $ARCHIVE_NAME ($ARCHIVE_SIZE)"

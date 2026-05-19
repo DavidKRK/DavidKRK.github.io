@@ -164,7 +164,7 @@
              class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
           <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
              class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
-          <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon text-2xl md:text-3xl"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="" width="217" height="60"></a>
+          <a href="https://buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon text-2xl md:text-3xl"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="217" height="60"></a>
         </div>
 
         <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
@@ -177,6 +177,7 @@
       </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -197,6 +198,10 @@
               if (activeBtn) {
                   activeBtn.classList.add('active');
               }
+
+              // Update document language and text direction for accessibility and RTL support
+              document.documentElement.lang = lang;
+              document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
           }
 
           langBtns.forEach(btn => {
@@ -205,6 +210,7 @@
               });
           });
 
+          switchLanguage('fr');
       });
     </script>
   </body>

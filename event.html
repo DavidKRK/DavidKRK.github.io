@@ -80,9 +80,9 @@
 
   <footer class="w-full max-w-7xl mx-auto">
     <div class="mt-8 mb-8 player-container">
-      <iframe width="100%" height="120"
+      <iframe title="Mixcloud player" width="100%" height="120"
+              style="border:0;"
               src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&autoplay=1&feed=%2FDavidKRK%2Fdavid-krk-life-good-techno-ep3%2F"
-              frameborder="0"
               allow="autoplay; encrypted-media; fullscreen; idle-detection; speaker-selection; web-share"></iframe>
     </div>
 
@@ -99,7 +99,7 @@
          class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud"></i></a>
       <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
          class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok"></i></a>
-      <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon text-2xl md:text-3xl"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="" width="217" height="60"></a>
+      <a href="https://buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon text-2xl md:text-3xl"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="217" height="60"></a>
     </div>
 
     <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
@@ -125,11 +125,15 @@
 
             const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
             contentsToShow.forEach(content => content.classList.add('active'));
-            
+
             const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
+
+            // Update document language and text direction for accessibility and RTL support
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
         }
 
         langBtns.forEach(btn => {
@@ -137,6 +141,8 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
+
+        switchLanguage('fr');
     });
     </script>
 </body>
