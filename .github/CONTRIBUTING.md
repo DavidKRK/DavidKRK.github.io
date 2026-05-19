@@ -7,7 +7,7 @@ Je suis DJ depuis plus de 20 ans et je viens de créer ce site web pour partager
 ## Comment contribuer ?
 
 1.  Consultez les [issues](https://github.com/DavidKRK/DavidKRK.github.io/issues) pour voir s'il n'y a pas déjà une tâche qui vous intéresse.
-2.  Si vous avez une nouvelle idée, n'hésitez pas à ouvrir une [nouvelle issue](https://github.com/DavidKRK/DavidKRK.github.io/issues/new/choose) pour en discuter.
+2.  Si vous avez une nouvelle idée, n'hésitez pas à ouvrir une issue via la page [issues](https://github.com/DavidKRK/DavidKRK.github.io/issues) pour en discuter.
 3.  Pour proposer un changement, faites un "fork" du projet, créez une branche pour vos modifications, et ouvrez une "pull request".
 
 Merci encore pour votre contribution !
