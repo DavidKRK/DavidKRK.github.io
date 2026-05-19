@@ -125,19 +125,18 @@ jobs:
         run: |
           DATE=$(date +%Y-%m-%d)
           ARCHIVE_NAME="davidkrk-backup-${DATE}.tar.gz"
+          # Écrire l'archive hors du répertoire courant pour éviter "file changed as we read it"
+          ARCHIVE_PATH="${RUNNER_TEMP}/${ARCHIVE_NAME}"
 
-          # Créer l'archive dans /tmp pour éviter "file changed as we read it"
-          # (si l'archive est écrite dans le répertoire courant, un nouveau fichier y est créé
-          # pendant que tar lit '.', ce qui peut déclencher cette erreur)
-          tar -czf "/tmp/$ARCHIVE_NAME" \
+          tar -czf "$ARCHIVE_PATH" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='dist' \
             --exclude='*.tar.gz' \
             .
 
-          ARCHIVE_SIZE=$(du -sh "/tmp/$ARCHIVE_NAME" | cut -f1)
-          echo "archive_name=/tmp/$ARCHIVE_NAME" >> "$GITHUB_OUTPUT"
+          ARCHIVE_SIZE=$(du -sh "$ARCHIVE_PATH" | cut -f1)
+          echo "archive_name=$ARCHIVE_PATH" >> "$GITHUB_OUTPUT"
           echo "archive_size=$ARCHIVE_SIZE" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "✅ Archive créée : $ARCHIVE_NAME ($ARCHIVE_SIZE)"
