@@ -42,7 +42,7 @@ Tous les leaders de la communauté sont tenus de respecter la vie privée et la 
 
 ## Attribution
 
-Ce Code de Conduite est adapté du [Contributor Covenant][homepage], version 2.1, disponible à [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1].
+Ce Code de Conduite est adapté du [Contributor Covenant][homepage], version 2.1, disponible à [https://github.com/EthicalSource/contributor_covenant/blob/e56bbaf58c61153ad57843292cf99f53638bc522/CODE_OF_CONDUCT.md][v2.1].
 
-[homepage]: https://www.contributor-covenant.org
-[v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
+[homepage]: https://github.com/EthicalSource/contributor_covenant/tree/e56bbaf58c61153ad57843292cf99f53638bc522
+[v2.1]: https://github.com/EthicalSource/contributor_covenant/blob/e56bbaf58c61153ad57843292cf99f53638bc522/CODE_OF_CONDUCT.md

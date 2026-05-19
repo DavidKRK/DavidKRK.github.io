@@ -13,7 +13,7 @@ This example displays how to construct a basic audio player using howler.js as t
 ## How-To
 1. Clone the git repo or download the source:
     * **Clone:** `git clone https://github.com/goldfire/howler.js.git`
-    * **Download:** [https://github.com/goldfire/howler.js/archive/master.zip](https://github.com/goldfire/howler.js/archive/master.zip)
+    * **Download:** [https://codeload.github.com/goldfire/howler.js/zip/refs/heads/master](https://codeload.github.com/goldfire/howler.js/zip/refs/heads/master)
 2. Open `index.html` in your favorite browser.
 
 ## Credits
