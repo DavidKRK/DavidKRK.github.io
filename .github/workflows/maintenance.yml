@@ -125,19 +125,17 @@ jobs:
         run: |
           DATE=$(date +%Y-%m-%d)
           ARCHIVE_NAME="davidkrk-backup-${DATE}.tar.gz"
+          # Écrire l'archive hors du répertoire courant pour éviter "file changed as we read it"
+          ARCHIVE_PATH="${RUNNER_TEMP}/${ARCHIVE_NAME}"
 
-          # Créer l'archive dans /tmp pour éviter que tar n'archive son propre fichier de sortie
-          tar -czf "/tmp/$ARCHIVE_NAME" \
+          tar -czf "$ARCHIVE_PATH" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='dist' \
             .
 
-          # Déplacer l'archive vers le répertoire courant pour l'étape de release
-          mv "/tmp/$ARCHIVE_NAME" "./$ARCHIVE_NAME"
-
-          ARCHIVE_SIZE=$(du -sh "$ARCHIVE_NAME" | cut -f1)
-          echo "archive_name=$ARCHIVE_NAME" >> "$GITHUB_OUTPUT"
+          ARCHIVE_SIZE=$(du -sh "$ARCHIVE_PATH" | cut -f1)
+          echo "archive_name=$ARCHIVE_PATH" >> "$GITHUB_OUTPUT"
           echo "archive_size=$ARCHIVE_SIZE" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "✅ Archive créée : $ARCHIVE_NAME ($ARCHIVE_SIZE)"
