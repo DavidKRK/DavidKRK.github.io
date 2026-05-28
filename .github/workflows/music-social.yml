@@ -77,7 +77,8 @@ jobs:
           script: |
             const sha = process.env.COMMIT_SHA || '';
             const shortSha = sha.slice(0, 7);
-            const commitMsg = process.env.COMMIT_MSG || 'Mise à jour manuelle';
+            const commitMsgRaw = process.env.COMMIT_MSG || 'Mise à jour manuelle';
+            const commitMsg = (commitMsgRaw.split(/\r?\n/).find(line => line.trim()) || 'Mise à jour manuelle').trim();
             const author = process.env.COMMIT_AUTHOR || 'DavidKRK';
             const linesAdded = process.env.LINES_ADDED;
             const linesRemoved = process.env.LINES_REMOVED;
@@ -93,7 +94,7 @@ jobs:
               '```',
               '🎵 Nouvelle mise à jour sur mon site !',
               '',
-              '🔥 Nouveau contenu musical disponible sur www.davidkrk.com',
+              '🔥 Nouveau contenu musical disponible sur https://davidkrk.com',
               '',
               '🎧 DJ & Producteur Techno depuis 1999',
               '📍 Saint-Jean-de-Luz, France',
@@ -110,7 +111,7 @@ jobs:
               '',
               '### SoundCloud / Bandcamp',
               '```',
-              '🔥 New track/mix available! Check it out on www.davidkrk.com',
+              '🔥 New track/mix available! Check it out on https://davidkrk.com',
               '#techno #underground #dj #producer #saintjeandeLuz',
               '```',
             ].join('\n');
@@ -129,7 +130,7 @@ jobs:
               `- **Lignes modifiées** : +${linesAdded} / -${linesRemoved}`,
               '',
               '### 🔗 Liens utiles',
-              `- 🌐 [Voir music.html en ligne](https://www.davidkrk.com/music.html)`,
+              `- 🌐 [Voir music.html en ligne](https://davidkrk.com/music.html)`,
               `- 📝 [Voir le diff sur GitHub](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.payload.head_commit?.id || sha})`,
               '',
               '---',
@@ -139,7 +140,7 @@ jobs:
               '---',
               '',
               '### ✅ Checklist de publication',
-              '- [ ] Vérifier que le nouveau contenu est visible sur [davidkrk.com/music.html](https://www.davidkrk.com/music.html)',
+              '- [ ] Vérifier que le nouveau contenu est visible sur [davidkrk.com/music.html](https://davidkrk.com/music.html)',
               '- [ ] Poster sur Instagram',
               '- [ ] Poster sur Facebook',
               '- [ ] Poster sur Twitter / X',
