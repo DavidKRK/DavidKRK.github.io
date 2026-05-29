@@ -142,7 +142,7 @@ jobs:
               '---',
               '',
               '### ✅ Checklist de publication',
-              '- [ ] Vérifier que le nouveau contenu est visible sur [davidkrk.com/music.html](https://davidkrk.com/music.html)',
+              '- [ ] Vérifier que le nouveau contenu est visible sur https://davidkrk.com/music.html',
               '- [ ] Poster sur Instagram',
               '- [ ] Poster sur Facebook',
               '- [ ] Poster sur Twitter / X',
