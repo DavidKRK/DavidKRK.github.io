@@ -77,9 +77,10 @@ jobs:
           script: |
             const sha = process.env.COMMIT_SHA || '';
             const shortSha = sha.slice(0, 7);
-            const commitMsg = (process.env.COMMIT_MSG || 'Mise à jour manuelle')
+            const defaultCommitMsg = 'Mise à jour manuelle';
+            const commitMsg = (process.env.COMMIT_MSG || defaultCommitMsg)
               .split('\n')
-              .find(line => line.trim().length > 0) || 'Mise à jour manuelle';
+              .find(line => line.trim().length > 0) || defaultCommitMsg;
             const author = process.env.COMMIT_AUTHOR || 'DavidKRK';
             const linesAdded = process.env.LINES_ADDED;
             const linesRemoved = process.env.LINES_REMOVED;
