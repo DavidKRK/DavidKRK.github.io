@@ -27,8 +27,9 @@ jobs:
           python-version: '3.11'
 
       - name: Injecter les videos et le CSS via Python
-        shell: python
+        shell: bash
         run: |
+          python <<'PY'
           import json
           import re
           import os
@@ -111,6 +112,7 @@ jobs:
               with open(css_path, 'w', encoding='utf-8') as f:
                   f.write(css_content)
               print('style.css cree avec CSS YouTube')
+          PY
 
       - name: Commit et push
         run: |
