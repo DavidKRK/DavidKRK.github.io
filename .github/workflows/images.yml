@@ -35,7 +35,7 @@ jobs:
       # La version est épinglée sur le commit de la version 1.4.1 pour la sécurité
       - name: Optimisation des images (calibreapp/image-actions)
         id: optimize
-        uses: calibreapp/image-actions@f32575787d333b0579f0b7d506ff03be63a669d1
+        uses: calibreapp/image-actions@9d037c06280028c110ff61c433ad4dc7d33c3c43
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           # Ne pas créer de PR automatique : commiter directement
