@@ -80,11 +80,11 @@ This website is continuously monitored for:
 
 ```bash
 # Clone the repository
-git clone https://github.com/DavidKRK/DavidKRK.github.io.git
+git clone https://github.com/DavidKRK/DavidKRK.github.io
 cd DavidKRK.github.io
 
 # Install dependencies
-npm install
+npm ci
 
 # Build optimized assets
 npm run build
