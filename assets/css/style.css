@@ -399,6 +399,37 @@ footer {
   width: auto;
   vertical-align: middle;
 }
+
+.social-icon.support-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 221, 87, 0.45);
+  background: rgba(255, 221, 87, 0.16);
+  color: #ffdd57;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.social-icon.support-link i {
+  color: currentColor;
+  font-size: 1.1em;
+}
+
+.social-icon.support-link span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.social-icon.support-link:hover,
+.social-icon.support-link:focus-visible {
+  background: rgba(255, 221, 87, 0.24);
+  color: #fff0a8;
+}
 @media (min-width: 768px) {
   .social-icon {
     font-size: 3.5rem; /* desktop */
