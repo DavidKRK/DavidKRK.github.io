@@ -1,0 +1,115 @@
+name: YouTube Auto-Sync
+
+on:
+  schedule:
+    # Verifie les nouvelles videos tous les jours a 10h UTC (12h CEST)
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  youtube-sync:
+    name: Sync dernieres videos YouTube
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: gh-pages
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dependances
+        run: pip install requests
+
+      - name: Creer le dossier data si necessaire
+        run: mkdir -p assets/data
+
+      - name: Recuperer les dernieres videos YouTube
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        shell: bash
+        run: |
+          python <<'PY'
+          import requests
+          import json
+          import os
+
+          api_key = os.environ.get('YOUTUBE_API_KEY', '')
+          if not api_key:
+              print('YOUTUBE_API_KEY non configure - abandon')
+              exit(0)
+
+          channel_handle = 'DavidKRKofficial'
+
+          search_url = (
+              'https://www.googleapis.com/youtube/v3/search'
+              '?key=' + api_key
+              + '&q=' + channel_handle
+              + '&type=channel&part=snippet&maxResults=1'
+          )
+          r = requests.get(search_url, timeout=30)
+          data = r.json()
+
+          if 'items' not in data or len(data['items']) == 0:
+              print('Erreur: chaine YouTube introuvable')
+              print(data)
+              exit(1)
+
+          channel_id = data['items'][0]['snippet']['channelId']
+          print('Channel ID trouve: ' + channel_id)
+
+          videos_url = (
+              'https://www.googleapis.com/youtube/v3/search'
+              '?key=' + api_key
+              + '&channelId=' + channel_id
+              + '&part=snippet,id&order=date&maxResults=6&type=video'
+          )
+          r2 = requests.get(videos_url, timeout=30)
+          videos = r2.json()
+
+          if 'items' not in videos:
+              print('Erreur: impossible de recuperer les videos')
+              print(videos)
+              exit(1)
+
+          video_list = []
+          for item in videos['items']:
+              video_id = item['id']['videoId']
+              title = item['snippet']['title']
+              thumb = item['snippet']['thumbnails']['high']['url']
+              published = item['snippet']['publishedAt'][:10]
+              video_list.append({
+                  'id': video_id,
+                  'title': title,
+                  'thumbnail': thumb,
+                  'published': published,
+                  'url': 'https://www.youtube.com/watch?v=' + video_id
+              })
+
+          with open('assets/data/youtube-videos.json', 'w', encoding='utf-8') as f:
+              json.dump(video_list, f, ensure_ascii=False, indent=2)
+
+          print(str(len(video_list)) + ' videos sauvegardees dans assets/data/youtube-videos.json')
+          for v in video_list:
+              print(' - [' + v['published'] + '] ' + v['title'])
+          PY
+
+      - name: Commit et push si nouvelles videos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/data/youtube-videos.json
+          if git diff --staged --quiet; then
+            echo "Aucune nouvelle video detectee."
+          else
+            git commit -m "Auto-sync: mise a jour des videos YouTube $(date +%Y-%m-%d)"
+            git push
+            echo "Videos mises a jour et poussees !"
+          fi
