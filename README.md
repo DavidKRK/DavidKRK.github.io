@@ -6,6 +6,7 @@
 [![Uptime Monitor](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml)
 [![Images](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml)
 [![Music Social](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml)
+[![YouTube Sync](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/youtube-sync.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/youtube-sync.yml)
 [![Maintenance](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.davidkrk.com&label=davidkrk.com)
 ![GitHub last commit](https://img.shields.io/github/last-commit/DavidKRK/DavidKRK.github.io)
@@ -31,6 +32,9 @@ Official website of **David KRK**, DJ and music producer based in Saint-Jean-de-
 #### Daily (3 AM)
 - **Performance Audits** : Lighthouse tests for speed, accessibility, SEO
 - **Automated Reports** : Performance badges and issue creation if scores drop
+
+#### Daily (10 AM)
+- **YouTube Video Sync** : Fetches latest videos from YouTube API and updates music.html automatically
 
 #### Weekly (Monday 10 AM)
 - **Dependency Updates** : Automatic npm package updates via Pull Request
@@ -74,6 +78,7 @@ This website is continuously monitored for:
 | **uptime.yml** | HTTP uptime monitoring + issue alerts | Every 30 min | [![Uptime](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/uptime.yml) |
 | **images.yml** | Auto image compression (JPEG/PNG/WebP) | On image push | [![Images](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/images.yml) |
 | **music-social.yml** | New music detection + social post template | On music.html change | [![Music Social](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/music-social.yml) |
+| **youtube-sync.yml** | YouTube video sync + music.html update | Daily 10 AM / On demand | [![YouTube Sync](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/youtube-sync.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/youtube-sync.yml) |
 | **maintenance.yml** | Lychee link check + backup + stale issues | Mon 8 AM / Sun 1 AM | [![Maintenance](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml/badge.svg)](https://github.com/DavidKRK/DavidKRK.github.io/actions/workflows/maintenance.yml) |
 
 ### 🚀 Getting Started
