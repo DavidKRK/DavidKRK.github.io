@@ -101,11 +101,95 @@ jobs:
               print(' - [' + v['published'] + '] ' + v['title'])
           PY
 
-      - name: Commit et push si nouvelles videos
+      - name: Injecter les videos dans music.html
+        shell: bash
+        run: |
+          python <<'PY'
+          import json
+          import re
+          import os
+
+          if not os.path.exists('assets/data/youtube-videos.json'):
+              print('Fichier youtube-videos.json introuvable - abandon')
+              exit(0)
+
+          with open('assets/data/youtube-videos.json', 'r', encoding='utf-8') as f:
+              videos = json.load(f)
+
+          cards = ''
+          for v in videos:
+              if v.get('id') == 'placeholder':
+                  continue
+              cards += (
+                  '<a href="' + v['url'] + '" target="_blank" rel="noopener noreferrer" class="yt-card">'
+                  '<div class="yt-thumb">'
+                  '<img src="' + v['thumbnail'] + '" alt="" loading="lazy" width="320" height="180">'
+                  '<span class="yt-play">&#9654;</span>'
+                  '</div>'
+                  '<p class="yt-title">' + v['title'] + '</p>'
+                  '<span class="yt-date">' + v['published'] + '</span>'
+                  '</a>'
+              )
+
+          channel_link = ('<a href="https://www.youtube.com/@DavidKRKofficial"'
+                          ' target="_blank" rel="noopener noreferrer"'
+                          ' class="yt-channel-link">&#127909; <span id="youtube-btn-text">Voir toutes les vidéos</span></a>')
+
+          youtube_block = (
+              '<!-- YOUTUBE-AUTO-START -->\n'
+              '      <h2 id="youtube-section-title">YouTube</h2>\n'
+              '      <div class="yt-grid">\n'
+              '        ' + channel_link + '\n'
+              '        <div class="yt-cards">' + cards + '</div>\n'
+              '      </div>\n'
+              '      <!-- YOUTUBE-AUTO-END -->'
+          )
+
+          with open('music.html', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          pattern = r'<!-- YOUTUBE-AUTO-START -->.*?<!-- YOUTUBE-AUTO-END -->'
+          if re.search(pattern, content, re.DOTALL):
+              content = re.sub(pattern, youtube_block, content, flags=re.DOTALL)
+          else:
+              content = content.replace('</main>', youtube_block + '\n    </main>')
+
+          with open('music.html', 'w', encoding='utf-8') as f:
+              f.write(content)
+          print('music.html mis a jour !')
+
+          css_marker = '/* === YouTube Auto-Section === */'
+          css_path = 'assets/css/style.css'
+          if os.path.exists(css_path):
+              with open(css_path, 'r', encoding='utf-8') as f:
+                  existing = f.read()
+              if css_marker not in existing:
+                  css_content = (
+                      '\n' + css_marker + '\n'
+                      '.yt-grid { max-width: 960px; margin: 2rem auto; padding: 0 1rem; text-align: center; }\n'
+                      '.yt-channel-link { display: inline-block; margin-bottom: 1.5rem; color: #ff0000; font-weight: bold; font-size: 1.1rem; text-decoration: none; }\n'
+                      '.yt-channel-link:hover { opacity: 0.8; }\n'
+                      '.yt-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }\n'
+                      '.yt-card { display: flex; flex-direction: column; background: rgba(0,0,0,0.45); border-radius: 10px; overflow: hidden; text-decoration: none; color: #fff; transition: transform 0.2s ease, box-shadow 0.2s ease; }\n'
+                      '.yt-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,0,0,0.2); }\n'
+                      '.yt-thumb { position: relative; }\n'
+                      '.yt-thumb img { width: 100%; height: 180px; object-fit: cover; display: block; }\n'
+                      '.yt-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 2.5rem; opacity: 0.85; pointer-events: none; }\n'
+                      '.yt-title { padding: 0.6rem 0.8rem 0.2rem; font-size: 0.9rem; font-weight: 600; text-align: left; }\n'
+                      '.yt-date { padding: 0 0.8rem 0.8rem; font-size: 0.75rem; color: #aaa; text-align: left; }\n'
+                  )
+                  with open(css_path, 'a', encoding='utf-8') as f:
+                      f.write(css_content)
+                  print('CSS YouTube ajoute a style.css')
+              else:
+                  print('CSS YouTube deja present')
+          PY
+
+      - name: Commit et push si changements
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/data/youtube-videos.json
+          git add assets/data/youtube-videos.json music.html assets/css/style.css
           if git diff --staged --quiet; then
             echo "Aucune nouvelle video detectee."
           else
