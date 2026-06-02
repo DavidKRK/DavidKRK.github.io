@@ -400,8 +400,8 @@ footer {
   align-items: center;
   justify-content: center;
   font-size: 2.5rem; /* mobile */
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 48px;
+  min-height: 48px;
   padding: 0.125rem;
 }
 
