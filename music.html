@@ -91,6 +91,35 @@
       color: rgba(255,255,255,0.5);
       font-size: 0.75rem;
     }
+    .player-load-wrapper {
+      margin: 0 auto 2rem;
+      max-width: 900px;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .player-load-btn {
+      background: transparent;
+      border: 1px solid var(--primary-color, #ff0000);
+      border-radius: 999px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Russo One', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1.4rem;
+      text-transform: uppercase;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .player-load-btn:hover,
+    .player-load-btn:focus-visible {
+      background: rgba(255,0,0,0.15);
+      transform: translateY(-1px);
+    }
+    .player-load-note {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+    }
   </style>
 </head>
 <body class="music-page">
@@ -166,8 +195,16 @@
     </div>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full music-main-content">
-      <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-      <div class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy></div>
+      <section class="player-load-wrapper" aria-labelledby="audio-player-trigger">
+        <button type="button" id="audio-player-trigger" class="player-load-btn" aria-controls="audio-player-widget">
+          Charger le lecteur audio
+        </button>
+        <p class="player-load-note">Le lecteur externe se charge à la demande pour accélérer l’affichage de la page.</p>
+        <div id="audio-player-widget" class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy hidden></div>
+        <noscript>
+          <p class="player-load-note"><a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer">Écouter sur Mixcloud</a></p>
+        </noscript>
+      </section>
 
       <!-- YOUTUBE-AUTO-START -->
       <h2 id="youtube-section-title">YouTube</h2>
@@ -207,34 +244,13 @@
     </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
-  <script src="assets/js/main.js"></script>
   <script>
-    // Chargement dynamique des vidéos YouTube depuis youtube-videos.json
-    fetch('assets/data/youtube-videos.json')
-      .then(r => r.json())
-      .then(videos => {
-        const grid = document.getElementById('youtube-grid');
-        if (!grid || !videos.length) return;
-        grid.innerHTML = videos.map(v => `
-          <a class="youtube-card" href="${v.url}" target="_blank" rel="noopener noreferrer">
-            <img src="${v.thumbnail}" alt="${v.title}" loading="lazy" width="480" height="270">
-            <div class="youtube-card-body">
-              <div class="youtube-card-title">${v.title}</div>
-              <div class="youtube-card-date">${v.published}</div>
-            </div>
-          </a>
-        `).join('');
-      })
-      .catch(() => {
-        const grid = document.getElementById('youtube-grid');
-        if (grid) grid.innerHTML = '<p style="color:rgba(255,255,255,0.5);text-align:center;">Vidéos temporairement indisponibles.</p>';
-      });
-
-    // Sélecteur de langue
     document.addEventListener('DOMContentLoaded', () => {
+        const audioPlayerTrigger = document.getElementById('audio-player-trigger');
+        const audioPlayerWidget = document.getElementById('audio-player-widget');
         const langBtns = document.querySelectorAll('.language-btn');
         const langContents = document.querySelectorAll('.lang-content');
+        let audioPlayerLoaded = false;
 
         const langContent = {
           fr: { youtube_title: 'Dernières vidéos YouTube', youtube_button: 'Voir toutes les vidéos' },
@@ -244,6 +260,28 @@
           ar: { youtube_title: 'أحدث مقاطع يوتيوب', youtube_button: 'عرض جميع مقاطع الفيديو' },
           uk: { youtube_title: 'Останні відео на YouTube', youtube_button: 'Переглянути всі відео' }
         };
+
+        function loadAudioPlayer() {
+            if (audioPlayerLoaded || !audioPlayerWidget) {
+                return;
+            }
+
+            audioPlayerLoaded = true;
+            audioPlayerWidget.hidden = false;
+
+            const script = document.createElement('script');
+            script.src = 'https://static.elfsight.com/platform/platform.js';
+            script.defer = true;
+            script.dataset.useServiceCore = '';
+            document.head.appendChild(script);
+
+            if (audioPlayerTrigger) {
+                audioPlayerTrigger.disabled = true;
+                audioPlayerTrigger.textContent = 'Lecteur audio chargé';
+            }
+        }
+
+        audioPlayerTrigger?.addEventListener('click', loadAudioPlayer);
 
         function switchLanguage(lang) {
             langContents.forEach(content => content.classList.remove('active'));
