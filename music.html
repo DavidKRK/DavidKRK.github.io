@@ -114,14 +114,14 @@
     <div class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
       <h1 class="main-title">David KRK</h1>
       <div class="language-selector flex-wrap">
-        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn active" data-lang="fr">Français</button>
         <button type="button" class="language-btn" data-lang="en">English</button>
         <button type="button" class="language-btn" data-lang="es">Castellano</button>
         <button type="button" class="language-btn" data-lang="eu">Euskara</button>
         <button type="button" class="language-btn" data-lang="ar">العربية</button>
         <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
-      <div class="lang-content" data-lang="fr">
+      <div class="lang-content active" data-lang="fr">
         <h2 class="main-title">Musique</h2>
         <div class="text-lg">
           <p class="mt-4">Découvrez la musique de David KRK, DJ et producteur de musique Techno.</p>
@@ -173,7 +173,7 @@
       <h2 id="youtube-section-title">YouTube</h2>
       <div class="yt-grid">
         <a href="https://www.youtube.com/@DavidKRKofficial" target="_blank" rel="noopener noreferrer" class="yt-channel-link">&#127909; <span id="youtube-btn-text">Voir toutes les vidéos</span></a>
-        <div class="yt-cards"><a href="https://www.youtube.com/watch?v=S5myogj5hK8" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/S5myogj5hK8/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">Test</p><span class="yt-date">2026-05-29</span></a><a href="https://www.youtube.com/watch?v=Ufso_wwn5Tw" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/Ufso_wwn5Tw/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">David KRK - Over The Rainbow &quot; Livestreaming &quot;</p><span class="yt-date">2025-11-30</span></a><a href="https://www.youtube.com/watch?v=EKEl86ULmBE" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/EKEl86ULmBE/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">David KRK Livestreaming Classic Trance Track</p><span class="yt-date">2020-05-07</span></a><a href="https://www.youtube.com/watch?v=4MJ06WdTvZA" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/4MJ06WdTvZA/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">D.I.Y.S. - Play With Me (Club Mix)</p><span class="yt-date">2013-03-01</span></a></div>
+        <div class="yt-cards"><a href="https://www.youtube.com/watch?v=S5myogj5hK8" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/S5myogj5hK8/hqdefault.jpg" alt="" loading="eager" decoding="async" fetchpriority="high" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">Test</p><span class="yt-date">2026-05-29</span></a><a href="https://www.youtube.com/watch?v=Ufso_wwn5Tw" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/Ufso_wwn5Tw/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">David KRK - Over The Rainbow &quot; Livestreaming &quot;</p><span class="yt-date">2025-11-30</span></a><a href="https://www.youtube.com/watch?v=EKEl86ULmBE" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/EKEl86ULmBE/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">David KRK Livestreaming Classic Trance Track</p><span class="yt-date">2020-05-07</span></a><a href="https://www.youtube.com/watch?v=4MJ06WdTvZA" target="_blank" rel="noopener noreferrer" class="yt-card"><div class="yt-thumb"><img src="https://i.ytimg.com/vi/4MJ06WdTvZA/hqdefault.jpg" alt="" loading="lazy" width="320" height="180"><span class="yt-play">&#9654;</span></div><p class="yt-title">D.I.Y.S. - Play With Me (Club Mix)</p><span class="yt-date">2013-03-01</span></a></div>
       </div>
       <!-- YOUTUBE-AUTO-END -->
     </main>
@@ -207,30 +207,8 @@
     </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    // Chargement dynamique des vidéos YouTube depuis youtube-videos.json
-    fetch('assets/data/youtube-videos.json')
-      .then(r => r.json())
-      .then(videos => {
-        const grid = document.getElementById('youtube-grid');
-        if (!grid || !videos.length) return;
-        grid.innerHTML = videos.map(v => `
-          <a class="youtube-card" href="${v.url}" target="_blank" rel="noopener noreferrer">
-            <img src="${v.thumbnail}" alt="${v.title}" loading="lazy" width="480" height="270">
-            <div class="youtube-card-body">
-              <div class="youtube-card-title">${v.title}</div>
-              <div class="youtube-card-date">${v.published}</div>
-            </div>
-          </a>
-        `).join('');
-      })
-      .catch(() => {
-        const grid = document.getElementById('youtube-grid');
-        if (grid) grid.innerHTML = '<p style="color:rgba(255,255,255,0.5);text-align:center;">Vidéos temporairement indisponibles.</p>';
-      });
-
     // Sélecteur de langue
     document.addEventListener('DOMContentLoaded', () => {
         const langBtns = document.querySelectorAll('.language-btn');
@@ -275,8 +253,6 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
-
-        switchLanguage('fr');
     });
   </script>
 </body>

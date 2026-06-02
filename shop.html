@@ -53,7 +53,7 @@
       <h1 class="main-title">David KRK</h1>
 
       <div class="language-selector flex-wrap">
-        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn active" data-lang="fr">Français</button>
         <button type="button" class="language-btn" data-lang="en">English</button>
         <button type="button" class="language-btn" data-lang="es">Castellano</button>
         <button type="button" class="language-btn" data-lang="eu">Euskara</button>
@@ -61,7 +61,7 @@
         <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
 
-      <div class="lang-content" data-lang="fr"><h2 class="main-title">Boutique</h2></div>
+      <div class="lang-content active" data-lang="fr"><h2 class="main-title">Boutique</h2></div>
       <div class="lang-content" data-lang="en"><h2 class="main-title">Shop</h2></div>
       <div class="lang-content" data-lang="es"><h2 class="main-title">Tienda</h2></div>
       <div class="lang-content" data-lang="eu"><h2 class="main-title">Denda</h2></div>
@@ -69,7 +69,7 @@
       <div class="lang-content" data-lang="uk"><h2 class="main-title">Магазин</h2></div>
 
       <!-- FR -->
-      <div class="lang-content" data-lang="fr">
+      <div class="lang-content active" data-lang="fr">
         <div class="text-lg">
           <h2 class="mt-4">Boutique Officielle</h2>
           <p>Vous avez ressenti l'énergie dans mes sets, vous avez vibré sur mes mix.</p>
@@ -207,12 +207,11 @@
     </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.core.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const langBtns = document.querySelectorAll('.language-btn');
-      const langContents = document.querySelectorAll('.lang-content');
+        const langBtns = document.querySelectorAll('.language-btn');
+        const langContents = document.querySelectorAll('.lang-content');
 
       function switchLanguage(lang) {
         langContents.forEach(content => content.classList.remove('active'));
@@ -229,14 +228,12 @@
         document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
       }
 
-      langBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          switchLanguage(btn.dataset.lang);
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
         });
-      });
-
-      switchLanguage('fr');
     });
-  </script>
+    </script>
 </body>
 </html>
