@@ -120,6 +120,17 @@
       font-size: 0.9rem;
       margin-top: 0.75rem;
     }
+    .visually-hidden {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
   </style>
 </head>
 <body class="music-page">
@@ -200,6 +211,7 @@
           Charger le lecteur audio
         </button>
         <p class="player-load-note">Le lecteur externe se charge à la demande pour accélérer l’affichage de la page.</p>
+        <p id="audio-player-status" class="visually-hidden" role="status" aria-live="polite"></p>
         <div id="audio-player-widget" class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy hidden></div>
         <noscript>
           <p class="player-load-note"><a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer">Écouter sur Mixcloud</a></p>
@@ -247,6 +259,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const audioPlayerTrigger = document.getElementById('audio-player-trigger');
+        const audioPlayerStatus = document.getElementById('audio-player-status');
         const audioPlayerWidget = document.getElementById('audio-player-widget');
         const langBtns = document.querySelectorAll('.language-btn');
         const langContents = document.querySelectorAll('.lang-content');
@@ -262,7 +275,7 @@
         };
 
         function loadAudioPlayer() {
-            if (audioPlayerLoaded || !audioPlayerWidget) {
+            if (audioPlayerLoaded || !audioPlayerTrigger || !audioPlayerWidget) {
                 return;
             }
 
@@ -275,9 +288,12 @@
             script.dataset.useServiceCore = '';
             document.head.appendChild(script);
 
-            if (audioPlayerTrigger) {
-                audioPlayerTrigger.disabled = true;
-                audioPlayerTrigger.textContent = 'Lecteur audio chargé';
+            audioPlayerTrigger.disabled = true;
+            audioPlayerTrigger.textContent = 'Lecteur audio chargé';
+            audioPlayerTrigger.setAttribute('aria-label', 'Lecteur audio chargé');
+
+            if (audioPlayerStatus) {
+                audioPlayerStatus.textContent = 'Le lecteur audio externe est maintenant chargé.';
             }
         }
 
