@@ -112,7 +112,7 @@
     }
     .player-load-btn:hover,
     .player-load-btn:focus-visible {
-      background: rgba(255,0,0,0.15);
+      background: color-mix(in srgb, var(--primary-color, #ff0000) 15%, transparent);
       transform: translateY(-1px);
     }
     .player-load-note {
@@ -210,11 +210,11 @@
         <button type="button" id="audio-player-trigger" class="player-load-btn" aria-controls="audio-player-widget">
           Charger le lecteur audio
         </button>
-        <p class="player-load-note">Le lecteur externe se charge à la demande pour accélérer l’affichage de la page.</p>
+        <p id="audio-player-note" class="player-load-note">Le lecteur externe se charge à la demande pour accélérer l’affichage de la page.</p>
         <p id="audio-player-status" class="visually-hidden" role="status" aria-live="polite"></p>
         <div id="audio-player-widget" class="elfsight-app-0d876127-462b-4b8f-95a5-33ec1a5916f8" data-elfsight-app-lazy hidden></div>
         <noscript>
-          <p class="player-load-note"><a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer">Écouter sur Mixcloud</a></p>
+          <p class="player-load-note"><a href="https://www.mixcloud.com/DavidKRK/" target="_blank" rel="noopener noreferrer">Mixcloud</a></p>
         </noscript>
       </section>
 
@@ -259,6 +259,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const audioPlayerTrigger = document.getElementById('audio-player-trigger');
+        const audioPlayerNote = document.getElementById('audio-player-note');
         const audioPlayerStatus = document.getElementById('audio-player-status');
         const audioPlayerWidget = document.getElementById('audio-player-widget');
         const langBtns = document.querySelectorAll('.language-btn');
@@ -266,18 +267,62 @@
         let audioPlayerLoaded = false;
 
         const langContent = {
-          fr: { youtube_title: 'Dernières vidéos YouTube', youtube_button: 'Voir toutes les vidéos' },
-          en: { youtube_title: 'Latest YouTube Videos', youtube_button: 'View all videos' },
-          es: { youtube_title: 'Últimos vídeos de YouTube', youtube_button: 'Ver todos los vídeos' },
-          eu: { youtube_title: 'Azken YouTube bideoak', youtube_button: 'Ikusi bideo guztiak' },
-          ar: { youtube_title: 'أحدث مقاطع يوتيوب', youtube_button: 'عرض جميع مقاطع الفيديو' },
-          uk: { youtube_title: 'Останні відео на YouTube', youtube_button: 'Переглянути всі відео' }
+          fr: {
+            youtube_title: 'Dernières vidéos YouTube',
+            youtube_button: 'Voir toutes les vidéos',
+            player_button: 'Charger le lecteur audio',
+            player_loaded: 'Lecteur audio chargé',
+            player_note: 'Le lecteur externe se charge à la demande pour accélérer l’affichage de la page.',
+            player_status: 'Le lecteur audio externe est maintenant chargé.'
+          },
+          en: {
+            youtube_title: 'Latest YouTube Videos',
+            youtube_button: 'View all videos',
+            player_button: 'Load audio player',
+            player_loaded: 'Audio player loaded',
+            player_note: 'The external player loads on demand to speed up page rendering.',
+            player_status: 'The external audio player is now loaded.'
+          },
+          es: {
+            youtube_title: 'Últimos vídeos de YouTube',
+            youtube_button: 'Ver todos los vídeos',
+            player_button: 'Cargar el reproductor de audio',
+            player_loaded: 'Reproductor de audio cargado',
+            player_note: 'El reproductor externo se carga bajo demanda para acelerar la visualización de la página.',
+            player_status: 'El reproductor de audio externo ya está cargado.'
+          },
+          eu: {
+            youtube_title: 'Azken YouTube bideoak',
+            youtube_button: 'Ikusi bideo guztiak',
+            player_button: 'Kargatu audio erreproduzitzailea',
+            player_loaded: 'Audio erreproduzitzailea kargatuta',
+            player_note: 'Kanpoko erreproduzitzailea eskatu ahala kargatzen da orria azkarrago erakusteko.',
+            player_status: 'Kanpoko audio erreproduzitzailea kargatuta dago orain.'
+          },
+          ar: {
+            youtube_title: 'أحدث مقاطع يوتيوب',
+            youtube_button: 'عرض جميع مقاطع الفيديو',
+            player_button: 'تحميل مشغل الصوت',
+            player_loaded: 'تم تحميل مشغل الصوت',
+            player_note: 'يتم تحميل المشغل الخارجي عند الطلب لتسريع عرض الصفحة.',
+            player_status: 'تم الآن تحميل مشغل الصوت الخارجي.'
+          },
+          uk: {
+            youtube_title: 'Останні відео на YouTube',
+            youtube_button: 'Переглянути всі відео',
+            player_button: 'Завантажити аудіоплеєр',
+            player_loaded: 'Аудіоплеєр завантажено',
+            player_note: 'Зовнішній плеєр завантажується на вимогу, щоб пришвидшити показ сторінки.',
+            player_status: 'Зовнішній аудіоплеєр тепер завантажено.'
+          }
         };
 
         function loadAudioPlayer() {
             if (audioPlayerLoaded || !audioPlayerTrigger || !audioPlayerWidget) {
                 return;
             }
+
+            const t = langContent[document.documentElement.lang] || langContent.fr;
 
             audioPlayerLoaded = true;
             audioPlayerWidget.hidden = false;
@@ -289,11 +334,11 @@
             document.head.appendChild(script);
 
             audioPlayerTrigger.disabled = true;
-            audioPlayerTrigger.textContent = 'Lecteur audio chargé';
-            audioPlayerTrigger.setAttribute('aria-label', 'Lecteur audio chargé');
+            audioPlayerTrigger.textContent = t.player_loaded;
+            audioPlayerTrigger.setAttribute('aria-label', t.player_loaded);
 
             if (audioPlayerStatus) {
-                audioPlayerStatus.textContent = 'Le lecteur audio externe est maintenant chargé.';
+                audioPlayerStatus.textContent = t.player_status;
             }
         }
 
@@ -318,6 +363,13 @@
             if (btnEl) btnEl.textContent = t.youtube_button;
             const headingEl = document.getElementById('youtube-section-title');
             if (headingEl) headingEl.textContent = t.youtube_title;
+            if (audioPlayerTrigger) {
+                const playerLabel = audioPlayerLoaded ? t.player_loaded : t.player_button;
+                audioPlayerTrigger.textContent = playerLabel;
+                audioPlayerTrigger.setAttribute('aria-label', playerLabel);
+            }
+            if (audioPlayerNote) audioPlayerNote.textContent = t.player_note;
+            if (audioPlayerStatus) audioPlayerStatus.textContent = audioPlayerLoaded ? t.player_status : '';
 
             // Update document language and text direction for accessibility and RTL support
             document.documentElement.lang = lang;
