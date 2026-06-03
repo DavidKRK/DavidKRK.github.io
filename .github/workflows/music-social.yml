@@ -53,7 +53,10 @@ jobs:
           ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
 
           # Extraire uniquement la section auto YouTube (source réelle des nouvelles entrées musicales)
-          MUSIC_LINK_PATTERN='https?://(www\.)?(youtube\.com|youtu\.be|soundcloud\.com|bandcamp\.com)'
+          YOUTUBE_VIDEO_PATTERN='https?://(www\.)?(youtube\.com/watch\?v=[^"[:space:]<]+|youtube\.com/shorts/[^"[:space:]<]+|youtu\.be/[^"[:space:]<]+)'
+          SOUNDCLOUD_PATTERN='https?://(www\.)?soundcloud\.com/[^"[:space:]<]+'
+          BANDCAMP_PATTERN='https?://([^"[:space:]<]+\.)?bandcamp\.com/[^"[:space:]<]+'
+          MUSIC_LINK_PATTERN="$YOUTUBE_VIDEO_PATTERN|$SOUNDCLOUD_PATTERN|$BANDCAMP_PATTERN"
           NEW_MUSIC_BLOCK=$(git show "$TARGET_REF:music.html" | sed -n '/<!-- YOUTUBE-AUTO-START -->/,/<!-- YOUTUBE-AUTO-END -->/p')
           if [ "$BASE_REF" = "$EMPTY_TREE" ]; then
             OLD_MUSIC_BLOCK=""
@@ -74,8 +77,16 @@ jobs:
           # Sauvegarder le diff dans un fichier temporaire pour l'issue
           echo "$ADDED" > /tmp/music_changes.txt
 
-          # Détecter une vraie nouveauté musicale (nouveaux liens de contenu dans le bloc auto YouTube)
-          if echo "$MUSIC_BLOCK_ADDED" | grep -qiE "$MUSIC_LINK_PATTERN"; then
+          # Détecter une vraie nouveauté musicale (nouveaux liens de contenu par rapport à l'état précédent)
+          extract_music_links() {
+            echo "$1" | grep -oiE "$MUSIC_LINK_PATTERN" | LC_ALL=C sort -u
+          }
+          if extract_music_links "$NEW_MUSIC_BLOCK" | grep -q .; then
+            NEW_LINKS_ONLY=$(LC_ALL=C comm -13 <(extract_music_links "$OLD_MUSIC_BLOCK") <(extract_music_links "$NEW_MUSIC_BLOCK") || true)
+          else
+            NEW_LINKS_ONLY=""
+          fi
+          if [ -n "$NEW_LINKS_ONLY" ]; then
             echo "has_music_content=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_music_content=false" >> "$GITHUB_OUTPUT"
