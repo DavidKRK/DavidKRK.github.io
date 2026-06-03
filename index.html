@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>David KRK · HOME</title>
   <meta name="description" content="Site officiel de David KRK, DJ et producteur international de musique Techno. Découvrez sa musique, sa biographie et ses événements.">
-  <meta name="keywords" content="David KRK, DJ techno, producteur, événements, musique">
   <meta name="author" content="David KRK">
 
   <!-- Open Graph / Facebook -->
@@ -31,6 +30,7 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <!-- CSS principal -->
+  <link rel="preload" as="image" href="assets/images/david_krk_owl.jpg" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="home-page">
@@ -51,7 +51,7 @@
       <h1 class="main-title">David KRK</h1>
 
       <div class="language-selector flex-wrap">
-        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn active" data-lang="fr">Français</button>
         <button type="button" class="language-btn" data-lang="en">English</button>
         <button type="button" class="language-btn" data-lang="es">Castellano</button>
         <button type="button" class="language-btn" data-lang="eu">Euskara</button>
@@ -59,49 +59,49 @@
         <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
 
-      <div class="lang-content" data-lang="fr"><h2 class="main-title">Accueil</h2></div>
-      <div class="lang-content" data-lang="en"><h2 class="main-title">Home</h2></div>
-      <div class="lang-content" data-lang="es"><h2 class="main-title">Inicio</h2></div>
-      <div class="lang-content" data-lang="eu"><h2 class="main-title">Hasiera</h2></div>
-      <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">الرئيسية</h2></div>
-      <div class="lang-content" data-lang="uk"><h2 class="main-title">Головна</h2></div>
+      <div class="lang-content active" data-lang="fr"><h2 class="main-title">Accueil</h2></div>
+      <div class="lang-content" data-lang="en" hidden><h2 class="main-title">Home</h2></div>
+      <div class="lang-content" data-lang="es" hidden><h2 class="main-title">Inicio</h2></div>
+      <div class="lang-content" data-lang="eu" hidden><h2 class="main-title">Hasiera</h2></div>
+      <div class="lang-content" data-lang="ar" dir="rtl" hidden><h2 class="main-title">الرئيسية</h2></div>
+      <div class="lang-content" data-lang="uk" hidden><h2 class="main-title">Головна</h2></div>
 
-      <div class="lang-content" data-lang="fr">
+      <div class="lang-content active" data-lang="fr">
         <div class="text-lg">
             <p class="mt-4">Site officiel de David KRK</p>
             <p>DJ et producteur international de musique Techno.</p>
             <p>Découvrez sa musique, sa biographie et ses événements.</p>
         </div>
       </div>
-      <div class="lang-content" data-lang="en">
+      <div class="lang-content" data-lang="en" hidden>
         <div class="text-lg">
             <p class="mt-4">Official Website of David KRK</p>
             <p>International Techno Music DJ & Producer.</p>
             <p>Discover his music, biography, and events.</p>
         </div>
       </div>
-      <div class="lang-content" data-lang="es">
+      <div class="lang-content" data-lang="es" hidden>
         <div class="text-lg">
             <p class="mt-4">Sitio web oficial de David KRK</p>
             <p>DJ y productor internacional de música Techno.</p>
             <p>Descubre su música, biografía y eventos.</p>
         </div>
       </div>
-      <div class="lang-content" data-lang="eu">
+      <div class="lang-content" data-lang="eu" hidden>
         <div class="text-lg">
             <p class="mt-4">David KRK-ren webgune ofiziala</p>
             <p>Techno musikako nazioarteko DJ eta ekoizlea.</p>
             <p>Ezagutu bere musika, biografia eta ekitaldiak.</p>
         </div>
       </div>
-      <div class="lang-content" data-lang="ar" dir="rtl">
+      <div class="lang-content" data-lang="ar" dir="rtl" hidden>
         <div class="text-lg">
             <p class="mt-4">الموقع الرسمي لديفيد كرك</p>
             <p>دي جي ومنتج عالمي لموسيقى التكنو.</p>
             <p>اكتشف موسيقاه وسيرته الذاتية وفعالياته.</p>
         </div>
       </div>
-      <div class="lang-content" data-lang="uk">
+      <div class="lang-content" data-lang="uk" hidden>
         <div class="text-lg">
             <p class="mt-4">Офіційний сайт David KRK</p>
             <p>Міжнародний техно-діджей та продюсер.</p>
@@ -111,11 +111,11 @@
 
 
       <div class="image-container">
-        <img src="assets/images/david_krk_owl.jpg" alt="David KRK Owl" class="responsive-image" width="1366" height="768" fetchpriority="high">
+        <img src="assets/images/david_krk_owl.jpg" alt="David KRK Owl" class="responsive-image" width="1366" height="768" decoding="async" fetchpriority="high">
       </div>
 
 
-      <!-- Slider “player‑widget” (optionnel) -->
+      <!-- Slider "player‑widget" (optionnel) -->
       <section class="mt-8 mb-8 player-container">
         <iframe title="Mixcloud player" width="100%" height="120"
                 loading="lazy"
@@ -139,7 +139,7 @@
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud" aria-hidden="true"></i></a>
         <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon support-link"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i><span>Buy Me A Coffee</span></a>
+        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" class="social-icon support-link"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Buy me a coffee</a>
       </nav>
 
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
@@ -158,11 +158,17 @@
         const langContents = document.querySelectorAll('.lang-content');
 
         function switchLanguage(lang) {
-            langContents.forEach(content => content.classList.remove('active'));
+            langContents.forEach(content => {
+                content.classList.remove('active');
+                content.hidden = true;
+            });
             langBtns.forEach(b => b.classList.remove('active'));
 
             const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
-            contentsToShow.forEach(content => content.classList.add('active'));
+            contentsToShow.forEach(content => {
+                content.classList.add('active');
+                content.hidden = false;
+            });
 
             const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
             if (activeBtn) {
@@ -179,8 +185,6 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
-
-        switchLanguage('fr');
     });
     </script>
 </body>
