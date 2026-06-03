@@ -37,9 +37,10 @@ jobs:
         shell: bash
         run: |
           python <<'PY'
-          import requests
+          import html
           import json
           import os
+          import requests
 
           api_key = os.environ.get('YOUTUBE_API_KEY', '')
           if not api_key:
@@ -79,10 +80,14 @@ jobs:
               print(videos)
               exit(1)
 
+          placeholder_titles = {'test'}
           video_list = []
           for item in videos['items']:
               video_id = item['id']['videoId']
-              title = item['snippet']['title']
+              title = html.unescape(item['snippet']['title']).strip()
+              if title.casefold() in placeholder_titles:
+                  print('Vidéo ignorée (titre de test exact): ' + video_id)
+                  continue
               thumb = item['snippet']['thumbnails']['high']['url']
               published = item['snippet']['publishedAt'][:10]
               video_list.append({
@@ -105,9 +110,10 @@ jobs:
         shell: bash
         run: |
           python <<'PY'
+          import html
           import json
-          import re
           import os
+          import re
 
           if not os.path.exists('assets/data/youtube-videos.json'):
               print('Fichier youtube-videos.json introuvable - abandon')
@@ -120,14 +126,18 @@ jobs:
           for v in videos:
               if v.get('id') == 'placeholder':
                   continue
+              safe_url = html.escape(v['url'], quote=True)
+              safe_thumbnail = html.escape(v['thumbnail'], quote=True)
+              safe_title = html.escape(v['title'])
+              safe_published = html.escape(v['published'])
               cards += (
-                  '<a href="' + v['url'] + '" target="_blank" rel="noopener noreferrer" class="yt-card">'
+                  '<a href="' + safe_url + '" target="_blank" rel="noopener noreferrer" class="yt-card">'
                   '<div class="yt-thumb">'
-                  '<img src="' + v['thumbnail'] + '" alt="" loading="lazy" width="320" height="180">'
+                  '<img src="' + safe_thumbnail + '" alt="" loading="lazy" width="320" height="180">'
                   '<span class="yt-play">&#9654;</span>'
                   '</div>'
-                  '<p class="yt-title">' + v['title'] + '</p>'
-                  '<span class="yt-date">' + v['published'] + '</span>'
+                  '<p class="yt-title">' + safe_title + '</p>'
+                  '<span class="yt-date">' + safe_published + '</span>'
                   '</a>'
               )
 

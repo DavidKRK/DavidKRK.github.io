@@ -122,5 +122,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    switchLanguage('fr');
+    // Default language is set in the HTML to avoid layout shifts on load.
 });
