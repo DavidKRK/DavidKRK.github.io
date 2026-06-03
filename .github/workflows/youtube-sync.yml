@@ -40,6 +40,7 @@ jobs:
           import html
           import json
           import os
+          import re
           import requests
 
           api_key = os.environ.get('YOUTUBE_API_KEY', '')
@@ -80,10 +81,14 @@ jobs:
               print(videos)
               exit(1)
 
-          placeholder_titles = {'test'}
+          youtube_id_re = re.compile(r'^[A-Za-z0-9_-]{11}$')
+          placeholder_titles = {'test', 'placeholder'}
           video_list = []
           for item in videos['items']:
-              video_id = item['id']['videoId']
+              video_id = item.get('id', {}).get('videoId', '').strip()
+              if not youtube_id_re.match(video_id):
+                  print('Vidéo ignorée (id YouTube invalide): ' + repr(video_id))
+                  continue
               title = html.unescape(item['snippet']['title']).strip()
               if title.casefold() in placeholder_titles:
                   print('Vidéo ignorée (titre de test exact): ' + video_id)
@@ -122,14 +127,34 @@ jobs:
           with open('assets/data/youtube-videos.json', 'r', encoding='utf-8') as f:
               videos = json.load(f)
 
+          youtube_id_re = re.compile(r'^[A-Za-z0-9_-]{11}$')
+          placeholder_titles = {'test', 'placeholder'}
+
           cards = ''
           for v in videos:
-              if v.get('id') == 'placeholder':
+              video_id = (v.get('id') or '').strip()
+              title = (v.get('title') or '').strip()
+              url = (v.get('url') or '').strip()
+              thumbnail = (v.get('thumbnail') or '').strip()
+              published = (v.get('published') or '').strip()
+
+              if not video_id or video_id == 'placeholder':
                   continue
-              safe_url = html.escape(v['url'], quote=True)
-              safe_thumbnail = html.escape(v['thumbnail'], quote=True)
-              safe_title = html.escape(v['title'])
-              safe_published = html.escape(v['published'])
+              if not youtube_id_re.match(video_id):
+                  continue
+              if title.casefold() in placeholder_titles:
+                  continue
+              if not url or 'placeholder' in url:
+                  continue
+              if not thumbnail:
+                  continue
+              if not published:
+                  continue
+
+              safe_url = html.escape(url, quote=True)
+              safe_thumbnail = html.escape(thumbnail, quote=True)
+              safe_title = html.escape(title)
+              safe_published = html.escape(published)
               cards += (
                   '<a href="' + safe_url + '" target="_blank" rel="noopener noreferrer" class="yt-card">'
                   '<div class="yt-thumb">'
