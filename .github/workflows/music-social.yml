@@ -30,21 +30,31 @@ jobs:
       - name: Analyser les modifications de music.html
         id: diff
         run: |
-          # Sur un push, comparer la plage exacte de commits de l'événement.
-          # En exécution manuelle (workflow_dispatch), revenir au commit précédent.
           if [ "${{ github.event_name }}" = "push" ] && \
              [ -n "${{ github.event.before }}" ] && \
              [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
-            DIFF=$(git diff "${{ github.event.before }}" "${{ github.sha }}" -- music.html)
+            BASE_REF="${{ github.event.before }}"
+            TARGET_REF="${{ github.sha }}"
           elif git rev-parse --verify HEAD^ >/dev/null 2>&1; then
-            DIFF=$(git diff HEAD^ HEAD -- music.html)
+            BASE_REF="HEAD^"
+            TARGET_REF="HEAD"
           else
-            EMPTY_TREE=$(git hash-object -t tree /dev/null)
-            DIFF=$(git diff "$EMPTY_TREE" HEAD -- music.html)
+            BASE_REF="$(git hash-object -t tree /dev/null)"
+            TARGET_REF="HEAD"
           fi
+
+          # Sur un push, comparer la plage exacte de commits de l'événement.
+          # En exécution manuelle (workflow_dispatch), revenir au commit précédent.
+          DIFF=$(git diff "$BASE_REF" "$TARGET_REF" -- music.html)
 
           # Extraire les lignes ajoutées (nouvelles entrées)
           ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
+
+          # Extraire uniquement la section auto YouTube (source réelle des nouvelles entrées musicales)
+          NEW_MUSIC_BLOCK=$(git show "$TARGET_REF:music.html" | sed -n '/<!-- YOUTUBE-AUTO-START -->/,/<!-- YOUTUBE-AUTO-END -->/p')
+          OLD_MUSIC_BLOCK=$(git show "$BASE_REF:music.html" 2>/dev/null | sed -n '/<!-- YOUTUBE-AUTO-START -->/,/<!-- YOUTUBE-AUTO-END -->/p')
+          MUSIC_BLOCK_DIFF=$(diff -u <(echo "$OLD_MUSIC_BLOCK") <(echo "$NEW_MUSIC_BLOCK") || true)
+          MUSIC_BLOCK_ADDED=$(echo "$MUSIC_BLOCK_DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
 
           # Compter les lignes modifiées en excluant les en-têtes de diff (+++ / ---)
           LINES_ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | wc -l)
@@ -57,8 +67,8 @@ jobs:
           # Sauvegarder le diff dans un fichier temporaire pour l'issue
           echo "$ADDED" > /tmp/music_changes.txt
 
-          # Détecter la présence de nouveaux titres (balises audio ou liens)
-          if echo "$ADDED" | grep -qiE '(audio|track|mix|set|release|soundcloud|youtube)'; then
+          # Détecter une vraie nouveauté musicale (nouveaux liens de contenu dans le bloc auto YouTube)
+          if echo "$MUSIC_BLOCK_ADDED" | grep -qiE 'https?://(www\.)?(youtube\.com|youtu\.be|soundcloud\.com|bandcamp\.com)'; then
             echo "has_music_content=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_music_content=false" >> "$GITHUB_OUTPUT"
