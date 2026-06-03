@@ -51,7 +51,7 @@
       <h1 class="main-title">David KRK</h1>
 
       <div class="language-selector flex-wrap">
-        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn active" data-lang="fr">Français</button>
         <button type="button" class="language-btn" data-lang="en">English</button>
         <button type="button" class="language-btn" data-lang="es">Castellano</button>
         <button type="button" class="language-btn" data-lang="eu">Euskara</button>
@@ -111,8 +111,7 @@
 
 
       <div class="image-container">
-        <!-- TODO: générer david_krk_owl.webp et david_krk_owl.avif, puis réactiver <picture> -->
-        <img src="assets/images/david_krk_owl.jpg" alt="David KRK Owl" class="responsive-image" width="1366" height="768" fetchpriority="high">
+        <img src="assets/images/david_krk_owl.jpg" alt="David KRK Owl" class="responsive-image" width="1366" height="768" decoding="async" fetchpriority="high">
       </div>
 
 
@@ -140,7 +139,7 @@
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-soundcloud" aria-hidden="true"></i></a>
         <a href="https://www.tiktok.com/@davidkrk" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
            class="social-icon text-2xl md:text-3xl text-white"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" aria-label="Buy Me A Coffee" class="social-icon support-link"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Buy me a coffee</a>
+        <a href="https://www.buymeacoffee.com/davidkrk" target="_blank" rel="noopener noreferrer" class="social-icon support-link"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Buy me a coffee</a>
       </nav>
 
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-4 text-sm">
@@ -186,8 +185,6 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
-
-        switchLanguage('fr');
     });
     </script>
 </body>
