@@ -322,6 +322,50 @@ footer {
   }
 }
 
+/* ---------- PLAYER (on-demand load) ---------- */
+.player-load-wrapper {
+  margin: 0 auto 2rem;
+  max-width: 900px;
+  padding: 0 1rem;
+  text-align: center;
+}
+.player-load-btn {
+  background: transparent;
+  border: 1px solid var(--primary-color, #ff0000);
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Russo One", sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.4rem;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+.player-load-btn:hover,
+.player-load-btn:focus-visible {
+  background: color-mix(in srgb, var(--primary-color, #ff0000) 15%, transparent);
+  transform: translateY(-1px);
+}
+.player-load-note {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 
 /* ---------- TYPOGRAPHY ---------- */
 .text-center .main-title {
