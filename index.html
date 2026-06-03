@@ -225,10 +225,10 @@
 
             mixcloudPlayerContainer.appendChild(iframe);
 
-            mixcloudPlayerTrigger.disabled = true;
-            mixcloudPlayerTrigger.textContent = t.player_loaded;
-            mixcloudPlayerTrigger.setAttribute('aria-label', t.player_loaded);
-
+mixcloudPlayerTrigger.setAttribute('aria-expanded', 'true');
+mixcloudPlayerTrigger.disabled = true;
+mixcloudPlayerTrigger.textContent = t.player_loaded;
+mixcloudPlayerTrigger.setAttribute('aria-label', t.player_loaded);
             if (mixcloudPlayerStatus) {
                 mixcloudPlayerStatus.textContent = t.player_status;
             }
