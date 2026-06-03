@@ -30,6 +30,8 @@ jobs:
       - name: Analyser les modifications de music.html
         id: diff
         run: |
+          EMPTY_TREE="$(git hash-object -t tree /dev/null)"
+
           if [ "${{ github.event_name }}" = "push" ] && \
              [ -n "${{ github.event.before }}" ] && \
              [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
@@ -39,7 +41,7 @@ jobs:
             BASE_REF="HEAD^"
             TARGET_REF="HEAD"
           else
-            BASE_REF="$(git hash-object -t tree /dev/null)"
+            BASE_REF="$EMPTY_TREE"
             TARGET_REF="HEAD"
           fi
 
@@ -51,8 +53,13 @@ jobs:
           ADDED=$(echo "$DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
 
           # Extraire uniquement la section auto YouTube (source réelle des nouvelles entrées musicales)
+          MUSIC_LINK_PATTERN='https?://(www\.)?(youtube\.com|youtu\.be|soundcloud\.com|bandcamp\.com)'
           NEW_MUSIC_BLOCK=$(git show "$TARGET_REF:music.html" | sed -n '/<!-- YOUTUBE-AUTO-START -->/,/<!-- YOUTUBE-AUTO-END -->/p')
-          OLD_MUSIC_BLOCK=$(git show "$BASE_REF:music.html" 2>/dev/null | sed -n '/<!-- YOUTUBE-AUTO-START -->/,/<!-- YOUTUBE-AUTO-END -->/p')
+          if [ "$BASE_REF" = "$EMPTY_TREE" ]; then
+            OLD_MUSIC_BLOCK=""
+          else
+            OLD_MUSIC_BLOCK=$(git show "$BASE_REF:music.html" | sed -n '/<!-- YOUTUBE-AUTO-START -->/,/<!-- YOUTUBE-AUTO-END -->/p')
+          fi
           MUSIC_BLOCK_DIFF=$(diff -u <(echo "$OLD_MUSIC_BLOCK") <(echo "$NEW_MUSIC_BLOCK") || true)
           MUSIC_BLOCK_ADDED=$(echo "$MUSIC_BLOCK_DIFF" | grep "^+" | grep -v "^+++" | sed 's/^+//' | head -50)
 
@@ -68,7 +75,7 @@ jobs:
           echo "$ADDED" > /tmp/music_changes.txt
 
           # Détecter une vraie nouveauté musicale (nouveaux liens de contenu dans le bloc auto YouTube)
-          if echo "$MUSIC_BLOCK_ADDED" | grep -qiE 'https?://(www\.)?(youtube\.com|youtu\.be|soundcloud\.com|bandcamp\.com)'; then
+          if echo "$MUSIC_BLOCK_ADDED" | grep -qiE "$MUSIC_LINK_PATTERN"; then
             echo "has_music_content=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_music_content=false" >> "$GITHUB_OUTPUT"
