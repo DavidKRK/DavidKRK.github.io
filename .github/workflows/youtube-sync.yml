@@ -80,12 +80,13 @@ jobs:
               print(videos)
               exit(1)
 
+          placeholder_titles = {'test'}
           video_list = []
           for item in videos['items']:
               video_id = item['id']['videoId']
               title = html.unescape(item['snippet']['title']).strip()
-              if title.casefold() == 'test':
-                  print('Video ignoree (titre de test): ' + video_id)
+              if title.casefold() in placeholder_titles:
+                  print('Vidéo ignorée (titre de test exact): ' + video_id)
                   continue
               thumb = item['snippet']['thumbnails']['high']['url']
               published = item['snippet']['publishedAt'][:10]
