@@ -1,6 +1,10 @@
 name: '💬 Gemini CLI'
 
 on:
+  issues:
+    types:
+      - 'opened'
+      - 'reopened'
   pull_request_review_comment:
     types:
       - 'created'
@@ -19,7 +23,7 @@ on:
       issue_number:
         description: "Le numéro de l'Issue ou de la PR"
         required: true
-        type: string
+        type: number
       is_pr:
         description: "Est-ce une Pull Request ?"
         required: true
@@ -27,7 +31,7 @@ on:
         default: false
 
 concurrency:
-  group: '${{ github.workflow }}-${{ github.event.issue.number || github.event.inputs.issue_number || github.run_id }}'
+  group: '${{ github.workflow }}-${{ github.event.issue.number || github.event.pull_request.number || github.event.inputs.issue_number || github.run_id }}'
   cancel-in-progress: |-
     ${{ github.event_name == 'workflow_dispatch' || (github.event.sender.type == 'User' && (github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'COLLABORATOR')) }}
 
@@ -106,6 +110,14 @@ jobs:
           IS_PR="false"
 
           if [[ "${EVENT_NAME}" == "workflow_dispatch" ]]; then
+            if ! [[ "${INPUT_ISSUE_NUMBER}" =~ ^[0-9]+$ ]]; then
+              echo "::error::issue_number must be a positive integer, got: '${INPUT_ISSUE_NUMBER}'"
+              exit 1
+            fi
+            if [[ -z "${INPUT_USER_REQUEST// }" ]]; then
+              echo "::error::user_request must not be empty or whitespace-only"
+              exit 1
+            fi
             USER_REQUEST="${INPUT_USER_REQUEST}"
             ISSUE_NUMBER="${INPUT_ISSUE_NUMBER}"
             IS_PR="${INPUT_IS_PR}"
