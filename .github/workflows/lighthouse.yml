@@ -4,9 +4,9 @@ on:
   # Audit sur chaque Pull Request ciblant la branche principale
   pull_request:
     branches: [main, gh-pages]
-  # Audit hebdomadaire le lundi à 3h UTC (au lieu de quotidien)
+  # Audit quotidien chaque nuit à 1h UTC
   schedule:
-    - cron: '0 3 * * 1'
+    - cron: '0 1 * * *'
   # Déclenchement manuel depuis l'onglet Actions
   workflow_dispatch:
 

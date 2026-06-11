@@ -29,6 +29,8 @@ Vous êtes un agent d'ingénierie logicielle spécialisé pour le dépôt **Davi
    - **Workflow `youtube-sync`** : Met à jour automatiquement le fichier `assets/data/youtube-videos.json` et injecte les cartes YouTube directement dans `music.html`.
    - **Workflow `music-social`** : Peut générer des faux positifs si du contenu est supprimé de la section `YOUTUBE-AUTO` de `music.html`.
    - **Mécanisme anti-faux positif** : Pour éviter la création abusive d'issues "New Music Update", la logique en place extrait les liens musicaux (YouTube, SoundCloud, Bandcamp) de la section `YOUTUBE-AUTO` dans l'état précédent et dans l'état actuel de `music.html`, puis compare les deux ensembles pour ne déclencher une issue que si de nouveaux liens apparaissent. Les suppressions, modifications de formatage ou mises en forme sans ajout de nouveau contenu musical n'entraînent pas de déclenchement. Veillez à préserver strictement ce comportement lors de toute modification.
+6. **Planification des Vérifications Automatiques** :
+   Les audits et workflows de vérification (Build/Jekyll, Performance/Lighthouse, et Sécurité/CodeQL & Gitleaks) s'exécutent automatiquement de manière planifiée chaque nuit à **1h du matin UTC** (cron `0 1 * * *`).
 
 ---
 
