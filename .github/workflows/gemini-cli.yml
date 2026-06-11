@@ -1,6 +1,10 @@
 name: '💬 Gemini CLI'
 
 on:
+  issues:
+    types:
+      - 'opened'
+      - 'reopened'
   pull_request_review_comment:
     types:
       - 'created'
@@ -10,11 +14,26 @@ on:
   issue_comment:
     types:
       - 'created'
+  workflow_dispatch:
+    inputs:
+      user_request:
+        description: "La requête ou instruction pour Gemini-CLI"
+        required: true
+        type: string
+      issue_number:
+        description: "Le numéro de l'Issue ou de la PR"
+        required: true
+        type: number
+      is_pr:
+        description: "Est-ce une Pull Request ?"
+        required: true
+        type: boolean
+        default: false
 
 concurrency:
-  group: '${{ github.workflow }}-${{ github.event.issue.number }}'
+  group: '${{ github.workflow }}-${{ github.event.issue.number || github.event.pull_request.number || github.event.inputs.issue_number || github.run_id }}'
   cancel-in-progress: |-
-    ${{ github.event.sender.type == 'User' && ( github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'COLLABORATOR') }}
+    ${{ github.event_name == 'workflow_dispatch' || (github.event.sender.type == 'User' && (github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'COLLABORATOR')) }}
 
 defaults:
   run:
@@ -80,6 +99,9 @@ jobs:
         env:
           EVENT_NAME: '${{ github.event_name }}'
           EVENT_PAYLOAD: '${{ toJSON(github.event) }}'
+          INPUT_USER_REQUEST: '${{ github.event.inputs.user_request }}'
+          INPUT_ISSUE_NUMBER: '${{ github.event.inputs.issue_number }}'
+          INPUT_IS_PR: '${{ github.event.inputs.is_pr }}'
         run: |-
           set -euo pipefail
 
@@ -87,7 +109,19 @@ jobs:
           ISSUE_NUMBER=""
           IS_PR="false"
 
-          if [[ "${EVENT_NAME}" == "issues" ]]; then
+          if [[ "${EVENT_NAME}" == "workflow_dispatch" ]]; then
+            if ! [[ "${INPUT_ISSUE_NUMBER}" =~ ^[0-9]+$ ]]; then
+              echo "::error::issue_number must be a positive integer, got: '${INPUT_ISSUE_NUMBER}'"
+              exit 1
+            fi
+            if [[ -z "${INPUT_USER_REQUEST// }" ]]; then
+              echo "::error::user_request must not be empty or whitespace-only"
+              exit 1
+            fi
+            USER_REQUEST="${INPUT_USER_REQUEST}"
+            ISSUE_NUMBER="${INPUT_ISSUE_NUMBER}"
+            IS_PR="${INPUT_IS_PR}"
+          elif [[ "${EVENT_NAME}" == "issues" ]]; then
             USER_REQUEST=$(echo "${EVENT_PAYLOAD}" | jq -r .issue.body)
             ISSUE_NUMBER=$(echo "${EVENT_PAYLOAD}" | jq -r .issue.number)
           elif [[ "${EVENT_NAME}" == "issue_comment" ]]; then
