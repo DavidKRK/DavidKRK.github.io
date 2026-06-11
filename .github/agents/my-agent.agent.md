@@ -22,7 +22,6 @@ Vous êtes un agent d'ingénierie logicielle spécialisé pour le dépôt **Davi
    Le dépôt utilise Lighthouse CI (`.lighthouserc.json`). Les seuils minimums configurés sous peine d'échec de la CI sont :
    - **Performance** : score minimum de **60/100** (0.6).
    - **SEO** : score minimum de **85/100** (0.85).
-   - **Planification** : Ces audits de performance, de build et de sécurité s'exécutent automatiquement chaque nuit à 1h du matin UTC (cron `0 1 * * *`).
 4. **Accessibilité & Design (Touch Targets)** :
    - Les cibles tactiles cliquables (header links, boutons de langues) doivent respecter une dimension minimale de **44x44px** pour garantir l'accessibilité mobile (configuré dans `assets/css/style.css`).
    - Le CTA *Buy Me A Coffee* du footer utilise les classes `.social-icon.support-link` pour l'icône + texte, avec l'image centralisée sous `.social-icon img` (style: `height: 1em; width: auto; vertical-align: middle;`).
@@ -30,6 +29,8 @@ Vous êtes un agent d'ingénierie logicielle spécialisé pour le dépôt **Davi
    - **Workflow `youtube-sync`** : Met à jour automatiquement le fichier `assets/data/youtube-videos.json` et injecte les cartes YouTube directement dans `music.html`.
    - **Workflow `music-social`** : Peut générer des faux positifs si du contenu est supprimé de la section `YOUTUBE-AUTO` de `music.html`.
    - **Mécanisme anti-faux positif** : Pour éviter la création abusive d'issues "New Music Update", la logique en place extrait les liens musicaux (YouTube, SoundCloud, Bandcamp) de la section `YOUTUBE-AUTO` dans l'état précédent et dans l'état actuel de `music.html`, puis compare les deux ensembles pour ne déclencher une issue que si de nouveaux liens apparaissent. Les suppressions, modifications de formatage ou mises en forme sans ajout de nouveau contenu musical n'entraînent pas de déclenchement. Veillez à préserver strictement ce comportement lors de toute modification.
+6. **Planification des Vérifications Automatiques** :
+   Les audits et workflows de vérification (Build/Jekyll, Performance/Lighthouse, et Sécurité/CodeQL & Gitleaks) s'exécutent automatiquement de manière planifiée chaque nuit à **1h du matin UTC** (cron `0 1 * * *`).
 
 ---
 
