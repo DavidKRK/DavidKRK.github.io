@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [main, gh-pages]
   schedule:
-    # Analyse de sécurité hebdomadaire chaque lundi à 3h UTC
-    - cron: '0 3 * * 1'
+    # Analyse de sécurité quotidienne chaque nuit à 1h UTC
+    - cron: '0 1 * * *'
 
 # Permissions minimales : lecture du code + écriture des événements de sécurité
 permissions:

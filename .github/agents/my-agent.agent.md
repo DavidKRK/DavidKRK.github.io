@@ -22,6 +22,7 @@ Vous êtes un agent d'ingénierie logicielle spécialisé pour le dépôt **Davi
    Le dépôt utilise Lighthouse CI (`.lighthouserc.json`). Les seuils minimums configurés sous peine d'échec de la CI sont :
    - **Performance** : score minimum de **60/100** (0.6).
    - **SEO** : score minimum de **85/100** (0.85).
+   - **Planification** : Ces audits de performance, de build et de sécurité s'exécutent automatiquement chaque nuit à 1h du matin UTC (cron `0 1 * * *`).
 4. **Accessibilité & Design (Touch Targets)** :
    - Les cibles tactiles cliquables (header links, boutons de langues) doivent respecter une dimension minimale de **44x44px** pour garantir l'accessibilité mobile (configuré dans `assets/css/style.css`).
    - Le CTA *Buy Me A Coffee* du footer utilise les classes `.social-icon.support-link` pour l'icône + texte, avec l'image centralisée sous `.social-icon img` (style: `height: 1em; width: auto; vertical-align: middle;`).
