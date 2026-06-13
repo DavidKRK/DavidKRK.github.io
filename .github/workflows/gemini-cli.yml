@@ -163,7 +163,7 @@ jobs:
           ref: 'refs/pull/${{ steps.get_context.outputs.issue_number }}/head'
           fetch-depth: 0
 
-      - name: 'Checkout main branch'
+      - name: 'Checkout default branch'
         if: |-
           ${{  steps.get_context.outputs.is_pr == 'false' }}
         uses: 'actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10' # ratchet:actions/checkout@v6.0.3
@@ -228,7 +228,7 @@ jobs:
 
       - name: 'Run Gemini'
         id: 'run_gemini'
-        uses: 'google-github-actions/run-gemini-cli@f77273f4c914e4bf38440cf36a0369cb64a37489' # ratchet:google-github-actions/run-gemini-cli@v0.1.22
+        uses: './.github/actions/run-repository-gemini'
         env:
           GITHUB_TOKEN: '${{ steps.generate_token.outputs.token || secrets.GITHUB_TOKEN }}'
           REPOSITORY: '${{ github.repository }}'
@@ -237,12 +237,15 @@ jobs:
           IS_PR: '${{ steps.get_context.outputs.is_pr }}'
         with:
           gemini_api_key: '${{ secrets.GEMINI_API_KEY }}'
+          gemini_cli_version: '${{ vars.GEMINI_CLI_VERSION }}'
+          gemini_model: 'gemini-2.5-flash'
           gcp_workload_identity_provider: '${{ vars.GCP_WIF_PROVIDER }}'
           gcp_project_id: '${{ vars.GOOGLE_CLOUD_PROJECT }}'
           gcp_location: '${{ vars.GOOGLE_CLOUD_LOCATION }}'
           gcp_service_account: '${{ vars.SERVICE_ACCOUNT_EMAIL }}'
           use_vertex_ai: '${{ vars.GOOGLE_GENAI_USE_VERTEXAI }}'
           use_gemini_code_assist: '${{ vars.GOOGLE_GENAI_USE_GCA }}'
+          github_issue_number: '${{ steps.get_context.outputs.issue_number }}'
           settings: |-
             {
               "debug": ${{ fromJSON(env.DEBUG || env.ACTIONS_STEP_DEBUG || false) }},
@@ -304,17 +307,12 @@ jobs:
                - Make the necessary code or documentation changes using the available tools (e.g., `write_file`). Ensure all changes follow project conventions and best practices. Reference all shell variables as `"${VAR}"` (with quotes and braces) to prevent errors.
                - Run any relevant tests or checks to verify the fix works as intended. If possible, provide evidence (test output, screenshots, etc.) that the issue is resolved.
                - **Branching and Committing**:
-                 - **NEVER commit directly to the `main` branch.**
-                 - If you are working on a **pull request** (`IS_PR` is `true`), the correct branch is already checked out. Simply commit and push to it.
+                - **NEVER assume the default branch is `main`.** This repository uses `gh-pages`, and the repository `GEMINI.md` file contains the current branch rules.
+                - If you are working on a **pull request** (`IS_PR` is `true`), the correct branch is already checked out. Simply commit and push to it.
                    - `git add .`
                    - `git commit -m "feat: <describe the change>"`
                    - `git push`
-                 - If you are working on an **issue** (`IS_PR` is `false`), create a new branch for your changes. A good branch name would be `issue/${ISSUE_NUMBER}/<short-description>`.
-                   - `git checkout -b issue/${ISSUE_NUMBER}/my-fix`
-                   - `git add .`
-                   - `git commit -m "feat: <describe the fix>"`
-                   - `git push origin issue/${ISSUE_NUMBER}/my-fix`
-                   - After pushing, you can create a pull request: `gh pr create --title "Fixes #${ISSUE_NUMBER}: <short title>" --body "This PR addresses issue #${ISSUE_NUMBER}."`
+                - If you are working on an **issue** (`IS_PR` is `false`), do not assume you can create or push a new branch. Check the repository guidance first. If repository policy blocks branch creation or direct pushes, stop after preparing the fix and explain the blocker clearly in your response.
                - Summarize what was changed and why in a markdown file: `write_file("response.md", "<your response here>")`
                - Post the response as a comment:
                  - For PRs: `gh pr comment "${ISSUE_NUMBER}" --body-file response.md`
@@ -334,7 +332,7 @@ jobs:
             3. **Answering Any Question on an Issue**
                - Read the question and the full issue context using `gh issue view` and related tools.
                - Research or analyze the codebase as needed to provide an accurate answer.
-               - If the question requires code or documentation changes, follow the fix process above, including creating and updating a checklist plan and **creating a new branch for your changes as described in section 1.**
+               - If the question requires code or documentation changes, follow the fix process above, including creating and updating a checklist plan and respecting the repository branch rules described in section 1 and `GEMINI.md`.
                - Write a clear, concise answer in `response.md` and post it as an issue comment: `gh issue comment "${ISSUE_NUMBER}" --body-file response.md`
 
             ## Guidelines

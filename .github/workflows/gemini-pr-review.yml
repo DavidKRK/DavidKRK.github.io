@@ -152,7 +152,7 @@ jobs:
           } >> "${GITHUB_OUTPUT}"
 
       - name: 'Run Gemini PR Review'
-        uses: 'google-github-actions/run-gemini-cli@f77273f4c914e4bf38440cf36a0369cb64a37489' # v0.1.22
+        uses: './.github/actions/run-repository-gemini'
         id: 'gemini_pr_review'
         continue-on-error: true
         env:
@@ -165,6 +165,7 @@ jobs:
           REPOSITORY: '${{ github.repository }}'
         with:
           gemini_cli_version: '${{ vars.GEMINI_CLI_VERSION }}'
+          gemini_model: 'gemini-2.5-flash'
           gcp_workload_identity_provider: '${{ vars.GCP_WIF_PROVIDER }}'
           gcp_project_id: '${{ vars.GOOGLE_CLOUD_PROJECT }}'
           gcp_location: '${{ vars.GOOGLE_CLOUD_LOCATION }}'
@@ -172,6 +173,7 @@ jobs:
           gemini_api_key: '${{ secrets.GEMINI_API_KEY }}'
           use_vertex_ai: '${{ vars.GOOGLE_GENAI_USE_VERTEXAI }}'
           use_gemini_code_assist: '${{ vars.GOOGLE_GENAI_USE_GCA }}'
+          github_pr_number: '${{ steps.get_pr.outputs.pr_number || steps.get_pr_comment.outputs.pr_number }}'
           settings: |-
             {
               "debug": ${{ fromJSON(env.DEBUG || env.ACTIONS_STEP_DEBUG || false) }},
