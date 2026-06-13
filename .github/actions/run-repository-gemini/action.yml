@@ -1,0 +1,106 @@
+name: 'Run repository Gemini workflow'
+description: 'Centralized Gemini CLI runner with safe model defaults for this repository.'
+
+inputs:
+  gemini_api_key:
+    description: 'Gemini API key'
+    required: false
+  gemini_cli_version:
+    description: 'Gemini CLI version to install'
+    required: false
+    default: 'latest'
+  gemini_model:
+    description: 'Gemini model to use'
+    required: false
+    default: 'gemini-2.5-flash'
+  gcp_workload_identity_provider:
+    description: 'Google Cloud Workload Identity Provider'
+    required: false
+  gcp_project_id:
+    description: 'Google Cloud project id'
+    required: false
+  gcp_location:
+    description: 'Google Cloud location'
+    required: false
+  gcp_service_account:
+    description: 'Google Cloud service account'
+    required: false
+  use_vertex_ai:
+    description: 'Whether to use Vertex AI'
+    required: false
+    default: 'false'
+  use_gemini_code_assist:
+    description: 'Whether to use Gemini Code Assist'
+    required: false
+    default: 'false'
+  settings:
+    description: 'Gemini CLI settings JSON'
+    required: false
+  prompt:
+    description: 'Prompt passed to Gemini CLI'
+    required: true
+  github_pr_number:
+    description: 'PR number for Gemini telemetry/context'
+    required: false
+  github_issue_number:
+    description: 'Issue number for Gemini telemetry/context'
+    required: false
+  upload_artifacts:
+    description: 'Whether to upload Gemini artifacts'
+    required: false
+    default: 'false'
+
+outputs:
+  summary:
+    description: 'Gemini CLI summarized output'
+    value: ${{ steps.run_gemini.outputs.summary }}
+  error:
+    description: 'Gemini CLI error output'
+    value: ${{ steps.run_gemini.outputs.error }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Resolve Gemini model'
+      id: 'resolve_model'
+      shell: 'bash'
+      env:
+        REQUESTED_MODEL: '${{ inputs.gemini_model }}'
+      run: |-
+        set -euo pipefail
+
+        MODEL="$(printf '%s' "${REQUESTED_MODEL}" | xargs)"
+        if [[ -z "${MODEL}" ]]; then
+          MODEL='gemini-2.5-flash'
+        fi
+
+        case "${MODEL}" in
+          auto|gemini-*)
+            ;;
+          *)
+            echo "::warning::Unsupported Gemini model '${MODEL}'. Falling back to 'gemini-2.5-flash' to avoid runtime model availability errors."
+            MODEL='gemini-2.5-flash'
+            ;;
+        esac
+
+        echo "::notice::Using Gemini model '${MODEL}'."
+        echo "gemini_model=${MODEL}" >> "${GITHUB_OUTPUT}"
+
+    - name: 'Run Gemini CLI'
+      id: 'run_gemini'
+      uses: 'google-github-actions/run-gemini-cli@f77273f4c914e4bf38440cf36a0369cb64a37489' # v0.1.22
+      with:
+        gemini_api_key: '${{ inputs.gemini_api_key }}'
+        gemini_cli_version: '${{ inputs.gemini_cli_version }}'
+        gemini_model: '${{ steps.resolve_model.outputs.gemini_model }}'
+        gcp_workload_identity_provider: '${{ inputs.gcp_workload_identity_provider }}'
+        gcp_project_id: '${{ inputs.gcp_project_id }}'
+        gcp_location: '${{ inputs.gcp_location }}'
+        gcp_service_account: '${{ inputs.gcp_service_account }}'
+        use_vertex_ai: '${{ inputs.use_vertex_ai }}'
+        use_gemini_code_assist: '${{ inputs.use_gemini_code_assist }}'
+        github_pr_number: '${{ inputs.github_pr_number }}'
+        github_issue_number: '${{ inputs.github_issue_number }}'
+        upload_artifacts: '${{ inputs.upload_artifacts }}'
+        settings: '${{ inputs.settings }}'
+        prompt: '${{ inputs.prompt }}'
