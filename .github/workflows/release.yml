@@ -1,0 +1,131 @@
+name: 🚀 Release automatique + Changelog
+
+on:
+  push:
+    branches: [gh-pages]
+    paths-ignore:
+      - '.github/badges/**'
+      - 'trigger.txt'
+      - 'digest.txt'
+      - 'assets/data/youtube-videos.json'
+
+# Empêche les releases parallèles sur le même commit
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: 📦 Créer la release
+    runs-on: ubuntu-latest
+    # Ignorer les commits automatiques des bots
+    if: |
+      github.actor != 'github-actions[bot]' &&
+      github.actor != 'dependabot[bot]'
+
+    steps:
+      - name: Checkout complet du dépôt
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+
+      # ── Générer le tag CalVer (vYYYY.MM.DD ou vYYYY.MM.DD.N) ──────────
+      - name: Calculer le tag de version
+        id: version
+        run: |
+          DATE=$(date -u +%Y.%m.%d)
+          BASE="v${DATE}"
+          TAG="$BASE"
+          N=1
+          while git tag --list "$TAG" | grep -q .; do
+            TAG="${BASE}.${N}"
+            N=$((N + 1))
+          done
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "🏷️ Tag généré : $TAG"
+
+      # ── Générer le changelog depuis la dernière release de version ──────
+      - name: Générer le changelog
+        id: changelog
+        run: |
+          # Dernier tag de version (exclut les tags backup-*)
+          LAST_TAG=$(git tag --sort=-version:refname \
+            | grep -v '^backup-' \
+            | head -1)
+
+          echo "📌 Dernière release : ${LAST_TAG:-aucune}"
+
+          # Commits depuis la dernière release (ou tout l'historique)
+          if [ -n "$LAST_TAG" ]; then
+            RANGE="${LAST_TAG}..HEAD"
+          else
+            RANGE="HEAD"
+          fi
+
+          # Récupérer les commits significatifs (exclure merges et auto-sync)
+          ALL=$(git log "$RANGE" \
+            --pretty=format:"%s (%h)" \
+            --no-merges \
+            | grep -ivE \
+              'auto-sync|scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump' \
+            || true)
+
+          if [ -z "$ALL" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "last_tag=${LAST_TAG:-début du projet}" >> "$GITHUB_OUTPUT"
+
+          # ── Patterns de classification des commits ───────────────────
+          P_FEAT='^feat[:(]|^(add|nouveau|ajout|new feature)'
+          P_FIX='^fix[:(]|^(correct|corrig|bug|hotfix)'
+          P_PERF='^perf[:(]|^(optim|perform|lighthouse|lcp|speed)'
+          P_CONTENT='^content[:(]|^(music|track|video|photo|biog|event)'
+          P_CHORE='^chore[:(]|^(update|mise|deps|refactor|style|ci|test)'
+          P_ALL="${P_FEAT}|${P_FIX}|${P_PERF}|${P_CONTENT}|${P_CHORE}"
+
+          # ── Grouper par type de commit conventionnel ──────────────────
+          FEATURES=$(echo "$ALL" | grep -iE "$P_FEAT"    | sed 's/^/- /' || true)
+          FIXES=$(echo "$ALL"    | grep -iE "$P_FIX"     | sed 's/^/- /' || true)
+          PERF=$(echo "$ALL"     | grep -iE "$P_PERF"    | sed 's/^/- /' || true)
+          CONTENT=$(echo "$ALL"  | grep -iE "$P_CONTENT" | sed 's/^/- /' || true)
+          CHORES=$(echo "$ALL"   | grep -iE "$P_CHORE"   | sed 's/^/- /' || true)
+          OTHERS=$(echo "$ALL"   | grep -viE "$P_ALL"    | sed 's/^/- /' || true)
+
+          # Construire le corps de la release
+          BODY="## 📋 Changelog\n\n"
+          BODY+="_Depuis : **${LAST_TAG:-début du projet}** → **${{ steps.version.outputs.tag }}**_\n\n"
+
+          [ -n "$FEATURES" ] && BODY+="### ✨ Nouvelles fonctionnalités\n${FEATURES}\n\n"
+          [ -n "$CONTENT" ]  && BODY+="### 🎵 Contenu\n${CONTENT}\n\n"
+          [ -n "$FIXES" ]    && BODY+="### 🐛 Corrections\n${FIXES}\n\n"
+          [ -n "$PERF" ]     && BODY+="### ⚡ Performances\n${PERF}\n\n"
+          [ -n "$CHORES" ]   && BODY+="### 🔧 Maintenance\n${CHORES}\n\n"
+          [ -n "$OTHERS" ]   && BODY+="### 📝 Autres\n${OTHERS}\n\n"
+
+          BODY+="---\n*Release générée automatiquement via GitHub Actions.*"
+
+          printf '%b' "$BODY" > /tmp/changelog.md
+          echo "✅ Changelog généré"
+          cat /tmp/changelog.md
+
+      # ── Créer la release GitHub ────────────────────────────────────────
+      - name: Publier la release
+        if: steps.changelog.outputs.skip != 'true'
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: "🚀 Release ${{ steps.version.outputs.tag }}"
+          body_path: /tmp/changelog.md
+          draft: false
+          prerelease: false
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
