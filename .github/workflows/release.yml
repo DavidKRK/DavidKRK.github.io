@@ -37,7 +37,7 @@ jobs:
       - name: Calculer le tag de version
         id: version
         run: |
-          DATE=$(date +%Y.%m.%d)
+          DATE=$(date -u +%Y.%m.%d)
           BASE="v${DATE}"
           TAG="$BASE"
           N=1
@@ -71,8 +71,8 @@ jobs:
           ALL=$(git log "$RANGE" \
             --pretty=format:"%s (%h)" \
             --no-merges \
-            | grep -v -E \
-              'Auto-sync|auto-sync|Scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump' \
+            | grep -ivE \
+              'auto-sync|scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump' \
             || true)
 
           if [ -z "$ALL" ]; then
@@ -83,20 +83,21 @@ jobs:
           echo "skip=false" >> "$GITHUB_OUTPUT"
           echo "last_tag=${LAST_TAG:-début du projet}" >> "$GITHUB_OUTPUT"
 
+          # ── Patterns de classification des commits ───────────────────
+          P_FEAT='^feat[:(]|^(add|nouveau|ajout|new feature)'
+          P_FIX='^fix[:(]|^(correct|corrig|bug|hotfix)'
+          P_PERF='^perf[:(]|^(optim|perform|lighthouse|lcp|speed)'
+          P_CONTENT='^content[:(]|^(music|track|video|photo|biog|event)'
+          P_CHORE='^chore[:(]|^(update|mise|deps|refactor|style|ci|test)'
+          P_ALL="${P_FEAT}|${P_FIX}|${P_PERF}|${P_CONTENT}|${P_CHORE}"
+
           # ── Grouper par type de commit conventionnel ──────────────────
-          FEATURES=$(echo "$ALL" | grep -iE '^feat[:(]|^(add|nouveau|ajout|new feature)' \
-            | sed 's/^/- /' || true)
-          FIXES=$(echo "$ALL" | grep -iE '^fix[:(]|^(correct|corrig|bug|hotfix)' \
-            | sed 's/^/- /' || true)
-          PERF=$(echo "$ALL" | grep -iE '^perf[:(]|^(optim|perform|lighthouse|lcp|speed)' \
-            | sed 's/^/- /' || true)
-          CONTENT=$(echo "$ALL" | grep -iE '^content[:(]|^(music|track|video|photo|biog|event)' \
-            | sed 's/^/- /' || true)
-          CHORES=$(echo "$ALL" | grep -iE '^chore[:(]|^(update|mise|deps|refactor|style|ci|test)' \
-            | sed 's/^/- /' || true)
-          OTHERS=$(echo "$ALL" \
-            | grep -viE '^feat[:(]|^(add|nouveau|ajout|new feature)|^fix[:(]|^(correct|corrig|bug|hotfix)|^perf[:(]|^(optim|perform|lighthouse|lcp|speed)|^content[:(]|^(music|track|video|photo|biog|event)|^chore[:(]|^(update|mise|deps|refactor|style|ci|test)' \
-            | sed 's/^/- /' || true)
+          FEATURES=$(echo "$ALL" | grep -iE "$P_FEAT"    | sed 's/^/- /' || true)
+          FIXES=$(echo "$ALL"    | grep -iE "$P_FIX"     | sed 's/^/- /' || true)
+          PERF=$(echo "$ALL"     | grep -iE "$P_PERF"    | sed 's/^/- /' || true)
+          CONTENT=$(echo "$ALL"  | grep -iE "$P_CONTENT" | sed 's/^/- /' || true)
+          CHORES=$(echo "$ALL"   | grep -iE "$P_CHORE"   | sed 's/^/- /' || true)
+          OTHERS=$(echo "$ALL"   | grep -viE "$P_ALL"    | sed 's/^/- /' || true)
 
           # Construire le corps de la release
           BODY="## 📋 Changelog\n\n"
