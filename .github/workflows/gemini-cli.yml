@@ -40,9 +40,16 @@ defaults:
     shell: 'bash'
 
 permissions:
-  contents: 'write'
+  # contents: write — limité au strict nécessaire :
+  # Le checkout et les commits se font via le token GitHub App (APP_ID/APP_PRIVATE_KEY)
+  # qui est scopé au repo. 'read' suffit pour le checkout initial.
+  # Gemini pousse via le token App, pas via GITHUB_TOKEN.
+  contents: 'read'
+  # id-token: write — REQUIS pour l'authentification GCP Workload Identity (Vertex AI)
   id-token: 'write'
+  # pull-requests: write — REQUIS pour commenter et modifier les PR
   pull-requests: 'write'
+  # issues: write — REQUIS pour commenter les issues et créer des labels
   issues: 'write'
 
 jobs:
