@@ -37,22 +37,39 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit
 
-      - name: Build optimized assets
+      - name: Copier tout le site dans dist/
+        run: |
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='dist' \
+            --exclude='*.md' \
+            --exclude='Gemfile*' \
+            --exclude='package*.json' \
+            --exclude='*.code-workspace' \
+            --exclude='*.toml' \
+            --exclude='*.txt' \
+            --exclude='.gitignore' \
+            --exclude='.gitleaks.toml' \
+            --exclude='.lychee.toml' \
+            --exclude='.lighthouserc.json' \
+            --exclude='.bundle' \
+            . dist/
+
+      - name: Build optimized assets (minify CSS + JS)
         run: npm run build
 
-      - name: Detect build output folder
-        id: detect
+      - name: Remplacer les assets par leurs versions minifiees
         run: |
-          if [ -d "dist" ]; then
-            echo "path=dist" >> "$GITHUB_OUTPUT"
-          elif [ -d "build" ]; then
-            echo "path=build" >> "$GITHUB_OUTPUT"
-          elif [ -d "public" ]; then
-            echo "path=public" >> "$GITHUB_OUTPUT"
-          else
-            echo "path=." >> "$GITHUB_OUTPUT"
+          # Remplacer le CSS original par la version minifiee
+          if [ -f "dist/assets/css/style.min.css" ]; then
+            cp dist/assets/css/style.min.css dist/assets/css/style.css
           fi
-          echo "Detected path: $(cat $GITHUB_OUTPUT | grep path | tail -1)"
+          # Remplacer le JS original par la version minifiee
+          if [ -f "dist/assets/js/main.min.js" ]; then
+            cp dist/assets/js/main.min.js dist/assets/js/main.js
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -60,7 +77,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.detect.outputs.path }}
+          path: dist
 
   deploy:
     name: Deploy to GitHub Pages
