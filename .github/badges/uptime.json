@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
   "label": "davidkrk.com",
-  "message": "hors ligne",
-  "color": "red"
+  "message": "en ligne",
+  "color": "brightgreen"
 }
