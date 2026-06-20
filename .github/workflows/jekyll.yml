@@ -1,4 +1,4 @@
-name: Build Check (npm run build)
+name: Site Build Check (no deploy)
 
 on:
   pull_request:
