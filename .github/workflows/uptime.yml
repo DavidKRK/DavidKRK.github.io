@@ -2,8 +2,8 @@ name: 📡 Monitoring Uptime - davidkrk.com
 
 on:
   schedule:
-    # Vérification de disponibilité toutes les 30 minutes
-    - cron: '*/30 * * * *'
+    # Vérification de disponibilité toutes les heures
+    - cron: '0 * * * *'
   # Déclenchement manuel pour un test immédiat
   workflow_dispatch:
 
@@ -11,6 +11,7 @@ on:
 permissions:
   contents: write
   issues: write
+  pull-requests: read
 
 jobs:
   uptime-check:
@@ -95,7 +96,6 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
-            // Rechercher les issues d'alerte uptime ouvertes
             const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -103,7 +103,6 @@ jobs:
               state: 'open'
             });
 
-            // Fermer chaque issue et ajouter un commentaire de résolution
             for (const issue of issues.data) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -120,6 +119,7 @@ jobs:
             }
 
       # Si le site est hors ligne, créer une issue d'alerte (une seule à la fois)
+      # Protection anti-boucle : ne crée pas d'issue si une PR Claude est déjà ouverte
       - name: Créer une alerte si le site est hors ligne
         if: steps.check.outputs.is_up == 'false'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
@@ -127,7 +127,36 @@ jobs:
           STATUS_CODE: ${{ steps.check.outputs.status_code }}
         with:
           script: |
-            // Créer les labels requis s'ils n'existent pas encore dans le dépôt
+            // Vérifier si une issue d'alerte uptime est déjà ouverte
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'uptime',
+              state: 'open'
+            });
+
+            // Ne créer qu'une seule alerte à la fois pour éviter le spam
+            if (existing.data.length > 0) {
+              console.log(`⏭️ Issue uptime déjà ouverte (#${existing.data[0].number}) — pas de doublon créé.`);
+              return;
+            }
+
+            // Protection anti-boucle : vérifier si une PR Claude est déjà ouverte sur ce sujet
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            const claudePR = prs.data.find(pr =>
+              pr.user.login === 'Claude' ||
+              pr.head.ref.startsWith('claude/fix-')
+            );
+            if (claudePR) {
+              console.log(`⏭️ PR Claude déjà ouverte (#${claudePR.number}) — pas de nouvelle issue créée.`);
+              return;
+            }
+
+            // Créer les labels requis s'ils n'existent pas encore
             const requiredLabels = [
               { name: 'uptime',  color: '0075ca', description: 'Monitoring uptime du site' },
               { name: 'urgent',  color: 'd93f0b', description: 'Nécessite une attention immédiate' }
@@ -154,35 +183,24 @@ jobs:
               }
             }
 
-            // Vérifier si une issue d'alerte uptime est déjà ouverte
-            const existing = await github.rest.issues.listForRepo({
+            await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: 'uptime',
-              state: 'open'
+              title: '🚨 Alerte : davidkrk.com est hors ligne',
+              body: [
+                '## ⚠️ Le site davidkrk.com est inaccessible',
+                '',
+                `- **URL surveillée** : https://www.davidkrk.com/`,
+                `- **Code HTTP reçu** : \`${process.env.STATUS_CODE}\``,
+                `- **Détecté le** : ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })} (heure de Paris)`,
+                '',
+                '### Actions recommandées',
+                '1. Vérifier l\'onglet **Déploiements** → GitHub Pages',
+                '2. Consulter les logs du workflow **Deploy**',
+                '3. Vérifier le DNS (CNAME → `davidkrk.github.io`)',
+                '',
+                '_Issue créée automatiquement par le workflow de monitoring uptime._',
+                '_Elle sera fermée automatiquement quand le site sera de nouveau accessible._'
+              ].join('\n'),
+              labels: ['uptime', 'urgent']
             });
-
-            // Ne créer qu'une seule alerte à la fois pour éviter le spam
-            if (existing.data.length === 0) {
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: '🚨 Alerte : davidkrk.com est hors ligne',
-                body: [
-                  '## ⚠️ Le site davidkrk.com est inaccessible',
-                  '',
-                  `- **URL surveillée** : https://www.davidkrk.com/`,
-                  `- **Code HTTP reçu** : \`${process.env.STATUS_CODE}\``,
-                  `- **Détecté le** : ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })} (heure de Paris)`,
-                  '',
-                  '### Actions recommandées',
-                  '1. Vérifier l\'onglet **Déploiements** → GitHub Pages',
-                  '2. Consulter les logs du workflow **Deploy**',
-                  '3. Vérifier le DNS (CNAME → `davidkrk.github.io`)',
-                  '',
-                  '_Issue créée automatiquement par le workflow de monitoring uptime._',
-                  '_Elle sera fermée automatiquement quand le site sera de nouveau accessible._'
-                ].join('\n'),
-                labels: ['uptime', 'urgent']
-              });
-            }
