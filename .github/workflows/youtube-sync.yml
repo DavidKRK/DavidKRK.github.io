@@ -71,7 +71,7 @@ jobs:
               'https://www.googleapis.com/youtube/v3/search'
               '?key=' + api_key
               + '&channelId=' + channel_id
-              + '&part=snippet,id&order=date&maxResults=6&type=video'
+              + '&part=snippet,id&order=date&maxResults=50&type=video'
           )
           r2 = requests.get(videos_url, timeout=30)
           videos = r2.json()
