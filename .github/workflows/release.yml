@@ -33,7 +33,7 @@ jobs:
           ref: gh-pages
           fetch-depth: 0
 
-      # ── Générer le tag CalVer (vYYYY.MM.DD ou vYYYY.MM.DD.N) ──────────
+      # ── Générer le tag CalVer (vYYYY.MM.DD ou vYYYY.MM.DD.N) ─────────────────────
       - name: Calculer le tag de version
         id: version
         run: |
@@ -67,23 +67,28 @@ jobs:
             RANGE="HEAD"
           fi
 
-          # Récupérer les commits significatifs (exclure merges et auto-sync)
+          # Récupérer les commits significatifs
+          # Filtre étendu : exclut auto-sync, scheduled, youtube-sync, backup-,
+          # dependabot, chore(deps): bump, commits Revert et chore: génériques
           ALL=$(git log "$RANGE" \
             --pretty=format:"%s (%h)" \
             --no-merges \
             | grep -ivE \
-              'auto-sync|scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump' \
+              'auto-sync|scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump|^Revert |^chore:' \
             || true)
 
-          if [ -z "$ALL" ]; then
+          # Seuil minimum : au moins 2 commits significatifs pour justifier une release
+          COUNT=$(echo "$ALL" | grep -c . || true)
+          if [ -z "$ALL" ] || [ "$COUNT" -lt 2 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "⏭️ Moins de 2 commits significatifs (${COUNT}) - release ignorée"
             exit 0
           fi
 
           echo "skip=false" >> "$GITHUB_OUTPUT"
           echo "last_tag=${LAST_TAG:-début du projet}" >> "$GITHUB_OUTPUT"
 
-          # ── Patterns de classification des commits ───────────────────
+          # ── Patterns de classification des commits ───────────────────────
           P_FEAT='^feat[:(]|^(add|nouveau|ajout|new feature)'
           P_FIX='^fix[:(]|^(correct|corrig|bug|hotfix)'
           P_PERF='^perf[:(]|^(optim|perform|lighthouse|lcp|speed)'
@@ -91,7 +96,7 @@ jobs:
           P_CHORE='^chore[:(]|^(update|mise|deps|refactor|style|ci|test)'
           P_ALL="${P_FEAT}|${P_FIX}|${P_PERF}|${P_CONTENT}|${P_CHORE}"
 
-          # ── Grouper par type de commit conventionnel ──────────────────
+          # ── Grouper par type de commit conventionnel ────────────────────
           FEATURES=$(echo "$ALL" | grep -iE "$P_FEAT"    | sed 's/^/- /' || true)
           FIXES=$(echo "$ALL"    | grep -iE "$P_FIX"     | sed 's/^/- /' || true)
           PERF=$(echo "$ALL"     | grep -iE "$P_PERF"    | sed 's/^/- /' || true)
@@ -116,7 +121,7 @@ jobs:
           echo "✅ Changelog généré"
           cat /tmp/changelog.md
 
-      # ── Créer la release GitHub ────────────────────────────────────────
+      # ── Créer la release GitHub ──────────────────────────────────────────────
       - name: Publier la release
         if: steps.changelog.outputs.skip != 'true'
         uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
