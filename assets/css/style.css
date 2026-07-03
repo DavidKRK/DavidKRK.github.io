@@ -237,7 +237,6 @@ body {
 
 /* ---------- BACKGROUND (all pages) ---------- */
 body {
-  background-image: none;
   display: flex;
   flex-direction: column;
 }
