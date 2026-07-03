@@ -110,17 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     langBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Toggle functionality
-            if (btn.classList.contains('active')) {
-                // If already active, hide everything
-                langContents.forEach(content => content.classList.remove('active'));
-                langBtns.forEach(b => b.classList.remove('active'));
-            } else {
-                // Otherwise, switch to the new language
-                switchLanguage(btn.dataset.lang);
-            }
+            switchLanguage(btn.dataset.lang);
         });
     });
 
-    // Default language is set in the HTML to avoid layout shifts on load.
+    switchLanguage('en');
 });
