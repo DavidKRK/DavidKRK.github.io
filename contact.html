@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,8 +34,6 @@
 
   <body class="contact-page">
 
-    <div class="background-image"></div>
-
     <div id="hero" class="content-wrapper">
       <header class="hero-header">
         <a href="index.html">Home</a>
@@ -52,16 +50,16 @@
         <h1 class="main-title">David KRK</h1>
 
         <div class="language-selector flex-wrap">
-          <button type="button" class="language-btn active" data-lang="fr">Français</button>
-          <button type="button" class="language-btn" data-lang="en">English</button>
+          <button type="button" class="language-btn" data-lang="fr">Français</button>
+          <button type="button" class="language-btn active" data-lang="en">English</button>
           <button type="button" class="language-btn" data-lang="es">Castellano</button>
           <button type="button" class="language-btn" data-lang="eu">Euskara</button>
           <button type="button" class="language-btn" data-lang="ar">العربية</button>
           <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
         </div>
 
-        <div class="lang-content active" data-lang="fr"><h2 class="main-title">Contact</h2></div>
-        <div class="lang-content" data-lang="en"><h2 class="main-title">Contact</h2></div>
+        <div class="lang-content" data-lang="fr"><h2 class="main-title">Contact</h2></div>
+        <div class="lang-content active" data-lang="en"><h2 class="main-title">Contact</h2></div>
         <div class="lang-content" data-lang="es"><h2 class="main-title">Contacto</h2></div>
         <div class="lang-content" data-lang="eu"><h2 class="main-title">Kontaktua</h2></div>
         <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">تواصل</h2></div>
@@ -70,7 +68,7 @@
 
       <main class="text-center max-w-4xl mx-auto px-4 w-full">
         <div class="contact-form-container">
-          <div class="lang-content active" data-lang="fr">
+          <div class="lang-content" data-lang="fr">
             <div class="contact-form">
               <form action="https://formspree.io/f/mzzvdbad" method="POST">
                 <input type="text" name="name" placeholder="Votre nom" required />
@@ -83,7 +81,7 @@
             </div>
           </div>
 
-          <div class="lang-content" data-lang="en">
+          <div class="lang-content active" data-lang="en">
             <div class="contact-form">
               <form action="https://formspree.io/f/mzzvdbad" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required />
@@ -207,6 +205,7 @@
                   switchLanguage(btn.dataset.lang);
               });
           });
+
       });
     </script>
   </body>

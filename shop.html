@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,8 +35,6 @@
 </head>
 <body class="shop-page">
 
-  <div class="background-image"></div>
-
   <div id="hero" class="content-wrapper">
     <header class="hero-header">
       <a href="index.html">Home</a>
@@ -53,23 +51,23 @@
       <h1 class="main-title">David KRK</h1>
 
       <div class="language-selector flex-wrap">
-        <button type="button" class="language-btn active" data-lang="fr">Français</button>
-        <button type="button" class="language-btn" data-lang="en">English</button>
+        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn active" data-lang="en">English</button>
         <button type="button" class="language-btn" data-lang="es">Castellano</button>
         <button type="button" class="language-btn" data-lang="eu">Euskara</button>
         <button type="button" class="language-btn" data-lang="ar">العربية</button>
         <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
       </div>
 
-      <div class="lang-content active" data-lang="fr"><h2 class="main-title">Boutique</h2></div>
-      <div class="lang-content" data-lang="en"><h2 class="main-title">Shop</h2></div>
+      <div class="lang-content" data-lang="fr"><h2 class="main-title">Boutique</h2></div>
+      <div class="lang-content active" data-lang="en"><h2 class="main-title">Shop</h2></div>
       <div class="lang-content" data-lang="es"><h2 class="main-title">Tienda</h2></div>
       <div class="lang-content" data-lang="eu"><h2 class="main-title">Denda</h2></div>
       <div class="lang-content" data-lang="ar" dir="rtl"><h2 class="main-title">المتجر</h2></div>
       <div class="lang-content" data-lang="uk"><h2 class="main-title">Магазин</h2></div>
 
       <!-- FR -->
-      <div class="lang-content active" data-lang="fr">
+      <div class="lang-content" data-lang="fr">
         <div class="text-lg">
           <h2 class="mt-4">Boutique Officielle</h2>
           <p>Vous avez ressenti l'énergie dans mes sets, vous avez vibré sur mes mix.</p>
@@ -82,15 +80,15 @@
           <p>Scannez le QR code pour commander votre T‑shirt et rejoindre le mouvement.</p>
         </div>
         <div class="product-image mt-6">
-          <img src="assets/images/tshirt-davidkrk.png" alt="T-shirt officiel David KRK porté, coupe premium, logo noir sur fond blanc" width="400" height="400" loading="lazy">
+          <img src="images/tshirt-davidkrk.png" alt="T-shirt officiel David KRK porté, coupe premium, logo noir sur fond blanc" width="400" height="400" loading="lazy">
         </div>
         <div class="mt-6">
-          <img src="assets/images/qr-tshirt-boutique.png" alt="QR code pour commander le T‑shirt officiel David KRK à 24,90 euros frais de port inclus" width="200" height="200" loading="lazy">
+          <img src="images/qr-tshirt-boutique.png" alt="QR code pour commander le T‑shirt officiel David KRK à 24,90 euros frais de port inclus" width="200" height="200" loading="lazy">
         </div>
       </div>
 
       <!-- EN -->
-      <div class="lang-content" data-lang="en">
+      <div class="lang-content active" data-lang="en">
         <div class="text-lg">
           <h2 class="mt-4">Official Shop</h2>
           <p>You felt the energy in my sets and vibrated on my mixes.</p>
@@ -233,6 +231,7 @@
                 switchLanguage(btn.dataset.lang);
             });
         });
+
     });
     </script>
 </body>
