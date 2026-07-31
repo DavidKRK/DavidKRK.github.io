@@ -1,5 +1,5 @@
-const CACHE_NAME = 'davidkrk-v1.1.0';
-const PRECACHE_URLS = [
+const CACHE_NAME = 'davidkrk-v1.0.0';
+const URLS_TO_CACHE = [
   '/',
   '/index.html',
   '/bio.html',
@@ -11,12 +11,17 @@ const PRECACHE_URLS = [
   '/assets/js/main.js',
   '/logo-30-01-25.png',
   '/manifest.json'
+  // Note: Removed cross-origin URLs (fonts.googleapis, cdnjs) - they will be cached at runtime
+  // This avoids install failures and prevents caching opaque responses
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then((cache) => {
+        console.log('📦 Cache ouvert');
+        return cache.addAll(URLS_TO_CACHE);
+      })
   );
   self.skipWaiting();
 });
@@ -25,9 +30,12 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('🗑️ Suppression ancien cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
       );
     })
   );
@@ -35,24 +43,32 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
-
-  // Same-origin resources: cache-first
-  if (url.origin === self.location.origin) {
-    event.respondWith(
-      caches.match(event.request).then((cached) => {
-        return cached || fetch(event.request).then((response) => {
-          const clone = response.clone();
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, clone);
-            return response;
-          });
-        });
-      })
-    );
+  // Only cache GET requests
+  if (event.request.method !== 'GET') {
     return;
   }
 
-  // Third-party resources (fonts, CDN): network-only, no caching
-  event.respondWith(fetch(event.request));
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        // Validate response before caching
+        if (!response || response.status !== 200 || response.type === 'opaque') {
+          // Don't cache non-200 responses or opaque cross-origin responses
+          return response;
+        }
+
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseClone).catch((err) => {
+            console.warn('⚠️ Cache put failed:', err);
+          });
+        });
+        return response;
+      })
+      .catch(() => {
+        // Offline fallback: try to serve from cache
+        return caches.match(event.request)
+          .then((cached) => cached || caches.match('/index.html'));
+      })
+  );
 });
