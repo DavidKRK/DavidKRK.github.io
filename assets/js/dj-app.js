@@ -101,7 +101,10 @@ function loadTrack(deck, track) {
 }
 
 function renderPlaylist() {
-  els.playlist.innerHTML = '';
+  // Clear playlist safely without using innerHTML
+  while (els.playlist.firstChild) {
+    els.playlist.removeChild(els.playlist.firstChild);
+  }
 
   playlist.forEach((t) => {
     const wrap = document.createElement('div');

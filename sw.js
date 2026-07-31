@@ -10,9 +10,9 @@ const URLS_TO_CACHE = [
   '/assets/css/style.css',
   '/assets/js/main.js',
   '/logo-30-01-25.png',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Russo+One&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+  '/manifest.json'
+  // Note: Removed cross-origin URLs (fonts.googleapis, cdnjs) - they will be cached at runtime
+  // This avoids install failures and prevents caching opaque responses
 ];
 
 self.addEventListener('install', (event) => {
@@ -43,17 +43,32 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Only cache GET requests
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
+        // Validate response before caching
+        if (!response || response.status !== 200 || response.type === 'opaque') {
+          // Don't cache non-200 responses or opaque cross-origin responses
+          return response;
+        }
+
         const responseClone = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseClone);
+          cache.put(event.request, responseClone).catch((err) => {
+            console.warn('⚠️ Cache put failed:', err);
+          });
         });
         return response;
       })
       .catch(() => {
-        return caches.match(event.request);
+        // Offline fallback: try to serve from cache
+        return caches.match(event.request)
+          .then((cached) => cached || caches.match('/index.html'));
       })
   );
 });

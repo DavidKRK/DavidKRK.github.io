@@ -8,12 +8,18 @@
 const ids = [
   'track', 'timer', 'duration', 'playBtn', 'pauseBtn',
   'prevBtn', 'nextBtn', 'playlistBtn', 'volumeBtn',
-  'progress', 'bar',      // (bar = zone de progression hors waveform)
+  'progress', 'bar',      // (bar = zone de progression hors el.wave)
   'wave', 'loading',
   'playlist', 'list',
   'volume', 'barEmpty', 'barFull', 'sliderBtn'
 ];
-ids.forEach(id => window[id] = document.getElementById(id));
+// Create a local object to avoid polluting global scope
+const el = {};
+ids.forEach(id => {
+  // Special case: 'wave' in ids array maps to 'el.wave' element ID
+  const elementId = (id === 'wave') ? 'el.wave' : id;
+  el[id] = document.getElementById(elementId);
+});
 
 /* --------------------------------------------------------------------
  *  2.  PLAYLIST  (les fichiers pointent vers les URLs raw GitHub)
@@ -57,12 +63,12 @@ class Player {
     this.currentHowl = null;           // Howl actif
 
     /*--- Interface / UI init ---*/
-    track.innerHTML = `${this.index + 1}. ${this.playlist[0].title}`;
+    el.track.textContent = `${this.index + 1}. ${this.playlist[0].title}`;
     this.renderPlaylist();
 
     /*--- Waveform (SiriWave) ---*/
     this.wave = new SiriWave({
-      container: waveform,
+      container: el.wave,
       width: window.innerWidth,
       height: window.innerHeight * 0.3,
       cover: true,
@@ -80,13 +86,16 @@ class Player {
    *   Utility : affichage de la playlist dans la div #list          *
    *==================================================================*/
   renderPlaylist() {
-    list.innerHTML = '';
+    // Clear playlist safely without using innerHTML
+    while (el.list.firstChild) {
+      el.list.removeChild(el.list.firstChild);
+    }
     this.playlist.forEach((song, i) => {
       const div = document.createElement('div');
       div.className = 'list-song';
       div.textContent = song.title;
       div.onclick = () => this.skipTo(i);
-      list.appendChild(div);
+      el.list.appendChild(div);
     });
   }
 
@@ -105,15 +114,15 @@ class Player {
         src: data.file,
         html5: true,                    // force le streaming en HTML5
         onplay: () => {
-          duration.innerHTML = this.formatTime(Math.round(howl.duration()));
+          el.duration.textContent = this.formatTime(Math.round(howl.duration()));
           this.wave.start();
           this.isPlaying = true;
           requestAnimationFrame(this.step.bind(this));
-          bar.style.display = 'none';
-          pauseBtn.style.display = 'block';
+          el.bar.style.display = 'none';
+          el.pauseBtn.style.display = 'block';
         },
         onload: () => {
-          this.loading.style.display = 'none';
+          this.el.loading.style.display = 'none';
         },
         onend: () => {
           this.wave.stop();
@@ -128,7 +137,7 @@ class Player {
     }
 
     howl.play();
-    track.innerHTML = `${this.index + 1}. ${data.title}`;
+    el.track.textContent = `${this.index + 1}. ${data.title}`;
     this.currentHowl = howl;
     this.isPlaying = true;
   }
@@ -137,8 +146,8 @@ class Player {
     if (!this.currentHowl) return;
     this.currentHowl.pause();
     this.isPlaying = false;
-    playBtn.style.display = 'block';
-    pauseBtn.style.display = 'none';
+    el.playBtn.style.display = 'block';
+    el.pauseBtn.style.display = 'none';
   }
 
   skip(direction) {
@@ -154,7 +163,7 @@ class Player {
     // Stop current track
     if (this.currentHowl) this.currentHowl.stop();
     // Reset progress bar
-    progress.style.width = '0%';
+    el.progress.style.width = '0%';
     // Play the selected track
     this.play(idx);
   }
@@ -165,8 +174,8 @@ class Player {
   volume(v) {
     Howler.volume(v);
     const barWidth = (v * 90) / 100;             // 90 % du slider
-    barFull.style.width = `${barWidth * 100}%`;
-    sliderBtn.style.left = `${window.innerWidth * barWidth + window.innerWidth * 0.05 - 25}px`;
+    el.barFull.style.width = `${barWidth * 100}%`;
+    el.sliderBtn.style.left = `${window.innerWidth * barWidth + window.innerWidth * 0.05 - 25}px`;
   }
 
   /*==================================================================*
@@ -183,8 +192,8 @@ class Player {
   step() {
     if (!this.currentHowl) return;
     const currentSeek = this.currentHowl.seek() || 0;
-    timer.innerHTML = this.formatTime(Math.round(currentSeek));
-    progress.style.width = `${(currentSeek / this.currentHowl.duration()) * 100}%`;
+    el.timer.textContent = this.formatTime(Math.round(currentSeek));
+    el.progress.style.width = `${(currentSeek / this.currentHowl.duration()) * 100}%`;
 
     if (this.currentHowl.playing()) {
       requestAnimationFrame(this.step.bind(this));
@@ -195,14 +204,14 @@ class Player {
    *   TOGGLE : affichage des panneaux playlist / volume              *
    *==================================================================*/
   togglePlaylist() {
-    const target = playlist.style.display === 'block' ? 'none' : 'block';
-    playlist.style.display = target;
-    playlist.className = target === 'block' ? 'fadein' : 'fadeout';
+    const target = el.playlist.style.display === 'block' ? 'none' : 'block';
+    el.playlist.style.display = target;
+    el.playlist.className = target === 'block' ? 'fadein' : 'fadeout';
   }
 
   toggleVolume() {
-    const target = volume.style.display === 'block' ? 'none' : 'block';
-    volume.style.display = target;
+    const target = el.volume.style.display === 'block' ? 'none' : 'block';
+    el.volume.style.display = target;
     volume.className = target === 'block' ? 'fadein' : 'fadeout';
   }
 
@@ -216,7 +225,7 @@ class Player {
   }
 
   /*==================================================================*
-   *   RESIZE : adaptation du waveform et du slider volume           *
+   *   RESIZE : adaptation du el.wave et du slider volume           *
    *==================================================================*/
   resizeWave() {
     const h = window.innerHeight * 0.3;
@@ -237,7 +246,7 @@ class Player {
     if (this.currentHowl) {
       const vol = this.currentHowl.volume();
       const barWidth = vol * 0.9;  // 90% de la largeur
-      sliderBtn.style.left = `${w * barWidth + w * 0.05 - 25}px`;
+      el.sliderBtn.style.left = `${w * barWidth + w * 0.05 - 25}px`;
     }
   }
 }
@@ -253,7 +262,7 @@ pauseBtn.addEventListener('click', () => player.pause());
 prevBtn.addEventListener('click', () => player.skip('prev'));
 nextBtn.addEventListener('click', () => player.skip('next'));
 
-waveform.addEventListener('click', e => {
+el.wave.addEventListener('click', e => {
   const percent = e.clientX / window.innerWidth;
   player.seek(percent);
 });
