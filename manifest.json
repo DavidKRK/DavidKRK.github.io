@@ -1,19 +1,33 @@
 {
-  "name": "David KRK - DJ Techno",
-  "short_name": "David KRK",
-  "description": "Site officiel de David KRK, DJ et producteur international de musique Techno",
+  "name": "DJ David KRK",
+  "short_name": "DavidKRK",
+  "description": "Site officiel DJ David KRK",
+  "lang": "fr",
+  "dir": "ltr",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#00ff00",
+  "background_color": "#171614",
+  "theme_color": "#01696f",
   "orientation": "any",
   "icons": [
     {
-      "src": "/logo-30-01-25.png",
+      "src": "/assets/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -28,7 +42,5 @@
       "url": "/event.html"
     }
   ],
-  "categories": ["music", "entertainment"],
-  "lang": "fr",
-  "dir": "ltr"
+  "categories": ["music", "entertainment"]
 }

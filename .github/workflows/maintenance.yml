@@ -28,7 +28,7 @@ jobs:
     steps:
       # Récupérer le contenu du site publié (branche gh-pages) pour scanner ses liens
       - name: Checkout du dépôt
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
 
@@ -36,7 +36,7 @@ jobs:
       # La configuration est définie dans .lychee.toml (exclusions : mailto, soundcloud, etc.)
       - name: Vérification des liens avec Lychee
         id: lychee
-        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           args: >
             --verbose
@@ -114,7 +114,7 @@ jobs:
     steps:
       # Récupérer le contenu du site publié (branche gh-pages) pour l'archiver
       - name: Checkout complet du dépôt
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
           fetch-depth: 0
@@ -142,7 +142,7 @@ jobs:
 
       # Publier l'archive dans une GitHub Release taguée
       - name: Publier le backup dans GitHub Releases
-        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
           tag_name: backup-${{ steps.archive.outputs.date }}
           name: "💾 Backup hebdomadaire — ${{ steps.archive.outputs.date }}"
