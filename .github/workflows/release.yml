@@ -68,13 +68,14 @@ jobs:
           fi
 
           # Récupérer les commits significatifs
-          # Filtre étendu : exclut auto-sync, scheduled, youtube-sync, backup-,
-          # dependabot, chore(deps): bump, commits Revert et chore: génériques
+          # Filtre : exclut auto-sync, scheduled, youtube-sync, backup-,
+          # dependabot, chore(deps): bump et commits Revert
+          # Note: ^chore: retiré pour inclure les commits sécurité et maintenance
           ALL=$(git log "$RANGE" \
             --pretty=format:"%s (%h)" \
             --no-merges \
             | grep -ivE \
-              'auto-sync|scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump|^Revert |^chore:' \
+              'auto-sync|scheduled|youtube-sync|backup-|dependabot|chore\(deps\): bump|^Revert ' \
             || true)
 
           # Seuil minimum : au moins 2 commits significatifs pour justifier une release
@@ -93,22 +94,25 @@ jobs:
           P_FIX='^fix[:(]|^(correct|corrig|bug|hotfix)'
           P_PERF='^perf[:(]|^(optim|perform|lighthouse|lcp|speed)'
           P_CONTENT='^content[:(]|^(music|track|video|photo|biog|event)'
+          P_SECURITY='^security[:(]|^(secure|secu|vuln|patch)'
           P_CHORE='^chore[:(]|^(update|mise|deps|refactor|style|ci|test)'
-          P_ALL="${P_FEAT}|${P_FIX}|${P_PERF}|${P_CONTENT}|${P_CHORE}"
+          P_ALL="${P_FEAT}|${P_FIX}|${P_PERF}|${P_CONTENT}|${P_SECURITY}|${P_CHORE}"
 
           # ── Grouper par type de commit conventionnel ────────────────────
-          FEATURES=$(echo "$ALL" | grep -iE "$P_FEAT"    | sed 's/^/- /' || true)
-          FIXES=$(echo "$ALL"    | grep -iE "$P_FIX"     | sed 's/^/- /' || true)
-          PERF=$(echo "$ALL"     | grep -iE "$P_PERF"    | sed 's/^/- /' || true)
-          CONTENT=$(echo "$ALL"  | grep -iE "$P_CONTENT" | sed 's/^/- /' || true)
-          CHORES=$(echo "$ALL"   | grep -iE "$P_CHORE"   | sed 's/^/- /' || true)
-          OTHERS=$(echo "$ALL"   | grep -viE "$P_ALL"    | sed 's/^/- /' || true)
+          FEATURES=$(echo "$ALL" | grep -iE "$P_FEAT"     | sed 's/^/- /' || true)
+          FIXES=$(echo "$ALL"    | grep -iE "$P_FIX"      | sed 's/^/- /' || true)
+          SECURITY=$(echo "$ALL" | grep -iE "$P_SECURITY" | sed 's/^/- /' || true)
+          PERF=$(echo "$ALL"     | grep -iE "$P_PERF"     | sed 's/^/- /' || true)
+          CONTENT=$(echo "$ALL"  | grep -iE "$P_CONTENT"  | sed 's/^/- /' || true)
+          CHORES=$(echo "$ALL"   | grep -iE "$P_CHORE"    | sed 's/^/- /' || true)
+          OTHERS=$(echo "$ALL"   | grep -viE "$P_ALL"     | sed 's/^/- /' || true)
 
           # Construire le corps de la release
           BODY="## 📋 Changelog\n\n"
           BODY+="_Depuis : **${LAST_TAG:-début du projet}** → **${{ steps.version.outputs.tag }}**_\n\n"
 
           [ -n "$FEATURES" ] && BODY+="### ✨ Nouvelles fonctionnalités\n${FEATURES}\n\n"
+          [ -n "$SECURITY" ] && BODY+="### 🔒 Sécurité\n${SECURITY}\n\n"
           [ -n "$CONTENT" ]  && BODY+="### 🎵 Contenu\n${CONTENT}\n\n"
           [ -n "$FIXES" ]    && BODY+="### 🐛 Corrections\n${FIXES}\n\n"
           [ -n "$PERF" ]     && BODY+="### ⚡ Performances\n${PERF}\n\n"

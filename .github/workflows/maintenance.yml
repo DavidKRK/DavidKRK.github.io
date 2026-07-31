@@ -94,7 +94,7 @@ jobs:
       # Sauvegarder le rapport complet en artefact
       - name: Sauvegarder le rapport Lychee
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v7.0.0
         with:
           name: lychee-report-${{ github.run_id }}
           path: lychee/
@@ -171,6 +171,7 @@ jobs:
   stale:
     name: 🧹 Fermeture des issues inactives (Stale)
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     permissions:
       issues: write
       pull-requests: write
