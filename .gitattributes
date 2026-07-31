@@ -2,7 +2,6 @@
 assets/**/*.mp3 filter=lfs diff=lfs merge=lfs -text
 assets/**/*.ogg filter=lfs diff=lfs merge=lfs -text
 assets/**/*.webm filter=lfs diff=lfs merge=lfs -text
-
 # Optionally track other heavy binary types
 assets/**/*.flac filter=lfs diff=lfs merge=lfs -text
 assets/**/*.wav filter=lfs diff=lfs merge=lfs -text
