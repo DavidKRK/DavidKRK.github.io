@@ -1,0 +1,101 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "brace-expansion": {
+      "name": "brace-expansion",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1124334,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+          "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=5.0.7"
+        }
+      ],
+      "effects": [
+        "minimatch"
+      ],
+      "range": "<=5.0.7",
+      "nodes": [
+        "node_modules/brace-expansion"
+      ],
+      "fixAvailable": true
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "brace-expansion"
+      ],
+      "effects": [
+        "serve-handler"
+      ],
+      "range": "2.0.0 - 10.0.2",
+      "nodes": [
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": true
+    },
+    "serve": {
+      "name": "serve",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "serve-handler"
+      ],
+      "effects": [],
+      "range": ">=7.0.0",
+      "nodes": [
+        "node_modules/serve"
+      ],
+      "fixAvailable": true
+    },
+    "serve-handler": {
+      "name": "serve-handler",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "serve"
+      ],
+      "range": ">=1.1.0",
+      "nodes": [
+        "node_modules/serve-handler"
+      ],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 4,
+      "critical": 0,
+      "total": 4
+    },
+    "dependencies": {
+      "prod": 1,
+      "dev": 118,
+      "optional": 1,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 118
+    }
+  }
+}
