@@ -2,8 +2,8 @@ name: 📡 Monitoring Uptime - davidkrk.com
 
 on:
   schedule:
-    # Vérification de disponibilité toutes les heures
-    - cron: '0 * * * *'
+    # Vérification de disponibilité toutes les 30 minutes
+    - cron: '*/30 * * * *'
   # Déclenchement manuel pour un test immédiat
   workflow_dispatch:
 

@@ -28,7 +28,7 @@ jobs:
 
       # Lancer l'audit Lighthouse sur les pages principales du site
       # Les seuils sont définis dans .lighthouserc.json :
-      #   - Performance  : échec sous 60/100 (`error`, minScore 0.6)
+      #   - Performance  : échec sous 75/100 (`warn`, minScore 0.75)
       #   - SEO          : échec sous 85/100 (`error`, minScore 0.85)
       # Le workflow échoue si un de ces seuils n'est pas atteint.
       - name: Audit Lighthouse CI
@@ -49,7 +49,7 @@ jobs:
       # Sauvegarder les résultats JSON pour analyse ou tableau de bord
       - name: Sauvegarder les résultats en artefact
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v7.0.0
         with:
           name: lighthouse-results-${{ github.run_id }}
           path: '.lighthouseci/'
@@ -103,7 +103,7 @@ jobs:
                   '## 🔦 Alerte Performance / SEO',
                   '',
                   'L\'audit Lighthouse automatique a détecté des scores inférieurs aux seuils définis :',
-                  '- **Performance** : minimum requis **60/100**',
+                  '- **Performance** : minimum requis **75/100**',
                   '- **SEO** : minimum requis **85/100**',
                   '',
                   `**Workflow déclenché** : ${context.workflow}`,
