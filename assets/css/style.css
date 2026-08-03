@@ -446,6 +446,32 @@ footer {
   padding: 0.125rem;
 }
 
+.social-icon:not(.support-link) {
+  gap: 0.45rem;
+  min-width: auto;
+  padding: 0.55rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.social-icon:not(.support-link) i {
+  color: currentColor;
+  font-size: 1.1rem;
+}
+
+.social-icon:not(.support-link)::after {
+  content: attr(aria-label);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
 .footer-contact-link {
   display: inline-flex;
   align-items: center;
@@ -502,6 +528,10 @@ footer {
 @media (min-width: 768px) {
   .social-icon {
     font-size: 3.5rem; /* desktop */
+  }
+
+  .social-icon:not(.support-link) {
+    font-size: 1rem;
   }
 }
 
