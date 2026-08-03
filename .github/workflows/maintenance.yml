@@ -180,7 +180,7 @@ jobs:
       # Marquer les issues sans activité depuis 60 jours comme "stale"
       # et les fermer automatiquement après 7 jours supplémentaires
       - name: Gérer les issues et PR inactives
-        uses: actions/stale@v10
+        uses: actions/stale@v11
         with:
           # ── Issues ──────────────────────────────────────────
           days-before-issue-stale: 60
