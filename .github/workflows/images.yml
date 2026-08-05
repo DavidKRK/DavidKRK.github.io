@@ -37,12 +37,16 @@ jobs:
         id: optimize
         uses: calibreapp/image-actions@9d037c06280028c110ff61c433ad4dc7d33c3c43
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Ne pas créer de PR automatique : commiter directement
           compressOnly: true
           jpegQuality: '85'
           pngQuality: '85'
           webpQuality: '85'
+          # Ignorer les fichiers temporaires/backup qui ne sont pas des images valides
+          ignorePaths: |
+            node_modules/**
+            **/*~*
 
       # Afficher un résumé des optimisations effectuées
       - name: Résumé de l'optimisation
