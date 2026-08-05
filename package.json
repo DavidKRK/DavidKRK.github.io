@@ -4,8 +4,8 @@
   "description": "Site officiel DJ David KRK",
   "scripts": {
     "build": "npm run minify:css && npm run minify:js",
-    "minify:css": "mkdir -p dist/assets/css && npx csso assets/css/style.css -o dist/assets/css/style.min.css",
-    "minify:js": "mkdir -p dist/assets/js && npx terser assets/js/main.js -o dist/assets/js/main.min.js",
+    "minify:css": "mkdir -p dist/assets/css && csso assets/css/style.css -o dist/assets/css/style.min.css",
+    "minify:js": "mkdir -p dist/assets/js && terser assets/js/main.js -o dist/assets/js/main.min.js",
     "dev": "npx serve --listen 8080"
   },
   "devDependencies": {
