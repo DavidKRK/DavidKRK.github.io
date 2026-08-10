@@ -11,6 +11,6 @@
   "devDependencies": {
     "csso-cli": "^4.0.2",
     "serve": "14.2.6",
-    "terser": "^5.49.0"
+    "terser": "^5.49.2"
   }
 }
