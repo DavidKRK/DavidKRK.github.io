@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.lang = lang;
         document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
+        localStorage.setItem('davidkrk_lang', lang);
+
         const t = langContent[lang] || langContent.fr;
         if (mixcloudPlayerTrigger) {
             const playerLabel = mixcloudPlayerLoaded ? t.player_loaded : t.player_button;
@@ -114,5 +116,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    switchLanguage('en');
+    switchLanguage(localStorage.getItem('davidkrk_lang') || 'en');
 });

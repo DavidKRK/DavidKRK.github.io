@@ -24,6 +24,7 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo-30-01-25.png">
+  <link rel="manifest" href="manifest.json">
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -284,6 +285,34 @@
         audioPlayerLoaded = true;
         audioPlayerWidget.hidden = false;
       }
+
+      if (audioPlayerTrigger) {
+        audioPlayerTrigger.addEventListener('click', loadAudioPlayer);
+      }
+
+      function switchLanguage(lang) {
+        langContents.forEach(content => content.classList.remove('active'));
+        langBtns.forEach(b => b.classList.remove('active'));
+
+        const contentsToShow = document.querySelectorAll(`.lang-content[data-lang="${lang}"]`);
+        contentsToShow.forEach(content => content.classList.add('active'));
+
+        const activeBtn = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+        localStorage.setItem('davidkrk_lang', lang);
+      }
+
+      langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchLanguage(btn.dataset.lang);
+        });
+      });
+
+      switchLanguage(localStorage.getItem('davidkrk_lang') || 'en');
     });
   </script>
 </body>

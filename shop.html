@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>David KRK · SHOP</title>
   <meta name="description" content="Boutique officielle de David KRK : T-shirt premium avec logo, disponible en plusieurs couleurs, frais de port inclus.">
-  <meta name="keywords" content="David KRK, boutique, t-shirt, merch, techno, shop">
   <meta name="author" content="David KRK">
 
   <!-- Open Graph / Facebook -->
@@ -24,6 +23,7 @@
   <meta property="twitter:image" content="https://davidkrk.com/logo-30-01-25.png">
 
   <link rel="icon" type="image/png" href="logo-30-01-25.png">
+  <link rel="manifest" href="manifest.json">
   <!-- Fonts + Icones -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -223,6 +223,8 @@
         // Update document language and text direction for accessibility and RTL support
         document.documentElement.lang = lang;
         document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+        localStorage.setItem('davidkrk_lang', lang);
       }
 
         langBtns.forEach(btn => {
@@ -231,6 +233,7 @@
             });
         });
 
+        switchLanguage(localStorage.getItem('davidkrk_lang') || 'en');
     });
     </script>
 </body>

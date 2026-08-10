@@ -257,6 +257,8 @@ mixcloudPlayerTrigger.setAttribute('aria-label', t.player_loaded);
             document.documentElement.lang = lang;
             document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
+            localStorage.setItem('davidkrk_lang', lang);
+
             const t = langContent[lang] || langContent.fr;
             if (mixcloudPlayerTrigger) {
                 const playerLabel = mixcloudPlayerLoaded ? t.player_loaded : t.player_button;
@@ -272,6 +274,8 @@ mixcloudPlayerTrigger.setAttribute('aria-label', t.player_loaded);
                 switchLanguage(btn.dataset.lang);
             });
         });
+
+        switchLanguage(localStorage.getItem('davidkrk_lang') || 'en');
     });
     </script>
 </body>
