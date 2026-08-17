@@ -31,8 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" as="style" integrity="sha384-BdxjrfQisR3tau4VcrsgkgS4O8uQQwW3Y8S6CqB6uWrdu7pR24UtJwQAypxa8xvS" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" integrity="sha384-BdxjrfQisR3tau4VcrsgkgS4O8uQQwW3Y8S6CqB6uWrdu7pR24UtJwQAypxa8xvS" crossorigin="anonymous"></noscript>
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" integrity="sha384-cLRn154r0DvLEV8K8BqfY9V+rZvpkaHrpxJ8v7g+IcZ2GIymbcSYyMjM7mbtIkZ" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-cLRn154r0DvLEV8K8BqfY9V+rZvpkaHrpxJ8v7g+IcZ2GIymbcSYyMjM7mbtIkZ" crossorigin="anonymous"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <!-- CSS principal -->
   <link rel="preload" as="image" href="assets/images/david_krk_owl.jpg" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -114,7 +113,29 @@
       </div>
 
 
-      <section class="player-load-wrapper" aria-labelledby="mixcloud-player-trigger">
+      <section class="beautiful-release" aria-labelledby="beautiful-release-title">
+       <div class="beautiful-release-card">
+         <img
+           src="assets/covers/beautiful-davidkrk-edit.png"
+           alt="Pochette de Matt Darey feat. Marcella Woods — Beautiful, Rue Jay Switch It Bootleg, David KRK Edit"
+           class="beautiful-release-cover"
+           width="1200"
+           height="1200"
+           loading="lazy">
+         <div class="beautiful-release-content">
+           <p class="beautiful-release-eyebrow">EXCLUSIVE BOOTLEG EDIT</p>
+           <h2 id="beautiful-release-title">Beautiful — David KRK Edit</h2>
+           <p class="beautiful-release-meta">Matt Darey feat. Marcella Woods · Rue Jay Switch It Bootleg</p>
+           <p class="beautiful-release-description">Listen to a preview of my edit, crafted for the dancefloor and DJ mixing.</p>
+           <audio class="beautiful-release-audio" controls preload="metadata">
+             <source src="assets/audio/beautiful-davidkrk-edit-sample.mp3" type="audio/mpeg">
+             Your browser does not support the HTML5 audio player.
+           </audio>
+         </div>
+       </div>
+     </section>
+
+     <section class="player-load-wrapper" aria-labelledby="mixcloud-player-trigger">
 <button type="button" id="mixcloud-player-trigger" class="player-load-btn" aria-controls="mixcloud-player-container" aria-expanded="false" aria-describedby="mixcloud-player-note">
           Charger le lecteur Mixcloud
         </button>
