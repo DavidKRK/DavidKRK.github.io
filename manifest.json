@@ -9,70 +9,13 @@
   "theme_color": "#00ff00",
   "orientation": "any",
   "icons": [
-    {
-      "src": "/icons/icon-72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    {"src":"/assets/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"/assets/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"/assets/icons/icon-512-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
   ],
   "shortcuts": [
-    {
-      "name": "Écouter Music",
-      "short_name": "Music",
-      "description": "Accéder à la page musique",
-      "url": "/music.html",
-      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Events",
-      "short_name": "Events",
-      "description": "Voir les événements",
-      "url": "/event.html",
-      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
-    }
+    {"name":"Écouter Music","short_name":"Music","url":"/music.html","icons":[{"src":"/assets/icons/icon-192.png","sizes":"192x192"}]},
+    {"name":"Events","short_name":"Events","url":"/event.html","icons":[{"src":"/assets/icons/icon-192.png","sizes":"192x192"}]}
   ],
   "categories": ["music", "entertainment"],
   "lang": "fr",
