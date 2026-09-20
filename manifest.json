@@ -1,46 +1,23 @@
 {
-  "name": "DJ David KRK",
-  "short_name": "DavidKRK",
-  "description": "Site officiel DJ David KRK",
-  "lang": "en",
-  "dir": "ltr",
+  "name": "David KRK - DJ Techno",
+  "short_name": "David KRK",
+  "description": "Site officiel de David KRK, DJ et producteur international de musique Techno",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#171614",
-  "theme_color": "#01696f",
+  "background_color": "#000000",
+  "theme_color": "#00ff00",
   "orientation": "any",
   "icons": [
-    {
-      "src": "/assets/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/icons/icon-512-maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
+    {"src":"/assets/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"/assets/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"/assets/icons/icon-512-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
   ],
   "shortcuts": [
-    {
-      "name": "Écouter Music",
-      "short_name": "Music",
-      "url": "/music.html"
-    },
-    {
-      "name": "Events",
-      "short_name": "Events",
-      "url": "/event.html"
-    }
+    {"name":"Écouter Music","short_name":"Music","url":"/music.html","icons":[{"src":"/assets/icons/icon-192.png","sizes":"192x192"}]},
+    {"name":"Events","short_name":"Events","url":"/event.html","icons":[{"src":"/assets/icons/icon-192.png","sizes":"192x192"}]}
   ],
-  "categories": ["music", "entertainment"]
+  "categories": ["music", "entertainment"],
+  "lang": "fr",
+  "dir": "ltr"
 }
