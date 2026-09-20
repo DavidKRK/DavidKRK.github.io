@@ -1,46 +1,80 @@
 {
-  "name": "DJ David KRK",
-  "short_name": "DavidKRK",
-  "description": "Site officiel DJ David KRK",
-  "lang": "en",
-  "dir": "ltr",
+  "name": "David KRK - DJ Techno",
+  "short_name": "David KRK",
+  "description": "Site officiel de David KRK, DJ et producteur international de musique Techno",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#171614",
-  "theme_color": "#01696f",
+  "background_color": "#000000",
+  "theme_color": "#00ff00",
   "orientation": "any",
   "icons": [
     {
-      "src": "/assets/icons/icon-192.png",
+      "src": "/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-512.png",
-      "sizes": "512x512",
+      "src": "/icons/icon-384.png",
+      "sizes": "384x384",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-512-maskable.png",
+      "src": "/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
     {
       "name": "Écouter Music",
       "short_name": "Music",
-      "url": "/music.html"
+      "description": "Accéder à la page musique",
+      "url": "/music.html",
+      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     },
     {
       "name": "Events",
       "short_name": "Events",
-      "url": "/event.html"
+      "description": "Voir les événements",
+      "url": "/event.html",
+      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     }
   ],
-  "categories": ["music", "entertainment"]
+  "categories": ["music", "entertainment"],
+  "lang": "fr",
+  "dir": "ltr"
 }
