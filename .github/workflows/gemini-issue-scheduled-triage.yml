@@ -2,7 +2,7 @@ name: '📋 Gemini Scheduled Issue Triage'
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 8 * * *' # Une fois par jour à 08:00 UTC
   workflow_dispatch:
 
 concurrency:
@@ -50,7 +50,7 @@ jobs:
 
           echo '🏷️ Finding issues that need triage...'
           NEED_TRIAGE_ISSUES="$(gh issue list --repo "${GITHUB_REPOSITORY}" \
-            --search 'is:open is:issue label:"status/needs-triage"' --json number,title,body)"
+            --search 'is:open is:issue label:"status/needs-triage" -label:"ai/triaged"' --json number,title,body)"
 
           echo '🔄 Merging and deduplicating issues...'
           ISSUES="$(echo "${NO_LABEL_ISSUES}" "${NEED_TRIAGE_ISSUES}" | jq -c -s 'add | unique_by(.number)')"
@@ -169,6 +169,20 @@ jobs:
               return;
             }
 
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'ai/triaged',
+                color: '0E8A16',
+                description: 'Issue déjà analysée par Gemini ; ne pas retraiter automatiquement'
+              });
+            } catch (err) {
+              if (err.status !== 422 && err.status !== 409) {
+                throw err;
+              }
+            }
+
             for (const entry of parsedLabels) {
               const issueNumber = entry.issue_number;
               if (!issueNumber) {
@@ -184,6 +198,24 @@ jobs:
                   issue_number: issueNumber,
                   labels: entry.labels_to_set
                 });
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  labels: ['ai/triaged']
+                });
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issueNumber,
+                    name: 'status/needs-triage'
+                  });
+                } catch (err) {
+                  if (err.status !== 404) {
+                    throw err;
+                  }
+                }
                 const explanation = entry.explanation ? ` - ${entry.explanation}` : '';
                 core.info(`Successfully set labels for #${issueNumber}: ${entry.labels_to_set.join(', ')}${explanation}`);
               } else {
