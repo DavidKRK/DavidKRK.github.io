@@ -11,9 +11,19 @@
   },
   "devDependencies": {
     "csso-cli": "^4.0.2",
+    "drizzle-kit": "^1.0.0-beta.22",
     "terser": "^5.27.0"
   },
-  "keywords": ["techno", "dj", "music"],
+  "keywords": [
+    "techno",
+    "dj",
+    "music"
+  ],
   "author": "David KRK",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@netlify/database": "^2.0.1",
+    "@netlify/functions": "^6.0.2",
+    "drizzle-orm": "^1.0.0-beta.22"
+  }
 }

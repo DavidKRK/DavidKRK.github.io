@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>David KRK · Statistiques</title>
+  <link rel="icon" type="image/png" href="logo-30-01-25.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap">
+  <style>
+    :root {
+      --surface-0: #0b0b0b;
+      --surface-1: #141414;
+      --border: #2a2a2a;
+      --grid: #262626;
+      --ink-1: #f2f2f2;
+      --ink-2: #b5b5b5;
+      --ink-3: #8a8a8a;
+      --mark: #e0529c;
+      --mark-soft: rgba(224, 82, 156, 0.18);
+      --good: #4cc38a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--surface-0);
+      color: var(--ink-1);
+      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    h1, h2 { font-family: "Russo One", system-ui, sans-serif; font-weight: 400; margin: 0; }
+    h1 { font-size: 1.6rem; letter-spacing: .02em; }
+    h2 { font-size: 1rem; color: var(--ink-2); margin-bottom: 14px; }
+    a { color: var(--ink-2); }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 20px 60px; }
+    header { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .seg button {
+      background: transparent; color: var(--ink-2); border: 0; padding: 7px 14px; cursor: pointer; font: inherit;
+    }
+    .seg button + button { border-left: 1px solid var(--border); }
+    .seg button[aria-pressed="true"] { background: var(--mark-soft); color: var(--ink-1); }
+    .btn {
+      background: transparent; color: var(--ink-2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 7px 14px; cursor: pointer; font: inherit;
+    }
+    .btn:hover, .seg button:hover { color: var(--ink-1); }
+    .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 14px; }
+    .tile .label { color: var(--ink-2); font-size: .85rem; }
+    .tile .value { font-size: 2.1rem; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.2; margin-top: 4px; }
+    .tile .sub { color: var(--ink-3); font-size: .8rem; }
+    .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--good); margin-right: 6px; vertical-align: middle; }
+    .chart-card { margin-bottom: 14px; position: relative; }
+    #chart { width: 100%; height: 260px; display: block; }
+    #chart .grid line { stroke: var(--grid); stroke-width: 1; }
+    #chart text { fill: var(--ink-3); font-size: 11px; font-variant-numeric: tabular-nums; }
+    #chart .bar { fill: var(--mark); pointer-events: none; }
+    #chart .hit { fill: transparent; cursor: crosshair; }
+    #chart .hit:hover + .bar, #chart .bar.active { fill: #f07ab6; }
+    .tooltip {
+      position: absolute; pointer-events: none; background: #1f1f1f; border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 10px; font-size: .85rem; white-space: nowrap; opacity: 0; transition: opacity .1s; z-index: 2;
+    }
+    .tooltip strong { display: block; color: var(--ink-1); margin-bottom: 2px; }
+    .tooltip span { color: var(--ink-2); }
+    details { margin-top: 10px; color: var(--ink-2); font-size: .85rem; }
+    details table { margin-top: 8px; }
+    .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+    .list { list-style: none; margin: 0; padding: 0; }
+    .list li { position: relative; display: flex; justify-content: space-between; gap: 12px; padding: 6px 10px; margin-bottom: 4px; border-radius: 4px; }
+    .list li .fill { position: absolute; inset: 0 auto 0 0; background: var(--mark-soft); border-radius: 4px; z-index: 0; }
+    .list li span { position: relative; z-index: 1; }
+    .list li .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .list li .num { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .empty { color: var(--ink-3); font-size: .9rem; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--grid); }
+    th:not(:first-child), td:not(:first-child) { text-align: right; }
+    #login { max-width: 380px; margin: 12vh auto 0; }
+    #login form { display: grid; gap: 12px; margin-top: 16px; }
+    #login input {
+      background: var(--surface-0); color: var(--ink-1); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font: inherit;
+    }
+    #login button { background: var(--mark); color: #fff; border: 0; border-radius: 8px; padding: 10px; font: inherit; font-weight: 600; cursor: pointer; }
+    .msg { color: #ff8a8a; font-size: .9rem; min-height: 1.2em; }
+    .hint { color: var(--ink-3); font-size: .85rem; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section id="login" class="card">
+      <h1>Statistiques</h1>
+      <p class="hint">Espace privé — trafic des visiteurs de davidkrk.com</p>
+      <form id="login-form">
+        <input type="password" id="password" placeholder="Mot de passe" autocomplete="current-password" required>
+        <button type="submit">Se connecter</button>
+        <div class="msg" id="login-msg" role="alert"></div>
+      </form>
+    </section>
+
+    <section id="dashboard" hidden>
+      <header>
+        <div>
+          <h1>Statistiques du site</h1>
+          <div class="hint" id="updated"></div>
+        </div>
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Période">
+            <button type="button" data-days="1">24 h</button>
+            <button type="button" data-days="7">7 jours</button>
+            <button type="button" data-days="30" aria-pressed="true">30 jours</button>
+            <button type="button" data-days="90">90 jours</button>
+            <button type="button" data-days="365">1 an</button>
+          </div>
+          <button type="button" class="btn" id="refresh">Actualiser</button>
+          <button type="button" class="btn" id="logout">Déconnexion</button>
+        </div>
+      </header>
+
+      <div class="tiles">
+        <div class="card tile"><div class="label">Visiteurs</div><div class="value" id="t-visitors">–</div><div class="sub">visiteurs uniques sur la période</div></div>
+        <div class="card tile"><div class="label">Pages vues</div><div class="value" id="t-views">–</div><div class="sub">toutes pages confondues</div></div>
+        <div class="card tile"><div class="label">Pages par visiteur</div><div class="value" id="t-ratio">–</div><div class="sub">moyenne</div></div>
+        <div class="card tile"><div class="label"><span class="live-dot" aria-hidden="true"></span>En ce moment</div><div class="value" id="t-live">–</div><div class="sub">visiteurs ces 5 dernières minutes</div></div>
+      </div>
+
+      <div class="card chart-card">
+        <h2>Pages vues par jour</h2>
+        <svg id="chart" role="img" aria-label="Pages vues par jour"></svg>
+        <div class="tooltip" id="tooltip"></div>
+        <details>
+          <summary>Voir le tableau</summary>
+          <table id="daily-table"><thead><tr><th>Jour</th><th>Pages vues</th><th>Visiteurs</th></tr></thead><tbody></tbody></table>
+        </details>
+      </div>
+
+      <div class="grid2">
+        <div class="card"><h2>Pages les plus vues</h2><ul class="list" id="l-pages"></ul></div>
+        <div class="card"><h2>Provenance (sites référents)</h2><ul class="list" id="l-referrers"></ul></div>
+        <div class="card"><h2>Pays</h2><ul class="list" id="l-countries"></ul></div>
+        <div class="card"><h2>Villes</h2><ul class="list" id="l-cities"></ul></div>
+        <div class="card"><h2>Appareils</h2><ul class="list" id="l-devices"></ul></div>
+        <div class="card"><h2>Navigateurs</h2><ul class="list" id="l-browsers"></ul></div>
+        <div class="card"><h2>Systèmes</h2><ul class="list" id="l-systems"></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var KEY = 'davidkrk_stats_pw';
+      var days = 30;
+      var nf = new Intl.NumberFormat('fr-FR');
+      var $ = function (id) { return document.getElementById(id); };
+
+      function showLogin(message) {
+        $('dashboard').hidden = true;
+        $('login').hidden = false;
+        $('login-msg').textContent = message || '';
+      }
+
+      function load() {
+        var pw = sessionStorage.getItem(KEY);
+        if (!pw) return showLogin();
+        fetch('/api/stats?days=' + days, { headers: { Authorization: 'Bearer ' + pw } })
+          .then(function (res) {
+            if (res.status === 401) { sessionStorage.removeItem(KEY); throw new Error('Mot de passe incorrect.'); }
+            if (res.status === 503) throw new Error('Le mot de passe STATS_PASSWORD n’est pas encore configuré dans Netlify.');
+            if (!res.ok) throw new Error('Erreur du serveur (' + res.status + ').');
+            return res.json();
+          })
+          .then(render)
+          .catch(function (err) { showLogin(err.message); });
+      }
+
+      function render(data) {
+        $('login').hidden = true;
+        $('dashboard').hidden = false;
+        var v = data.totals.visitors, p = data.totals.views;
+        $('t-visitors').textContent = nf.format(v);
+        $('t-views').textContent = nf.format(p);
+        $('t-ratio').textContent = v ? (p / v).toLocaleString('fr-FR', { maximumFractionDigits: 1 }) : '–';
+        $('t-live').textContent = nf.format(data.live.visitors);
+        $('updated').textContent = 'Mis à jour à ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+        var series = fillDays(data.daily, data.days);
+        drawChart(series);
+        $('daily-table').querySelector('tbody').innerHTML = series.slice().reverse().map(function (d) {
+          return '<tr><td>' + fmtDay(d.day) + '</td><td>' + nf.format(d.views) + '</td><td>' + nf.format(d.visitors) + '</td></tr>';
+        }).join('');
+
+        ['pages', 'referrers', 'countries', 'cities', 'devices', 'browsers', 'systems'].forEach(function (k) {
+          renderList($('l-' + k), data[k]);
+        });
+      }
+
+      function fillDays(rows, n) {
+        var map = {};
+        rows.forEach(function (r) { map[r.day] = r; });
+        var out = [];
+        var count = Math.min(n, 365);
+        for (var i = count - 1; i >= 0; i--) {
+          var d = new Date(Date.now() - i * 86400000);
+          var key = d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+          out.push({ day: key, views: map[key] ? map[key].views : 0, visitors: map[key] ? map[key].visitors : 0 });
+        }
+        return out;
+      }
+
+      function fmtDay(key) {
+        var parts = key.split('-');
+        return new Date(+parts[0], +parts[1] - 1, +parts[2]).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+      }
+
+      function niceMax(v) {
+        if (v <= 4) return 4;
+        var pow = Math.pow(10, Math.floor(Math.log10(v)));
+        var steps = [1, 2, 2.5, 5, 10];
+        for (var i = 0; i < steps.length; i++) if (steps[i] * pow >= v) return steps[i] * pow;
+        return 10 * pow;
+      }
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+      }
+
+      function drawChart(series) {
+        var svg = $('chart');
+        var W = svg.clientWidth || 800, H = 260;
+        var m = { t: 10, r: 8, b: 26, l: 40 };
+        var iw = W - m.l - m.r, ih = H - m.t - m.b;
+        var max = niceMax(Math.max.apply(null, series.map(function (d) { return d.views; })));
+        var step = iw / series.length;
+        var gap = series.length > 120 ? 0.5 : 2;
+        var bw = Math.max(step - gap, 1);
+        var r = Math.min(4, bw / 2);
+        var html = '<g class="grid">';
+        for (var i = 0; i <= 4; i++) {
+          var y = m.t + ih - (ih * i) / 4;
+          html += '<line x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y + '" y2="' + y + '"></line>';
+          html += '<text x="' + (m.l - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + nf.format((max * i) / 4) + '</text>';
+        }
+        html += '</g>';
+        var labelEvery = Math.ceil(series.length / Math.max(Math.floor(iw / 70), 1));
+        series.forEach(function (d, i) {
+          var x = m.l + i * step + gap / 2;
+          var h = (d.views / max) * ih;
+          var y = m.t + ih - h;
+          html += '<rect class="hit" data-i="' + i + '" x="' + (m.l + i * step) + '" y="' + m.t + '" width="' + step + '" height="' + ih + '"></rect>';
+          if (h > 0) {
+            var rr = Math.min(r, h);
+            html += '<path class="bar" d="M' + x + ',' + (m.t + ih) + 'V' + (y + rr) + 'Q' + x + ',' + y + ' ' + (x + rr) + ',' + y +
+              'H' + (x + bw - rr) + 'Q' + (x + bw) + ',' + y + ' ' + (x + bw) + ',' + (y + rr) + 'V' + (m.t + ih) + 'Z"></path>';
+          } else {
+            html += '<g></g>';
+          }
+          if ((series.length - 1 - i) % labelEvery === 0) {
+            var parts = d.day.split('-');
+            html += '<text x="' + (x + bw / 2) + '" y="' + (H - 8) + '" text-anchor="middle">' + parts[2] + '/' + parts[1] + '</text>';
+          }
+        });
+        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        svg.innerHTML = html;
+
+        var tip = $('tooltip');
+        svg.querySelectorAll('.hit').forEach(function (el) {
+          el.addEventListener('mousemove', function (e) {
+            var d = series[+el.dataset.i];
+            tip.innerHTML = '<strong>' + esc(fmtDay(d.day)) + '</strong><span>' + nf.format(d.views) + ' pages vues · ' + nf.format(d.visitors) + ' visiteurs</span>';
+            var box = svg.parentNode.getBoundingClientRect();
+            var left = e.clientX - box.left + 14;
+            if (left + tip.offsetWidth > box.width - 8) left = e.clientX - box.left - tip.offsetWidth - 14;
+            tip.style.left = left + 'px';
+            tip.style.top = (e.clientY - box.top - 20) + 'px';
+            tip.style.opacity = 1;
+          });
+          el.addEventListener('mouseleave', function () { tip.style.opacity = 0; });
+        });
+      }
+
+      function renderList(ul, rows) {
+        if (!rows.length) { ul.innerHTML = '<li class="empty">Aucune donnée pour cette période</li>'; return; }
+        var max = rows[0].views;
+        ul.innerHTML = rows.map(function (r) {
+          return '<li title="' + esc(r.label) + '"><span class="fill" style="width:' + Math.max((r.views / max) * 100, 2) + '%"></span>' +
+            '<span class="name">' + esc(r.label) + '</span><span class="num">' + nf.format(r.views) + '</span></li>';
+        }).join('');
+      }
+
+      $('login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        sessionStorage.setItem(KEY, $('password').value);
+        $('password').value = '';
+        load();
+      });
+      $('logout').addEventListener('click', function () { sessionStorage.removeItem(KEY); showLogin(); });
+      $('refresh').addEventListener('click', load);
+      document.querySelectorAll('.seg button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true');
+          days = +b.dataset.days;
+          load();
+        });
+      });
+      var resizeTimer;
+      window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { if (!$('dashboard').hidden) load(); }, 250); });
+      setInterval(function () { if (!$('dashboard').hidden && !document.hidden) load(); }, 60000);
+
+      load();
+    })();
+  </script>
+</body>
+</html>
