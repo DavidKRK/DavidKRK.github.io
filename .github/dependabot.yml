@@ -10,7 +10,7 @@ updates:
       timezone: "Europe/Paris"
     labels:
       - "dependencies"
-      - "github-actions"
+      - "automation"
     commit-message:
       prefix: "chore(deps)"
 
@@ -24,7 +24,7 @@ updates:
       timezone: "Europe/Paris"
     labels:
       - "dependencies"
-      - "npm"
+      - "javascript"
     commit-message:
       prefix: "chore(deps)"
     open-pull-requests-limit: 5
