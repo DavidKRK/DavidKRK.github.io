@@ -150,7 +150,9 @@
 
   <script>
     (function () {
-      var KEY = 'davidkrk_stats_pw';
+      var API_BASE = window.DAVIDKRK_STATS_API_BASE || 'https://whimsical-kitsune-85066d.netlify.app';
+      var authToken = '';
+      var requestNonce = 0;
       var days = 30;
       var nf = new Intl.NumberFormat('fr-FR');
       var $ = function (id) { return document.getElementById(id); };
@@ -162,17 +164,25 @@
       }
 
       function load() {
-        var pw = sessionStorage.getItem(KEY);
+        var pw = authToken;
         if (!pw) return showLogin();
-        fetch('/api/stats?days=' + days, { headers: { Authorization: 'Bearer ' + pw } })
+        var nonce = ++requestNonce;
+        fetch(API_BASE + '/api/stats?days=' + days, { headers: { Authorization: 'Bearer ' + pw } })
           .then(function (res) {
-            if (res.status === 401) { sessionStorage.removeItem(KEY); throw new Error('Mot de passe incorrect.'); }
+            if (nonce !== requestNonce) return Promise.reject({ stale: true });
+            if (res.status === 401) { authToken = ''; throw new Error('Mot de passe incorrect.'); }
             if (res.status === 503) throw new Error('Le mot de passe STATS_PASSWORD n’est pas encore configuré dans Netlify.');
             if (!res.ok) throw new Error('Erreur du serveur (' + res.status + ').');
             return res.json();
           })
-          .then(render)
-          .catch(function (err) { showLogin(err.message); });
+          .then(function (data) {
+            if (nonce !== requestNonce) return;
+            render(data);
+          })
+          .catch(function (err) {
+            if (err && err.stale) return;
+            showLogin(err && err.message ? err.message : 'Erreur réseau.');
+          });
       }
 
       function render(data) {
@@ -291,11 +301,12 @@
 
       $('login-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        sessionStorage.setItem(KEY, $('password').value);
+        authToken = $('password').value;
+        requestNonce++;
         $('password').value = '';
         load();
       });
-      $('logout').addEventListener('click', function () { sessionStorage.removeItem(KEY); showLogin(); });
+      $('logout').addEventListener('click', function () { authToken = ''; requestNonce++; showLogin(); });
       $('refresh').addEventListener('click', load);
       document.querySelectorAll('.seg button').forEach(function (b) {
         b.addEventListener('click', function () {
