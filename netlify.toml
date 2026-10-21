@@ -1,0 +1,10 @@
+# Link checker: skip preconnect checks for Google Fonts (TLS cannot be verified from the build environment)
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+  [plugins.inputs]
+    skipPatterns = [
+      "preconnect-check https://fonts.googleapis.com",
+      "preconnect-check https://fonts.gstatic.com",
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com",
+    ]
