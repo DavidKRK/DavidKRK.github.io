@@ -1,0 +1,10 @@
+# Override the UI-installed Checklinks plugin for Deploy Previews only.
+# Keep the checks visible; tolerate failures only for these preconnect reports.
+[[context.deploy-preview.plugins]]
+package = "netlify-plugin-checklinks"
+
+[context.deploy-preview.plugins.inputs]
+todoPatterns = [
+  "preconnect-check https://fonts.googleapis.com",
+  "preconnect-check https://fonts.gstatic.com",
+]
