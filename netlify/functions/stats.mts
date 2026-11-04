@@ -1,19 +1,21 @@
 import type { Config } from "@netlify/functions";
-import { timingSafeEqual, createHmac, randomBytes } from "node:crypto";
+import { timingSafeEqual } from "node:crypto";
 import { count, countDistinct, desc, gte, sql, type SQL } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { pageViews } from "../../db/schema.js";
 
 const TIMEZONE = "Europe/Paris";
-const COMPARE_KEY = randomBytes(32);
 
 function isAuthorized(req: Request) {
   const expected = Netlify.env.get("STATS_PASSWORD");
   const provided = req.headers.get("authorization")?.replace(/^Bearer /, "") ?? "";
   if (!expected || !provided) return false;
-  const a = createHmac("sha256", COMPARE_KEY).update(provided).digest();
-  const b = createHmac("sha256", COMPARE_KEY).update(expected).digest();
-  return timingSafeEqual(a, b);
+  const size = Math.max(provided.length, expected.length) * 4;
+  const a = Buffer.alloc(size);
+  const b = Buffer.alloc(size);
+  a.write(provided);
+  b.write(expected);
+  return timingSafeEqual(a, b) && provided === expected;
 }
 
 function topBy(column: SQL, since: Date, fallback = "Inconnu", limit = 10) {
