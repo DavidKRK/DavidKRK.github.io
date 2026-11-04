@@ -1,23 +1,24 @@
 import type { Config } from "@netlify/functions";
-import { timingSafeEqual, createHash } from "node:crypto";
+import { timingSafeEqual, createHmac, randomBytes } from "node:crypto";
 import { count, countDistinct, desc, gte, sql, type SQL } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { pageViews } from "../../db/schema.js";
 
 const TIMEZONE = "Europe/Paris";
+const COMPARE_KEY = randomBytes(32);
 
 function isAuthorized(req: Request) {
   const expected = Netlify.env.get("STATS_PASSWORD");
   const provided = req.headers.get("authorization")?.replace(/^Bearer /, "") ?? "";
   if (!expected || !provided) return false;
-  const a = createHash("sha256").update(provided).digest();
-  const b = createHash("sha256").update(expected).digest();
+  const a = createHmac("sha256", COMPARE_KEY).update(provided).digest();
+  const b = createHmac("sha256", COMPARE_KEY).update(expected).digest();
   return timingSafeEqual(a, b);
 }
 
-function topBy(column: SQL, since: Date, limit = 10) {
+function topBy(column: SQL, since: Date, fallback = "Inconnu", limit = 10) {
   return db
-    .select({ label: sql<string>`coalesce(${column}, 'Direct / inconnu')`, views: count(), visitors: countDistinct(pageViews.visitorHash) })
+    .select({ label: sql<string>`coalesce(${column}, ${fallback})`, views: count(), visitors: countDistinct(pageViews.visitorHash) })
     .from(pageViews)
     .where(gte(pageViews.createdAt, since))
     .groupBy(sql`1`)
@@ -49,7 +50,7 @@ export default async (req: Request) => {
       .groupBy(sql`1`)
       .orderBy(sql`1`),
     topBy(sql`${pageViews.path}`, since),
-    topBy(sql`${pageViews.referrer}`, since),
+    topBy(sql`${pageViews.referrer}`, since, "Direct / inconnu"),
     topBy(sql`${pageViews.country}`, since),
     topBy(sql`${pageViews.city}`, since),
     topBy(sql`${pageViews.device}`, since),

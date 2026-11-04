@@ -120,9 +120,9 @@
       </header>
 
       <div class="tiles">
-        <div class="card tile"><div class="label">Visiteurs</div><div class="value" id="t-visitors">–</div><div class="sub">visiteurs uniques sur la période</div></div>
+        <div class="card tile"><div class="label">Visiteurs</div><div class="value" id="t-visitors">–</div><div class="sub">visiteurs uniques par jour, cumulés sur la période</div></div>
         <div class="card tile"><div class="label">Pages vues</div><div class="value" id="t-views">–</div><div class="sub">toutes pages confondues</div></div>
-        <div class="card tile"><div class="label">Pages par visiteur</div><div class="value" id="t-ratio">–</div><div class="sub">moyenne</div></div>
+        <div class="card tile"><div class="label">Pages par visiteur</div><div class="value" id="t-ratio">–</div><div class="sub">moyenne par visiteur-jour</div></div>
         <div class="card tile"><div class="label"><span class="live-dot" aria-hidden="true"></span>En ce moment</div><div class="value" id="t-live">–</div><div class="sub">visiteurs ces 5 dernières minutes</div></div>
       </div>
 
@@ -150,7 +150,8 @@
 
   <script>
     (function () {
-      var KEY = 'davidkrk_stats_pw';
+      var pw = '';
+      var requestId = 0;
       var days = 30;
       var nf = new Intl.NumberFormat('fr-FR');
       var $ = function (id) { return document.getElementById(id); };
@@ -162,17 +163,17 @@
       }
 
       function load() {
-        var pw = sessionStorage.getItem(KEY);
         if (!pw) return showLogin();
+        var current = ++requestId;
         fetch('/api/stats?days=' + days, { headers: { Authorization: 'Bearer ' + pw } })
           .then(function (res) {
-            if (res.status === 401) { sessionStorage.removeItem(KEY); throw new Error('Mot de passe incorrect.'); }
+            if (res.status === 401) { pw = ''; throw new Error('Mot de passe incorrect.'); }
             if (res.status === 503) throw new Error('Le mot de passe STATS_PASSWORD n’est pas encore configuré dans Netlify.');
             if (!res.ok) throw new Error('Erreur du serveur (' + res.status + ').');
             return res.json();
           })
-          .then(render)
-          .catch(function (err) { showLogin(err.message); });
+          .then(function (data) { if (current === requestId) render(data); })
+          .catch(function (err) { if (current === requestId) showLogin(err.message); });
       }
 
       function render(data) {
@@ -291,11 +292,11 @@
 
       $('login-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        sessionStorage.setItem(KEY, $('password').value);
+        pw = $('password').value;
         $('password').value = '';
         load();
       });
-      $('logout').addEventListener('click', function () { sessionStorage.removeItem(KEY); showLogin(); });
+      $('logout').addEventListener('click', function () { pw = ''; requestId++; showLogin(); });
       $('refresh').addEventListener('click', load);
       document.querySelectorAll('.seg button').forEach(function (b) {
         b.addEventListener('click', function () {

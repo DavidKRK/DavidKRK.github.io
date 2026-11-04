@@ -36,22 +36,47 @@ function referrerHost(referrer: unknown, siteHost: string) {
   }
 }
 
+const ALLOWED_ORIGINS = new Set([
+  "https://www.davidkrk.com",
+  "https://davidkrk.com",
+  "https://davidkrk.github.io",
+]);
+
+function allowedOrigin(req: Request) {
+  const origin = req.headers.get("origin");
+  if (!origin) return null;
+  return ALLOWED_ORIGINS.has(origin) || origin === new URL(req.url).origin ? origin : null;
+}
+
 export default async (req: Request, context: Context) => {
+  const origin = allowedOrigin(req);
+  if (!origin) return new Response("Forbidden", { status: 403 });
+  const cors = { "Access-Control-Allow-Origin": origin, Vary: "Origin" };
+
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: { ...cors, "Access-Control-Allow-Methods": "POST", "Access-Control-Allow-Headers": "Content-Type" },
+    });
+  }
+
   const ua = req.headers.get("user-agent") ?? "";
-  if (!ua || BOT_PATTERN.test(ua)) return new Response(null, { status: 204 });
+  if (!ua || BOT_PATTERN.test(ua)) return new Response(null, { status: 204, headers: cors });
 
   let body: { path?: unknown; referrer?: unknown; language?: unknown };
   try {
-    body = JSON.parse(await req.text());
+    const parsed = JSON.parse(await req.text());
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("invalid");
+    body = parsed;
   } catch {
-    return new Response("Invalid body", { status: 400 });
+    return new Response("Invalid body", { status: 400, headers: cors });
   }
 
   const rawPath = typeof body.path === "string" ? body.path : "/";
   const path = (rawPath.replace(/\/index\.html$/, "/").replace(/\.html$/, "") || "/").slice(0, 300);
-  const siteHost = new URL(req.url).hostname;
+  const siteHost = new URL(origin).hostname;
 
-  // Anonymous visitor id: no cookie, no stored IP, rotates every day.
+  // Anonymous visitor id: no cookie, no stored IP, rotates every day (so uniques are daily uniques).
   const day = new Date().toISOString().slice(0, 10);
   const visitorHash = createHash("sha256")
     .update(`${day}|${context.site.id ?? ""}|${context.ip}|${ua}`)
@@ -68,10 +93,11 @@ export default async (req: Request, context: Context) => {
     ...parseUserAgent(ua),
   });
 
-  return new Response(null, { status: 204 });
+  return new Response(null, { status: 204, headers: cors });
 };
 
 export const config: Config = {
   path: "/api/track",
-  method: "POST",
+  method: ["POST", "OPTIONS"],
+  rateLimit: { windowLimit: 60, windowSize: 60, aggregateBy: ["ip", "domain"] },
 };
