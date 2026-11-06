@@ -92,7 +92,7 @@
   <div class="wrap">
     <section id="login" class="card">
       <h1>Statistiques</h1>
-      <p class="hint">Espace privé — trafic des visiteurs de davidkrk.com</p>
+      <p class="hint">Espace privé — trafic des visiteurs de davidkrk.com. La session expire après 15 minutes.</p>
       <form id="login-form">
         <input type="password" id="password" placeholder="Mot de passe" autocomplete="current-password" required>
         <button type="submit">Se connecter</button>
@@ -150,7 +150,8 @@
 
   <script>
     (function () {
-      var pw = '';
+      var sessionToken = '';
+      var apiBase = 'https://whimsical-kitsune-85066d.netlify.app/api';
       var requestId = 0;
       var days = 30;
       var nf = new Intl.NumberFormat('fr-FR');
@@ -163,16 +164,17 @@
       }
 
       function load() {
-        if (!pw) return showLogin();
+        if (!sessionToken) return showLogin();
         var current = ++requestId;
-        fetch('/api/stats?days=' + days, { headers: { Authorization: 'Bearer ' + pw } })
+        fetch(apiBase + '/stats?days=' + days, { headers: { Authorization: 'Bearer ' + sessionToken } })
           .then(function (res) {
-            if (res.status === 401) { pw = ''; throw new Error('Mot de passe incorrect.'); }
+            if (current !== requestId) return null;
+            if (res.status === 401) { sessionToken = ''; throw new Error('Session expirée. Reconnectez-vous.'); }
             if (res.status === 503) throw new Error('Le mot de passe STATS_PASSWORD n’est pas encore configuré dans Netlify.');
             if (!res.ok) throw new Error('Erreur du serveur (' + res.status + ').');
             return res.json();
           })
-          .then(function (data) { if (current === requestId) render(data); })
+          .then(function (data) { if (data && current === requestId) render(data); })
           .catch(function (err) { if (current === requestId) showLogin(err.message); });
       }
 
@@ -201,10 +203,11 @@
         var map = {};
         rows.forEach(function (r) { map[r.day] = r; });
         var out = [];
-        var count = Math.min(n, 365);
+        var count = Math.min(n === 1 ? 2 : n, 365);
+        var parts = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }).split('-');
+        var today = Date.UTC(+parts[0], +parts[1] - 1, +parts[2]);
         for (var i = count - 1; i >= 0; i--) {
-          var d = new Date(Date.now() - i * 86400000);
-          var key = d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+          var key = new Date(today - i * 86400000).toISOString().slice(0, 10);
           out.push({ day: key, views: map[key] ? map[key].views : 0, visitors: map[key] ? map[key].visitors : 0 });
         }
         return out;
@@ -292,11 +295,30 @@
 
       $('login-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        pw = $('password').value;
+        var current = ++requestId;
+        var body = JSON.stringify({ password: $('password').value });
         $('password').value = '';
-        load();
+        fetch(apiBase + '/stats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body
+        })
+          .then(function (res) {
+            if (current !== requestId) return null;
+            if (res.status === 401) throw new Error('Mot de passe incorrect.');
+            if (res.status === 503) throw new Error('Le mot de passe STATS_PASSWORD n’est pas encore configuré dans Netlify.');
+            if (!res.ok) throw new Error('Erreur du serveur (' + res.status + ').');
+            return res.json();
+          })
+          .then(function (data) {
+            if (data && current === requestId) {
+              sessionToken = data.token;
+              load();
+            }
+          })
+          .catch(function (err) { if (current === requestId) showLogin(err.message); });
       });
-      $('logout').addEventListener('click', function () { pw = ''; requestId++; showLogin(); });
+      $('logout').addEventListener('click', function () { sessionToken = ''; requestId++; showLogin(); });
       $('refresh').addEventListener('click', load);
       document.querySelectorAll('.seg button').forEach(function (b) {
         b.addEventListener('click', function () {

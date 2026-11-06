@@ -63,21 +63,35 @@ export default async (req: Request, context: Context) => {
   const ua = req.headers.get("user-agent") ?? "";
   if (!ua || BOT_PATTERN.test(ua)) return new Response(null, { status: 204, headers: cors });
 
+  const bodyText = await req.text();
+  if (bodyText.length > 2048) return new Response("Payload too large", { status: 413, headers: cors });
+
   let body: { path?: unknown; referrer?: unknown; language?: unknown };
   try {
-    const parsed = JSON.parse(await req.text());
+    const parsed = JSON.parse(bodyText);
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("invalid");
     body = parsed;
   } catch {
     return new Response("Invalid body", { status: 400, headers: cors });
   }
 
-  const rawPath = typeof body.path === "string" ? body.path : "/";
+  const rawPath = body.path;
+  if (
+    typeof rawPath !== "string" ||
+    rawPath.length > 300 ||
+    !rawPath.startsWith("/") ||
+    rawPath.startsWith("//") ||
+    /[?#\u0000-\u001f]/.test(rawPath) ||
+    rawPath.split("/").some((segment) => segment === "." || segment === "..")
+  ) {
+    return new Response("Invalid path", { status: 400, headers: cors });
+  }
+
   const path = (rawPath.replace(/\/index\.html$/, "/").replace(/\.html$/, "") || "/").slice(0, 300);
   const siteHost = new URL(origin).hostname;
 
   // Anonymous visitor id: no cookie, no stored IP, rotates every day (so uniques are daily uniques).
-  const day = new Date().toISOString().slice(0, 10);
+  const day = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris" }).format(new Date());
   const visitorHash = createHash("sha256")
     .update(`${day}|${context.site.id ?? ""}|${context.ip}|${ua}`)
     .digest("hex")
