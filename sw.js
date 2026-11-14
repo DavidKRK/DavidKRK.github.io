@@ -1,4 +1,4 @@
-const CACHE_NAME = 'davidkrk-v1.0.1';
+const CACHE_NAME = 'davidkrk-v1.0.2';
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
@@ -9,7 +9,6 @@ const URLS_TO_CACHE = [
   '/shop.html',
   '/assets/css/style.css',
   '/assets/js/main.js',
-  '/assets/js/audio-player.js',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
   '/assets/icons/icon-512-maskable.png',
