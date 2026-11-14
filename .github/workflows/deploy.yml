@@ -26,11 +26,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit
+
+      - name: Type-check Netlify functions
+        run: npm run typecheck
 
       - name: Validate static site
         run: npm run build
