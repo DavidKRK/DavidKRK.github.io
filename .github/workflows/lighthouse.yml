@@ -44,7 +44,7 @@ jobs:
             http://127.0.0.1:4173/music.html
             http://127.0.0.1:4173/bio.html
             http://127.0.0.1:4173/contact.html
-          configPath: .lighthouserc.json
+          configPath: .lighthouserc-pr.json
           # Sauvegarder les rapports en artefacts téléchargeables
           uploadArtifacts: true
           # Publier temporairement les rapports pour accès immédiat (lien dans le log)
