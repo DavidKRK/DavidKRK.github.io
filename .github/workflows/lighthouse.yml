@@ -26,13 +26,28 @@ jobs:
       - name: Checkout du dépôt
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # Lancer l'audit Lighthouse sur les pages principales du site
-      # Les seuils sont définis dans .lighthouserc.json :
-      #   - Performance  : échec sous 75/100 (`warn`, minScore 0.75)
-      #   - SEO          : échec sous 85/100 (`error`, minScore 0.85)
-      # Le workflow échoue si un de ces seuils n'est pas atteint.
-      - name: Audit Lighthouse CI
-        id: lighthouse
+      # PR: auditer le contenu de la branche pour valider les changements non fusionnés
+      - name: Audit Lighthouse CI (PR)
+        if: github.event_name == 'pull_request'
+        id: lighthouse_pr
+        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
+        with:
+          urls: |
+            /
+            /music.html
+            /bio.html
+            /contact.html
+          staticDistDir: .
+          configPath: .lighthouserc.json
+          # Sauvegarder les rapports en artefacts téléchargeables
+          uploadArtifacts: true
+          # Publier temporairement les rapports pour accès immédiat (lien dans le log)
+          temporaryPublicStorage: true
+
+      # Schedule/manual: auditer la production pour surveillance continue
+      - name: Audit Lighthouse CI (production)
+        if: github.event_name != 'pull_request'
+        id: lighthouse_prod
         uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
         with:
           urls: |
