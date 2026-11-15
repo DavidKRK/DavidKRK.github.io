@@ -26,13 +26,34 @@ jobs:
       - name: Checkout du dépôt
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # Lancer l'audit Lighthouse sur les pages principales du site
-      # Les seuils sont définis dans .lighthouserc.json :
-      #   - Performance  : échec sous 75/100 (`warn`, minScore 0.75)
-      #   - SEO          : échec sous 85/100 (`error`, minScore 0.85)
-      # Le workflow échoue si un de ces seuils n'est pas atteint.
-      - name: Audit Lighthouse CI
-        id: lighthouse
+      - name: Démarrer un serveur local pour l'audit PR
+        if: github.event_name == 'pull_request'
+        run: |
+          python3 -m http.server 4173 --directory . >/tmp/lighthouse-server.log 2>&1 &
+          echo "LIGHTHOUSE_SERVER_PID=$!" >> "$GITHUB_ENV"
+          sleep 1
+
+      # PR: auditer le contenu de la branche pour valider les changements non fusionnés
+      - name: Audit Lighthouse CI (PR)
+        if: github.event_name == 'pull_request'
+        id: lighthouse_pr
+        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
+        with:
+          urls: |
+            http://127.0.0.1:4173/
+            http://127.0.0.1:4173/music.html
+            http://127.0.0.1:4173/bio.html
+            http://127.0.0.1:4173/contact.html
+          configPath: .lighthouserc-pr.json
+          # Sauvegarder les rapports en artefacts téléchargeables
+          uploadArtifacts: true
+          # Publier temporairement les rapports pour accès immédiat (lien dans le log)
+          temporaryPublicStorage: true
+
+      # Schedule/manual: auditer la production pour surveillance continue
+      - name: Audit Lighthouse CI (production)
+        if: github.event_name != 'pull_request'
+        id: lighthouse_prod
         uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
         with:
           urls: |
@@ -45,6 +66,13 @@ jobs:
           uploadArtifacts: true
           # Publier temporairement les rapports pour accès immédiat (lien dans le log)
           temporaryPublicStorage: true
+
+      - name: Arrêter le serveur local PR
+        if: always() && github.event_name == 'pull_request'
+        run: |
+          if [ -n "${LIGHTHOUSE_SERVER_PID:-}" ]; then
+            kill "$LIGHTHOUSE_SERVER_PID" || true
+          fi
 
       # Sauvegarder les résultats JSON pour analyse ou tableau de bord
       - name: Sauvegarder les résultats en artefact
