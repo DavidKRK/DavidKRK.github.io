@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>David KRK · NEWS</title>
+  <meta name="description" content="News from David KRK, DJ and techno producer.">
+  <link rel="icon" type="image/png" href="logo-30-01-25.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="content-wrapper">
+    <header class="hero-header">
+      <a href="index.html" id="home-link">Home</a>
+      <a href="bio.html">Bio</a>
+      <a href="music.html">Music</a>
+      <a href="event.html">Event</a>
+      <a href="contact.html">Contact</a>
+      <a href="shop.html">Shop</a>
+    </header>
+
+    <main class="text-center max-w-4xl mx-auto px-4 w-full mt-10">
+      <h1 class="main-title">David KRK</h1>
+      <div class="language-selector flex-wrap">
+        <button type="button" class="language-btn" data-lang="fr">Français</button>
+        <button type="button" class="language-btn active" data-lang="en">English</button>
+        <button type="button" class="language-btn" data-lang="es">Castellano</button>
+        <button type="button" class="language-btn" data-lang="eu">Euskara</button>
+        <button type="button" class="language-btn" data-lang="ar">العربية</button>
+        <button type="button" class="language-btn" data-lang="uk">Ukrainian</button>
+      </div>
+
+      <section class="lang-content" data-lang="fr" hidden>
+        <h2 class="main-title">Actualités</h2>
+        <p>Cette page accueillera les prochaines actualités de David KRK. Revenez bientôt.</p>
+      </section>
+      <section class="lang-content active" data-lang="en">
+        <h2 class="main-title">News</h2>
+        <p>This page will feature future news from David KRK. Check back soon.</p>
+      </section>
+      <section class="lang-content" data-lang="es" hidden>
+        <h2 class="main-title">Noticias</h2>
+        <p>Esta página recogerá las próximas noticias de David KRK. Vuelve pronto.</p>
+      </section>
+      <section class="lang-content" data-lang="eu" hidden>
+        <h2 class="main-title">Albisteak</h2>
+        <p>Orrialde honetan David KRK-ren hurrengo albisteak agertuko dira. Itzuli laster.</p>
+      </section>
+      <section class="lang-content" data-lang="ar" dir="rtl" hidden>
+        <h2 class="main-title">الأخبار</h2>
+        <p>ستضم هذه الصفحة أخبار ديفيد كرك القادمة. عُد قريبًا.</p>
+      </section>
+      <section class="lang-content" data-lang="uk" hidden>
+        <h2 class="main-title">Новини</h2>
+        <p>На цій сторінці з’являтимуться майбутні новини David KRK. Завітайте знову незабаром.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p class="text-sm opacity-70">© 2026 David KRK. All Rights Reserved</p>
+      <p class="neon-text font-bold text-lg mt-4">"May The Techno Be With You"</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const homeLabels = {
+            fr: 'Accueil', en: 'Home', es: 'Inicio', eu: 'Hasiera', ar: 'الرئيسية', uk: 'Головна'
+        };
+        const langBtns = document.querySelectorAll('.language-btn');
+        const langContents = document.querySelectorAll('.lang-content');
+
+        function switchLanguage(lang) {
+            if (!Object.prototype.hasOwnProperty.call(homeLabels, lang)) lang = 'en';
+            langContents.forEach(content => {
+                const active = content.dataset.lang === lang;
+                content.classList.toggle('active', active);
+                content.hidden = !active;
+            });
+            langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('home-link').textContent = homeLabels[lang];
+            localStorage.setItem('davidkrk_lang', lang);
+        }
+
+        langBtns.forEach(btn => btn.addEventListener('click', () => switchLanguage(btn.dataset.lang)));
+        switchLanguage(localStorage.getItem('davidkrk_lang') || 'en');
+    });
+  </script>
+</body>
+</html>
