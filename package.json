@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "minify:css": "npx csso assets/css/style.css -o assets/css/style.min.css",
     "minify:js": "npx terser assets/js/main.js -o assets/js/main.min.js -c -m",
+    "minify:home": "terser assets/js/home.js -o assets/js/home.min.js -c -m",
     "test": "npm run validate"
   },
   "devDependencies": {

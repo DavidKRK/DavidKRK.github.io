@@ -44,6 +44,7 @@
         <a href="bio.html">Bio</a>
         <a href="music.html">Music</a>
         <a href="event.html">Events</a>
+        <a href="actualites.html" id="news-link">News</a>
         <a href="shop.html">Shop</a>
         <a href="https://chat.whatsapp.com/CWnaoDc9TY6HbTmW9cOyYc" target="_blank" rel="noopener noreferrer" class="nav-link text-xl sm:text-2xl flex items-center">
           <i class="fab fa-whatsapp mr-1 sm:mr-2"></i>Whatsapp
@@ -191,6 +192,10 @@
           const langContents = document.querySelectorAll('.lang-content');
 
           function switchLanguage(lang) {
+              const newsLabels = {
+                  fr: 'Actualités', en: 'News', es: 'Noticias',
+                  eu: 'Albisteak', ar: 'الأخبار', uk: 'Новини'
+              };
               langContents.forEach(content => {
                   content.classList.remove('active');
                   content.style.display = '';
@@ -210,6 +215,7 @@
               document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
               localStorage.setItem('davidkrk_lang', lang);
+              document.getElementById('news-link').textContent = newsLabels[lang] || newsLabels.en;
           }
 
           langBtns.forEach(btn => {
