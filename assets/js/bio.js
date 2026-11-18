@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const langBtns = document.querySelectorAll('.language-btn');
     const langContents = document.querySelectorAll('.lang-content');
+    const newsLink = document.getElementById('news-link');
 
     const mixcloudPlayerTrigger = document.getElementById('mixcloud-player-trigger');
     const mixcloudPlayerNote = document.getElementById('mixcloud-player-note');
@@ -10,36 +11,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const langContent = {
         fr: {
+            news: 'Actualités',
             player_button: 'Charger le lecteur Mixcloud',
             player_loaded: 'Lecteur Mixcloud chargé',
             player_note: 'Le lecteur externe se charge à la demande pour accélérer l’affichage de la page.',
             player_status: 'Le lecteur Mixcloud est maintenant chargé.'
         },
         en: {
+            news: 'News',
             player_button: 'Load Mixcloud player',
             player_loaded: 'Mixcloud player loaded',
             player_note: 'The external player loads on demand to speed up page rendering.',
             player_status: 'The Mixcloud player is now loaded.'
         },
         es: {
+            news: 'Noticias',
             player_button: 'Cargar el reproductor de Mixcloud',
             player_loaded: 'Reproductor de Mixcloud cargado',
             player_note: 'El reproductor externo se carga bajo demanda para acelerar la visualización de la página.',
             player_status: 'El reproductor de Mixcloud ya está cargado.'
         },
         eu: {
+            news: 'Albisteak',
             player_button: 'Kargatu Mixcloud erreproduzitzailea',
             player_loaded: 'Mixcloud erreproduzitzailea kargatuta',
             player_note: 'Kanpoko erreproduzitzailea eskatu ahala kargatzen da orria azkarrago erakusteko.',
             player_status: 'Mixcloud erreproduzitzailea kargatuta dago orain.'
         },
         ar: {
+            news: 'الأخبار',
             player_button: 'تحميل مشغل Mixcloud',
             player_loaded: 'تم تحميل مشغل Mixcloud',
             player_note: 'يتم تحميل المشغل الخارجي عند الطلب لتسريع عرض الصفحة.',
             player_status: 'تم الآن تحميل مشغل Mixcloud.'
         },
         uk: {
+            news: 'Новини',
             player_button: 'Завантажити плеєр Mixcloud',
             player_loaded: 'Плеєр Mixcloud завантажено',
             player_note: 'Зовнішній плеєр завантажується на вимогу, щоб пришвидшити показ сторінки.',
@@ -101,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('davidkrk_lang', lang);
 
         const t = langContent[lang] || langContent.fr;
+        if (newsLink) newsLink.textContent = t.news;
         if (mixcloudPlayerTrigger) {
             const playerLabel = mixcloudPlayerLoaded ? t.player_loaded : t.player_button;
             mixcloudPlayerTrigger.textContent = playerLabel;
