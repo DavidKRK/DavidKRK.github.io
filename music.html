@@ -104,6 +104,7 @@
 
     <header class="hero-header">
       <a href="index.html">Home</a>
+      <a href="actualites.html" id="news-link">News</a>
       <a href="bio.html">Bio</a>
       <a href="event.html">Event</a>
       <a href="contact.html">Contact</a>
@@ -225,12 +226,14 @@
       const audioPlayerNote = document.getElementById('audio-player-note');
       const audioPlayerStatus = document.getElementById('audio-player-status');
       const audioPlayerWidget = document.getElementById('audio-player-widget');
+      const newsLink = document.getElementById('news-link');
       const langBtns = document.querySelectorAll('.language-btn');
       const langContents = document.querySelectorAll('.lang-content');
       let audioPlayerLoaded = false;
 
       const langContent = {
         fr: {
+          news: 'Actualités',
           youtube_title: 'Dernières vidéos YouTube',
           youtube_button: 'Voir toutes les vidéos',
           player_button: 'Charger le lecteur audio',
@@ -239,6 +242,7 @@
           player_status: 'Le lecteur audio externe est maintenant chargé.'
         },
         en: {
+          news: 'News',
           youtube_title: 'Latest YouTube Videos',
           youtube_button: 'View all videos',
           player_button: 'Load audio player',
@@ -247,6 +251,7 @@
           player_status: 'The external audio player is now loaded.'
         },
         es: {
+          news: 'Noticias',
           youtube_title: 'Últimos vídeos de YouTube',
           youtube_button: 'Ver todos los vídeos',
           player_button: 'Cargar el reproductor de audio',
@@ -255,6 +260,7 @@
           player_status: 'El reproductor de audio externo ya está cargado.'
         },
         eu: {
+          news: 'Albisteak',
           youtube_title: 'Azken YouTube bideoak',
           youtube_button: 'Ikusi bideo guztiak',
           player_button: 'Kargatu audio erreproduzitzailea',
@@ -263,6 +269,7 @@
           player_status: 'Kanpoko audio erreproduzitzailea kargatuta dago orain.'
         },
         ar: {
+          news: 'الأخبار',
           youtube_title: 'أحدث مقاطع يوتيوب',
           youtube_button: 'عرض جميع مقاطع الفيديو',
           player_button: 'تحميل مشغل الصوت',
@@ -271,6 +278,7 @@
           player_status: 'تم الآن تحميل مشغل الصوت الخارجي.'
         },
         uk: {
+          news: 'Новини',
           youtube_title: 'Останні відео на YouTube',
           youtube_button: 'Переглянути всі відео',
           player_button: 'Завантажити аудіоплеєр',
@@ -309,6 +317,7 @@
         document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
         localStorage.setItem('davidkrk_lang', lang);
+        newsLink.textContent = langContent[lang].news;
       }
 
       langBtns.forEach(btn => {
