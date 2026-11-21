@@ -1,11 +1,11 @@
 (() => {
   const labels = {
-    fr: { home: 'Accueil', heading: 'Dernières vidéos', loading: 'Chargement des vidéos…', empty: 'Aucune vidéo disponible.', error: 'Impossible de charger les vidéos.' },
-    en: { home: 'Home', heading: 'Latest videos', loading: 'Loading videos…', empty: 'No videos available.', error: 'Unable to load videos.' },
-    es: { home: 'Inicio', heading: 'Últimos vídeos', loading: 'Cargando vídeos…', empty: 'No hay vídeos disponibles.', error: 'No se pueden cargar los vídeos.' },
-    eu: { home: 'Hasiera', heading: 'Azken bideoak', loading: 'Bideoak kargatzen…', empty: 'Ez dago bideorik eskuragarri.', error: 'Ezin izan dira bideoak kargatu.' },
-    ar: { home: 'الرئيسية', heading: 'أحدث الفيديوهات', loading: 'جارٍ تحميل الفيديوهات…', empty: 'لا توجد فيديوهات متاحة.', error: 'تعذر تحميل الفيديوهات.' },
-    uk: { home: 'Головна', heading: 'Останні відео', loading: 'Завантаження відео…', empty: 'Немає доступних відео.', error: 'Не вдалося завантажити відео.' }
+    fr: { home: 'Accueil', heading: 'Dernières vidéos', loading: 'Chargement des vidéos…', empty: 'Aucune vidéo disponible.', error: 'Impossible de charger les vidéos.', play: 'Lire ici', open: 'Ouvrir sur YouTube', fallback: 'Si la lecture intégrée est restreinte :', player: 'Lecteur vidéo' },
+    en: { home: 'Home', heading: 'Latest videos', loading: 'Loading videos…', empty: 'No videos available.', error: 'Unable to load videos.', play: 'Play here', open: 'Open on YouTube', fallback: 'If embedded playback is restricted:', player: 'Video player' },
+    es: { home: 'Inicio', heading: 'Últimos vídeos', loading: 'Cargando vídeos…', empty: 'No hay vídeos disponibles.', error: 'No se pueden cargar los vídeos.', play: 'Reproducir aquí', open: 'Abrir en YouTube', fallback: 'Si la reproducción integrada está restringida:', player: 'Reproductor de vídeo' },
+    eu: { home: 'Hasiera', heading: 'Azken bideoak', loading: 'Bideoak kargatzen…', empty: 'Ez dago bideorik eskuragarri.', error: 'Ezin izan dira bideoak kargatu.', play: 'Erreproduzitu hemen', open: 'Ireki YouTube-n', fallback: 'Kapsulatutako erreprodukzioa mugatuta badago:', player: 'Bideo-erreproduzitzailea' },
+    ar: { home: 'الرئيسية', heading: 'أحدث الفيديوهات', loading: 'جارٍ تحميل الفيديوهات…', empty: 'لا توجد فيديوهات متاحة.', error: 'تعذر تحميل الفيديوهات.', play: 'شغّل هنا', open: 'افتح على YouTube', fallback: 'إذا كان التشغيل المضمّن مقيّدًا:', player: 'مشغّل الفيديو' },
+    uk: { home: 'Головна', heading: 'Останні відео', loading: 'Завантаження відео…', empty: 'Немає доступних відео.', error: 'Не вдалося завантажити відео.', play: 'Відтворити тут', open: 'Відкрити на YouTube', fallback: 'Якщо вбудоване відтворення обмежене:', player: 'Відеоплеєр' }
   };
   const buttons = document.querySelectorAll('.language-btn');
   const contents = document.querySelectorAll('.lang-content');
@@ -15,6 +15,8 @@
   let language = 'en';
   let state = 'loading';
   let videos = [];
+  let cards = [];
+  let activePlayer = null;
 
   function safeUrl(value) {
     if (typeof value !== 'string') return null;
@@ -48,29 +50,64 @@
     heading.textContent = labels[language].heading;
     status.hidden = state === 'ready';
     status.textContent = state === 'ready' ? '' : labels[language][state];
-    list.replaceChildren();
     const formatter = new Intl.DateTimeFormat(language, { dateStyle: 'long', timeZone: 'UTC' });
-    videos.forEach(video => {
+    cards.forEach(({ video, button, link, fallback, date, iframe }) => {
+      button.textContent = labels[language].play;
+      button.setAttribute('aria-label', `${labels[language].play} : ${video.title}`);
+      link.textContent = labels[language].open;
+      link.setAttribute('aria-label', `${labels[language].open} : ${video.title}`);
+      fallback.textContent = labels[language].fallback;
+      date.textContent = formatter.format(new Date(`${video.published}T00:00:00Z`));
+      if (iframe) iframe.title = `${labels[language].player} : ${video.title}`;
+    });
+  }
+
+  function createCards() {
+    cards = videos.map(video => {
       const card = document.createElement('article');
       card.className = 'news-feed-card';
-      const link = document.createElement('a');
-      link.href = video.url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      const media = document.createElement('div');
       const image = document.createElement('img');
       image.src = video.thumbnail;
       image.alt = '';
       image.loading = 'lazy';
       image.width = 320;
       image.height = 180;
+      media.append(image);
+      const button = document.createElement('button');
+      button.type = 'button';
       const title = document.createElement('h3');
       title.textContent = video.title;
       const date = document.createElement('time');
       date.dateTime = video.published;
-      date.textContent = formatter.format(new Date(`${video.published}T00:00:00Z`));
-      link.append(image, title);
-      card.append(link, date);
+      const fallback = document.createElement('span');
+      const link = document.createElement('a');
+      link.href = video.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      const fallbackContainer = document.createElement('p');
+      fallbackContainer.append(fallback, ' ', link);
+      const entry = { video, button, link, fallback, date, iframe: null };
+      button.addEventListener('click', () => {
+        if (activePlayer) {
+          activePlayer.iframe.replaceWith(activePlayer.image);
+          activePlayer.button.hidden = false;
+          activePlayer.entry.iframe = null;
+        }
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${video.id}`;
+        iframe.title = `${labels[language].player} : ${video.title}`;
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.allowFullscreen = true;
+        image.replaceWith(iframe);
+        button.hidden = true;
+        entry.iframe = iframe;
+        activePlayer = { iframe, image, button, entry };
+        iframe.focus();
+      });
+      card.append(media, button, title, date, fallbackContainer);
       list.append(card);
+      return entry;
     });
   }
 
@@ -116,6 +153,7 @@
         return true;
       });
       state = videos.length ? 'ready' : 'empty';
+      createCards();
       render();
     })
     .catch(() => {
