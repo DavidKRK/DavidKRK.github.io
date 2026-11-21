@@ -16,7 +16,6 @@
   <div class="content-wrapper">
     <header class="hero-header">
       <a href="index.html" id="home-link">Home</a>
-      <a href="actualites.html" id="news-link" aria-current="page">News</a>
       <a href="bio.html">Bio</a>
       <a href="music.html">Music</a>
       <a href="event.html">Event</a>
@@ -116,9 +115,6 @@
       const homeLabels = {
         fr: 'Accueil', en: 'Home', es: 'Inicio', eu: 'Hasiera', ar: 'الرئيسية', uk: 'Головна'
       };
-      const newsLabels = {
-        fr: 'Actualités', en: 'News', es: 'Noticias', eu: 'Albisteak', ar: 'الأخبار', uk: 'Новини'
-      };
       const langBtns = document.querySelectorAll('.language-btn');
       const langContents = document.querySelectorAll('.lang-content');
 
@@ -133,7 +129,6 @@
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
         document.getElementById('home-link').textContent = homeLabels[lang];
-        document.getElementById('news-link').textContent = newsLabels[lang];
         localStorage.setItem('davidkrk_lang', lang);
       }
 
