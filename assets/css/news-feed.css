@@ -1,0 +1,33 @@
+.news-feed-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.5rem;
+  text-align: start;
+}
+
+.news-feed-card {
+  min-width: 0;
+}
+
+.news-feed-card a {
+  display: block;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.news-feed-card a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+.news-feed-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.news-feed-card h3 {
+  margin: 0.5rem 0;
+}

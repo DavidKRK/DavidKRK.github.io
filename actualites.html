@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/news-feed.css">
+  <script src="assets/js/news-feed.js" defer></script>
 </head>
 <body>
   <div class="content-wrapper">
@@ -58,26 +60,11 @@
     </div>
 
     <main class="text-center max-w-4xl mx-auto px-4 w-full">
-      <div class="mt-8 mb-8">
-        <section class="lang-content" data-lang="fr" hidden>
-          <p>Cette page accueillera les prochaines actualités de David KRK. Revenez bientôt.</p>
-        </section>
-        <section class="lang-content active" data-lang="en">
-          <p>This page will feature future news from David KRK. Check back soon.</p>
-        </section>
-        <section class="lang-content" data-lang="es" hidden>
-          <p>Esta página recogerá las próximas noticias de David KRK. Vuelve pronto.</p>
-        </section>
-        <section class="lang-content" data-lang="eu" hidden>
-          <p>Orrialde honetan David KRK-ren hurrengo albisteak agertuko dira. Itzuli laster.</p>
-        </section>
-        <section class="lang-content" data-lang="ar" dir="rtl" hidden>
-          <p>ستضم هذه الصفحة أخبار ديفيد كرك القادمة. عُد قريبًا.</p>
-        </section>
-        <section class="lang-content" data-lang="uk" hidden>
-          <p>На цій сторінці з’являтимуться майбутні новини David KRK. Завітайте знову незабаром.</p>
-        </section>
-      </div>
+      <section class="news-feed mt-8 mb-8" aria-labelledby="news-feed-heading">
+        <h2 id="news-feed-heading">Latest videos</h2>
+        <p id="news-feed-status" role="status" aria-live="polite">Loading videos…</p>
+        <div id="news-feed-list" class="news-feed-list"></div>
+      </section>
     </main>
 
     <footer class="w-full max-w-7xl mx-auto">
@@ -110,31 +97,5 @@
     </footer>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const homeLabels = {
-        fr: 'Accueil', en: 'Home', es: 'Inicio', eu: 'Hasiera', ar: 'الرئيسية', uk: 'Головна'
-      };
-      const langBtns = document.querySelectorAll('.language-btn');
-      const langContents = document.querySelectorAll('.lang-content');
-
-      function switchLanguage(lang) {
-        if (!Object.prototype.hasOwnProperty.call(homeLabels, lang)) lang = 'en';
-        langContents.forEach(content => {
-          const active = content.dataset.lang === lang;
-          content.classList.toggle('active', active);
-          content.hidden = !active;
-        });
-        langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
-        document.documentElement.lang = lang;
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.getElementById('home-link').textContent = homeLabels[lang];
-        localStorage.setItem('davidkrk_lang', lang);
-      }
-
-      langBtns.forEach(btn => btn.addEventListener('click', () => switchLanguage(btn.dataset.lang)));
-      switchLanguage(localStorage.getItem('davidkrk_lang') || 'en');
-    });
-  </script>
 </body>
 </html>
