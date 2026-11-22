@@ -1,0 +1,4 @@
+offline = true
+include_fragments = "anchor-only"
+fallback_extensions = ["html"]
+index_files = ["index.html"]
