@@ -1,0 +1,36 @@
+name: Contrôle local des liens PR
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  local-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du contenu de la PR
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Installer Lychee vérifié
+        run: |
+          curl --fail --silent --show-error --location \
+            --output "$RUNNER_TEMP/lychee.tar.gz" \
+            https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz
+          echo '1f4e0ef7f6554a6ed33dd7ac144fb2e1bbed98598e7af973042fc5cd43951c9a  '"$RUNNER_TEMP/lychee.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/lychee.tar.gz" -C "$RUNNER_TEMP"
+
+      - name: Vérifier les liens locaux HTML et CSS
+        shell: bash
+        run: |
+          mapfile -d '' -t files < <(git ls-files -z -- '*.html' '*.css')
+          if ((${#files[@]} == 0)); then
+            echo "Aucun fichier HTML ou CSS suivi à vérifier." >&2
+            exit 1
+          fi
+          "$RUNNER_TEMP/lychee-x86_64-unknown-linux-gnu/lychee" \
+            --config .lychee-local.toml --root-dir "$GITHUB_WORKSPACE" \
+            --no-progress -- "${files[@]}"
